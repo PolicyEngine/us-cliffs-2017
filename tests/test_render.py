@@ -49,7 +49,7 @@ def test_counted_once_section(tmp_path, capsys):
     assert "| x0.8 | x1 | x1.2 |" in out
     assert "| 2017 rules, counting health coverage, premium tax credit counted once | 1.90M | 2.00M | 2.10M |" in out
     assert "for 0.06M adults (30 in the sample)" in out
-    assert "Under 2025 rules, counting health coverage, with the credit counted once, losing the credit lowers no adult's net income most." in out
+    assert "Under 2025 rules, counting health coverage, with the credit counted once, losing the credit lowers net income most for none of the adults facing a cliff." in out
 
 
 def test_no_counted_once_section_without_files(tmp_path, capsys):
@@ -121,3 +121,107 @@ def test_no_take_up_section_without_file(tmp_path, capsys):
 
     take_up_section(tmp_path / "missing.json")
     assert capsys.readouterr().out == ""
+
+
+def interval_block(total, drivers):
+    """A results/driver_intervals.json block: drivers maps a key to (count, interval, share interval, households, half)."""
+    return {
+        "people_on_cliff": total,
+        "by_largest_loss": {
+            k: {
+                "people_on_cliff": n,
+                "interval_95": list(ci),
+                "share_interval_95": list(share_ci),
+                "source_households": hh,
+                "source_households_for_half": half,
+            }
+            for k, (n, ci, share_ci, hh, half) in drivers.items()
+        },
+    }
+
+
+def plain_2017():
+    return {
+        "year": 2017,
+        "health_benefits_in_net_income": False,
+        "people_on_cliff": 700_000.0,
+        "people_on_cliff_by_driver": {"snap": 400_000.0, "tanf": 300_000.0},
+    }
+
+
+def test_drivers_section_shows_intervals_and_households(capsys):
+    from scripts.render_results import drivers_section
+
+    block = interval_block(700_000.0, {
+        "snap": (400_000.0, (200_000.0, 600_000.0), (0.3, 0.8), 40, 4),
+        "tanf": (300_000.0, (90_000.0, 520_000.0), (0.2, 0.7), 12, 2),
+    })
+    drivers_section([plain_2017()], {("2017_plain", "twice"): block})
+    out = capsys.readouterr().out
+    assert "| Largest loss | Adults | 95% interval | Share | 95% interval | Survey households |" in out
+    assert "| SNAP | 0.40M | 0.20M to 0.60M | 57% | 30% to 80% | 40 (4) |" in out
+    assert "| TANF | 0.30M | 0.09M to 0.52M | 43% | 20% to 70% | 12 (2) |" in out
+    assert "5,000 resamples of Microcosm's source households" in out
+
+
+def test_drivers_section_without_intervals_keeps_the_plain_table(capsys):
+    from scripts.render_results import drivers_section
+
+    drivers_section([plain_2017()], {})
+    out = capsys.readouterr().out
+    assert "| Largest loss | Adults | Share |" in out
+    assert "| SNAP | 0.40M | 57% |" in out
+    assert "resamples" not in out
+
+
+def test_load_intervals_refuses_counts_from_other_runs(tmp_path):
+    from scripts.render_results import load_intervals
+
+    assert load_intervals([plain_2017()], tmp_path / "missing.json") == {}
+    good = interval_block(700_000.0, {
+        "snap": (400_000.0, (0, 1), (0, 1), 1, 1),
+        "tanf": (300_000.0, (0, 1), (0, 1), 1, 1),
+    })
+    path = tmp_path / "driver_intervals.json"
+    path.write_text(json.dumps({"runs": {"2017_plain": {"as_modeled": good}}}))
+    assert set(load_intervals([plain_2017()], path)) == {("2017_plain", "twice")}
+
+    other_total = dict(good, people_on_cliff=690_000.0)
+    path.write_text(json.dumps({"runs": {"2017_plain": {"as_modeled": other_total}}}))
+    with pytest.raises(SystemExit, match="adults facing a cliff"):
+        load_intervals([plain_2017()], path)
+
+    other_driver = interval_block(700_000.0, {
+        "snap": (400_000.0, (0, 1), (0, 1), 1, 1),
+        "wic": (300_000.0, (0, 1), (0, 1), 1, 1),
+    })
+    path.write_text(json.dumps({"runs": {"2017_plain": {"as_modeled": other_driver}}}))
+    with pytest.raises(SystemExit, match="tanf, wic"):
+        load_intervals([plain_2017()], path)
+
+
+def test_counted_once_section_gives_the_credit_count_its_interval(tmp_path, capsys):
+    from scripts.render_results import counted_once_section
+
+    def headline(n):
+        return dict(people_on_cliff=n, workers_on_cliff=n, households_with_person_on_cliff=n, people_in_those_households=n)
+
+    largest = dict(people=60_000.0, sample_people=28)
+    for key in ("lifted_past_400", "lose_income_test", "lose_whole_credit"):
+        largest[key], largest[f"sample_{key}"] = 60_000.0, 26
+    record = dict(
+        year=2017,
+        health_benefits_in_net_income=True,
+        counted_once=headline(2.0e6),
+        medicaid_value_scaled_counted_once={"0.8": headline(1.9e6), "1.2": headline(2.1e6)},
+        premium_tax_credit_largest_loss=largest,
+    )
+    (tmp_path / "once_2017.json").write_text(json.dumps(record))
+    block = interval_block(2.0e6, {"assigned_aca_ptc": (60_000.0, (8_000.0, 128_000.0), (0.0, 0.1), 17, 2)})
+    counted_once_section([], folder=tmp_path, intervals={("2017_health", "once"): block})
+    out = capsys.readouterr().out
+    assert "for 0.06M adults (28 in the sample, from 17 survey households, 2 of which supply half; 95% interval 0.01M to 0.13M)" in out
+
+    off = interval_block(2.0e6, {"assigned_aca_ptc": (61_000.0, (8_000.0, 128_000.0), (0.0, 0.1), 17, 2)})
+    with pytest.raises(SystemExit, match="credit count"):
+        counted_once_section([], folder=tmp_path, intervals={("2017_health", "once"): off})

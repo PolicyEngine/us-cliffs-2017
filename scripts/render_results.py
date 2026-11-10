@@ -7,10 +7,14 @@ Supplemental Food Program as the model does (CSFP=keep scripts/run_final.sh),
 using results/csfp/reach_2025.json from scripts/csfp_reach.py where it exists.
 Where results/counted_once/once_<year>.json exist (scripts/counted_once.py), a
 section repeats the Medicaid scaling with the premium tax credit counted once
-and says where the credit is the largest loss.
+and says where the credit is the largest loss. Where results/driver_intervals.json
+exists (scripts/driver_intervals.py), the tables of largest losses and the
+credit's paragraph give each count's 95% interval and the survey households
+behind it; the script stops if that file's counts differ from the runs'.
 """
 
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -57,6 +61,7 @@ TOTALS = {
 REACH = Path("results/csfp/reach_2025.json")
 ONCE = Path("results/counted_once")
 TAKE_UP = Path("results/take_up_bounds.json")
+INTERVALS = Path("results/driver_intervals.json")
 TAKE_UP_GROUPS = {
     "school_meals": "School meals",
     "state_benefits": "State benefits",
@@ -98,6 +103,54 @@ def millions(x, se=None):
     if se is not None:
         text += f" (± {1.96 * se / 1e6:,.2f}M)"
     return text
+
+
+def run_key(result):
+    """The run's name in results/driver_intervals.json, such as 2017_health."""
+    return f"{result['year']}_{'health' if result['health_benefits_in_net_income'] else 'plain'}"
+
+
+def same(a, b):
+    return math.isclose(a, b, rel_tol=1e-9, abs_tol=1e-6)
+
+
+def load_intervals(results, path=INTERVALS):
+    """The blocks of results/driver_intervals.json by (run, credit), or {} without the file.
+
+    credit is "twice" for the model's own count and "once" for the count with the premium
+    tax credit counted once. Stops if a block's total or any of its counts by largest loss
+    differs from the run it describes, so no table shows intervals from other runs.
+    """
+    if not path.exists():
+        return {}
+    runs = json.loads(path.read_text())["runs"]
+    out = {}
+    for r in results:
+        entry = runs.get(run_key(r), {})
+        once = r.get("premium_tax_credit_counted_once")
+        for credit, key, block in (("twice", "as_modeled", r), ("once", "credit_counted_once", once)):
+            if key not in entry or block is None:
+                continue
+            got = entry[key]
+            if not same(got["people_on_cliff"], block["people_on_cliff"]):
+                raise SystemExit(
+                    f"{path}: {run_key(r)} {key} gives {got['people_on_cliff']:,.1f} adults facing a cliff,"
+                    f" the run {block['people_on_cliff']:,.1f}"
+                )
+            drivers = block.get("people_on_cliff_by_driver", {})
+            off = sorted(
+                k for k in set(drivers) | set(got["by_largest_loss"])
+                if k not in drivers or k not in got["by_largest_loss"]
+                or not same(got["by_largest_loss"][k]["people_on_cliff"], drivers[k])
+            )
+            if off:
+                raise SystemExit(f"{path}: {run_key(r)} {key}'s counts by largest loss differ from the run's: {', '.join(off)}")
+            out[(run_key(r), credit)] = got
+    return out
+
+
+def interval_text(pair, fmt):
+    return f"{fmt(pair[0])} to {fmt(pair[1])}"
 
 
 def counts_table(rows):
@@ -156,8 +209,12 @@ def csfp_section(main_results, csfp_paths):
                   f" {millions(r['people_on_cliff'])} adults facing a cliff under {name(r)}.")
 
 
-def counted_once_section(results, folder=ONCE):
-    """Medicaid's scaling and the credit as largest loss, counting the credit once."""
+def counted_once_section(results, folder=ONCE, intervals=None):
+    """Medicaid's scaling and the credit as largest loss, counting the credit once.
+
+    intervals (load_intervals) adds the credit count's 95% interval and survey households.
+    """
+    intervals = intervals or {}
     once = sorted((json.loads(p.read_text()) for p in folder.glob("once_*.json")), key=lambda r: r["year"])
     if not once:
         return
@@ -176,17 +233,68 @@ def counted_once_section(results, folder=ONCE):
     for r in once:
         p = r["premium_tax_credit_largest_loss"]
         if not p["sample_people"]:
-            print(f"Under {name(r)}, with the credit counted once, losing the credit lowers no adult's net income most.\n")
+            print(f"Under {name(r)}, with the credit counted once, losing the credit lowers net income most for none of the adults facing a cliff.\n")
             continue
+        support = f"{p['sample_people']} in the sample"
+        b = intervals.get((f"{r['year']}_health", "once"), {}).get("by_largest_loss", {}).get("assigned_aca_ptc")
+        if b is not None:
+            if not same(b["people_on_cliff"], p["people"]):
+                raise SystemExit(
+                    f"{INTERVALS}: {r['year']}'s credit count is {b['people_on_cliff']:,.1f}, the recount's {p['people']:,.1f}"
+                )
+            support += (
+                f", from {b['source_households']} survey households, {b['source_households_for_half']} of which"
+                f" supply half; 95% interval {interval_text(b['interval_95'], millions)}"
+            )
         print(
             f"Under {name(r)}, with the credit counted once, losing the credit lowers net income most"
-            f" for {millions(p['people'])} adults ({p['sample_people']} in the sample). For"
+            f" for {millions(p['people'])} adults ({support}). For"
             f" {millions(p['lifted_past_400'])} ({p['sample_lifted_past_400']} in the sample), the raise lifts"
             f" their tax unit's income from below 400% of the poverty line to 400% or more;"
             f" {millions(p['lose_income_test'])} ({p['sample_lose_income_test']}) fail the credit's income test"
             f" after the raise, and {millions(p['lose_whole_credit'])} ({p['sample_lose_whole_credit']}) lose"
             f" their tax unit's whole credit.\n"
         )
+
+
+def drivers_section(results, intervals):
+    """Adults facing a cliff by the part whose loss lowers net income most."""
+    print("\n## What lowers net income most, for adults facing a cliff\n")
+    if intervals:
+        print("scripts/driver_intervals.py gives each count and share a 95% interval: the 2.5th and")
+        print("97.5th percentiles over 5,000 resamples of Microcosm's source households (sampling")
+        print("error only). The last column counts the survey households that carry each count,")
+        print("and in parentheses the fewest of them that supply half of it.\n")
+    for r in results:
+        variants = [("twice", r.get("people_on_cliff_by_driver"))]
+        if r["health_benefits_in_net_income"] and "premium_tax_credit_counted_once" in r:
+            variants.append(("once", r["premium_tax_credit_counted_once"].get("people_on_cliff_by_driver")))
+        for credit, drivers in variants:
+            if not drivers:
+                continue
+            total = sum(drivers.values())
+            block = intervals.get((run_key(r), credit))
+            print(f"**{name(r, credit)}**\n")
+            if block is None:
+                print("| Largest loss | Adults | Share |")
+                print("|---|---|---|")
+            else:
+                print("| Largest loss | Adults | 95% interval | Share | 95% interval | Survey households |")
+                print("|---|---|---|---|---|---|")
+            for key, value in sorted(drivers.items(), key=lambda kv: -kv[1]):
+                cells = [PROGRAMS.get(key, key), millions(value)]
+                if block is None:
+                    cells.append(share_text(value / total))
+                else:
+                    b = block["by_largest_loss"][key]
+                    cells += [
+                        interval_text(b["interval_95"], millions),
+                        share_text(value / total),
+                        interval_text(b["share_interval_95"], share_text),
+                        f"{b['source_households']} ({b['source_households_for_half']})",
+                    ]
+                print("| " + " | ".join(cells) + " |")
+            print()
 
 
 def take_up_section(path=TAKE_UP):
@@ -287,7 +395,8 @@ def main(argv):
         for r in scaled:
             row = {**{k: v["people_on_cliff"] for k, v in r["medicaid_value_scaled"].items()}, "1": r["people_on_cliff"]}
             print(f"| {name(r, 'twice')} | " + " | ".join(millions(row[c]) for c in cols) + " |")
-    counted_once_section(results)
+    intervals = load_intervals(results)
+    counted_once_section(results, intervals=intervals)
     checked = [r for r in results if "medicaid_value_check" in r]
     if checked:
         print("\n## Medicaid's value against the spending it spreads ($ billions)\n")
@@ -296,21 +405,7 @@ def main(argv):
         for r in checked:
             c = r["medicaid_value_check"]
             print(f"| {name(r)} | {c['medicaid_cost_total'] / 1e9:,.1f} | {c['spending_total'] / 1e9:,.1f} | {100 * c['relative_gap']:.3f}% |")
-    print("\n## What lowers net income most, for adults facing a cliff\n")
-    for r in results:
-        variants = [("twice", r.get("people_on_cliff_by_driver"))]
-        if r["health_benefits_in_net_income"] and "premium_tax_credit_counted_once" in r:
-            variants.append(("once", r["premium_tax_credit_counted_once"].get("people_on_cliff_by_driver")))
-        for credit, drivers in variants:
-            if not drivers:
-                continue
-            total = sum(drivers.values())
-            print(f"**{name(r, credit)}**\n")
-            print("| Largest loss | Adults | Share |")
-            print("|---|---|---|")
-            for key, value in sorted(drivers.items(), key=lambda kv: -kv[1]):
-                print(f"| {PROGRAMS.get(key, key)} | {millions(value)} | {share_text(value / total)} |")
-            print()
+    drivers_section(results, intervals)
     take_up_section()
     print("## Program totals in each run ($ billions)\n")
     keys = []
