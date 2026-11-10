@@ -8,6 +8,10 @@
 # model's own benefit list, in results/csfp/.
 # Set CLIFFS_RUNNER or a .runner file to queue the runs (scripts/runner.zsh).
 set -u
+case "${CSFP:-}" in
+  ""|keep) ;;
+  *) echo "CSFP must be unset or keep, not '$CSFP'" >&2; exit 2 ;;
+esac
 F=${1:?fraction}; S=${2:-0}
 cd ${0:A:h}/..
 source scripts/runner.zsh

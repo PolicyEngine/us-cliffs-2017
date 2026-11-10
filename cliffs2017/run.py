@@ -248,6 +248,9 @@ def main():
     from cliffs2017.simulation import build_simulation
 
     started = time.time()
+    # Hash the code before the run, so an edit to cliffs2017/ during a run
+    # can't stamp the edited code on results the old code computed.
+    code = code_version()
     system = CountryTaxBenefitSystem()
     dataset, factors = load_dataset(
         args.year, args.fraction, args.seed, system, args.parts, args.part
@@ -399,7 +402,7 @@ def main():
         for package in ("policyengine-us", "policyengine-core")
     }
     result["dataset"] = f"{REPO}/{FILENAME}@{REVISION}"
-    result["code"] = code_version()
+    result["code"] = code
     if medicaid_meta is not None:
         result["medicaid_totals"] = dict(
             file=args.medicaid_totals,

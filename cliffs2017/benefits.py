@@ -6,8 +6,12 @@ Supplemental Food Program (CSFP) from 2024; a 2017 run reads the list's
 earliest value, from 2022, which has no CSFP.
 
 The model gives CSFP's food package to every person its eligibility rules
-admit: aged 60 or older, with income at or below the program's limit and, in
-Illinois, Kansas and Massachusetts, living in a served county. Its
+admit: aged 60 or older, with income at or below the program's limit (150% of
+the poverty guidelines in 2025; Texas sets its own, 130%) and, in Illinois,
+Kansas and Massachusetts, living in a served county. From 11 April 2025, a
+Kansan who receives SSI, SNAP, FDPIR or a Medicare Savings Program meets the
+income test whatever their income; the yearly eligibility formula reads that
+monthly rule's December value, so a 2025 run applies it to the whole year. Its
 ``gov.usda.csfp.amount`` values one package as the program's funding divided
 by its participation: $601 in 2025, from $425 million and 707,000 people.
 Every eligible person in the model therefore receives a package, however

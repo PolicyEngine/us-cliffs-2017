@@ -16,6 +16,10 @@
 # 2017 run does. CSFP=keep runs the model's own list instead, into
 # results/parts/csfp/, for the sensitivity in results/summary.md.
 set -u
+case "${CSFP:-}" in
+  ""|keep) ;;
+  *) echo "CSFP must be unset or keep, not '$CSFP'" >&2; exit 2 ;;
+esac
 P=${1:?parts}; S=${2:?seed}; I=${3:?part indices}
 C=${4:-2017-plain,2017-health,2025-plain,2025-health}
 cd ${0:A:h}/..

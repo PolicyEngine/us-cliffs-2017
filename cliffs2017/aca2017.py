@@ -33,10 +33,13 @@ with two adjustments so the credit reflects the earlier year's law and prices:
    the model spreads each state's Medicaid spending in 2017.
 
 The 400%-of-poverty eligibility limit needs no change: the model's
-``gov.aca.ptc_income_eligibility`` already ends eligibility above 400% before
-2021. (The model truncates income to whole percentage points of poverty, so it
-also denies the credit at exactly 400.00%, which the IRS's 2017 Form 8962
-worksheet allows; no survey record lands exactly there.)
+``gov.aca.ptc_income_eligibility`` already ends eligibility at 400% before
+2021. Section 36B(c)(1)(A) allows the credit when household income "does not
+exceed 400 percent" of the poverty line. The model truncates income to whole
+percentage points of the line (``aca_magi_fraction``) and denies a truncated
+4.00, so it agrees with the statute except at exactly 400.00%, which the
+statute allows and the model denies. We haven't checked how the IRS's 2017
+Form 8962 treats income from 400% to 401% of the line.
 """
 
 import csv
