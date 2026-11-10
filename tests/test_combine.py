@@ -135,3 +135,15 @@ def test_refuses_mismatched_or_missing_parts():
         combine([a, dict(a)])
     with pytest.raises(ValueError, match="disagree on year"):
         combine([a, dict(b, year=2025)])
+
+
+def test_runs_without_the_csfp_option_count_as_leaving_csfp_in():
+    """A part from before --leave-out-csfp combines with a part that ran without it."""
+    people = pd.DataFrame(dict(household_id=[0, 1], weight=[1.0, 2.0], worker=[True, False]))
+    on_cliff = np.array([True, False])
+    a = part_result(people.iloc[:1], on_cliff[:1], 2, 0)
+    b = part_result(people.iloc[1:].reset_index(drop=True), on_cliff[1:], 2, 1)
+    assert combine([a, dict(b, leave_out_csfp=False)])["leave_out_csfp"] is False
+    assert combine([dict(a, leave_out_csfp=True), dict(b, leave_out_csfp=True)])["leave_out_csfp"] is True
+    with pytest.raises(ValueError, match="disagree on leave_out_csfp"):
+        combine([a, dict(b, leave_out_csfp=True)])

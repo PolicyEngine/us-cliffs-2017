@@ -9,11 +9,19 @@ from __future__ import annotations
 HEALTH_PARAMETER = "gov.simulation.include_health_benefits_in_net_income"
 
 
-def reforms(health: bool, aca_before_2018: bool, medicaid_totals=None, year: int | None = None):
+def reforms(
+    health: bool,
+    aca_before_2018: bool,
+    medicaid_totals=None,
+    year: int | None = None,
+    leave_out_csfp: bool = False,
+):
     """The reforms one configuration applies, or None.
 
     ``medicaid_totals`` (cliffs2017.medicaid) fixes Medicaid's two state
-    totals at their full-sample values for ``year``.
+    totals at their full-sample values for ``year``. ``leave_out_csfp``
+    removes the Commodity Supplemental Food Program from household benefits
+    (cliffs2017.benefits).
     """
     from policyengine_core.reforms import Reform
 
@@ -32,6 +40,10 @@ def reforms(health: bool, aca_before_2018: bool, medicaid_totals=None, year: int
         from cliffs2017.medicaid import fixed_state_totals
 
         out.append(fixed_state_totals(medicaid_totals, year))
+    if leave_out_csfp:
+        from cliffs2017.benefits import LeaveOutCSFP
+
+        out.append(LeaveOutCSFP)
     return tuple(out) if out else None
 
 
@@ -41,6 +53,7 @@ def build_simulation(
     health: bool = False,
     aca_before_2018: bool = False,
     medicaid_totals=None,
+    leave_out_csfp: bool = False,
 ):
     """A Microsimulation of ``dataset`` (already deflated to ``year`` if earlier).
 
@@ -54,6 +67,6 @@ def build_simulation(
 
     return Microsimulation(
         dataset=dataset,
-        reform=reforms(health, aca_before_2018, medicaid_totals, year),
+        reform=reforms(health, aca_before_2018, medicaid_totals, year, leave_out_csfp),
         dataset_end_year=max(year, int(dataset.time_period)),
     )

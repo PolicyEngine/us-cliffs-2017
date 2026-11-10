@@ -32,6 +32,9 @@ def main():
     for key in ("year", "health_benefits_in_net_income", "aca_before_2018", "seed", "versions", "dataset"):
         if part[key] != sub[key]:
             sys.exit(f"the runs differ on {key}: {part[key]} vs {sub[key]}")
+    # Runs made before --leave-out-csfp existed don't record it; they ran without it.
+    if part.get("leave_out_csfp", False) != sub.get("leave_out_csfp", False):
+        sys.exit("the runs differ on leave_out_csfp")
     failed = False
     for key in WEIGHTED + SAMPLE:
         scaled = part[key] * (parts if key in WEIGHTED else 1)

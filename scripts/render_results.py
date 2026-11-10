@@ -1,10 +1,15 @@
 """Render combined cliff results as Markdown tables (results/summary.md).
 
-usage: python scripts/render_results.py results/final_*.json > results/summary.md
+usage: python scripts/render_results.py results/final_*.json [--csfp results/csfp/final_*.json] > results/summary.md
+
+With --csfp, a section compares the 2025 runs that count the Commodity
+Supplemental Food Program as the model does (CSFP=keep scripts/run_final.sh),
+using results/csfp/reach_2025.json from scripts/csfp_reach.py where it exists.
 """
 
 import json
 import sys
+from pathlib import Path
 
 LABELS = {
     "people_on_cliff": "Adults facing a cliff",
@@ -33,7 +38,9 @@ PROGRAMS = {
     "social_security": "Social Security",
     "unemployment_compensation": "Unemployment compensation",
     "spm_unit_broadband_subsidy": "Broadband subsidy",
+    "commodity_supplemental_food_program": "Commodity Supplemental Food Program",
 }
+REACH = Path("results/csfp/reach_2025.json")
 
 
 def name(result):
@@ -48,7 +55,67 @@ def millions(x, se=None):
     return text
 
 
-def main(paths):
+def counts_table(rows):
+    print("| Configuration | " + " | ".join(LABELS.values()) + " | Share of workers |")
+    print("|" + "---|" * (len(LABELS) + 2))
+    for label, r in rows:
+        cells = [millions(r[k], r["standard_errors"].get(k)) for k in LABELS]
+        cells.append(f"{100 * r['workers_on_cliff'] / r['workers']:.2f}%")
+        print(f"| {label} | " + " | ".join(cells) + " |")
+
+
+def csfp_section(main_results, csfp_paths):
+    kept = sorted((json.load(open(p)) for p in csfp_paths), key=lambda r: r["health_benefits_in_net_income"])
+    if not kept:
+        return
+    print("\n## Counting the Commodity Supplemental Food Program\n")
+    print("From 2024, PolicyEngine-US counts the Commodity Supplemental Food Program (CSFP) in")
+    print("household benefits and gives its food package to everyone the program's rules admit.")
+    if REACH.exists():
+        reach = json.loads(REACH.read_text())
+        line = (
+            f"On a {100 * reach['fraction']:.0f}% household sample, the model gives "
+            f"{reach['model_recipients'] / 1e6:.1f} million people a package in {reach['year']}, "
+            f"at ${reach['model_spending'] / 1e9:.1f} billion"
+        )
+        if reach.get("cited"):
+            line += (
+                f"; the model's parameters cite the program's {reach['year']} funding and participation "
+                f"as ${reach['cited']['funding'] / 1e6:,.0f} million and {reach['cited']['participation']:,.0f} people"
+            )
+        print(line + ".")
+    print("A 2017 run reads the model's earlier list, which has no CSFP, so the main rows leave CSFP")
+    print("out of 2025 as well (cliffs2017/benefits.py). These rows count it as the model does.\n")
+    by_health = {r["health_benefits_in_net_income"]: r for r in main_results if r["year"] == 2025}
+    rows = []
+    for r in kept:
+        base = by_health.get(r["health_benefits_in_net_income"])
+        if base:
+            rows.append((f"{name(base)}, leaving CSFP out", base))
+        rows.append((f"{name(r)}, counting CSFP", r))
+        if r["health_benefits_in_net_income"] and "premium_tax_credit_counted_once" in r:
+            if base and "premium_tax_credit_counted_once" in base:
+                rows.append((f"{name(base)}, leaving CSFP out, premium tax credit counted once", once_row(base)))
+            rows.append((f"{name(r)}, counting CSFP, premium tax credit counted once", once_row(r)))
+    counts_table(rows)
+    for r in kept:
+        drivers = r.get("people_on_cliff_by_driver", {})
+        csfp = drivers.get("commodity_supplemental_food_program")
+        if csfp:
+            print(f"\nCounting CSFP, it is the largest loss for {millions(csfp)} of the {millions(r['people_on_cliff'])}"
+                  f" adults facing a cliff under {name(r)}.")
+
+
+def once_row(r):
+    o = r["premium_tax_credit_counted_once"]
+    return dict(o, workers=r["workers"])
+
+
+def main(argv):
+    paths, csfp_paths = argv, []
+    if "--csfp" in argv:
+        i = argv.index("--csfp")
+        paths, csfp_paths = argv[:i], argv[i + 1 :]
     results = [json.load(open(p)) for p in paths]
     results.sort(key=lambda r: (r["year"], r["health_benefits_in_net_income"]))
     print("# Cliff counts\n")
@@ -128,6 +195,7 @@ def main(paths):
     if any("medicaid_cost" in r.get("program_totals_left_out", {}) for r in results):
         print("\nThe runs without health coverage leave out Medicaid's value: they don't hold")
         print("Medicaid's full-sample state totals, and their net income leaves Medicaid out.")
+    csfp_section(results, csfp_paths)
 
 
 if __name__ == "__main__":

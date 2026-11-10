@@ -10,17 +10,25 @@
 #   e.g. scripts/run_final.sh 4 0 0,1 & scripts/run_final.sh 4 0 2,3
 # Then: scripts/combine_final.sh <parts> <seed>
 # Set CLIFFS_RUNNER or a .runner file to queue the runs (scripts/runner.zsh).
+# From 2024 the model counts the Commodity Supplemental Food Program in
+# household benefits and gives every eligible person a package, so runs for
+# those years leave it out (cliffs2017/benefits.py) and count the benefits a
+# 2017 run does. CSFP=keep runs the model's own list instead, into
+# results/parts/csfp/, for the sensitivity in results/summary.md.
 set -u
 P=${1:?parts}; S=${2:?seed}; I=${3:?part indices}
 C=${4:-2017-plain,2017-health,2025-plain,2025-health}
 cd ${0:A:h}/..
 source scripts/runner.zsh
-mkdir -p results/parts logs
+partdir=results/parts
+[ "${CSFP:-}" = keep ] && partdir=results/parts/csfp
+mkdir -p $partdir logs
 for i in ${(s:,:)I}; do
   for cfg in ${(s:,:)C}; do
     y=${cfg%-*}; m=${cfg#*-}
     flags=(--decompose)
     [ $y -lt 2018 ] && flags+=(--aca-before-2018)
+    [ $y -ge 2024 ] && [ "${CSFP:-}" != keep ] && flags+=(--leave-out-csfp)
     if [ $m = health ]; then
       totals=results/medicaid/totals_${y}_p${P}_s${S}.json
       if [ ! -s $totals ]; then
@@ -29,13 +37,13 @@ for i in ${(s:,:)I}; do
       fi
       flags+=(--health --medicaid-totals $totals)
     fi
-    out=results/parts/run_${y}_${m}_p${P}_${i}_s${S}.json
+    out=$partdir/run_${y}_${m}_p${P}_${i}_s${S}.json
     if [ -s $out ]; then echo "$(date -u +%FT%TZ) skip $out (done)" | tee -a logs/final.log; continue; fi
-    echo "$(date -u +%FT%TZ) start $y $m part $i/$P s=$S" | tee -a logs/final.log
-    run cliffs-final-$y-$m-p$i .venv/bin/python -m cliffs2017.run \
+    echo "$(date -u +%FT%TZ) start $y $m${CSFP:+ csfp} part $i/$P s=$S" | tee -a logs/final.log
+    run cliffs-final-$y-$m-p$i${CSFP:+-csfp} .venv/bin/python -m cliffs2017.run \
       --year $y $flags --parts $P --part $i --seed $S --out $out \
-      > logs/final_${y}_${m}_p${P}_${i}_s${S}.log 2>&1
+      > logs/final_${y}_${m}_p${P}_${i}_s${S}${CSFP:+_csfp}.log 2>&1
     rc=$?
-    echo "$(date -u +%FT%TZ) end $y $m part $i rc=$rc" | tee -a logs/final.log
+    echo "$(date -u +%FT%TZ) end $y $m${CSFP:+ csfp} part $i rc=$rc" | tee -a logs/final.log
   done
 done

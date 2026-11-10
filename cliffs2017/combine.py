@@ -48,6 +48,7 @@ SAME = [
     "year",
     "health_benefits_in_net_income",
     "aca_before_2018",
+    "leave_out_csfp",
     "parts",
     "seed",
     "versions",
@@ -56,6 +57,8 @@ SAME = [
     "deflation",
     "medicaid_totals",
 ]
+# Runs made before an option existed don't record it; they ran without it.
+DEFAULTS = {"leave_out_csfp": False}
 MEDICAID_TOLERANCE = 1e-3
 
 
@@ -78,7 +81,7 @@ def combine(results: list[dict]) -> dict:
         raise ValueError("no parts to combine")
     first = results[0]
     for key in SAME:
-        values = [json.dumps(r.get(key), sort_keys=True) for r in results]
+        values = [json.dumps(r.get(key, DEFAULTS.get(key)), sort_keys=True) for r in results]
         if len(set(values)) > 1:
             raise ValueError(f"parts disagree on {key}")
     parts = first["parts"]
@@ -86,7 +89,7 @@ def combine(results: list[dict]) -> dict:
     if indices != list(range(parts)):
         raise ValueError(f"expected parts 0..{parts - 1} once each, got {indices}")
 
-    out = {key: first.get(key) for key in SAME if key in first}
+    out = {key: first.get(key, DEFAULTS.get(key)) for key in SAME if key in first or key in DEFAULTS}
     for key in ADDITIVE:
         if all(key in r for r in results):
             out[key] = sum(r[key] for r in results)

@@ -30,7 +30,7 @@ the parts equals a single full-sample run.
 
 Usage:
   python -m cliffs2017.run --year 2017 [--health] [--aca-before-2018]
-      [--decompose] [--fraction 0.05 | --parts 4 --part 0]
+      [--leave-out-csfp] [--decompose] [--fraction 0.05 | --parts 4 --part 0]
       [--medicaid-totals results/medicaid/totals_2017_p4_s0.json] --out results/x.json
 """
 
@@ -166,6 +166,11 @@ def main():
         action="store_true",
         help="Apply cliffs2017.aca2017.ACABefore2018 (premium tax credit before 2018).",
     )
+    parser.add_argument(
+        "--leave-out-csfp",
+        action="store_true",
+        help="Leave the Commodity Supplemental Food Program out of household benefits (cliffs2017.benefits).",
+    )
     parser.add_argument("--decompose", action="store_true")
     parser.add_argument("--fraction", type=float, default=1.0)
     parser.add_argument("--parts", type=int, default=1)
@@ -200,7 +205,7 @@ def main():
             medicaid_meta, args.year, args.aca_before_2018, f"{REPO}/{FILENAME}@{REVISION}"
         )
     sim = build_simulation(
-        dataset, args.year, args.health, args.aca_before_2018, medicaid_totals
+        dataset, args.year, args.health, args.aca_before_2018, medicaid_totals, args.leave_out_csfp
     )
     year = args.year
     loaded = time.time()
@@ -225,6 +230,7 @@ def main():
         year=year,
         health_benefits_in_net_income=args.health,
         aca_before_2018=args.aca_before_2018,
+        leave_out_csfp=args.leave_out_csfp,
         fraction=args.fraction,
         parts=args.parts,
         part=args.part,
