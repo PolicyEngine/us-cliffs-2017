@@ -58,8 +58,8 @@ REACH = Path("results/csfp/reach_2025.json")
 ONCE = Path("results/counted_once")
 TAKE_UP = Path("results/take_up_bounds.json")
 TAKE_UP_GROUPS = {
-    "wic": "WIC",
     "school_meals": "School meals",
+    "state_benefits": "State benefits",
     "chip": "CHIP",
     "medicare_savings_programs": "Medicare Savings Programs",
     "state_health_programs": "State health programs",
@@ -110,14 +110,14 @@ def csfp_section(main_results, csfp_paths):
     if REACH.exists():
         reach = json.loads(REACH.read_text())
         line = (
-            f"Weighted up from a {100 * reach['fraction']:.0f}% household sample, the model gives "
+            f"Weighting up a {100 * reach['fraction']:.0f}% household sample, we find that the model gives "
             f"{reach['model_recipients'] / 1e6:.1f} million people a package in {reach['year']}, "
             f"at ${reach['model_spending'] / 1e9:.1f} billion"
         )
         if reach.get("cited"):
             line += (
-                f". It values each package at ${reach['package_value']:,.0f}, which divides the program's "
-                f"{reach['year']} cost of ${reach['cited']['funding'] / 1e6:,.0f} million by its "
+                f". It values each package at ${reach['package_value']:,.0f}, the program's "
+                f"{reach['year']} cost of ${reach['cited']['funding'] / 1e6:,.0f} million divided by its "
                 f"{reach['cited']['participation']:,.0f} participants"
             )
         print(line + ".")
@@ -150,9 +150,9 @@ def counted_once_section(results, folder=ONCE):
     if not once:
         return
     print("\n## Medicaid valued differently, with the premium tax credit counted once\n")
-    print("From scripts/counted_once.py, which rebuilds each part of the runs counting health")
-    print("coverage, reproduces their counted-once counts and the table above, and scales")
-    print("every enrollee's Medicaid value by the factor shown.\n")
+    print("scripts/counted_once.py rebuilds each part of the runs counting health coverage,")
+    print("reproduces their counted-once counts and the table above, and scales every")
+    print("enrollee's Medicaid value by the factor shown.\n")
     cols = sorted(list(once[0]["medicaid_value_scaled_counted_once"]) + ["1"], key=float)
     print("| Configuration | " + " | ".join(f"x{c}" for c in cols) + " |")
     print("|" + "---|" * (len(cols) + 1))
@@ -183,14 +183,22 @@ def take_up_section(path=TAKE_UP):
         return
     runs = json.loads(path.read_text())["runs"]
     print("## Cliffs that rest on benefits the model gives to everyone eligible\n")
-    print("Microcosm supplies take-up for SNAP, SSI, TANF, housing assistance, Head Start,")
-    print("Medicaid, the ACA premium tax credit and the EITC. PolicyEngine-US gives WIC, free and")
-    print("reduced-price school meals, CHIP, Medicare Savings Programs and several state health")
-    print("programs to everyone eligible. It counts school meals for every K-12 child in an")
+    print("Microcosm supplies take-up for SNAP, SSI, TANF, WIC, housing assistance, Head Start,")
+    print("Medicaid, Medicare, the ACA premium tax credit and the EITC.")
+    print("We set WIC take-up from the draw Microcosm stores, as policyengine.py does")
+    print("(cliffs2017/wic_take_up.py). PolicyEngine-US gives free and reduced-price school meals,")
+    print("most state child care subsidies, CHIP, Medicare Savings Programs and several state")
+    print("health programs to everyone eligible. It counts school meals for every K-12 child in an")
     print("eligible family on all 180 school days. In each cell, scripts/take_up_bounds.py counts")
     print("the adults facing a cliff whose cliff would disappear if that benefit didn't change")
-    print("with the raise. If some families don't take up these benefits, only part of each")
-    print("figure would disappear. In the rows counting health coverage, we count the premium")
+    print("with the raise. If some families don't take up these benefits, only some of the cliffs")
+    print("in each cell would disappear. The state benefits column also holds state supplements")
+    print("to SSI. Some states pay these only to SSI recipients, so they follow Microcosm's SSI")
+    print("take-up, and the column overstates the cliffs that rest on full take-up. When a raise")
+    print("ends Medicaid for someone in a household, the model can start their CHIP or Medicare")
+    print("Savings Program instead. A household that didn't take that coverage up would lose the")
+    print("offset, so the model can also miss cliffs. The per-person files hold only cliff rows,")
+    print("so we can't count those. In the rows counting health coverage, we count the premium")
     print("tax credit once.\n")
     groups = [g for g in TAKE_UP_GROUPS if any(g in e[k]["groups"] for e in runs.values() for k in e)]
     print("| Configuration | Adults facing a cliff | " + " | ".join(TAKE_UP_GROUPS[g] for g in groups) + " |")
@@ -233,8 +241,9 @@ def main(argv):
     print("income above zero) by everyone with earnings, including people the model")
     print("doesn't test. We leave the Commodity Supplemental Food Program out of the 2025 rows")
     print("(see the last section). In the rows counting health coverage, we count the premium")
-    print("tax credit twice, as the model does when it computes net income. In the next table,")
-    print("as in the headline counts in METHODOLOGY.md, we count it once.\n")
+    print("tax credit twice, as the model does when it computes net income. In the table after")
+    print("this one, we count it once, as we do in our headline counts; we give the reason in")
+    print("METHODOLOGY.md.\n")
     header = "| Configuration | " + " | ".join(LABELS.values()) + " | Share of workers | Mean cliff gap |"
     print(header)
     print("|" + "---|" * (len(LABELS) + 3))

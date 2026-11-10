@@ -77,15 +77,17 @@ def test_take_up_section(tmp_path, capsys):
     def group(n, share):
         return {"columns": [], "cliffs_that_disappear": n, "share": share, "sample_rows": 1}
 
-    plain = {"people_on_cliff": 700_000.0, "groups": {"wic": group(90_000.0, 0.126), "school_meals": group(300_000.0, 0.43), "all_of_these": group(390_000.0, 0.556)}}
-    health = {"people_on_cliff": 2.68e6, "groups": {"wic": group(10_000.0, 0.004), "school_meals": group(300_000.0, 0.113), "chip": group(45_000.0, 0.017), "medicare_savings_programs": group(150_000.0, 0.055), "state_health_programs": group(0.0, 0.0), "all_of_these": group(500_000.0, 0.188)}}
+    plain = {"people_on_cliff": 700_000.0, "groups": {"school_meals": group(300_000.0, 0.43), "state_benefits": group(50_000.0, 0.071), "all_of_these": group(340_000.0, 0.486)}}
+    health = {"people_on_cliff": 2.68e6, "groups": {"school_meals": group(300_000.0, 0.113), "state_benefits": group(35_000.0, 0.013), "chip": group(45_000.0, 0.017), "medicare_savings_programs": group(150_000.0, 0.055), "state_health_programs": group(0.0, 0.0), "all_of_these": group(500_000.0, 0.188)}}
     path = tmp_path / "take_up_bounds.json"
     path.write_text(json.dumps({"runs": {"2017_plain": {"as_modeled": plain}, "2017_health": {"as_modeled": health, "credit_counted_once": health}}}))
     take_up_section(path)
     out = capsys.readouterr().out
-    assert "| Configuration | Adults facing a cliff | WIC | School meals | CHIP | Medicare Savings Programs | State health programs | Any of these |" in out
-    assert "| 2017 rules, cash and near-cash only | 0.70M | 0.09M (13%) | 0.30M (43%) | – | – | – | 0.39M (56%) |" in out
-    assert "| 2017 rules, counting health coverage, premium tax credit counted once | 2.68M | 0.01M (0%) | 0.30M (11%) | 0.04M (2%) | 0.15M (6%) | 0.00M (0%) | 0.50M (19%) |" in out
+    assert "| Configuration | Adults facing a cliff | School meals | State benefits | CHIP | Medicare Savings Programs | State health programs | Any of these |" in out
+    assert "| 2017 rules, cash and near-cash only | 0.70M | 0.30M (43%) | 0.05M (7%) | – | – | – | 0.34M (49%) |" in out
+    assert "| 2017 rules, counting health coverage, premium tax credit counted once | 2.68M | 0.30M (11%) | 0.04M (1%) | 0.04M (2%) | 0.15M (6%) | 0.00M (0%) | 0.50M (19%) |" in out
+    # WIC follows Microcosm's stored draw, so it has no column of its own
+    assert "| WIC |" not in out and "We set WIC take-up from the draw Microcosm stores" in out
 
 
 def test_no_take_up_section_without_file(tmp_path, capsys):

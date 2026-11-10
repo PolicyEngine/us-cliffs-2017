@@ -3,6 +3,9 @@
  "health_benefits_in_net_income": false,
  "aca_before_2018": false,
  "leave_out_csfp": true,
+ "stored_input_renames": {
+  "would_claim_wic": "takes_up_wic_if_eligible"
+ },
  "decompose": true,
  "bootstrap_clusters": "household_source_id",
  "fraction": 1.0,
@@ -13,40 +16,40 @@
  "households_total": 31059496.36349248,
  "workers": 48424419.80818404,
  "workers_evaluated": 41938708.192174345,
- "people_on_cliff": 73758.92583621596,
- "workers_on_cliff": 71036.88958164124,
- "households_with_person_on_cliff": 45652.959103578236,
- "people_in_those_households": 221032.90494491137,
- "mean_cliff_gap_on_cliff": 3036.539490264706,
- "cliff_gap_total": 223971891.06117547,
- "sample_people_on_cliff": 118,
+ "people_on_cliff": 71939.60344145796,
+ "workers_on_cliff": 69217.57228884666,
+ "households_with_person_on_cliff": 43833.68777971156,
+ "people_in_those_households": 215574.50001778663,
+ "mean_cliff_gap_on_cliff": 3106.403962044753,
+ "cliff_gap_total": 223473469.15847334,
+ "sample_people_on_cliff": 113,
  "sample_households": 14301,
  "sample_clusters": 11865,
- "share_of_workers_on_cliff": 0.0014669641859010058,
+ "share_of_workers_on_cliff": 0.001429393941383856,
  "standard_errors": {
-  "people_on_cliff": 29902.56766684354,
-  "workers_on_cliff": 29750.05626395381,
-  "households_with_person_on_cliff": 17585.7201325785,
-  "people_in_those_households": 95130.21566762571
+  "people_on_cliff": 29687.24377458004,
+  "workers_on_cliff": 29552.857245682775,
+  "households_with_person_on_cliff": 17265.216500049362,
+  "people_in_those_households": 94382.12491686772
  },
  "decomposition_flag_mismatches": 0,
  "premium_tax_credit_counted_once": {
-  "people_on_cliff": 73758.92583621596,
-  "workers_on_cliff": 71036.88958164124,
-  "households_with_person_on_cliff": 45652.959103578236,
-  "people_in_those_households": 221032.90494491137,
+  "people_on_cliff": 71939.60344145796,
+  "workers_on_cliff": 69217.57228884666,
+  "households_with_person_on_cliff": 43833.68777971156,
+  "people_in_those_households": 215574.50001778663,
   "standard_errors": {
-   "people_on_cliff": 29902.56766684354,
-   "workers_on_cliff": 29750.05626395381,
-   "households_with_person_on_cliff": 17585.7201325785,
-   "people_in_those_households": 95130.21566762571
+   "people_on_cliff": 29687.24377458004,
+   "workers_on_cliff": 29552.857245682775,
+   "households_with_person_on_cliff": 17265.216500049362,
+   "people_in_those_households": 94382.12491686772
   },
-  "sample_people_on_cliff": 118,
+  "sample_people_on_cliff": 113,
   "people_on_cliff_by_driver": {
    "tanf": 27630.046345027396,
    "reduced_price_school_meals": 15984.457562965224,
    "snap": 12746.940910813399,
-   "wic": 9043.359245042084,
+   "wic": 7224.0368502840865,
    "household_refundable_tax_credits": 5236.028119326569,
    "ssi": 3107.756591796875,
    "free_school_meals": 10.051914049196057,
@@ -58,7 +61,7 @@
   "tanf": 27630.046345027396,
   "reduced_price_school_meals": 15984.457562965224,
   "snap": 12746.940910813399,
-  "wic": 9043.359245042084,
+  "wic": 7224.0368502840865,
   "household_refundable_tax_credits": 5236.028119326569,
   "ssi": 3107.756591796875,
   "free_school_meals": 10.051914049196057,
@@ -70,7 +73,7 @@
   "snap": 23339810752.00069,
   "ssi": 15217818099.030554,
   "tanf": 1147698709.071244,
-  "wic": 2760022355.2217283,
+  "wic": 1645598357.780776,
   "free_school_meals": 8132920082.446283,
   "reduced_price_school_meals": 402497554.0544373,
   "eitc": 16253718677.461079,
@@ -82,8 +85,8 @@
   "housing_assistance": 1905849276.0305986,
   "household_head_start_benefits": 0.0,
   "household_state_benefits": 2276275607.012401,
-  "household_benefits": 489683438342.9686,
-  "household_net_income": 4123706996694.7544
+  "household_benefits": 488569014394.32666,
+  "household_net_income": 4122592573092.3003
  },
  "people_in_recipient_units": {
   "snap": 15719594.601819549,
@@ -95,9 +98,9 @@
   "assigned_aca_ptc": 5849035.257857377
  },
  "timing_seconds": {
-  "load": 32.9,
-  "cliffs": 241.5,
-  "total": 573.0
+  "load": 42.5,
+  "cliffs": 293.5,
+  "total": 594.2
  },
  "versions": {
   "policyengine-us": "2.116.0",
@@ -105,8 +108,8 @@
  },
  "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
  "code": {
-  "commit": "efa0b34cae43e25b71373a19bda93f3501d0defc",
-  "cliffs2017_sha256": "070af058ee72c7acea5a2cc6def63526b2422281191b8e04ba6727981b50cd10"
+  "commit": "cd77a875454b36aa9cbc7854c6e56a927e7cb024",
+  "cliffs2017_sha256": "04f6b6c399139cf514ae9cd8ed0a5aeaf95e9d728a1c360d0415eed929b97574"
  },
  "python": "3.13.13"
 }

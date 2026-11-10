@@ -11,66 +11,69 @@
  },
  "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
  "code": {
-  "commit": "a81870645dd8b01f5961888ab933fc53367bfed9",
-  "cliffs2017_sha256": "ad4968e1abb3a56512a4c2a47af0fe1c684ec9de3c62d867db20c0c07e939cec",
-  "script_sha256": "e2977a749a1bfd302c4bd2a5b620227c0686e1062f4ddd5a3233e32188c8aa9e"
+  "commit": "cd77a875454b36aa9cbc7854c6e56a927e7cb024",
+  "cliffs2017_sha256": "04f6b6c399139cf514ae9cd8ed0a5aeaf95e9d728a1c360d0415eed929b97574",
+  "script_sha256": "2735c33a9e02d42b0b04666563cdf4283b4c9f4b867ad131ea91de81285a4197"
+ },
+ "stored_input_renames": {
+  "would_claim_wic": "takes_up_wic_if_eligible"
  },
  "counted_once": {
-  "people_on_cliff": 3079307.385472643,
-  "workers_on_cliff": 2592639.0359196262,
-  "households_with_person_on_cliff": 2423366.530020176,
-  "people_in_those_households": 7333086.92138248
+  "people_on_cliff": 3079306.748654438,
+  "workers_on_cliff": 2592638.400889024,
+  "households_with_person_on_cliff": 2423365.91942764,
+  "people_in_those_households": 7333084.455185217
  },
  "medicaid_value_scaled_counted_once": {
   "0.8": {
-   "people_on_cliff": 3079307.385472643,
-   "workers_on_cliff": 2592639.0359196262,
-   "households_with_person_on_cliff": 2423366.530020176,
-   "people_in_those_households": 7333086.92138248
+   "people_on_cliff": 3079306.748654438,
+   "workers_on_cliff": 2592638.400889024,
+   "households_with_person_on_cliff": 2423365.91942764,
+   "people_in_those_households": 7333084.455185217
   },
   "0.9": {
-   "people_on_cliff": 3079307.385472643,
-   "workers_on_cliff": 2592639.0359196262,
-   "households_with_person_on_cliff": 2423366.530020176,
-   "people_in_those_households": 7333086.92138248
+   "people_on_cliff": 3079306.748654438,
+   "workers_on_cliff": 2592638.400889024,
+   "households_with_person_on_cliff": 2423365.91942764,
+   "people_in_those_households": 7333084.455185217
   },
   "1.1": {
-   "people_on_cliff": 3079307.385472643,
-   "workers_on_cliff": 2592639.0359196262,
-   "households_with_person_on_cliff": 2423366.530020176,
-   "people_in_those_households": 7333086.92138248
+   "people_on_cliff": 3079306.748654438,
+   "workers_on_cliff": 2592638.400889024,
+   "households_with_person_on_cliff": 2423365.91942764,
+   "people_in_those_households": 7333084.455185217
   },
   "1.2": {
-   "people_on_cliff": 3079307.385472643,
-   "workers_on_cliff": 2592639.0359196262,
-   "households_with_person_on_cliff": 2423366.530020176,
-   "people_in_those_households": 7333086.92138248
+   "people_on_cliff": 3079306.748654438,
+   "workers_on_cliff": 2592638.400889024,
+   "households_with_person_on_cliff": 2423365.91942764,
+   "people_in_those_households": 7333084.455185217
   }
  },
  "medicaid_value_scaled_model": {
   "0.8": {
-   "people_on_cliff": 3101513.355773528,
-   "workers_on_cliff": 2601140.164052233,
-   "households_with_person_on_cliff": 2437077.645541712,
-   "people_in_those_households": 7382721.441665011
+   "people_on_cliff": 3101512.718955323,
+   "workers_on_cliff": 2601139.529021631,
+   "households_with_person_on_cliff": 2437077.034949176,
+   "people_in_those_households": 7382718.975467748
   },
   "0.9": {
-   "people_on_cliff": 3101513.355773528,
-   "workers_on_cliff": 2601140.164052233,
-   "households_with_person_on_cliff": 2437077.645541712,
-   "people_in_those_households": 7382721.441665011
+   "people_on_cliff": 3101512.718955323,
+   "workers_on_cliff": 2601139.529021631,
+   "households_with_person_on_cliff": 2437077.034949176,
+   "people_in_those_households": 7382718.975467748
   },
   "1.1": {
-   "people_on_cliff": 3101513.355773528,
-   "workers_on_cliff": 2601140.164052233,
-   "households_with_person_on_cliff": 2437077.645541712,
-   "people_in_those_households": 7382721.441665011
+   "people_on_cliff": 3101512.718955323,
+   "workers_on_cliff": 2601139.529021631,
+   "households_with_person_on_cliff": 2437077.034949176,
+   "people_in_those_households": 7382718.975467748
   },
   "1.2": {
-   "people_on_cliff": 3101513.355773528,
-   "workers_on_cliff": 2601140.164052233,
-   "households_with_person_on_cliff": 2437077.645541712,
-   "people_in_those_households": 7382721.441665011
+   "people_on_cliff": 3101512.718955323,
+   "workers_on_cliff": 2601139.529021631,
+   "households_with_person_on_cliff": 2437077.034949176,
+   "people_in_those_households": 7382718.975467748
   }
  },
  "premium_tax_credit_largest_loss": {

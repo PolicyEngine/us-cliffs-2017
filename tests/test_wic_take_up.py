@@ -229,6 +229,38 @@ def test_the_cliff_tests_branches_start_from_the_draw(small_dataset):
 
 
 @pytest.mark.parametrize("year", YEARS)
+def test_raised_earnings_copies_keep_the_draw(small_dataset, system, year):
+    """The copy the cliff test makes to raise an adult's earnings keeps the mapped draw.
+
+    marginal_earnings_change deletes each copy once it has measured it, so this
+    builds one with PolicyEngine-US's own create_perturbed_branch, which keeps a
+    simulation's inputs and deletes every other array.
+    """
+    from policyengine_us.variables.household.marginal_tax_rate_helpers import (
+        create_perturbed_branch,
+    )
+
+    data = configured(small_dataset, system, year)
+    sim = build_simulation(data, year)
+    draw = data.person[LEGACY].to_numpy(dtype=bool)
+    base_wic = sim.calculate("wic", year).values
+    branch = create_perturbed_branch(
+        sim, year, "wic_check", {"employment_income": np.full(len(draw), 1_000.0)}
+    )
+    try:
+        for month in range(1, 13):
+            np.testing.assert_array_equal(
+                branch.calculate(LIVE, f"{year}-{month:02d}").values, draw
+            )
+        raised_wic = branch.calculate("wic", year).values
+        # Nobody the draw leaves out gets WIC in either simulation.
+        assert (base_wic[~draw] == 0).all() and (raised_wic[~draw] == 0).all()
+        assert base_wic[draw].sum() > 0
+    finally:
+        del sim.branches["wic_check"]
+
+
+@pytest.mark.parametrize("year", YEARS)
 def test_medicaid_sums_ignore_wic_take_up(small_dataset, system, year):
     from cliffs2017.medicaid import simulation_sums
 

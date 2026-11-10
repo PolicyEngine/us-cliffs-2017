@@ -7,61 +7,61 @@
  "part": 2,
  "seed": 0,
  "counted_once": {
-  "people_on_cliff": 935728.0000950899,
-  "workers_on_cliff": 793646.2643794524,
-  "households_with_person_on_cliff": 707771.0857285752,
-  "people_in_those_households": 2141895.06394866
+  "people_on_cliff": 935727.9533544634,
+  "workers_on_cliff": 793646.217638826,
+  "households_with_person_on_cliff": 707771.0623582621,
+  "people_in_those_households": 2141894.9704674073
  },
  "medicaid_value_scaled_counted_once": {
   "0.8": {
-   "people_on_cliff": 935728.0000950899,
-   "workers_on_cliff": 793646.2643794524,
-   "households_with_person_on_cliff": 707771.0857285752,
-   "people_in_those_households": 2141895.06394866
+   "people_on_cliff": 935727.9533544634,
+   "workers_on_cliff": 793646.217638826,
+   "households_with_person_on_cliff": 707771.0623582621,
+   "people_in_those_households": 2141894.9704674073
   },
   "0.9": {
-   "people_on_cliff": 935728.0000950899,
-   "workers_on_cliff": 793646.2643794524,
-   "households_with_person_on_cliff": 707771.0857285752,
-   "people_in_those_households": 2141895.06394866
+   "people_on_cliff": 935727.9533544634,
+   "workers_on_cliff": 793646.217638826,
+   "households_with_person_on_cliff": 707771.0623582621,
+   "people_in_those_households": 2141894.9704674073
   },
   "1.1": {
-   "people_on_cliff": 935728.0000950899,
-   "workers_on_cliff": 793646.2643794524,
-   "households_with_person_on_cliff": 707771.0857285752,
-   "people_in_those_households": 2141895.06394866
+   "people_on_cliff": 935727.9533544634,
+   "workers_on_cliff": 793646.217638826,
+   "households_with_person_on_cliff": 707771.0623582621,
+   "people_in_those_households": 2141894.9704674073
   },
   "1.2": {
-   "people_on_cliff": 935728.0000950899,
-   "workers_on_cliff": 793646.2643794524,
-   "households_with_person_on_cliff": 707771.0857285752,
-   "people_in_those_households": 2141895.06394866
+   "people_on_cliff": 935727.9533544634,
+   "workers_on_cliff": 793646.217638826,
+   "households_with_person_on_cliff": 707771.0623582621,
+   "people_in_those_households": 2141894.9704674073
   }
  },
  "medicaid_value_scaled_model": {
   "0.8": {
-   "people_on_cliff": 952705.1029472742,
-   "workers_on_cliff": 802134.7930128868,
-   "households_with_person_on_cliff": 716259.6371546674,
-   "people_in_those_households": 2175849.2924456866
+   "people_on_cliff": 952705.0562066478,
+   "workers_on_cliff": 802134.7462722603,
+   "households_with_person_on_cliff": 716259.6137843543,
+   "people_in_those_households": 2175849.1989644337
   },
   "0.9": {
-   "people_on_cliff": 952705.1029472742,
-   "workers_on_cliff": 802134.7930128868,
-   "households_with_person_on_cliff": 716259.6371546674,
-   "people_in_those_households": 2175849.2924456866
+   "people_on_cliff": 952705.0562066478,
+   "workers_on_cliff": 802134.7462722603,
+   "households_with_person_on_cliff": 716259.6137843543,
+   "people_in_those_households": 2175849.1989644337
   },
   "1.1": {
-   "people_on_cliff": 952705.1029472742,
-   "workers_on_cliff": 802134.7930128868,
-   "households_with_person_on_cliff": 716259.6371546674,
-   "people_in_those_households": 2175849.2924456866
+   "people_on_cliff": 952705.0562066478,
+   "workers_on_cliff": 802134.7462722603,
+   "households_with_person_on_cliff": 716259.6137843543,
+   "people_in_those_households": 2175849.1989644337
   },
   "1.2": {
-   "people_on_cliff": 952705.1029472742,
-   "workers_on_cliff": 802134.7930128868,
-   "households_with_person_on_cliff": 716259.6371546674,
-   "people_in_those_households": 2175849.2924456866
+   "people_on_cliff": 952705.0562066478,
+   "workers_on_cliff": 802134.7462722603,
+   "households_with_person_on_cliff": 716259.6137843543,
+   "people_in_those_households": 2175849.1989644337
   }
  },
  "counted_once_by_driver": {
@@ -72,10 +72,10 @@
   "household_tax_before_refundable_credits": 10000.560235460289,
   "medicaid_cost": 694993.2744299365,
   "msp_cost": 40266.59195526177,
-  "reduced_price_school_meals": 36783.609881161596,
+  "reduced_price_school_meals": 36783.631794857676,
   "snap": 80641.1565181103,
   "tanf": 1930.750732421875,
-  "wic": 0.07494810130447149
+  "wic": 0.006293778773397207
  },
  "premium_tax_credit_largest_loss": {
   "people": 0.0,
@@ -94,9 +94,12 @@
  },
  "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
  "code": {
-  "commit": "a81870645dd8b01f5961888ab933fc53367bfed9",
-  "cliffs2017_sha256": "ad4968e1abb3a56512a4c2a47af0fe1c684ec9de3c62d867db20c0c07e939cec",
-  "script_sha256": "e2977a749a1bfd302c4bd2a5b620227c0686e1062f4ddd5a3233e32188c8aa9e"
+  "commit": "cd77a875454b36aa9cbc7854c6e56a927e7cb024",
+  "cliffs2017_sha256": "04f6b6c399139cf514ae9cd8ed0a5aeaf95e9d728a1c360d0415eed929b97574",
+  "script_sha256": "2735c33a9e02d42b0b04666563cdf4283b4c9f4b867ad131ea91de81285a4197"
  },
- "seconds": 277.1
+ "stored_input_renames": {
+  "would_claim_wic": "takes_up_wic_if_eligible"
+ },
+ "seconds": 317.7
 }

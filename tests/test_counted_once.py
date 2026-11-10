@@ -96,6 +96,7 @@ def parts_and_final():
         versions={"policyengine-us": "2.116.0", "policyengine-core": "3.34.10"},
         dataset="d",
         code={"commit": "c"},
+        stored_input_renames={"would_claim_wic": "takes_up_wic_if_eligible"},
     )
     parts = []
     for i in range(2):
@@ -117,7 +118,10 @@ def parts_and_final():
     total = {k: parts[0]["counted_once"][k] + parts[1]["counted_once"][k] for k in HEADLINE}
     final = {
         key: shared[key]
-        for key in ("year", "health_benefits_in_net_income", "aca_before_2018", "leave_out_csfp", "parts", "seed", "versions", "dataset")
+        for key in (
+            "year", "health_benefits_in_net_income", "aca_before_2018", "leave_out_csfp", "parts", "seed", "versions",
+            "dataset", "stored_input_renames",
+        )
     }
     final["premium_tax_credit_counted_once"] = dict(total, people_on_cliff_by_driver={"assigned_aca_ptc": 3.0})
     final["medicaid_value_scaled"] = {"0.8": total}
@@ -144,8 +148,14 @@ def test_combine_adds_the_parts():
         lambda parts, final: final["premium_tax_credit_counted_once"].update(people_on_cliff=31.0),
         lambda parts, final: final["medicaid_value_scaled"]["0.8"].update(workers_on_cliff=0.0),
         lambda parts, final: final["premium_tax_credit_counted_once"].update(people_on_cliff_by_driver={}),
+        lambda parts, final: parts[1].update(stored_input_renames={}),
+        lambda parts, final: final.update(stored_input_renames={}),
+        lambda parts, final: final.pop("stored_input_renames"),
     ],
-    ids=["seed", "code", "duplicate part", "missing part", "final settings", "final count", "final scaling", "final drivers"],
+    ids=[
+        "seed", "code", "duplicate part", "missing part", "final settings", "final count", "final scaling",
+        "final drivers", "renames", "final renames", "final from before the mapping",
+    ],
 )
 def test_combine_refuses(spoil):
     parts, final = parts_and_final()
