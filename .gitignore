@@ -1,0 +1,16 @@
+# Environments and caches
+.venv/
+april2025/.venv/
+april2025/src/
+__pycache__/
+.hypothesis/
+.pytest_cache/
+
+# Run logs
+logs/
+*.log
+
+# Record-level model output never goes in git: rebuild it with the scripts.
+results/per_person/
+april2025/*.csv
+april2025/*.csv.gz

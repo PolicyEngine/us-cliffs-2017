@@ -1,0 +1,95 @@
+{
+ "year": 2017,
+ "health_benefits_in_net_income": false,
+ "aca_before_2018": true,
+ "fraction": 0.25,
+ "seed": 0,
+ "people_total": 326350912.0,
+ "households_total": 118254832.0,
+ "workers": 176011040.0,
+ "workers_evaluated": 152338272.0,
+ "people_on_cliff": 645729.75,
+ "workers_on_cliff": 558421.625,
+ "households_with_person_on_cliff": 430291.375,
+ "people_in_those_households": 1494338.268387501,
+ "mean_cliff_gap_on_cliff": 653.90087890625,
+ "sample_people_on_cliff": 94,
+ "sample_households": 14218,
+ "share_of_workers_on_cliff": 0.003172651130292736,
+ "program_totals": {
+  "snap": 54944113896.561325,
+  "ssi": 44836325637.169495,
+  "tanf": 3925253780.815407,
+  "wic": 6596579848.119705,
+  "free_school_meals": 14843429404.94609,
+  "reduced_price_school_meals": 2814653183.888475,
+  "eitc": 55469431920.51195,
+  "refundable_ctc": 22587669044.748856,
+  "aca_ptc": 78189963265.47513,
+  "assigned_aca_ptc": 28347687236.187706,
+  "medicaid_cost": 493704037275.384,
+  "chip": 8267702851.04732,
+  "housing_assistance": 3960777907.2012525,
+  "household_head_start_benefits": 0.0,
+  "household_state_benefits": 5269890964.891708,
+  "household_benefits": 1334735974789.0935,
+  "household_net_income": 10974635883688.559
+ },
+ "people_in_recipient_units": {
+  "snap": 57684848.0,
+  "ssi": 6914894.0,
+  "tanf": 3416875.75,
+  "medicaid_enrolled": 68800088.0,
+  "chip_enrolled": 4004330.5,
+  "aca_ptc": 34545680.0,
+  "assigned_aca_ptc": 16382571.0
+ },
+ "timing_seconds": {
+  "load": 48.3,
+  "cliffs": 258.3,
+  "total": 375.1
+ },
+ "versions": {
+  "policyengine-us": "2.116.0",
+  "policyengine-core": "3.34.10"
+ },
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "python": "3.13.13",
+ "deflation": [
+  {
+   "index": "calibration.gov.census.populations.total",
+   "columns": 1,
+   "factor": 0.9556332013803133
+  },
+  {
+   "index": "calibration.gov.hhs.cms.direct_purchase_premium_per_enrollee",
+   "columns": 1,
+   "factor": 0.7111224663600749
+  },
+  {
+   "index": "calibration.gov.hhs.cms.esi_premium_per_enrollee",
+   "columns": 2,
+   "factor": 0.6875
+  },
+  {
+   "index": "calibration.gov.hhs.cms.moop_per_capita",
+   "columns": 2,
+   "factor": 0.7212009803921569
+  },
+  {
+   "index": "cola",
+   "columns": 5,
+   "factor": 0.7800067460376343
+  },
+  {
+   "index": "cpi_u",
+   "columns": 63,
+   "factor": 0.7838725088284473
+  },
+  {
+   "index": "earnings",
+   "columns": 18,
+   "factor": 0.7204632954775015
+  }
+ ]
+}

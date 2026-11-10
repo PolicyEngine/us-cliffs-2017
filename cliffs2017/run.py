@@ -1,0 +1,303 @@
+"""National tax-benefit cliff counts for one year, with or without health coverage.
+
+A person "faces a cliff" when PolicyEngine-US's ``is_on_cliff`` is true: their
+household's net income would fall if their earnings rose by
+``simulation.marginal_tax_rate_delta`` ($1,000). The model evaluates this for
+up to ``simulation.marginal_tax_rate_adults`` (two) adults per household, the
+highest earners.
+
+With ``--health``, the run turns on
+``gov.simulation.include_health_benefits_in_net_income``, so household net
+income also counts Medicaid, CHIP, ACA premium tax credits and the state
+health programs listed in ``gov.household.household_health_benefits`` (valued
+at government cost) and subtracts the health costs in
+``gov.household.household_health_costs``.
+
+With ``--decompose``, the run also breaks each measured adult's change in net
+income into its parts (cliffs2017.decompose), counts people on a cliff by the
+part that lowers their net income most, and repeats the headline counts with
+the premium tax credit counted once.
+
+Standard errors come from a household bootstrap of the sample.
+
+The full sample does not fit in the memory ceiling of one run, so final runs
+split households into disjoint parts (``--parts 4 --part i``, at full weight)
+and scripts/combine.py adds the parts up: households do not interact in the
+model, so the sum equals a single full-sample run.
+
+Usage:
+  python -m cliffs2017.run --year 2017 [--health] [--aca-before-2018]
+      [--decompose] [--fraction 0.05 | --parts 4 --part 0] --out results/x.json
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import platform
+import time
+from importlib import metadata
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+from huggingface_hub import hf_hub_download
+
+from cliffs2017.deflate import deflate, partition, subsample
+
+REPO = "policyengine/populace-us"
+FILENAME = "populace_us_2024.h5"
+REVISION = "populace-us-2024-spm-20260909"
+BOOTSTRAP_DRAWS = 200
+
+# Program totals reported beside the cliff counts, to compare a year's run
+# with that year's administrative totals.
+PROGRAM_TOTALS = [
+    "snap",
+    "ssi",
+    "tanf",
+    "wic",
+    "free_school_meals",
+    "reduced_price_school_meals",
+    "eitc",
+    "refundable_ctc",
+    "aca_ptc",
+    "assigned_aca_ptc",
+    "medicaid_cost",
+    "chip",
+    "housing_assistance",
+    "household_head_start_benefits",
+    "household_state_benefits",
+    "household_benefits",
+    "household_net_income",
+]
+PROGRAM_PEOPLE = {
+    "snap": "spm_unit",
+    "ssi": "person",
+    "tanf": "spm_unit",
+    "medicaid_enrolled": "person",
+    "chip_enrolled": "person",
+    "aca_ptc": "tax_unit",
+    "assigned_aca_ptc": "tax_unit",
+}
+
+
+def load_dataset(year: int, fraction: float, seed: int, system, parts: int = 1, part: int = 0):
+    from policyengine_us.data.dataset_schema import USSingleYearDataset
+
+    path = hf_hub_download(REPO, FILENAME, repo_type="dataset", revision=REVISION)
+    dataset = USSingleYearDataset(path)
+    if parts > 1:
+        dataset = partition(dataset, parts, part, seed)
+    elif fraction < 1:
+        dataset = subsample(dataset, fraction, seed)
+    factors = None
+    if year < int(dataset.time_period):
+        dataset, factors = deflate(dataset, system, year)
+    return dataset, factors
+
+
+def headline(people: pd.DataFrame, on_cliff: np.ndarray) -> dict[str, float]:
+    """People on a cliff, their households, and everyone in those households."""
+    frame = people.assign(on_cliff=on_cliff)
+    by_household = frame.groupby("household_id").agg(
+        weight=("weight", "first"),
+        members=("weight", "size"),
+        any_on_cliff=("on_cliff", "any"),
+    )
+    on_hh = by_household[by_household.any_on_cliff]
+    return dict(
+        people_on_cliff=float(frame.weight[frame.on_cliff].sum()),
+        workers_on_cliff=float(frame.weight[frame.on_cliff & frame.worker].sum()),
+        households_with_person_on_cliff=float(on_hh["weight"].sum()),
+        people_in_those_households=float((on_hh["weight"] * on_hh["members"]).sum()),
+    )
+
+
+def bootstrap(people: pd.DataFrame, on_cliff: np.ndarray, draws: int, seed: int = 0):
+    """Standard errors of the headline counts from resampling households."""
+    frame = people.assign(on_cliff=on_cliff, worker_on=on_cliff & people["worker"].to_numpy())
+    by_household = frame.groupby("household_id").agg(
+        weight=("weight", "first"),
+        members=("weight", "size"),
+        people_on=("on_cliff", "sum"),
+        workers_on=("worker_on", "sum"),
+        any_on=("on_cliff", "any"),
+    )
+    w = by_household["weight"].to_numpy()
+    stats = np.column_stack(
+        [
+            w * by_household["people_on"].to_numpy(),
+            w * by_household["workers_on"].to_numpy(),
+            w * by_household["any_on"].to_numpy(),
+            w * by_household["members"].to_numpy() * by_household["any_on"].to_numpy(),
+        ]
+    )
+    names = [
+        "people_on_cliff",
+        "workers_on_cliff",
+        "households_with_person_on_cliff",
+        "people_in_those_households",
+    ]
+    n = len(w)
+    if n == 0:
+        return {name: 0.0 for name in names}
+    rng = np.random.default_rng(seed)
+    totals = np.empty((draws, stats.shape[1]))
+    for b in range(draws):
+        counts = rng.multinomial(n, np.full(n, 1 / n))
+        totals[b] = counts @ stats
+    return {name: float(se) for name, se in zip(names, totals.std(axis=0, ddof=1))}
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--year", type=int, required=True)
+    parser.add_argument("--health", action="store_true")
+    parser.add_argument(
+        "--aca-before-2018",
+        action="store_true",
+        help="Apply cliffs2017.aca2017.ACABefore2018 (premium tax credit before 2018).",
+    )
+    parser.add_argument("--decompose", action="store_true")
+    parser.add_argument("--fraction", type=float, default=1.0)
+    parser.add_argument("--parts", type=int, default=1)
+    parser.add_argument("--part", type=int, default=0)
+    parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--out", required=True)
+    args = parser.parse_args()
+    if args.parts > 1 and args.fraction < 1:
+        parser.error("use --fraction or --parts, not both")
+
+    from policyengine_us import CountryTaxBenefitSystem
+
+    from cliffs2017.simulation import build_simulation
+
+    started = time.time()
+    system = CountryTaxBenefitSystem()
+    dataset, factors = load_dataset(
+        args.year, args.fraction, args.seed, system, args.parts, args.part
+    )
+    sim = build_simulation(dataset, args.year, args.health, args.aca_before_2018)
+    year = args.year
+    loaded = time.time()
+
+    def arr(variable, map_to=None):
+        return np.asarray(sim.calculate(variable, year, map_to=map_to).values)
+
+    weight = arr("person_weight").astype(np.float64)
+    household_id = arr("household_id", map_to="person")
+    person_id = arr("person_id")
+    on_cliff = arr("is_on_cliff").astype(bool)
+    evaluated = arr("cliff_evaluated").astype(bool)
+    gap = arr("cliff_gap")
+    earnings = arr("employment_income") + arr("self_employment_income")
+    worker = earnings > 0
+    cliffs_done = time.time()
+
+    people = pd.DataFrame(
+        dict(household_id=household_id, weight=weight, worker=worker, evaluated=evaluated)
+    )
+    result = dict(
+        year=year,
+        health_benefits_in_net_income=args.health,
+        aca_before_2018=args.aca_before_2018,
+        fraction=args.fraction,
+        parts=args.parts,
+        part=args.part,
+        seed=args.seed,
+        people_total=float(weight.sum()),
+        households_total=float(people.groupby("household_id").weight.first().sum()),
+        workers=float(weight[worker].sum()),
+        workers_evaluated=float(weight[worker & evaluated].sum()),
+        **headline(people, on_cliff),
+        mean_cliff_gap_on_cliff=float(
+            np.average(gap[on_cliff], weights=weight[on_cliff]) if on_cliff.any() else 0
+        ),
+        cliff_gap_total=float((gap * weight)[on_cliff].sum()),
+        sample_people_on_cliff=int(on_cliff.sum()),
+        sample_households=int(people.household_id.nunique()),
+    )
+    result["share_of_workers_on_cliff"] = result["workers_on_cliff"] / result["workers"]
+    result["standard_errors"] = bootstrap(people, on_cliff, BOOTSTRAP_DRAWS)
+
+    if args.decompose:
+        from cliffs2017.decompose import decompose, primary_driver
+
+        parts = decompose(sim, year)
+        index = parts["person_index"].to_numpy()
+        # The breakdown must reproduce the model's own cliff flags.
+        flagged = np.zeros_like(on_cliff)
+        flagged[index] = parts["d_net"].to_numpy() < 0
+        result["decomposition_flag_mismatches"] = int((flagged != on_cliff).sum())
+        single = np.zeros_like(on_cliff)
+        single[index] = parts["d_net_single_ptc"].to_numpy() < 0
+        result["premium_tax_credit_counted_once"] = dict(
+            **headline(people, single),
+            standard_errors=bootstrap(people, single, BOOTSTRAP_DRAWS),
+            sample_people_on_cliff=int(single.sum()),
+        )
+        cliff_rows = parts[parts["d_net"] < 0].copy()
+        cliff_rows["weight"] = weight[cliff_rows["person_index"]]
+        cliff_rows["driver"] = primary_driver(cliff_rows)
+        result["people_on_cliff_by_driver"] = (
+            cliff_rows.groupby("driver")["weight"].sum().sort_values(ascending=False).to_dict()
+        )
+        single_rows = parts[parts["d_net_single_ptc"] < 0].copy()
+        single_rows["weight"] = weight[single_rows["person_index"]]
+        single_rows["driver"] = primary_driver(single_rows.drop(columns=["d_marketplace_net_premium"], errors="ignore"))
+        result["premium_tax_credit_counted_once"]["people_on_cliff_by_driver"] = (
+            single_rows.groupby("driver")["weight"].sum().sort_values(ascending=False).to_dict()
+        )
+        # Record-level model output stays out of git (results/per_person/).
+        detail = Path(args.out).parent / "per_person" / (
+            Path(args.out).stem + "_cliff_parts.csv.gz"
+        )
+        detail.parent.mkdir(parents=True, exist_ok=True)
+        keep = parts[(parts["d_net"] < 0) | (parts["d_net_single_ptc"] < 0)].copy()
+        keep.insert(0, "person_id", person_id[keep["person_index"]])
+        keep.insert(1, "household_id", household_id[keep["person_index"]])
+        keep["weight"] = weight[keep["person_index"]]
+        keep.to_csv(detail, index=False)
+        result["cliff_parts_file"] = str(detail)
+
+    totals = {}
+    for variable in PROGRAM_TOTALS:
+        try:
+            totals[variable] = float(sim.calculate(variable, year).sum())
+        except Exception as error:  # a variable missing from this model version
+            totals[variable] = f"error: {type(error).__name__}: {error}"[:200]
+    recipients = {}
+    for variable, entity in PROGRAM_PEOPLE.items():
+        try:
+            value = arr(variable, map_to="person")
+            recipients[variable] = float(weight[value > 0].sum())
+        except Exception as error:
+            recipients[variable] = f"error: {type(error).__name__}: {error}"[:200]
+    result["program_totals"] = totals
+    result["people_in_recipient_units"] = recipients
+    result["timing_seconds"] = dict(
+        load=round(loaded - started, 1),
+        cliffs=round(cliffs_done - loaded, 1),
+        total=round(time.time() - started, 1),
+    )
+    result["versions"] = {
+        package: metadata.version(package)
+        for package in ("policyengine-us", "policyengine-core")
+    }
+    result["dataset"] = f"{REPO}/{FILENAME}@{REVISION}"
+    result["python"] = platform.python_version()
+    if factors is not None:
+        result["deflation"] = (
+            factors.groupby("index")
+            .agg(columns=("column", "size"), factor=("factor", "first"))
+            .reset_index()
+            .to_dict(orient="records")
+        )
+    with open(args.out, "w") as f:
+        json.dump(result, f, indent=1)
+    print(json.dumps({k: v for k, v in result.items() if k not in ("program_totals",)}, indent=1))
+
+
+if __name__ == "__main__":
+    main()

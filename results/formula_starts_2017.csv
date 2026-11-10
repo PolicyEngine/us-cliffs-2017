@@ -1,0 +1,30 @@
+variable,first_formula,unit,value_type,entity,label,total_2024,weighted_nonzero_2024
+spm_unit_capped_work_childcare_expenses,2024-01-01,currency-USD,float,spm_unit,SPM unit work and childcare expenses,276036238246.83936,76716614.43132788
+mt_federal_deductions,2024-01-01,currency-USD,float,tax_unit,Federal standard or itemized deduction for Montana,10790284238.008175,426033.0634791965
+md_senior_tax_credit_potential,2022-01-01,currency-USD,float,tax_unit,Maryland Senior Tax Credit,588312135.482002,588294.9151969776
+mt_state_income_tax_itemized_add_back,2024-01-01,currency-USD,float,tax_unit,Montana addback of state income tax deducted in federal itemized deductions,52897723.30184281,25660.952783330344
+md_senior_tax_credit_eligible,2022-01-01,,bool,tax_unit,Eligible for the Maryland Senior Tax Credit,1572871.2748491112,1572871.2748491112
+md_ctc,2020-01-01,currency-USD,float,tax_unit,Maryland Child Tax Credit,28.08607742190361,0.05617215484380722
+medicaid_ltss_couple_countable_income,2026-01-01,currency-USD,float,person,Medicaid LTSS countable income under a couple budget,0.0,0.0
+medicaid_ltss_home_equity_eligible,2026-01-01,,bool,person,Meets Medicaid LTSS home-equity threshold,0.0,0.0
+medicaid_ltss_csra,2026-01-01,currency-USD,float,person,Medicaid LTSS community spouse resource allowance,0.0,0.0
+medicaid_ltss_countable_income,2026-01-01,currency-USD,float,person,Medicaid LTSS countable income,0.0,0.0
+medicaid_ltss_special_income_limit,2026-01-01,currency-USD,float,person,Medicaid LTSS special income limit,0.0,0.0
+medicaid_ltss_mmmna,2026-01-01,currency-USD,float,person,Medicaid LTSS minimum monthly maintenance needs allowance,0.0,0.0
+medicaid_ltss_assistance_unit_size,2026-01-01,,int,person,Medicaid LTSS assistance unit size,0.0,0.0
+medicaid_ltss_impairment_related_work_expenses,2026-01-01,currency-USD,float,person,Medicaid LTSS monthly impairment-related work expenses,0.0,0.0
+medicaid_ltss_csra_resource_eligible,2026-01-01,,bool,person,Meets modeled Medicaid LTSS resource threshold,0.0,0.0
+medicaid_ltss_excluded_impairment_related_work_expenses,2026-01-01,currency-USD,float,person,Medicaid LTSS claimant-qualified impairment-related work expenses,0.0,0.0
+tx_medicaid_ltss_excluded_interest_and_dividends,2026-01-01,currency-USD,float,person,Texas Medicaid LTSS excluded interest and dividends,0.0,0.0
+is_medicaid_ltss_financial_threshold_eligible,2026-01-01,,bool,person,Meets modeled Medicaid LTSS financial thresholds,0.0,0.0
+wa_medicaid_ltss_excluded_income,2026-01-01,currency-USD,float,person,Washington Medicaid LTSS modeled income exclusions,0.0,0.0
+employment_income_last_year,2024-01-01,currency-USD,float,person,employment income last year,0.0,0.0
+medicaid_ltss_community_spouse_countable_resources,2026-01-01,currency-USD,float,person,Medicaid LTSS community spouse countable resources,0.0,0.0
+medicaid_ltss_countable_resources,2026-01-01,currency-USD,float,person,Medicaid LTSS countable resources,0.0,0.0
+medicaid_ltss_individual_countable_income,2026-01-01,currency-USD,float,person,Medicaid LTSS countable income under an individual budget,0.0,0.0
+nj_property_tax_relief,2026-01-01,currency-USD,float,tax_unit,New Jersey property tax relief benefits,0.0,0.0
+nj_property_tax_relief_income,2026-01-01,currency-USD,float,tax_unit,New Jersey property tax relief application income,0.0,0.0
+nj_staynj_eligible,2026-01-01,,bool,tax_unit,New Jersey Stay NJ Property Tax Credit program eligibility,0.0,0.0
+ri_military_retirement_subtraction,2023-01-01,currency-USD,float,person,Rhode Island military service pension subtraction,0.0,0.0
+is_medicaid_ltss_income_eligible,2026-01-01,,bool,person,Meets modeled Medicaid LTSS income threshold,0.0,0.0
+medicaid_ltss_financial_pathway,2026-01-01,,Enum,person,Medicaid LTSS financial pathway,,

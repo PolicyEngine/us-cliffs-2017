@@ -1,0 +1,73 @@
+{
+ "denominators": {
+  "people": 348725574.08675784,
+  "adults": 274108821.2932707,
+  "measured_adults": 234346455.34451708,
+  "workers": 173766435.33216548,
+  "wage_earners": 166200162.68962544,
+  "workers_18_64": 155148835.54133704,
+  "measured_workers": 155223401.6928221
+ },
+ "variants": {
+  "as_published": {
+   "numerators": {
+    "adults_on_cliff": 7360124.36810171,
+    "workers_on_cliff": 4040289.7752773324,
+    "wage_earners_on_cliff": 3731683.8377003344
+   },
+   "shares": {
+    "adults_on_cliff/people": 0.021105777479545045,
+    "adults_on_cliff/adults": 0.026851103636052153,
+    "adults_on_cliff/measured_adults": 0.03140702238180413,
+    "adults_on_cliff/workers": 0.042356421446019595,
+    "adults_on_cliff/wage_earners": 0.0442847001410375,
+    "adults_on_cliff/workers_18_64": 0.0474391209087787,
+    "adults_on_cliff/measured_workers": 0.047416332124114634,
+    "workers_on_cliff/people": 0.011585871744158824,
+    "workers_on_cliff/adults": 0.014739729120043902,
+    "workers_on_cliff/measured_adults": 0.017240669458121853,
+    "workers_on_cliff/workers": 0.02325126695241267,
+    "workers_on_cliff/wage_earners": 0.02430978231244256,
+    "workers_on_cliff/workers_18_64": 0.026041379950936586,
+    "workers_on_cliff/measured_workers": 0.026028870203945318,
+    "wage_earners_on_cliff/people": 0.010700918186091927,
+    "wage_earners_on_cliff/adults": 0.013613877218886666,
+    "wage_earners_on_cliff/measured_adults": 0.01592379040772909,
+    "wage_earners_on_cliff/workers": 0.02147528566473143,
+    "wage_earners_on_cliff/wage_earners": 0.022452949367258796,
+    "wage_earners_on_cliff/workers_18_64": 0.024052283890368512,
+    "wage_earners_on_cliff/measured_workers": 0.024040729664494245
+   }
+  },
+  "draws_held": {
+   "numerators": {
+    "adults_on_cliff": 823698.8908137623,
+    "workers_on_cliff": 583254.5013008583,
+    "wage_earners_on_cliff": 541336.7290802468
+   },
+   "shares": {
+    "adults_on_cliff/people": 0.0023620260514900984,
+    "adults_on_cliff/adults": 0.003005006868905112,
+    "adults_on_cliff/measured_adults": 0.0035148766794992794,
+    "adults_on_cliff/workers": 0.00474026465030033,
+    "adults_on_cliff/wage_earners": 0.004956065490453213,
+    "adults_on_cliff/workers_18_64": 0.00530908845006639,
+    "adults_on_cliff/measured_workers": 0.005306538072421667,
+    "workers_on_cliff/people": 0.0016725314821784568,
+    "workers_on_cliff/adults": 0.002127820982006379,
+    "workers_on_cliff/measured_adults": 0.002488855657933486,
+    "workers_on_cliff/workers": 0.0033565429375697936,
+    "workers_on_cliff/wage_earners": 0.0035093497615286406,
+    "workers_on_cliff/workers_18_64": 0.0037593224548917678,
+    "workers_on_cliff/measured_workers": 0.0037575165531746582,
+    "wage_earners_on_cliff/people": 0.0015523287344150162,
+    "wage_earners_on_cliff/adults": 0.0019748971467834203,
+    "wage_earners_on_cliff/measured_adults": 0.0023099847116715188,
+    "wage_earners_on_cliff/workers": 0.0031153123907125533,
+    "wage_earners_on_cliff/wage_earners": 0.0032571371791685864,
+    "wage_earners_on_cliff/workers_18_64": 0.003489144647405464,
+    "wage_earners_on_cliff/measured_workers": 0.003487468533588254
+   }
+  }
+ }
+}

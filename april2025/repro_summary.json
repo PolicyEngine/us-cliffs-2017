@@ -1,0 +1,20 @@
+{
+ "model": "policyengine-us 1.251.1 (c379969db9)",
+ "dataset": "hf://policyengine/policyengine-us-data/enhanced_cps_2024.h5@da98b4faccf44492e91d80c0112a34ef6c3da0bd",
+ "year": 2025,
+ "people_on_cliff": 7360124.5,
+ "workers_on_cliff": 4040289.75,
+ "households_with_person_on_cliff": 4382834.5,
+ "people_in_those_households": 13811117.835150652,
+ "sample_people_on_cliff": 2619,
+ "sample_households_on_cliff": 1586,
+ "people_total": 348725600.0,
+ "mtr_above_one_share": 0.021105775609612465,
+ "seconds": 700.7,
+ "total_snap": 96499067719.05663,
+ "total_tanf": 9373955439.896477,
+ "total_eitc": 51322862925.301796,
+ "total_aca_ptc": 0.0,
+ "total_medicaid": 1082768302071.8953,
+ "total_household_net_income": 19184990255981.27
+}

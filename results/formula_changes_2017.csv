@@ -1,0 +1,15 @@
+variable,formula_in_force,next_formula,placeholder,unit,label
+aca_ptc,0001-01-01,2018-01-01,True,currency-USD,ACA premium tax credit for tax unit
+aca_ptc_before_filing_gate,0001-01-01,2018-01-01,True,currency-USD,ACA premium tax credit before the filing condition
+basic_health_program,0001-01-01,2026-01-01,True,currency-USD,Basic Health Program
+ny_inflation_refund_credit,0001-01-01,2023-01-01,True,currency-USD,New York inflation refund
+dc_standard_deduction,0001-01-01,2025-01-01,False,currency-USD,DC standard deduction
+ia_cdcc,0001-01-01,2023-01-01,False,currency-USD,Iowa child/dependent care credit
+ky_ccap_copay,0001-01-01,2024-11-18,False,currency-USD,Kentucky CCAP family copayment
+mt_taxable_income_joint,0001-01-01,2024-01-01,False,currency-USD,Montana taxable income when married couples file jointly
+per_capita_chip,0001-01-01,2026-01-01,False,currency-USD,Average CHIP payment
+per_capita_chip_gross,0001-01-01,2026-01-01,False,currency-USD,Average gross CHIP benefit value
+snap_max_allotment,0001-01-01,2025-10-01,False,currency-USD,SNAP maximum allotment
+vt_2017_itemized_deduction_addback,2017-01-01,2018-01-01,False,currency-USD,Vermont 2017 itemized deduction addback
+vt_taxable_income,2017-01-01,2018-01-01,False,currency-USD,Vermont taxable income
+wi_itemized_deduction_credit_charitable_deduction,0001-01-01,2020-01-01,False,currency-USD,Charitable deduction for Wisconsin's itemized deduction credit

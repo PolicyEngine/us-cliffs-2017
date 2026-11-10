@@ -1,0 +1,58 @@
+{
+ "year": 2025,
+ "health_benefits_in_net_income": false,
+ "aca_before_2018": false,
+ "fraction": 0.25,
+ "seed": 0,
+ "people_total": 344673024.0,
+ "households_total": 124893952.0,
+ "workers": 185892736.0,
+ "workers_evaluated": 160827776.0,
+ "people_on_cliff": 953673.0625,
+ "workers_on_cliff": 581030.875,
+ "households_with_person_on_cliff": 593133.5625,
+ "people_in_those_households": 2135445.280501722,
+ "mean_cliff_gap_on_cliff": 649.0281372070312,
+ "sample_people_on_cliff": 188,
+ "sample_households": 14218,
+ "share_of_workers_on_cliff": 0.0031256244192349723,
+ "program_totals": {
+  "snap": 96624913839.87027,
+  "ssi": 60266197240.62132,
+  "tanf": 6532783880.349594,
+  "wic": 10749931856.022284,
+  "free_school_meals": 32921151347.020836,
+  "reduced_price_school_meals": 1545268196.824399,
+  "eitc": 66655926150.92599,
+  "refundable_ctc": 40880968594.84398,
+  "aca_ptc": 164300205376.8448,
+  "assigned_aca_ptc": 65038518970.57063,
+  "medicaid_cost": 880018859680.2811,
+  "chip": 11361907496.860508,
+  "housing_assistance": 3934856023.2323875,
+  "household_head_start_benefits": 0.0,
+  "household_state_benefits": 7839905258.252894,
+  "household_benefits": 1967441136305.2617,
+  "household_net_income": 16729664665480.84
+ },
+ "people_in_recipient_units": {
+  "snap": 61970448.0,
+  "ssi": 6739186.0,
+  "tanf": 4224418.5,
+  "medicaid_enrolled": 73747712.0,
+  "chip_enrolled": 4308920.0,
+  "aca_ptc": 51076320.0,
+  "assigned_aca_ptc": 24512276.0
+ },
+ "timing_seconds": {
+  "load": 144.4,
+  "cliffs": 1093.9,
+  "total": 1238.8
+ },
+ "versions": {
+  "policyengine-us": "2.116.0",
+  "policyengine-core": "3.34.10"
+ },
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "python": "3.13.13"
+}

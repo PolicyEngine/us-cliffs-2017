@@ -1,0 +1,73 @@
+{
+ "model": "policyengine-us 1.251.1 (c379969db9), policyengine-core 3.16.6",
+ "dataset": "hf://policyengine/policyengine-us-data/enhanced_cps_2024.h5@da98b4faccf44492e91d80c0112a34ef6c3da0bd",
+ "year": 2025,
+ "households": 56250,
+ "people": 139852,
+ "random_calls_in_base": 3,
+ "draws_held_rows_with_any_redraw": 0,
+ "results": {
+  "as_published": {
+   "label": "as_published",
+   "adults_on_cliff": 7360124.5,
+   "households_with_adult_on_cliff": 4382834.5,
+   "people_in_those_households": 13811117.835150652,
+   "sample_adults_on_cliff": 2619,
+   "adults_on_cliff_whose_household_redrew": 5698303.0,
+   "adults_on_cliff_by_driver": {
+    "ssi": 5717820.5,
+    "wic": 506960.0,
+    "snap": 371948.46875,
+    "household_state_benefits": 364006.125,
+    "reduced_price_school_meals": 346418.96875,
+    "household_refundable_tax_credits": 28088.310546875,
+    "free_school_meals": 24739.4296875,
+    "household_tax_before_refundable_credits": 85.6908950805664,
+    "commodity_supplemental_food_program": 57.08565902709961
+   },
+   "measured_adults": 234346448.0,
+   "measured_adults_whose_household_net_income_changed": 234346448.0,
+   "measured_adults_whose_household_redrew": 157173968.0
+  },
+  "null_raise": {
+   "label": "null_raise",
+   "adults_on_cliff": 10531402.0,
+   "households_with_adult_on_cliff": 6003769.5,
+   "people_in_those_households": 20459158.962628897,
+   "sample_adults_on_cliff": 3456,
+   "adults_on_cliff_whose_household_redrew": 8533862.0,
+   "adults_on_cliff_by_driver": {
+    "ssi": 5797332.5,
+    "wic": 3902700.0,
+    "household_state_benefits": 831343.0,
+    "snap": 27.07790184020996
+   },
+   "measured_adults": 234346448.0,
+   "measured_adults_whose_household_net_income_changed": 19840246.0,
+   "measured_adults_whose_household_redrew": 157173840.0
+  },
+  "draws_held": {
+   "label": "draws_held",
+   "adults_on_cliff": 823698.875,
+   "households_with_adult_on_cliff": 479128.625,
+   "people_in_those_households": 1890271.3642021716,
+   "sample_adults_on_cliff": 222,
+   "adults_on_cliff_whose_household_redrew": 0.0,
+   "adults_on_cliff_by_driver": {
+    "snap": 377975.875,
+    "reduced_price_school_meals": 346418.96875,
+    "ssi": 31946.896484375,
+    "household_refundable_tax_credits": 27728.96875,
+    "free_school_meals": 24739.27734375,
+    "household_state_benefits": 13903.0302734375,
+    "household_tax_before_refundable_credits": 392.3537902832031,
+    "wic": 311.5857849121094,
+    "commodity_supplemental_food_program": 281.9552917480469
+   },
+   "measured_adults": 234346448.0,
+   "measured_adults_whose_household_net_income_changed": 234346448.0,
+   "measured_adults_whose_household_redrew": 0.0
+  }
+ },
+ "seconds": 443.6
+}
