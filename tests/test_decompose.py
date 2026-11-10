@@ -11,23 +11,37 @@ counted:
    machinery against re-simulation from scratch);
 4. without health benefits, no health part enters, so counting the premium
    tax credit once changes nothing.
+
+With health benefits counted, the simulations hold Medicaid's state totals at
+the full-sample values the final runs use (results/medicaid/, from
+scripts/medicaid_totals.sh), as cliffs2017.run does.
 """
+
+from pathlib import Path
 
 import numpy as np
 import pytest
 
 from cliffs2017.decompose import NET, components, decompose, household_values
 from cliffs2017.deflate import deflate
+from cliffs2017.medicaid import load_totals
 from cliffs2017.simulation import build_simulation
 
 CONFIGURATIONS = [(2017, False), (2017, True), (2025, False), (2025, True)]
+MEDICAID_TOTALS = Path(__file__).parents[1] / "results" / "medicaid"
 
 
 def configured(dataset, system, year, health):
     data = dataset
     if year < int(dataset.time_period):
         data, _ = deflate(dataset, system, year)
-    return data, dict(health=health, aca_before_2018=year < 2018)
+    options = dict(health=health, aca_before_2018=year < 2018)
+    if health:
+        path = MEDICAID_TOTALS / f"totals_{year}_p4_s0.json"
+        if not path.exists():
+            pytest.fail(f"{path} is missing: run scripts/medicaid_totals.sh 4 0 first")
+        options["medicaid_totals"] = load_totals(path)[0]
+    return data, options
 
 
 @pytest.mark.parametrize("year, health", CONFIGURATIONS)

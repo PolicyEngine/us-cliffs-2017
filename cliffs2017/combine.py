@@ -1,10 +1,17 @@
 """Add up disjoint household parts of one configuration into full-sample results.
 
 Each part (cliffs2017.run --parts P --part i) holds different households at
-full weight, and households do not interact in the model, so every weighted
-total of the full sample is the sum of the parts' totals. Ratios are
-recomputed from the summed totals. The bootstrap resamples households within
-each part, so the parts' estimates are independent and their variances add.
+full weight. In the model, households interact only through Medicaid's two
+state totals, and runs with health coverage counted fix those at their
+full-sample values (cliffs2017.medicaid), so every weighted total of the full
+sample is the sum of the parts' totals. Ratios are recomputed from the summed
+totals. The bootstrap resamples households within each part, so the parts'
+estimates are independent and their variances add.
+
+With health coverage counted, Medicaid's value over the full sample must add
+up to the spending the totals spread: the combined ``medicaid_cost`` has to
+match the totals file's ``spending_total`` within MEDICAID_TOLERANCE, or the
+combine fails.
 
 Usage:
   python -m cliffs2017.combine results/parts/run_2017_plain_p4_*.json --out results/final_2017_plain.json
@@ -47,7 +54,9 @@ SAME = [
     "dataset",
     "python",
     "deflation",
+    "medicaid_totals",
 ]
+MEDICAID_TOLERANCE = 1e-3
 
 
 def add_dicts(dicts):
@@ -97,8 +106,26 @@ def combine(results: list[dict]) -> dict:
             standard_errors=quadrature([o["standard_errors"] for o in once]),
             people_on_cliff_by_driver=add_dicts([o["people_on_cliff_by_driver"] for o in once]),
         )
+    if all("medicaid_value_scaled" in r for r in results):
+        out["medicaid_value_scaled"] = {
+            scale: {k: sum(r["medicaid_value_scaled"][scale][k] for r in results) for k in HEADLINE}
+            for scale in first["medicaid_value_scaled"]
+        }
     for key in ("program_totals", "people_in_recipient_units"):
         out[key] = add_dicts([r[key] for r in results])
+    if first.get("health_benefits_in_net_income"):
+        if not first.get("medicaid_totals"):
+            raise ValueError("health runs need full-sample Medicaid totals (cliffs2017.medicaid)")
+        cost = out["program_totals"]["medicaid_cost"]
+        spending = first["medicaid_totals"]["spending_total"]
+        gap = abs(cost - spending) / spending
+        out["medicaid_value_check"] = dict(
+            medicaid_cost_total=cost, spending_total=spending, relative_gap=gap
+        )
+        if gap > MEDICAID_TOLERANCE:
+            raise ValueError(
+                f"Medicaid value ${cost:,.0f} misses the spending it spreads, ${spending:,.0f}"
+            )
     out["seconds"] = sum(r["timing_seconds"]["total"] for r in results)
     out["part_files"] = sorted(r.get("_file", "") for r in results)
     return out

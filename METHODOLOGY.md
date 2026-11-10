@@ -4,24 +4,30 @@ PolicyEngine, November 2026
 
 ## What we estimate
 
-A person faces a cliff when their household's net income would fall if they earned $1,000 more in a year. We count three things nationally:
+An adult faces a cliff when their household's net income would fall if they earned $1,000 more in a year. We count three things nationally:
 
-1. the people who face a cliff;
+1. the adults who face a cliff;
 2. the households they live in;
-3. everyone who lives in those households.
+3. everyone who lives in those households, children included.
 
 We run the count under 2017 tax and benefit rules, and under 2025 rules for comparison. Each year has two versions: one counting cash and near-cash income only, and one that also counts health coverage (Medicaid, CHIP and ACA premium tax credits).
 
-The results table in [results/summary.md](results/summary.md) comes straight from the runs described here. The scripts write it, so every number in it traces to a run in this repository.
+The scripts in this repository write the results table, [results/summary.md](results/summary.md), so every number in it traces to a run described here.
 
 ## How the model finds a cliff
 
 We use PolicyEngine-US, an open-source microsimulation model of federal and state taxes and benefits ([github.com/PolicyEngine/policyengine-us](https://github.com/PolicyEngine/policyengine-us)). The model computes each household's net income, then runs a second version of the household with one adult's earnings $1,000 higher and computes it again. If net income falls, that adult faces a cliff, and the drop is their cliff gap.
 
-- **Who it tests.** The model ranks a household's adults by market income and tests the top two, one at a time. It doesn't test children or a third adult, so a household counts at most two people as facing a cliff. The model tests the top two even when they have no earnings; our worker counts keep only people with positive earnings.
+- **Who it tests.** The model ranks a household's adults by market income and tests the top two, one at a time. It doesn't test children or a third adult, so it counts at most two adults per household as facing a cliff. The model tests the top two even when they have no earnings; our worker counts keep only adults with positive earnings.
 - **How it adds the $1,000.** The raise follows the adult's current mix of wages and self-employment income, and goes to wages when they have no positive earnings. The second version keeps every input and recomputes everything that depends on earnings: taxes, credits and benefits.
 - **Net income.** Household net income equals market income plus benefits and refundable tax credits, minus taxes before refundable credits. Benefits include Social Security, SSI, SNAP, WIC, free and reduced-price school meals, TANF, unemployment compensation, housing assistance, Head Start and state benefit programs, as the model's `gov.household.household_benefits` parameter lists them.
-- **Health coverage.** With health coverage counted, net income also adds Medicaid, CHIP, the ACA premium tax credit, Medicare Savings Programs and state health programs, and subtracts CHIP premiums and marketplace premiums net of the premium tax credit. The model values Medicaid at government cost: each state's Medicaid spending, spread across enrollees with an age-based cost index.
+- **Health coverage.** With health coverage counted, net income also adds Medicaid, CHIP, the ACA premium tax credit, Medicare Savings Programs and state health programs, and subtracts CHIP premiums and marketplace premiums net of the premium tax credit. The model values Medicaid at government cost: it spreads each state's Medicaid spending across the state's enrollees in proportion to a cost index built from the benchmark marketplace premium: the premium for the enrollee's age, or an equal share of a family-tier premium among the tax unit's enrollees.
+
+### Medicaid's state totals
+
+Two of the formulas behind Medicaid's value add up over everyone in a run, not over one household. One gives each state's average cost index, which stands in for an enrollee whose own index is zero; the other adds the cost indices of the state's enrollees, and the model divides the state's spending by that sum. A run over a quarter of the households therefore finds about a quarter of each state's sum and values each enrollee at about four times the full-sample amount. A small subsample can do worse: in a 2% subsample, where each state's sum covers only the few enrollees the subsample holds, the model valued some enrollees' Medicaid at billions of dollars. Under our pre-2018 premium tax credit reform (below), the model would also take the sum from the unreformed policy while taking each enrollee's index from the reform.
+
+So we compute both totals for the full sample under each configuration's own policy and hold them fixed in every run ([cliffs2017/medicaid.py](cliffs2017/medicaid.py)). Each household's Medicaid value then depends only on its own records and its state, and Medicaid's value over the full sample equals the spending the model spreads. PolicyEngine-US holds state Medicaid spending for 2020 through 2023 only, so the 2017 runs spread the 2020 totals ($661.5 billion across the states and DC) and the 2025 runs spread the 2023 totals ($880.0 billion). [[Sensitivity of the 2017 health counts to scaling Medicaid's value down to 2017 levels.]]
 
 ### The premium tax credit counts twice
 
@@ -29,11 +35,11 @@ With health coverage counted, PolicyEngine-US adds the premium tax credit to net
 
 ### What lowers net income
 
-For each person on a cliff we break the change in net income into its parts (earnings, each benefit, refundable credits, taxes and health costs) and name the part that falls most. The parts add up to the model's own change in net income for every person tested. Each result file reports `decomposition_flag_mismatches`, the number of people whose cliff flag the breakdown fails to reproduce.
+For each adult on a cliff we break the change in net income into its parts (earnings, each benefit, refundable credits, taxes and health costs) and name the part that falls most. The parts add up to the model's own change in net income for every adult tested. Each result file reports `decomposition_flag_mismatches`, the number of adults whose cliff flag the breakdown fails to reproduce.
 
 ## The population
 
-We use Microcosm, PolicyEngine's microdata for the US, in its 2024 build (`policyengine/populace-us`, file `populace_us_2024.h5`, revision `populace-us-2024-spm-20260909`). Microcosm builds on the Census Bureau's Current Population Survey Annual Social and Economic Supplement (2022 to 2024 surveys). It adds imputations from the IRS Statistics of Income Public Use File, the Federal Reserve's Survey of Consumer Finances, the Survey of Income and Program Participation, the CPS Outgoing Rotation Groups, the MEPS Insurance Component and the American Community Survey, then calibrates household weights to IRS, Census and program totals.
+We use Microcosm, PolicyEngine's microdata for the US, in its 2024 build (`policyengine/populace-us`, file `populace_us_2024.h5`, revision `populace-us-2024-spm-20260909`). Microcosm builds on the Census Bureau's Current Population Survey Annual Social and Economic Supplement, pooling its 2023, 2024 and 2025 surveys, which cover incomes in 2022 to 2024, into 57,240 household records. It adds imputations from the IRS Statistics of Income Public Use File, the Federal Reserve's Survey of Consumer Finances, the Survey of Income and Program Participation, the CPS Outgoing Rotation Groups, the MEPS Insurance Component and the American Community Survey, then calibrates household weights to IRS, Census and program totals.
 
 PolicyEngine-US can age a dataset forward but not back, so we build the 2017 inputs ourselves. We scale every dollar amount in the 2024 data to 2017 levels with the index that fits it:
 
@@ -55,27 +61,28 @@ The 2025 runs use the same Microcosm build, which PolicyEngine-US ages forward t
 
 The model holds each tax and benefit parameter with the date it took effect, and a 2017 run reads the values in force in 2017. Two gaps matter:
 
-- **The ACA premium tax credit before 2018.** PolicyEngine-US returns no premium tax credit before 2018, because its benchmark premium data start in 2018. Our `ACABefore2018` reform (cliffs2017/aca2017.py) applies the model's 2018 formula to 2017 with the 2017 applicable percentages from IRS Revenue Procedure 2016-24 (2.04% of income below 133% of the poverty line, up to 9.69% from 300% to 400%), and scales the 2018 benchmark premiums back with the model's own premium index (359 in 2017, 481 in 2018). The model already ends eligibility above 400% of the poverty line before 2021, which reproduces the 2017 subsidy cliff.
+- **The ACA premium tax credit before 2018.** PolicyEngine-US returns no premium tax credit before 2018, because its benchmark premium data start in 2018. Our `ACABefore2018` reform ([cliffs2017/aca2017.py](cliffs2017/aca2017.py)) applies the model's 2018 formula to 2017 with the 2017 applicable percentages from IRS Revenue Procedure 2016-24 (2.04% of income below 133% of the poverty line, up to 9.69% from 300% to 400%), and scales the 2018 benchmark premiums back with the model's own premium index (359 in 2017, 481 in 2018). The model already ends eligibility above 400% of the poverty line before 2021, which reproduces the 2017 subsidy cliff.
 - **Parameters that start after 2017.** Where a parameter's first value postdates 2017, the model uses the earliest value it has. That affects state programs most: many state income tax parameters start in 2021, most state child care subsidy parameters start after 2017, and SNAP's state utility allowances start in fiscal 2018. results/parameters_read_2017.csv lists every parameter the 2017 runs read and the date of its first value.
 
 Two programs barely register in either year: Head Start comes out at $0, and housing assistance totals about $4 billion, far below actual federal spending. Cliffs from those programs go uncounted.
 
 ## Uncertainty
 
-Each count comes with a 95% interval from a household bootstrap: 200 resamples of the survey's households, with the same weights. The intervals cover sampling error only, not error in the model or the data.
+Each count comes with a 95% interval from a household bootstrap: 200 resamples of the survey's households, with the same weights. The intervals cover sampling error only, not error in the model or the data, and they hold Medicaid's state totals fixed.
 
 ## Running it
 
-The full sample needs more memory than one run can use, so we split households into four disjoint groups, run each at full weight and add them up. Households don't interact in the model, so the sum equals a single full-sample run.
+The full sample needs more memory than one run can use, so we split households into four disjoint groups, run each at full weight and add the results. We found one way a household's results depend on other households in the model, Medicaid's state totals; with those held at their full-sample values, the four parts add up to a single full-sample run. The combine step checks that Medicaid's value over the four parts matches the spending it spreads, and each part's run without health coverage matches the run over the same households with four times their weights.
 
 ```bash
 uv venv --python 3.13 && uv pip install -e ".[test]"
-scripts/run_final.sh 4 0 0,1   # parts 0 and 1
-scripts/run_final.sh 4 0 2,3   # parts 2 and 3
-scripts/combine_final.sh 4 0   # results/final_*.json and results/summary.md
+scripts/medicaid_totals.sh 4 0   # Medicaid's full-sample state totals, for the health runs
+scripts/run_final.sh 4 0 0,1     # parts 0 and 1
+scripts/run_final.sh 4 0 2,3     # parts 2 and 3
+scripts/combine_final.sh 4 0     # results/final_*.json and results/summary.md
 ```
 
-`pytest` runs the tests: the bootstrap, the household split, the deflation, the pre-2018 credit, and a check that the breakdown adds up and matches a fresh simulation of the raised household. Each result file records the PolicyEngine-US and policyengine-core versions, the dataset revision, the factors applied and the run time.
+`pytest` runs the tests. They cover the bootstrap, the household split, the deflation and the pre-2018 credit. For Medicaid's totals, they check that the sums add up across parts, follow the model's own formulas, leave each household's value unchanged whichever part holds it, and spread exactly the states' spending. For the breakdown, they check that the parts add up and match a fresh simulation of the raised household. Each result file records the PolicyEngine-US and policyengine-core versions, the dataset revision, the factors applied, the Medicaid totals file and the run time.
 
 ## How these numbers relate to our April 2025 estimate
 

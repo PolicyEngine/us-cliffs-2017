@@ -14,3 +14,4 @@ logs/
 results/per_person/
 april2025/*.csv
 april2025/*.csv.gz
+per_person/

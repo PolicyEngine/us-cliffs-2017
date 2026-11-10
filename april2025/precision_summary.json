@@ -1,0 +1,85 @@
+{
+ "as_published": {
+  "estimate": {
+   "adults_on_cliff": 7360124.36810171,
+   "households_with_adult_on_cliff": 4382834.655838716,
+   "people_in_those_households": 13811117.835150653
+  },
+  "sample_adults_on_cliff": 2619,
+  "sample_households_on_cliff": 1586,
+  "largest_two_households_share_of_adults": 0.08105393776842712,
+  "kish_effective_households": 77.08932867382748,
+  "standard_error": {
+   "adults_on_cliff": 823261.8188434775,
+   "households_with_adult_on_cliff": 499660.6517165359,
+   "people_in_those_households": 2127197.8214822356
+  },
+  "interval_95": {
+   "adults_on_cliff": [
+    5814731.448677948,
+    8944036.575727072
+   ],
+   "households_with_adult_on_cliff": [
+    3411517.3572788136,
+    5467971.398911051
+   ],
+   "people_in_those_households": [
+    10181245.147993071,
+    18826131.51348225
+   ]
+  }
+ },
+ "draws_held": {
+  "estimate": {
+   "adults_on_cliff": 823698.8908137623,
+   "households_with_adult_on_cliff": 479128.6645081192,
+   "people_in_those_households": 1890271.3642021716
+  },
+  "sample_adults_on_cliff": 222,
+  "sample_households_on_cliff": 151,
+  "largest_two_households_share_of_adults": 0.5025331710912678,
+  "kish_effective_households": 7.0271400345452575,
+  "standard_error": {
+   "adults_on_cliff": 322678.3638813004,
+   "households_with_adult_on_cliff": 167282.10217245016,
+   "people_in_those_households": 702102.6286223523
+  },
+  "interval_95": {
+   "adults_on_cliff": [
+    279841.51125115174,
+    1439119.356238736
+   ],
+   "households_with_adult_on_cliff": [
+    180073.30957549665,
+    811646.241817567
+   ],
+   "people_in_those_households": [
+    726761.4920266089,
+    3368576.1841668496
+   ]
+  }
+ },
+ "published_over_held": {
+  "adults_on_cliff": {
+   "estimate": 8.93545499476195,
+   "interval_95": [
+    5.287317170061037,
+    28.269967041204094
+   ]
+  },
+  "households_with_adult_on_cliff": {
+   "estimate": 9.14751084729652,
+   "interval_95": [
+    5.480516969578887,
+    23.884661822877046
+   ]
+  },
+  "people_in_those_households": {
+   "estimate": 7.306420705886281,
+   "interval_95": [
+    4.299590065241874,
+    19.461750711490087
+   ]
+  }
+ }
+}

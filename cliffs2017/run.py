@@ -22,12 +22,16 @@ Standard errors come from a household bootstrap of the sample.
 
 The full sample does not fit in the memory ceiling of one run, so final runs
 split households into disjoint parts (``--parts 4 --part i``, at full weight)
-and scripts/combine.py adds the parts up: households do not interact in the
-model, so the sum equals a single full-sample run.
+and cliffs2017.combine adds the parts up. One part's households interact with
+the others in the model only through Medicaid's two state totals
+(cliffs2017.medicaid), so a run with health coverage counted takes those
+totals for the full sample from ``--medicaid-totals``; with them, the sum of
+the parts equals a single full-sample run.
 
 Usage:
   python -m cliffs2017.run --year 2017 [--health] [--aca-before-2018]
-      [--decompose] [--fraction 0.05 | --parts 4 --part 0] --out results/x.json
+      [--decompose] [--fraction 0.05 | --parts 4 --part 0]
+      [--medicaid-totals results/medicaid/totals_2017_p4_s0.json] --out results/x.json
 """
 
 from __future__ import annotations
@@ -49,6 +53,9 @@ REPO = "policyengine/populace-us"
 FILENAME = "populace_us_2024.h5"
 REVISION = "populace-us-2024-spm-20260909"
 BOOTSTRAP_DRAWS = 200
+# Medicaid's value scales with the state spending it spreads, which the model
+# holds for 2020-2023 only; these factors show how far that moves the counts.
+MEDICAID_SCALES = (0.8, 0.9, 1.1, 1.2)
 
 # Program totals reported beside the cliff counts, to compare a year's run
 # with that year's administrative totals.
@@ -165,9 +172,15 @@ def main():
     parser.add_argument("--part", type=int, default=0)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--out", required=True)
+    parser.add_argument(
+        "--medicaid-totals",
+        help="Full-sample Medicaid state totals from cliffs2017.medicaid (required with --health).",
+    )
     args = parser.parse_args()
     if args.parts > 1 and args.fraction < 1:
         parser.error("use --fraction or --parts, not both")
+    if args.health and not args.medicaid_totals:
+        parser.error("--health needs --medicaid-totals; see cliffs2017/medicaid.py")
 
     from policyengine_us import CountryTaxBenefitSystem
 
@@ -178,7 +191,17 @@ def main():
     dataset, factors = load_dataset(
         args.year, args.fraction, args.seed, system, args.parts, args.part
     )
-    sim = build_simulation(dataset, args.year, args.health, args.aca_before_2018)
+    medicaid_totals = medicaid_meta = None
+    if args.health:
+        from cliffs2017.medicaid import check_totals_match, load_totals
+
+        medicaid_totals, medicaid_meta = load_totals(args.medicaid_totals)
+        check_totals_match(
+            medicaid_meta, args.year, args.aca_before_2018, f"{REPO}/{FILENAME}@{REVISION}"
+        )
+    sim = build_simulation(
+        dataset, args.year, args.health, args.aca_before_2018, medicaid_totals
+    )
     year = args.year
     loaded = time.time()
 
@@ -249,6 +272,16 @@ def main():
         result["premium_tax_credit_counted_once"]["people_on_cliff_by_driver"] = (
             single_rows.groupby("driver")["weight"].sum().sort_values(ascending=False).to_dict()
         )
+        if "d_medicaid_cost" in parts:
+            # Every Medicaid value moves with its state's spending, so scaling
+            # spending by f adds (f - 1) times the Medicaid change to d_net.
+            result["medicaid_value_scaled"] = {}
+            for scale in MEDICAID_SCALES:
+                moved = np.zeros_like(on_cliff)
+                moved[index] = (
+                    parts["d_net"] + (scale - 1) * parts["d_medicaid_cost"]
+                ).to_numpy() < 0
+                result["medicaid_value_scaled"][f"{scale:g}"] = headline(people, moved)
         # Record-level model output stays out of git (results/per_person/).
         detail = Path(args.out).parent / "per_person" / (
             Path(args.out).stem + "_cliff_parts.csv.gz"
@@ -286,6 +319,15 @@ def main():
         for package in ("policyengine-us", "policyengine-core")
     }
     result["dataset"] = f"{REPO}/{FILENAME}@{REVISION}"
+    if medicaid_meta is not None:
+        result["medicaid_totals"] = dict(
+            file=args.medicaid_totals,
+            sha256=medicaid_meta["sha256"],
+            parts=medicaid_meta["parts"],
+            states_with_enrollees=medicaid_meta["states_with_enrollees"],
+            spending_total=medicaid_meta["spending_total"],
+            enrolled_weight_total=medicaid_meta["enrolled_weight_total"],
+        )
     result["python"] = platform.python_version()
     if factors is not None:
         result["deflation"] = (

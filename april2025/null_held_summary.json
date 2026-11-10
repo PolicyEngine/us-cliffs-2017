@@ -1,0 +1,15 @@
+{
+ "label": "null_held",
+ "adults_on_cliff": 0.0,
+ "households_with_adult_on_cliff": 0.0,
+ "people_in_those_households": 0.0,
+ "sample_adults_on_cliff": 0,
+ "adults_on_cliff_whose_household_redrew": 0.0,
+ "adults_on_cliff_by_driver": {},
+ "measured_adults": 234346448.0,
+ "measured_adults_whose_household_net_income_changed": 0.0,
+ "measured_adults_whose_household_redrew": 0.0,
+ "rows": 94380,
+ "rows_with_any_net_income_change": 0,
+ "largest_absolute_net_income_change": 0.0
+}
