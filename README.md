@@ -19,7 +19,8 @@ How many American adults would see their household's net income fall if they ear
 | cliffs2017/combine.py | Adds the household groups into one result per configuration |
 | scripts/medicaid_totals.sh | The Medicaid totals, from per-state sums over each household group |
 | scripts/run_final.sh, scripts/combine_final.sh | The final runs and their combination |
-| scripts/check_part_scaling.py | Checks one group's run against the subsample run over the same households |
+| scripts/check_part_scaling.py, scripts/run_batch.sh | Checks one group's run against the subsample run over the same households, which run_batch.sh makes |
+| scripts/runner.zsh | Runs each job directly, or through a queue you name |
 | results/medicaid/ | The Medicaid sums and totals the health runs read |
 | scripts/render_results.py | Writes results/summary.md from the combined results |
 | scripts/audit_*.py | The parameter and formula audits behind the coverage notes in METHODOLOGY.md |
@@ -35,7 +36,7 @@ scripts/run_final.sh 4 0 0,1 && scripts/run_final.sh 4 0 2,3
 scripts/combine_final.sh 4 0
 ```
 
-Each part needs about 11 GB of memory. The tests read the Medicaid totals in results/medicaid/, so run scripts/medicaid_totals.sh before pytest in a fresh clone that lacks them. Per-person outputs go to results/per_person/, which git ignores.
+Each part needs about 11 GB of memory. To queue the runs under a memory limit, set `CLIFFS_RUNNER` (or write its value to a `.runner` file) to a command that takes a label and then the command to run. The tests read the Medicaid totals in results/medicaid/, so run scripts/medicaid_totals.sh before pytest in a fresh clone that lacks them. Per-person outputs go to results/per_person/, which git ignores.
 
 ## License
 

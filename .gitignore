@@ -15,3 +15,6 @@ results/per_person/
 april2025/*.csv
 april2025/*.csv.gz
 per_person/
+
+# Local run queue (scripts/runner.zsh)
+.runner
