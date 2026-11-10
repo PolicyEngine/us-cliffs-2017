@@ -1,0 +1,103 @@
+{
+ "year": 2025,
+ "health_benefits_in_net_income": true,
+ "aca_before_2018": false,
+ "leave_out_csfp": true,
+ "parts": 4,
+ "part": 3,
+ "seed": 0,
+ "counted_once": {
+  "people_on_cliff": 745833.1805175805,
+  "workers_on_cliff": 570873.7646675089,
+  "households_with_person_on_cliff": 578154.1684076061,
+  "people_in_those_households": 1684841.1296862732
+ },
+ "medicaid_value_scaled_counted_once": {
+  "0.8": {
+   "people_on_cliff": 745833.1805175805,
+   "workers_on_cliff": 570873.7646675089,
+   "households_with_person_on_cliff": 578154.1684076061,
+   "people_in_those_households": 1684841.1296862732
+  },
+  "0.9": {
+   "people_on_cliff": 745833.1805175805,
+   "workers_on_cliff": 570873.7646675089,
+   "households_with_person_on_cliff": 578154.1684076061,
+   "people_in_those_households": 1684841.1296862732
+  },
+  "1.1": {
+   "people_on_cliff": 745833.1805175805,
+   "workers_on_cliff": 570873.7646675089,
+   "households_with_person_on_cliff": 578154.1684076061,
+   "people_in_those_households": 1684841.1296862732
+  },
+  "1.2": {
+   "people_on_cliff": 745833.1805175805,
+   "workers_on_cliff": 570873.7646675089,
+   "households_with_person_on_cliff": 578154.1684076061,
+   "people_in_those_households": 1684841.1296862732
+  }
+ },
+ "medicaid_value_scaled_model": {
+  "0.8": {
+   "people_on_cliff": 751062.0335516,
+   "workers_on_cliff": 570886.3569593409,
+   "households_with_person_on_cliff": 583376.7252957096,
+   "people_in_those_households": 1700521.3926424156
+  },
+  "0.9": {
+   "people_on_cliff": 751062.0335516,
+   "workers_on_cliff": 570886.3569593409,
+   "households_with_person_on_cliff": 583376.7252957096,
+   "people_in_those_households": 1700521.3926424156
+  },
+  "1.1": {
+   "people_on_cliff": 751062.0335516,
+   "workers_on_cliff": 570886.3569593409,
+   "households_with_person_on_cliff": 583376.7252957096,
+   "people_in_those_households": 1700521.3926424156
+  },
+  "1.2": {
+   "people_on_cliff": 751062.0335516,
+   "workers_on_cliff": 570886.3569593409,
+   "households_with_person_on_cliff": 583376.7252957096,
+   "people_in_those_households": 1700521.3926424156
+  }
+ },
+ "counted_once_by_driver": {
+  "chip": 11731.45486693643,
+  "chip_premium": 22012.08984375,
+  "free_school_meals": 77418.65337767417,
+  "household_refundable_tax_credits": 7296.755958126625,
+  "household_state_benefits": 15044.603877726477,
+  "household_tax_before_refundable_credits": 16900.970938065904,
+  "medicaid_cost": 431921.91216217197,
+  "msp_cost": 42320.56015647948,
+  "reduced_price_school_meals": 7193.360973194824,
+  "snap": 74315.52704091085,
+  "tanf": 30805.513548851013,
+  "wic": 8871.777773692738
+ },
+ "premium_tax_credit_largest_loss": {
+  "people": 0.0,
+  "sample_people": 0,
+  "lifted_past_400": 0.0,
+  "sample_lifted_past_400": 0,
+  "lose_income_test": 0.0,
+  "sample_lose_income_test": 0,
+  "lose_whole_credit": 0.0,
+  "sample_lose_whole_credit": 0
+ },
+ "reproduces": "results/parts/run_2025_health_p4_3_s0.json",
+ "versions": {
+  "policyengine-us": "2.116.0",
+  "policyengine-core": "3.34.10"
+ },
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "code": {
+  "commit": "a81870645dd8b01f5961888ab933fc53367bfed9",
+  "cliffs2017_sha256": "ad4968e1abb3a56512a4c2a47af0fe1c684ec9de3c62d867db20c0c07e939cec",
+  "script_sha256": "e2977a749a1bfd302c4bd2a5b620227c0686e1062f4ddd5a3233e32188c8aa9e"
+ },
+ "seconds": 280.2
+}

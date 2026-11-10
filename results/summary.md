@@ -1,21 +1,23 @@
 # Cliff counts
 
-Each count is a weighted national total. Parentheses give 95% intervals
-from a bootstrap that resamples source households (sampling error only).
+Each count is a weighted national total. The ± figure in parentheses is half the
+width of its 95% interval, 1.96 standard errors from a bootstrap that resamples
+source households (sampling error only).
 PolicyEngine-US tests the two adults with the highest market income in each
 household, so everyone counted as facing a cliff is an adult. Share of workers
 divides the adults facing a cliff who have earnings (wages plus self-employment
 income above zero) by everyone with earnings, including people the model
 doesn't test. The 2025 rows leave out the Commodity Supplemental Food Program
 (see the last section). The rows counting health coverage count the premium tax
-credit twice, as the model does; the next table counts it once.
+credit twice, as the model computes net income; the next table counts it once, as
+the headline counts in METHODOLOGY.md and the notes do.
 
 | Configuration | Adults facing a cliff | Their households | Household members | Workers facing a cliff | Share of workers | Mean cliff gap |
 |---|---|---|---|---|---|---|
 | 2017 rules, cash and near-cash only | 0.70M (± 0.24M) | 0.47M (± 0.15M) | 1.76M (± 0.61M) | 0.61M (± 0.22M) | 0.34% | $608 |
-| 2017 rules, counting health coverage | 2.75M (± 0.44M) | 2.03M (± 0.32M) | 6.39M (± 1.04M) | 2.38M (± 0.40M) | 1.34% | $8,268 |
+| 2017 rules, counting health coverage, premium tax credit counted twice | 2.75M (± 0.44M) | 2.03M (± 0.32M) | 6.39M (± 1.04M) | 2.38M (± 0.40M) | 1.34% | $8,268 |
 | 2025 rules, cash and near-cash only | 0.69M (± 0.21M) | 0.45M (± 0.14M) | 1.85M (± 0.63M) | 0.52M (± 0.16M) | 0.28% | $1,135 |
-| 2025 rules, counting health coverage | 3.10M (± 0.48M) | 2.44M (± 0.38M) | 7.38M (± 1.25M) | 2.60M (± 0.43M) | 1.38% | $11,594 |
+| 2025 rules, counting health coverage, premium tax credit counted twice | 3.10M (± 0.48M) | 2.44M (± 0.38M) | 7.38M (± 1.25M) | 2.60M (± 0.43M) | 1.38% | $11,594 |
 
 ## Premium tax credit counted once
 
@@ -25,8 +27,8 @@ These rows count it once.
 
 | Configuration | Adults facing a cliff | Their households | Household members | Workers facing a cliff | Share of workers |
 |---|---|---|---|---|---|
-| 2017 rules, counting health coverage | 2.68M (± 0.43M) | 1.98M (± 0.31M) | 6.20M (± 1.02M) | 2.33M (± 0.39M) | 1.31% |
-| 2025 rules, counting health coverage | 3.08M (± 0.47M) | 2.42M (± 0.38M) | 7.33M (± 1.25M) | 2.59M (± 0.42M) | 1.38% |
+| 2017 rules, counting health coverage, premium tax credit counted once | 2.68M (± 0.43M) | 1.98M (± 0.31M) | 6.20M (± 1.02M) | 2.33M (± 0.39M) | 1.31% |
+| 2025 rules, counting health coverage, premium tax credit counted once | 3.08M (± 0.47M) | 2.42M (± 0.38M) | 7.33M (± 1.25M) | 2.59M (± 0.42M) | 1.38% |
 
 ## Adults facing a cliff with Medicaid valued differently
 
@@ -37,8 +39,26 @@ premium tax credit twice, as the model does.
 
 | Configuration | x0.8 | x0.9 | x1 | x1.1 | x1.2 |
 |---|---|---|---|---|---|
-| 2017 rules, counting health coverage | 2.71M | 2.73M | 2.75M | 2.75M | 2.76M |
-| 2025 rules, counting health coverage | 3.10M | 3.10M | 3.10M | 3.10M | 3.10M |
+| 2017 rules, counting health coverage, premium tax credit counted twice | 2.71M | 2.73M | 2.75M | 2.75M | 2.76M |
+| 2025 rules, counting health coverage, premium tax credit counted twice | 3.10M | 3.10M | 3.10M | 3.10M | 3.10M |
+
+## Medicaid valued differently, with the premium tax credit counted once
+
+From scripts/counted_once.py, which rebuilds each part of the runs counting health
+coverage, reproduces their counted-once counts and the table above, and scales
+every enrollee's Medicaid value by the factor shown.
+
+| Configuration | x0.8 | x0.9 | x1 | x1.1 | x1.2 |
+|---|---|---|---|---|---|
+| 2017 rules, counting health coverage, premium tax credit counted once | 2.65M | 2.66M | 2.68M | 2.69M | 2.70M |
+| 2025 rules, counting health coverage, premium tax credit counted once | 3.08M | 3.08M | 3.08M | 3.08M | 3.08M |
+
+## The premium tax credit as the largest loss
+
+Under 2017 rules, counting health coverage, with the credit counted once, losing the credit lowers net income most for 0.06M adults (28 in the sample). For 0.06M (26 in the sample), the raise lifts their tax unit's income from below 400% of the poverty line to 400% or more; 0.06M (26) fail the credit's income test after the raise, and 0.06M (26) lose their tax unit's whole credit.
+
+Under 2025 rules, counting health coverage, with the credit counted once, the credit is no adult's largest loss.
+
 
 ## Medicaid's value against the spending it spreads ($ billions)
 
@@ -64,13 +84,13 @@ premium tax credit twice, as the model does.
 | SSI | 0.00M | 0% |
 | Housing assistance | 0.00M | 0% |
 
-**2017 rules, counting health coverage**
+**2017 rules, counting health coverage, premium tax credit counted twice**
 
 | Largest loss | Adults | Share |
 |---|---|---|
 | Medicaid | 1.84M | 67% |
 | Reduced-price school meals | 0.25M | 9% |
-| msp_cost | 0.15M | 5% |
+| Medicare Savings Programs | 0.15M | 5% |
 | ACA premium tax credit | 0.11M | 4% |
 | TANF | 0.11M | 4% |
 | SNAP | 0.07M | 2% |
@@ -91,7 +111,7 @@ premium tax credit twice, as the model does.
 |---|---|---|
 | Medicaid | 1.83M | 68% |
 | Reduced-price school meals | 0.24M | 9% |
-| msp_cost | 0.15M | 5% |
+| Medicare Savings Programs | 0.15M | 5% |
 | TANF | 0.11M | 4% |
 | SNAP | 0.07M | 2% |
 | Free school meals | 0.06M | 2% |
@@ -119,13 +139,13 @@ premium tax credit twice, as the model does.
 | SSI | 0.02M | 2% |
 | State benefits | 0.02M | 2% |
 
-**2025 rules, counting health coverage**
+**2025 rules, counting health coverage, premium tax credit counted twice**
 
 | Largest loss | Adults | Share |
 |---|---|---|
 | Medicaid | 2.24M | 72% |
 | SNAP | 0.18M | 6% |
-| msp_cost | 0.14M | 4% |
+| Medicare Savings Programs | 0.14M | 4% |
 | TANF | 0.12M | 4% |
 | Free school meals | 0.11M | 3% |
 | Refundable tax credits | 0.08M | 3% |
@@ -143,7 +163,7 @@ premium tax credit twice, as the model does.
 |---|---|---|
 | Medicaid | 2.24M | 73% |
 | SNAP | 0.18M | 6% |
-| msp_cost | 0.14M | 4% |
+| Medicare Savings Programs | 0.14M | 4% |
 | TANF | 0.11M | 4% |
 | Free school meals | 0.11M | 3% |
 | Reduced-price school meals | 0.08M | 3% |
@@ -155,27 +175,50 @@ premium tax credit twice, as the model does.
 | State benefits | 0.02M | 0% |
 | SSI | 0.01M | 0% |
 
+## Cliffs that rest on benefits the model gives to everyone eligible
+
+Microcosm carries take-up for SNAP, SSI, TANF, housing assistance, Head Start,
+Medicaid, the ACA premium tax credit and the EITC. PolicyEngine-US gives WIC, free and
+reduced-price school meals, CHIP, Medicare Savings Programs and several state health
+programs to everyone eligible, and counts school meals for every K-12 child in an
+eligible family on all 180 school days. Each cell gives the adults facing a cliff whose
+cliff would disappear if that benefit didn't change with the raise, from
+scripts/take_up_bounds.py. That bounds how far full take-up raises each count:
+realistic take-up would remove only part of each figure. The rows counting health
+coverage count the premium tax credit once.
+
+| Configuration | Adults facing a cliff | WIC | School meals | CHIP | Medicare Savings Programs | State health programs | Any of these |
+|---|---|---|---|---|---|---|---|
+| 2017 rules, cash and near-cash only | 0.70M | 0.09M (13%) | 0.30M (43%) | – | – | – | 0.39M (56%) |
+| 2017 rules, counting health coverage, premium tax credit counted once | 2.68M | 0.01M (0%) | 0.30M (11%) | 0.04M (2%) | 0.15M (5%) | 0.00M (0%) | 0.50M (19%) |
+| 2025 rules, cash and near-cash only | 0.69M | 0.06M (8%) | 0.10M (15%) | – | – | – | 0.17M (24%) |
+| 2025 rules, counting health coverage, premium tax credit counted once | 3.08M | 0.02M (1%) | 0.10M (3%) | 0.05M (2%) | 0.14M (4%) | 0.00M (0%) | 0.31M (10%) |
+
 ## Program totals in each run ($ billions)
 
 | Program | 2017 rules, cash and near-cash only | 2017 rules, counting health coverage | 2025 rules, cash and near-cash only | 2025 rules, counting health coverage |
 |---|---|---|---|---|
-| household_net_income | 10,740.0 | 11,417.3 | 16,375.5 | 17,323.1 |
-| household_benefits | 1,327.8 | 2,033.3 | 1,950.1 | 2,917.5 |
-| aca_ptc | 80.3 | 80.3 | 170.0 | 170.0 |
-| eitc | 56.8 | 56.8 | 68.9 | 68.9 |
-| snap | 56.4 | 56.4 | 98.8 | 98.8 |
-| ssi | 42.1 | 42.1 | 55.5 | 55.5 |
-| assigned_aca_ptc | 25.6 | 25.6 | 60.6 | 60.6 |
-| refundable_ctc | 22.8 | 22.8 | 40.1 | 40.1 |
-| free_school_meals | 14.4 | 14.4 | 31.7 | 31.7 |
-| chip | 9.0 | 9.0 | 11.8 | 11.8 |
-| wic | 6.9 | 6.9 | 11.5 | 11.5 |
-| housing_assistance | 5.5 | 5.5 | 5.7 | 5.7 |
-| household_state_benefits | 5.0 | 5.0 | 7.0 | 7.0 |
-| tanf | 3.3 | 3.3 | 5.4 | 5.4 |
-| reduced_price_school_meals | 2.8 | 2.8 | 1.7 | 1.7 |
-| household_head_start_benefits | 0.0 | 0.0 | 0.0 | 0.0 |
-| medicaid_cost | – | 661.5 | – | 880.0 |
+| Household net income (household_net_income) | 10,740.0 | 11,417.3 | 16,375.5 | 17,323.1 |
+| All household benefits (household_benefits) | 1,327.8 | 2,033.3 | 1,950.1 | 2,917.5 |
+| ACA premium tax credit before take-up (aca_ptc) | 80.3 | 80.3 | 170.0 | 170.0 |
+| EITC (eitc) | 56.8 | 56.8 | 68.9 | 68.9 |
+| SNAP (snap) | 56.4 | 56.4 | 98.8 | 98.8 |
+| SSI (ssi) | 42.1 | 42.1 | 55.5 | 55.5 |
+| ACA premium tax credit after take-up (assigned_aca_ptc) | 25.6 | 25.6 | 60.6 | 60.6 |
+| Refundable child tax credit (refundable_ctc) | 22.8 | 22.8 | 40.1 | 40.1 |
+| Free school meals (free_school_meals) | 14.4 | 14.4 | 31.7 | 31.7 |
+| CHIP (chip) | 9.0 | 9.0 | 11.8 | 11.8 |
+| WIC (wic) | 6.9 | 6.9 | 11.5 | 11.5 |
+| Housing assistance (housing_assistance) | 5.5 | 5.5 | 5.7 | 5.7 |
+| State benefits (household_state_benefits) | 5.0 | 5.0 | 7.0 | 7.0 |
+| TANF (tanf) | 3.3 | 3.3 | 5.4 | 5.4 |
+| Reduced-price school meals (reduced_price_school_meals) | 2.8 | 2.8 | 1.7 | 1.7 |
+| Head Start (household_head_start_benefits) | 0.0 | 0.0 | 0.0 | 0.0 |
+| Medicaid (medicaid_cost) | – | 661.5 | – | 880.0 |
+
+assigned_aca_ptc multiplies aca_ptc by takes_up_aca_if_eligible. Net income counting
+health coverage adds assigned_aca_ptc, the credit the tables above call the ACA
+premium tax credit.
 
 The runs without health coverage leave out Medicaid's value: they don't hold
 Medicaid's full-sample state totals, and their net income leaves Medicaid out.
@@ -192,10 +235,10 @@ out of 2025 as well (cliffs2017/benefits.py). These rows count it as the model d
 |---|---|---|---|---|---|
 | 2025 rules, cash and near-cash only, leaving CSFP out | 0.69M (± 0.21M) | 0.45M (± 0.14M) | 1.85M (± 0.63M) | 0.52M (± 0.16M) | 0.28% |
 | 2025 rules, cash and near-cash only, counting CSFP | 0.85M (± 0.23M) | 0.55M (± 0.15M) | 2.05M (± 0.64M) | 0.58M (± 0.17M) | 0.31% |
-| 2025 rules, counting health coverage, leaving CSFP out | 3.10M (± 0.48M) | 2.44M (± 0.38M) | 7.38M (± 1.25M) | 2.60M (± 0.43M) | 1.38% |
-| 2025 rules, counting health coverage, counting CSFP | 3.27M (± 0.48M) | 2.53M (± 0.38M) | 7.58M (± 1.25M) | 2.65M (± 0.43M) | 1.41% |
-| 2025 rules, counting health coverage, leaving CSFP out, premium tax credit counted once | 3.08M (± 0.47M) | 2.42M (± 0.38M) | 7.33M (± 1.25M) | 2.59M (± 0.42M) | 1.38% |
-| 2025 rules, counting health coverage, counting CSFP, premium tax credit counted once | 3.25M (± 0.48M) | 2.52M (± 0.38M) | 7.53M (± 1.24M) | 2.64M (± 0.43M) | 1.41% |
+| 2025 rules, counting health coverage, premium tax credit counted twice, leaving CSFP out | 3.10M (± 0.48M) | 2.44M (± 0.38M) | 7.38M (± 1.25M) | 2.60M (± 0.43M) | 1.38% |
+| 2025 rules, counting health coverage, premium tax credit counted twice, counting CSFP | 3.27M (± 0.48M) | 2.53M (± 0.38M) | 7.58M (± 1.25M) | 2.65M (± 0.43M) | 1.41% |
+| 2025 rules, counting health coverage, premium tax credit counted once, leaving CSFP out | 3.08M (± 0.47M) | 2.42M (± 0.38M) | 7.33M (± 1.25M) | 2.59M (± 0.42M) | 1.38% |
+| 2025 rules, counting health coverage, premium tax credit counted once, counting CSFP | 3.25M (± 0.48M) | 2.52M (± 0.38M) | 7.53M (± 1.24M) | 2.64M (± 0.43M) | 1.41% |
 
 Counting CSFP, losing it lowers net income most for 0.17M of the 0.85M adults facing a cliff under 2025 rules, cash and near-cash only.
 

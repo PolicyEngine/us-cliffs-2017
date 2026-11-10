@@ -1,0 +1,401 @@
+{
+  "note": "Cliffs that disappear if a benefit group's change is removed. Upper bounds on how far full take-up of these benefits raises each count.",
+  "commit": "c0231c83b18bdd6bd3ce4e4e22f04cd6fa551593",
+  "script_sha256": "ac7b2973be32bc6579ac909df1f71158d89b0b93d8e328a0406d848a3b1ae1e1",
+  "runs": {
+    "2017_plain": {
+      "as_modeled": {
+        "people_on_cliff": 699247.163954508,
+        "sample_people_on_cliff": 409,
+        "groups": {
+          "wic": {
+            "columns": [
+              "d_wic"
+            ],
+            "cliffs_that_disappear": 87821.2397538622,
+            "share": 0.12559398776421168,
+            "sample_rows": 69
+          },
+          "school_meals": {
+            "columns": [
+              "d_free_school_meals",
+              "d_reduced_price_school_meals"
+            ],
+            "cliffs_that_disappear": 300797.0559061182,
+            "share": 0.4301727220529529,
+            "sample_rows": 221
+          },
+          "all_of_these": {
+            "columns": [
+              "d_wic",
+              "d_free_school_meals",
+              "d_reduced_price_school_meals"
+            ],
+            "cliffs_that_disappear": 388617.9371256172,
+            "share": 0.5557661970737718,
+            "sample_rows": 277
+          }
+        }
+      }
+    },
+    "2017_health": {
+      "as_modeled": {
+        "people_on_cliff": 2747272.670579358,
+        "sample_people_on_cliff": 1531,
+        "groups": {
+          "wic": {
+            "columns": [
+              "d_wic"
+            ],
+            "cliffs_that_disappear": 11129.07037205511,
+            "share": 0.0040509522375542575,
+            "sample_rows": 34
+          },
+          "school_meals": {
+            "columns": [
+              "d_free_school_meals",
+              "d_reduced_price_school_meals"
+            ],
+            "cliffs_that_disappear": 312275.7661913958,
+            "share": 0.11366755456623154,
+            "sample_rows": 223
+          },
+          "chip": {
+            "columns": [
+              "d_chip"
+            ],
+            "cliffs_that_disappear": 36866.029645527015,
+            "share": 0.013419137474167255,
+            "sample_rows": 37
+          },
+          "medicare_savings_programs": {
+            "columns": [
+              "d_msp_cost"
+            ],
+            "cliffs_that_disappear": 145989.96692116332,
+            "share": 0.053139962583465095,
+            "sample_rows": 46
+          },
+          "state_health_programs": {
+            "columns": [
+              "d_assigned_ca_premium_subsidy",
+              "d_co_omnisalud",
+              "d_assigned_co_premium_assistance",
+              "d_ct_covered_connecticut",
+              "d_ma_connector_care",
+              "d_md_premium_assistance",
+              "d_nj_njhps",
+              "d_assigned_nm_premium_assistance",
+              "d_or_healthier_oregon_cost",
+              "d_vt_premium_assistance",
+              "d_wa_cascade_care_savings"
+            ],
+            "cliffs_that_disappear": 0.0,
+            "share": 0.0,
+            "sample_rows": 0
+          },
+          "all_of_these": {
+            "columns": [
+              "d_wic",
+              "d_free_school_meals",
+              "d_reduced_price_school_meals",
+              "d_chip",
+              "d_msp_cost",
+              "d_assigned_ca_premium_subsidy",
+              "d_co_omnisalud",
+              "d_assigned_co_premium_assistance",
+              "d_ct_covered_connecticut",
+              "d_ma_connector_care",
+              "d_md_premium_assistance",
+              "d_nj_njhps",
+              "d_assigned_nm_premium_assistance",
+              "d_or_healthier_oregon_cost",
+              "d_vt_premium_assistance",
+              "d_wa_cascade_care_savings"
+            ],
+            "cliffs_that_disappear": 506260.57113500347,
+            "share": 0.1842775114958796,
+            "sample_rows": 333
+          }
+        }
+      },
+      "credit_counted_once": {
+        "people_on_cliff": 2678606.7032590043,
+        "sample_people_on_cliff": 1489,
+        "groups": {
+          "wic": {
+            "columns": [
+              "d_wic"
+            ],
+            "cliffs_that_disappear": 11129.131795080204,
+            "share": 0.004154821154423165,
+            "sample_rows": 36
+          },
+          "school_meals": {
+            "columns": [
+              "d_free_school_meals",
+              "d_reduced_price_school_meals"
+            ],
+            "cliffs_that_disappear": 302519.58169925323,
+            "share": 0.11293915651416239,
+            "sample_rows": 220
+          },
+          "chip": {
+            "columns": [
+              "d_chip"
+            ],
+            "cliffs_that_disappear": 44745.01816137647,
+            "share": 0.016704586793923927,
+            "sample_rows": 37
+          },
+          "medicare_savings_programs": {
+            "columns": [
+              "d_msp_cost"
+            ],
+            "cliffs_that_disappear": 145989.96692116332,
+            "share": 0.05450220323257625,
+            "sample_rows": 46
+          },
+          "state_health_programs": {
+            "columns": [
+              "d_assigned_ca_premium_subsidy",
+              "d_co_omnisalud",
+              "d_assigned_co_premium_assistance",
+              "d_ct_covered_connecticut",
+              "d_ma_connector_care",
+              "d_md_premium_assistance",
+              "d_nj_njhps",
+              "d_assigned_nm_premium_assistance",
+              "d_or_healthier_oregon_cost",
+              "d_vt_premium_assistance",
+              "d_wa_cascade_care_savings"
+            ],
+            "cliffs_that_disappear": 0.0,
+            "share": 0.0,
+            "sample_rows": 0
+          },
+          "all_of_these": {
+            "columns": [
+              "d_wic",
+              "d_free_school_meals",
+              "d_reduced_price_school_meals",
+              "d_chip",
+              "d_msp_cost",
+              "d_assigned_ca_premium_subsidy",
+              "d_co_omnisalud",
+              "d_assigned_co_premium_assistance",
+              "d_ct_covered_connecticut",
+              "d_ma_connector_care",
+              "d_md_premium_assistance",
+              "d_nj_njhps",
+              "d_assigned_nm_premium_assistance",
+              "d_or_healthier_oregon_cost",
+              "d_vt_premium_assistance",
+              "d_wa_cascade_care_savings"
+            ],
+            "cliffs_that_disappear": 504383.34004251,
+            "share": 0.18830063384401952,
+            "sample_rows": 326
+          }
+        }
+      }
+    },
+    "2025_plain": {
+      "as_modeled": {
+        "people_on_cliff": 686669.9128292012,
+        "sample_people_on_cliff": 502,
+        "groups": {
+          "wic": {
+            "columns": [
+              "d_wic"
+            ],
+            "cliffs_that_disappear": 58047.09921059117,
+            "share": 0.08453421087204313,
+            "sample_rows": 58
+          },
+          "school_meals": {
+            "columns": [
+              "d_free_school_meals",
+              "d_reduced_price_school_meals"
+            ],
+            "cliffs_that_disappear": 102609.08394839137,
+            "share": 0.14942999836067353,
+            "sample_rows": 188
+          },
+          "all_of_these": {
+            "columns": [
+              "d_wic",
+              "d_free_school_meals",
+              "d_reduced_price_school_meals"
+            ],
+            "cliffs_that_disappear": 165869.4799211449,
+            "share": 0.24155635309217696,
+            "sample_rows": 252
+          }
+        }
+      }
+    },
+    "2025_health": {
+      "as_modeled": {
+        "people_on_cliff": 3101513.355773528,
+        "sample_people_on_cliff": 1260,
+        "groups": {
+          "wic": {
+            "columns": [
+              "d_wic"
+            ],
+            "cliffs_that_disappear": 16096.446433533216,
+            "share": 0.005189868489061756,
+            "sample_rows": 22
+          },
+          "school_meals": {
+            "columns": [
+              "d_free_school_meals",
+              "d_reduced_price_school_meals"
+            ],
+            "cliffs_that_disappear": 102621.51508797158,
+            "share": 0.033087561882311295,
+            "sample_rows": 184
+          },
+          "chip": {
+            "columns": [
+              "d_chip"
+            ],
+            "cliffs_that_disappear": 50162.80332337611,
+            "share": 0.016173653816449658,
+            "sample_rows": 26
+          },
+          "medicare_savings_programs": {
+            "columns": [
+              "d_msp_cost"
+            ],
+            "cliffs_that_disappear": 135288.34172690578,
+            "share": 0.04362010612498698,
+            "sample_rows": 42
+          },
+          "state_health_programs": {
+            "columns": [
+              "d_assigned_ca_premium_subsidy",
+              "d_co_omnisalud",
+              "d_assigned_co_premium_assistance",
+              "d_ct_covered_connecticut",
+              "d_ma_connector_care",
+              "d_md_premium_assistance",
+              "d_nj_njhps",
+              "d_assigned_nm_premium_assistance",
+              "d_or_healthier_oregon_cost",
+              "d_vt_premium_assistance",
+              "d_wa_cascade_care_savings"
+            ],
+            "cliffs_that_disappear": 0.0,
+            "share": 0.0,
+            "sample_rows": 0
+          },
+          "all_of_these": {
+            "columns": [
+              "d_wic",
+              "d_free_school_meals",
+              "d_reduced_price_school_meals",
+              "d_chip",
+              "d_msp_cost",
+              "d_assigned_ca_premium_subsidy",
+              "d_co_omnisalud",
+              "d_assigned_co_premium_assistance",
+              "d_ct_covered_connecticut",
+              "d_ma_connector_care",
+              "d_md_premium_assistance",
+              "d_nj_njhps",
+              "d_assigned_nm_premium_assistance",
+              "d_or_healthier_oregon_cost",
+              "d_vt_premium_assistance",
+              "d_wa_cascade_care_savings"
+            ],
+            "cliffs_that_disappear": 309382.40905388177,
+            "share": 0.09975208021527952,
+            "sample_rows": 282
+          }
+        }
+      },
+      "credit_counted_once": {
+        "people_on_cliff": 3079307.385472643,
+        "sample_people_on_cliff": 1255,
+        "groups": {
+          "wic": {
+            "columns": [
+              "d_wic"
+            ],
+            "cliffs_that_disappear": 16096.446433533216,
+            "share": 0.005227294458965671,
+            "sample_rows": 22
+          },
+          "school_meals": {
+            "columns": [
+              "d_free_school_meals",
+              "d_reduced_price_school_meals"
+            ],
+            "cliffs_that_disappear": 102608.92851607234,
+            "share": 0.03332208047827706,
+            "sample_rows": 184
+          },
+          "chip": {
+            "columns": [
+              "d_chip"
+            ],
+            "cliffs_that_disappear": 50162.84890869178,
+            "share": 0.01629030253535156,
+            "sample_rows": 28
+          },
+          "medicare_savings_programs": {
+            "columns": [
+              "d_msp_cost"
+            ],
+            "cliffs_that_disappear": 135288.34172690578,
+            "share": 0.043934666076261286,
+            "sample_rows": 42
+          },
+          "state_health_programs": {
+            "columns": [
+              "d_assigned_ca_premium_subsidy",
+              "d_co_omnisalud",
+              "d_assigned_co_premium_assistance",
+              "d_ct_covered_connecticut",
+              "d_ma_connector_care",
+              "d_md_premium_assistance",
+              "d_nj_njhps",
+              "d_assigned_nm_premium_assistance",
+              "d_or_healthier_oregon_cost",
+              "d_vt_premium_assistance",
+              "d_wa_cascade_care_savings"
+            ],
+            "cliffs_that_disappear": 0.0,
+            "share": 0.0,
+            "sample_rows": 0
+          },
+          "all_of_these": {
+            "columns": [
+              "d_wic",
+              "d_free_school_meals",
+              "d_reduced_price_school_meals",
+              "d_chip",
+              "d_msp_cost",
+              "d_assigned_ca_premium_subsidy",
+              "d_co_omnisalud",
+              "d_assigned_co_premium_assistance",
+              "d_ct_covered_connecticut",
+              "d_ma_connector_care",
+              "d_md_premium_assistance",
+              "d_nj_njhps",
+              "d_assigned_nm_premium_assistance",
+              "d_or_healthier_oregon_cost",
+              "d_vt_premium_assistance",
+              "d_wa_cascade_care_savings"
+            ],
+            "cliffs_that_disappear": 309369.8623473655,
+            "share": 0.10046735308299864,
+            "sample_rows": 282
+          }
+        }
+      }
+    }
+  }
+}

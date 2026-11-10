@@ -1,0 +1,87 @@
+{
+ "year": 2017,
+ "health_benefits_in_net_income": true,
+ "aca_before_2018": true,
+ "leave_out_csfp": false,
+ "parts": 4,
+ "seed": 0,
+ "versions": {
+  "policyengine-us": "2.116.0",
+  "policyengine-core": "3.34.10"
+ },
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "code": {
+  "commit": "a81870645dd8b01f5961888ab933fc53367bfed9",
+  "cliffs2017_sha256": "ad4968e1abb3a56512a4c2a47af0fe1c684ec9de3c62d867db20c0c07e939cec",
+  "script_sha256": "e2977a749a1bfd302c4bd2a5b620227c0686e1062f4ddd5a3233e32188c8aa9e"
+ },
+ "counted_once": {
+  "people_on_cliff": 2678606.7032590047,
+  "workers_on_cliff": 2326465.5487797395,
+  "households_with_person_on_cliff": 1978948.3429316566,
+  "people_in_those_households": 6199717.67412652
+ },
+ "medicaid_value_scaled_counted_once": {
+  "0.8": {
+   "people_on_cliff": 2651245.2275284403,
+   "workers_on_cliff": 2302834.9735637237,
+   "households_with_person_on_cliff": 1955317.7710819994,
+   "people_in_those_households": 6100310.1400942495
+  },
+  "0.9": {
+   "people_on_cliff": 2664369.9986956646,
+   "workers_on_cliff": 2315959.71819263,
+   "households_with_person_on_cliff": 1968442.5422492237,
+   "people_in_those_households": 6157694.474763147
+  },
+  "1.1": {
+   "people_on_cliff": 2685381.6286774795,
+   "workers_on_cliff": 2326465.5508583705,
+   "households_with_person_on_cliff": 1978948.3450102876,
+   "people_in_those_households": 6199717.682441044
+  },
+  "1.2": {
+   "people_on_cliff": 2698381.2273287554,
+   "workers_on_cliff": 2335281.331376207,
+   "households_with_person_on_cliff": 1987764.1243163943,
+   "people_in_those_households": 6234532.584306261
+  }
+ },
+ "medicaid_value_scaled_model": {
+  "0.8": {
+   "people_on_cliff": 2713136.1967655076,
+   "workers_on_cliff": 2359779.092877718,
+   "households_with_person_on_cliff": 2002971.3636695994,
+   "people_in_those_households": 6292337.976231661
+  },
+  "0.9": {
+   "people_on_cliff": 2726261.042676174,
+   "workers_on_cliff": 2372903.8748783455,
+   "households_with_person_on_cliff": 2016096.1722085448,
+   "people_in_those_households": 6349722.423015721
+  },
+  "1.1": {
+   "people_on_cliff": 2747272.672657989,
+   "workers_on_cliff": 2383409.707544086,
+   "households_with_person_on_cliff": 2026601.9749696087,
+   "people_in_those_households": 6391745.630693618
+  },
+  "1.2": {
+   "people_on_cliff": 2760272.196565823,
+   "workers_on_cliff": 2392225.450690201,
+   "households_with_person_on_cliff": 2035417.7169039943,
+   "people_in_those_households": 6426560.420443672
+  }
+ },
+ "premium_tax_credit_largest_loss": {
+  "people": 59777.50215417624,
+  "sample_people": 28,
+  "lifted_past_400": 59775.86466855288,
+  "sample_lifted_past_400": 26,
+  "lose_income_test": 59775.86466855288,
+  "sample_lose_income_test": 26,
+  "lose_whole_credit": 59775.86466855288,
+  "sample_lose_whole_credit": 26
+ },
+ "adds_up_to": "results/final_2017_health.json"
+}
