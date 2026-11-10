@@ -1,0 +1,138 @@
+{
+ "year": 2017,
+ "health_benefits_in_net_income": true,
+ "aca_before_2018": true,
+ "fraction": 0.02,
+ "parts": 1,
+ "part": 0,
+ "seed": 1,
+ "people_total": 308402002.4984678,
+ "households_total": 112797824.30777442,
+ "workers": 169251295.6748734,
+ "workers_evaluated": 148729951.8719588,
+ "people_on_cliff": 2327797.735063454,
+ "workers_on_cliff": 2327792.6179539133,
+ "households_with_person_on_cliff": 1437912.1340296697,
+ "people_in_those_households": 4602140.873587659,
+ "mean_cliff_gap_on_cliff": 5652.7011893562285,
+ "cliff_gap_total": 13158345025.573923,
+ "sample_people_on_cliff": 39,
+ "sample_households": 1166,
+ "share_of_workers_on_cliff": 0.013753470002531219,
+ "standard_errors": {
+  "people_on_cliff": 1272350.7088398396,
+  "workers_on_cliff": 1272350.5802237906,
+  "households_with_person_on_cliff": 727250.7825134858,
+  "people_in_those_households": 2980025.828397834
+ },
+ "decomposition_flag_mismatches": 0,
+ "premium_tax_credit_counted_once": {
+  "people_on_cliff": 2327797.669597177,
+  "workers_on_cliff": 2327792.552487636,
+  "households_with_person_on_cliff": 1437912.0685633924,
+  "people_in_those_households": 4602140.611722549,
+  "standard_errors": {
+   "people_on_cliff": 1272350.7079297,
+   "workers_on_cliff": 1272350.579313657,
+   "households_with_person_on_cliff": 727250.7812119588,
+   "people_in_those_households": 2980025.8181585292
+  },
+  "sample_people_on_cliff": 38,
+  "people_on_cliff_by_driver": {
+   "medicaid_cost": 1351332.365144005,
+   "reduced_price_school_meals": 976463.2735562325,
+   "chip": 1.213846206665039,
+   "free_school_meals": 0.34982916712760925,
+   "snap": 0.23270762711763382,
+   "wic": 0.18459343910217285,
+   "household_tax_before_refundable_credits": 0.049920499324798584
+  }
+ },
+ "people_on_cliff_by_driver": {
+  "medicaid_cost": 1351332.365144005,
+  "reduced_price_school_meals": 976463.2735562325,
+  "chip": 1.213846206665039,
+  "free_school_meals": 0.34982916712760925,
+  "snap": 0.23270762711763382,
+  "wic": 0.18459343910217285,
+  "household_refundable_tax_credits": 0.06546627730131149,
+  "household_tax_before_refundable_credits": 0.049920499324798584
+ },
+ "cliff_parts_file": "results/per_person/smoke_2017_health_decompose_f02_cliff_parts.csv.gz",
+ "program_totals": {
+  "snap": 53181162415.50641,
+  "ssi": 27162842373.46843,
+  "tanf": 5308298500.632355,
+  "wic": 5290490899.386293,
+  "free_school_meals": 14099237324.96497,
+  "reduced_price_school_meals": 2053690021.0911283,
+  "eitc": 46204269866.729485,
+  "refundable_ctc": 17543676965.052597,
+  "aca_ptc": 98548842300.79695,
+  "assigned_aca_ptc": 28925587640.448143,
+  "medicaid_cost": 491375812030.8629,
+  "chip": 19229138932.42163,
+  "housing_assistance": 1488796297.4606934,
+  "household_head_start_benefits": 0.0,
+  "household_state_benefits": 1297953171.9710817,
+  "household_benefits": 1614301663808.8726,
+  "household_net_income": 12524819766347.873
+ },
+ "people_in_recipient_units": {
+  "snap": 48452936.013552025,
+  "ssi": 4370763.525729641,
+  "tanf": 7319132.960705072,
+  "medicaid_enrolled": 56362413.58448239,
+  "chip_enrolled": 7257154.121632904,
+  "aca_ptc": 35202000.11090715,
+  "assigned_aca_ptc": 15953089.6079238
+ },
+ "timing_seconds": {
+  "load": 1321.8,
+  "cliffs": 57.5,
+  "total": 1409.0
+ },
+ "versions": {
+  "policyengine-us": "2.116.0",
+  "policyengine-core": "3.34.10"
+ },
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "python": "3.13.13",
+ "deflation": [
+  {
+   "index": "calibration.gov.census.populations.total",
+   "columns": 1,
+   "factor": 0.9556332013803133
+  },
+  {
+   "index": "calibration.gov.hhs.cms.direct_purchase_premium_per_enrollee",
+   "columns": 1,
+   "factor": 0.7111224663600749
+  },
+  {
+   "index": "calibration.gov.hhs.cms.esi_premium_per_enrollee",
+   "columns": 2,
+   "factor": 0.6875
+  },
+  {
+   "index": "calibration.gov.hhs.cms.moop_per_capita",
+   "columns": 2,
+   "factor": 0.7212009803921569
+  },
+  {
+   "index": "cola",
+   "columns": 5,
+   "factor": 0.7800067460376343
+  },
+  {
+   "index": "cpi_u",
+   "columns": 63,
+   "factor": 0.7838725088284473
+  },
+  {
+   "index": "earnings",
+   "columns": 18,
+   "factor": 0.7204632954775015
+  }
+ ]
+}
