@@ -1,0 +1,476 @@
+{
+ "kind": "medicaid_state_sums",
+ "year": 2017,
+ "aca_before_2018": true,
+ "parts": 4,
+ "part": 1,
+ "fraction": 1.0,
+ "seed": 0,
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "versions": {
+  "policyengine-us": "2.116.0",
+  "policyengine-core": "3.34.10"
+ },
+ "seconds": 93.5,
+ "states": {
+  "AK": {
+   "positive_index_weight": 168686.52511617172,
+   "positive_index_total": 98519811.88158303,
+   "enrolled_positive_index_total": 27911204.464511305,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 67748.71934285089,
+   "people": 575.0,
+   "enrolled_people": 197.0
+  },
+  "AL": {
+   "positive_index_weight": 1284593.2917992994,
+   "positive_index_total": 664054566.0244133,
+   "enrolled_positive_index_total": 73645247.46824,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 246081.7353101379,
+   "people": 844.0,
+   "enrolled_people": 137.0
+  },
+  "AR": {
+   "positive_index_weight": 851272.5975836467,
+   "positive_index_total": 296506843.81480217,
+   "enrolled_positive_index_total": 65954058.21062626,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 232649.4189349777,
+   "people": 789.0,
+   "enrolled_people": 249.0
+  },
+  "AZ": {
+   "positive_index_weight": 2152888.6419550614,
+   "positive_index_total": 1079962765.153195,
+   "enrolled_positive_index_total": 177423791.79727542,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 501978.9358530491,
+   "people": 849.0,
+   "enrolled_people": 197.0
+  },
+  "CA": {
+   "positive_index_weight": 9000374.027848454,
+   "positive_index_total": 3674299493.6965437,
+   "enrolled_positive_index_total": 756159190.6087012,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 2562414.961163313,
+   "people": 2021.0,
+   "enrolled_people": 478.0
+  },
+  "CO": {
+   "positive_index_weight": 1478447.2192350163,
+   "positive_index_total": 625019236.8686106,
+   "enrolled_positive_index_total": 78434059.33054371,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 253149.2394483668,
+   "people": 857.0,
+   "enrolled_people": 120.0
+  },
+  "CT": {
+   "positive_index_weight": 927827.951358605,
+   "positive_index_total": 540848929.060959,
+   "enrolled_positive_index_total": 78575008.13599895,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 187462.54706655908,
+   "people": 679.0,
+   "enrolled_people": 131.0
+  },
+  "DC": {
+   "positive_index_weight": 160016.40711327535,
+   "positive_index_total": 44325746.66857083,
+   "enrolled_positive_index_total": 13819829.484084213,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 61152.14901313089,
+   "people": 333.0,
+   "enrolled_people": 123.0
+  },
+  "DE": {
+   "positive_index_weight": 249064.38149188802,
+   "positive_index_total": 132594161.17946962,
+   "enrolled_positive_index_total": 30491199.564684395,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 79623.40743726376,
+   "people": 805.0,
+   "enrolled_people": 129.0
+  },
+  "FL": {
+   "positive_index_weight": 5377369.684158124,
+   "positive_index_total": 2626648210.1248612,
+   "enrolled_positive_index_total": 365790195.2932968,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 1038768.5328946216,
+   "people": 1153.0,
+   "enrolled_people": 210.0
+  },
+  "GA": {
+   "positive_index_weight": 2241301.659567232,
+   "positive_index_total": 1088009760.449267,
+   "enrolled_positive_index_total": 189691373.92238376,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 553689.8877978427,
+   "people": 918.0,
+   "enrolled_people": 173.0
+  },
+  "HI": {
+   "positive_index_weight": 374731.4033968004,
+   "positive_index_total": 161312932.2517911,
+   "enrolled_positive_index_total": 46328877.84075442,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 131830.93747671926,
+   "people": 764.0,
+   "enrolled_people": 228.0
+  },
+  "IA": {
+   "positive_index_weight": 790080.7333724394,
+   "positive_index_total": 526079629.3170008,
+   "enrolled_positive_index_total": 58807539.71057629,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 134804.15752316057,
+   "people": 772.0,
+   "enrolled_people": 110.0
+  },
+  "ID": {
+   "positive_index_weight": 416298.61285962234,
+   "positive_index_total": 180741013.0454839,
+   "enrolled_positive_index_total": 19159883.857012898,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 62614.35413744785,
+   "people": 624.0,
+   "enrolled_people": 67.0
+  },
+  "IL": {
+   "positive_index_weight": 2953611.5543260174,
+   "positive_index_total": 1561489486.2225473,
+   "enrolled_positive_index_total": 247107682.6585163,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 577487.9824678319,
+   "people": 1113.0,
+   "enrolled_people": 216.0
+  },
+  "IN": {
+   "positive_index_weight": 1673975.7298452212,
+   "positive_index_total": 552223564.826881,
+   "enrolled_positive_index_total": 87762943.28587458,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 374589.42259929597,
+   "people": 856.0,
+   "enrolled_people": 188.0
+  },
+  "KS": {
+   "positive_index_weight": 860116.1815167386,
+   "positive_index_total": 406623705.1666421,
+   "enrolled_positive_index_total": 33645429.99694661,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 116587.80322047323,
+   "people": 716.0,
+   "enrolled_people": 88.0
+  },
+  "KY": {
+   "positive_index_weight": 709473.2739622502,
+   "positive_index_total": 312965998.4802326,
+   "enrolled_positive_index_total": 37197544.36181846,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 124572.80249764596,
+   "people": 504.0,
+   "enrolled_people": 123.0
+  },
+  "LA": {
+   "positive_index_weight": 1109447.1730258588,
+   "positive_index_total": 499176266.31984174,
+   "enrolled_positive_index_total": 132249829.81327245,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 417104.4987566829,
+   "people": 706.0,
+   "enrolled_people": 229.0
+  },
+  "MA": {
+   "positive_index_weight": 1577118.17418456,
+   "positive_index_total": 401268234.42044884,
+   "enrolled_positive_index_total": 86333372.5014758,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 403741.42987459357,
+   "people": 1011.0,
+   "enrolled_people": 207.0
+  },
+  "MD": {
+   "positive_index_weight": 1527660.7515152956,
+   "positive_index_total": 764912301.6344186,
+   "enrolled_positive_index_total": 91861795.56564859,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 248616.54348458885,
+   "people": 820.0,
+   "enrolled_people": 97.0
+  },
+  "ME": {
+   "positive_index_weight": 379089.7895657172,
+   "positive_index_total": 238705755.68551937,
+   "enrolled_positive_index_total": 16532184.098797813,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 44423.28609025563,
+   "people": 502.0,
+   "enrolled_people": 44.0
+  },
+  "MI": {
+   "positive_index_weight": 2857754.6646516495,
+   "positive_index_total": 1132497703.7044048,
+   "enrolled_positive_index_total": 153588711.44347346,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 587052.1214304888,
+   "people": 1048.0,
+   "enrolled_people": 218.0
+  },
+  "MN": {
+   "positive_index_weight": 1210864.0321233338,
+   "positive_index_total": 466582930.74258125,
+   "enrolled_positive_index_total": 67003272.75895699,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 258772.47016277193,
+   "people": 801.0,
+   "enrolled_people": 102.0
+  },
+  "MO": {
+   "positive_index_weight": 1607335.5767327673,
+   "positive_index_total": 850562588.8341371,
+   "enrolled_positive_index_total": 40324060.299719244,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 148286.01832013717,
+   "people": 767.0,
+   "enrolled_people": 68.0
+  },
+  "MS": {
+   "positive_index_weight": 626664.5186310406,
+   "positive_index_total": 304527630.7576422,
+   "enrolled_positive_index_total": 53991710.096799746,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 128572.90463894323,
+   "people": 655.0,
+   "enrolled_people": 137.0
+  },
+  "MT": {
+   "positive_index_weight": 276751.15862768487,
+   "positive_index_total": 157454509.18050525,
+   "enrolled_positive_index_total": 18426387.085052453,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 44694.28182875115,
+   "people": 463.0,
+   "enrolled_people": 96.0
+  },
+  "NC": {
+   "positive_index_weight": 2432900.8855326944,
+   "positive_index_total": 1447651233.894123,
+   "enrolled_positive_index_total": 144185226.34159285,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 342411.3292153878,
+   "people": 909.0,
+   "enrolled_people": 131.0
+  },
+  "ND": {
+   "positive_index_weight": 184235.65960582288,
+   "positive_index_total": 62400759.29602167,
+   "enrolled_positive_index_total": 2539634.406965899,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 10037.073162671019,
+   "people": 447.0,
+   "enrolled_people": 48.0
+  },
+  "NE": {
+   "positive_index_weight": 511489.5683719319,
+   "positive_index_total": 346932225.5167291,
+   "enrolled_positive_index_total": 31339240.996757627,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 78599.5222546079,
+   "people": 752.0,
+   "enrolled_people": 71.0
+  },
+  "NH": {
+   "positive_index_weight": 427551.77623888635,
+   "positive_index_total": 200374885.53284708,
+   "enrolled_positive_index_total": 15714517.502007406,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 48455.07397748635,
+   "people": 597.0,
+   "enrolled_people": 66.0
+  },
+  "NJ": {
+   "positive_index_weight": 2394355.6245675203,
+   "positive_index_total": 923100779.4950562,
+   "enrolled_positive_index_total": 134695797.950172,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 448207.4777228439,
+   "people": 1183.0,
+   "enrolled_people": 168.0
+  },
+  "NM": {
+   "positive_index_weight": 581864.9433861285,
+   "positive_index_total": 218295161.90666112,
+   "enrolled_positive_index_total": 68896223.81128448,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 263162.5780405343,
+   "people": 679.0,
+   "enrolled_people": 244.0
+  },
+  "NV": {
+   "positive_index_weight": 683718.7613856366,
+   "positive_index_total": 272610256.4683559,
+   "enrolled_positive_index_total": 56292836.72916412,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 165614.05374830303,
+   "people": 722.0,
+   "enrolled_people": 157.0
+  },
+  "NY": {
+   "positive_index_weight": 4720761.960428749,
+   "positive_index_total": 1553372260.7920945,
+   "enrolled_positive_index_total": 405533683.20468956,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 1280681.6872752984,
+   "people": 1569.0,
+   "enrolled_people": 452.0
+  },
+  "OH": {
+   "positive_index_weight": 3145138.3038269547,
+   "positive_index_total": 1231846498.1042414,
+   "enrolled_positive_index_total": 163515065.25598246,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 647776.2604936075,
+   "people": 1119.0,
+   "enrolled_people": 232.0
+  },
+  "OK": {
+   "positive_index_weight": 827928.8469289133,
+   "positive_index_total": 622633023.7436242,
+   "enrolled_positive_index_total": 46558672.71299417,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 95688.6394055826,
+   "people": 716.0,
+   "enrolled_people": 131.0
+  },
+  "OR": {
+   "positive_index_weight": 1120249.471265063,
+   "positive_index_total": 444995911.7197464,
+   "enrolled_positive_index_total": 135310743.91993424,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 449470.32350378076,
+   "people": 811.0,
+   "enrolled_people": 196.0
+  },
+  "PA": {
+   "positive_index_weight": 3191845.038408043,
+   "positive_index_total": 1804099488.7352862,
+   "enrolled_positive_index_total": 309772099.85451484,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 803673.9354543628,
+   "people": 1491.0,
+   "enrolled_people": 350.0
+  },
+  "RI": {
+   "positive_index_weight": 334135.37535949744,
+   "positive_index_total": 105086856.10556737,
+   "enrolled_positive_index_total": 16506932.180099888,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 74075.30148288197,
+   "people": 632.0,
+   "enrolled_people": 129.0
+  },
+  "SC": {
+   "positive_index_weight": 1347462.791310425,
+   "positive_index_total": 773290081.895383,
+   "enrolled_positive_index_total": 98140772.42828366,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 264363.5109904787,
+   "people": 597.0,
+   "enrolled_people": 100.0
+  },
+  "SD": {
+   "positive_index_weight": 221799.89342998125,
+   "positive_index_total": 120786347.6184943,
+   "enrolled_positive_index_total": 1495701.9078993886,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 6078.299422753626,
+   "people": 603.0,
+   "enrolled_people": 47.0
+  },
+  "TN": {
+   "positive_index_weight": 1779879.1482321087,
+   "positive_index_total": 1346436443.117403,
+   "enrolled_positive_index_total": 159100599.03870204,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 368367.8793326188,
+   "people": 796.0,
+   "enrolled_people": 180.0
+  },
+  "TX": {
+   "positive_index_weight": 7425883.583409505,
+   "positive_index_total": 3282648584.659328,
+   "enrolled_positive_index_total": 215376225.16957068,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 962767.6637244804,
+   "people": 1413.0,
+   "enrolled_people": 195.0
+  },
+  "UT": {
+   "positive_index_weight": 854686.4626569272,
+   "positive_index_total": 352148914.58033216,
+   "enrolled_positive_index_total": 12144312.92743991,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 39713.42296837701,
+   "people": 733.0,
+   "enrolled_people": 37.0
+  },
+  "VA": {
+   "positive_index_weight": 1894072.4468109778,
+   "positive_index_total": 1026721476.7085232,
+   "enrolled_positive_index_total": 113328230.59748214,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 345507.81651498424,
+   "people": 912.0,
+   "enrolled_people": 95.0
+  },
+  "VT": {
+   "positive_index_weight": 173746.46734706726,
+   "positive_index_total": 64047174.5443214,
+   "enrolled_positive_index_total": 13897327.50111252,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 40620.56303504469,
+   "people": 354.0,
+   "enrolled_people": 88.0
+  },
+  "WA": {
+   "positive_index_weight": 1871599.6106011784,
+   "positive_index_total": 643523840.8707958,
+   "enrolled_positive_index_total": 123121499.94437541,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 444373.7397002066,
+   "people": 997.0,
+   "enrolled_people": 220.0
+  },
+  "WI": {
+   "positive_index_weight": 1669933.64391619,
+   "positive_index_total": 833822817.7799817,
+   "enrolled_positive_index_total": 117748784.53748174,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 345284.1910688207,
+   "people": 849.0,
+   "enrolled_people": 145.0
+  },
+  "WV": {
+   "positive_index_weight": 424913.3357861504,
+   "positive_index_total": 227132730.32185355,
+   "enrolled_positive_index_total": 62466600.975794874,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 124639.08653948852,
+   "people": 615.0,
+   "enrolled_people": 143.0
+  },
+  "WY": {
+   "positive_index_weight": 148380.0572429215,
+   "positive_index_total": 117270502.04335429,
+   "enrolled_positive_index_total": 4954535.303265916,
+   "enrolled_zero_index_weight": 0.0,
+   "enrolled_weight": 11626.795654216105,
+   "people": 421.0,
+   "enrolled_people": 40.0
+  }
+ }
+}

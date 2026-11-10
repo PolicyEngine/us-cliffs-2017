@@ -1,0 +1,141 @@
+{
+ "year": 2017,
+ "health_benefits_in_net_income": false,
+ "aca_before_2018": true,
+ "fraction": 1.0,
+ "parts": 4,
+ "part": 0,
+ "seed": 0,
+ "people_total": 81587725.99198863,
+ "households_total": 29563709.727032833,
+ "workers": 44002759.75003525,
+ "workers_evaluated": 38084568.23637432,
+ "people_on_cliff": 161432.4106310828,
+ "workers_on_cliff": 139605.39795820363,
+ "households_with_person_on_cliff": 107572.84028171255,
+ "people_in_those_households": 373584.5670968752,
+ "mean_cliff_gap_on_cliff": 653.9009780330179,
+ "cliff_gap_total": 105560811.1978928,
+ "sample_people_on_cliff": 94,
+ "sample_households": 14218,
+ "share_of_workers_on_cliff": 0.0031726509598773924,
+ "standard_errors": {
+  "people_on_cliff": 58840.45506276424,
+  "workers_on_cliff": 56248.64729116762,
+  "households_with_person_on_cliff": 35130.96546726579,
+  "people_in_those_households": 143856.2099089217
+ },
+ "decomposition_flag_mismatches": 0,
+ "premium_tax_credit_counted_once": {
+  "people_on_cliff": 161432.4106310828,
+  "workers_on_cliff": 139605.39795820363,
+  "households_with_person_on_cliff": 107572.84028171255,
+  "people_in_those_households": 373584.5670968752,
+  "standard_errors": {
+   "people_on_cliff": 58840.45506276424,
+   "workers_on_cliff": 56248.64729116762,
+   "households_with_person_on_cliff": 35130.96546726579,
+   "people_in_those_households": 143856.2099089217
+  },
+  "sample_people_on_cliff": 94,
+  "people_on_cliff_by_driver": {
+   "reduced_price_school_meals": 74796.82579683966,
+   "household_state_benefits": 26283.57124482101,
+   "tanf": 19461.71830640151,
+   "wic": 16933.781085138908,
+   "household_tax_before_refundable_credits": 10601.321045041084,
+   "free_school_meals": 10007.581612581678,
+   "household_refundable_tax_credits": 3347.49072265625,
+   "ssi": 0.071102574467659,
+   "snap": 0.049715028231730685
+  }
+ },
+ "people_on_cliff_by_driver": {
+  "reduced_price_school_meals": 74796.82579683966,
+  "household_state_benefits": 26283.57124482101,
+  "tanf": 19461.71830640151,
+  "wic": 16933.781085138908,
+  "household_tax_before_refundable_credits": 10601.321045041084,
+  "free_school_meals": 10007.581612581678,
+  "household_refundable_tax_credits": 3347.49072265625,
+  "ssi": 0.071102574467659,
+  "snap": 0.049715028231730685
+ },
+ "cliff_parts_file": "results/parts/per_person/run_2017_plain_p4_0_s0_cliff_parts.csv.gz",
+ "program_totals": {
+  "snap": 13736028474.140331,
+  "ssi": 11209081409.292374,
+  "tanf": 981313445.2038517,
+  "wic": 1649144962.0299263,
+  "free_school_meals": 3710857351.2365227,
+  "reduced_price_school_meals": 703663295.9721187,
+  "eitc": 13867357980.127987,
+  "refundable_ctc": 5646917261.187214,
+  "aca_ptc": 19547490816.368782,
+  "assigned_aca_ptc": 7086921809.0469265,
+  "medicaid_cost": 493704037275.384,
+  "chip": 2066925712.76183,
+  "housing_assistance": 990194476.8003131,
+  "household_head_start_benefits": 0.0,
+  "household_state_benefits": 1317472741.222927,
+  "household_benefits": 333683993697.2734,
+  "household_net_income": 2743658970922.1396
+ },
+ "people_in_recipient_units": {
+  "snap": 14421212.006503418,
+  "ssi": 1728723.5120812738,
+  "tanf": 854218.9785804853,
+  "medicaid_enrolled": 17200023.04336728,
+  "chip_enrolled": 1001082.6316688587,
+  "aca_ptc": 8636419.7198749,
+  "assigned_aca_ptc": 4095642.542354895
+ },
+ "timing_seconds": {
+  "load": 31.3,
+  "cliffs": 193.9,
+  "total": 426.4
+ },
+ "versions": {
+  "policyengine-us": "2.116.0",
+  "policyengine-core": "3.34.10"
+ },
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "python": "3.13.13",
+ "deflation": [
+  {
+   "index": "calibration.gov.census.populations.total",
+   "columns": 1,
+   "factor": 0.9556332013803133
+  },
+  {
+   "index": "calibration.gov.hhs.cms.direct_purchase_premium_per_enrollee",
+   "columns": 1,
+   "factor": 0.7111224663600749
+  },
+  {
+   "index": "calibration.gov.hhs.cms.esi_premium_per_enrollee",
+   "columns": 2,
+   "factor": 0.6875
+  },
+  {
+   "index": "calibration.gov.hhs.cms.moop_per_capita",
+   "columns": 2,
+   "factor": 0.7212009803921569
+  },
+  {
+   "index": "cola",
+   "columns": 5,
+   "factor": 0.7800067460376343
+  },
+  {
+   "index": "cpi_u",
+   "columns": 63,
+   "factor": 0.7838725088284473
+  },
+  {
+   "index": "earnings",
+   "columns": 18,
+   "factor": 0.7204632954775015
+  }
+ ]
+}

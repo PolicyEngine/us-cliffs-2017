@@ -113,6 +113,15 @@ def combine(results: list[dict]) -> dict:
         }
     for key in ("program_totals", "people_in_recipient_units"):
         out[key] = add_dicts([r[key] for r in results])
+    if parts > 1 and not first.get("medicaid_totals"):
+        # Without the full-sample totals, each part values Medicaid from its
+        # own state sums (cliffs2017.medicaid), so the parts' values don't add
+        # up to a full-sample total. These runs leave health coverage out of
+        # net income, so their cliff counts don't use Medicaid's value.
+        if out["program_totals"].pop("medicaid_cost", None) is not None:
+            out["program_totals_left_out"] = {
+                "medicaid_cost": "parts value Medicaid from their own state sums"
+            }
     if first.get("health_benefits_in_net_income"):
         if not first.get("medicaid_totals"):
             raise ValueError("health runs need full-sample Medicaid totals (cliffs2017.medicaid)")

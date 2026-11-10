@@ -115,11 +115,19 @@ def main(paths):
                 print(f"| {PROGRAMS.get(key, key)} | {millions(value)} | {100 * value / total:.0f}% |")
             print()
     print("## Program totals in each run ($ billions)\n")
-    keys = [k for k in results[0]["program_totals"] if isinstance(results[0]["program_totals"][k], (int, float))]
+    keys = []
+    for r in results:
+        for k, v in r["program_totals"].items():
+            if isinstance(v, (int, float)) and k not in keys:
+                keys.append(k)
     print("| Program | " + " | ".join(name(r) for r in results) + " |")
     print("|---|" + "---|" * len(results))
     for k in keys:
-        print(f"| {k} | " + " | ".join(f"{r['program_totals'].get(k, 0) / 1e9:,.1f}" for r in results) + " |")
+        cells = [f"{r['program_totals'][k] / 1e9:,.1f}" if k in r["program_totals"] else "–" for r in results]
+        print(f"| {k} | " + " | ".join(cells) + " |")
+    if any("medicaid_cost" in r.get("program_totals_left_out", {}) for r in results):
+        print("\nThe runs without health coverage leave out Medicaid's value: they don't hold")
+        print("Medicaid's full-sample state totals, and their net income leaves Medicaid out.")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,107 @@
+{
+ "year": 2025,
+ "health_benefits_in_net_income": false,
+ "aca_before_2018": false,
+ "parts": 4,
+ "seed": 0,
+ "versions": {
+  "policyengine-us": "2.116.0",
+  "policyengine-core": "3.34.10"
+ },
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "python": "3.13.13",
+ "people_total": 343234872.2962102,
+ "households_total": 123674824.15836269,
+ "workers": 184464515.026452,
+ "workers_evaluated": 160088124.18886638,
+ "people_on_cliff": 852474.978496114,
+ "workers_on_cliff": 570233.6510191624,
+ "households_with_person_on_cliff": 545958.7989556607,
+ "people_in_those_households": 2050922.0107495617,
+ "cliff_gap_total": 842484306.2767743,
+ "sample_people_on_cliff": 574,
+ "sample_households": 57240,
+ "decomposition_flag_mismatches": 0,
+ "share_of_workers_on_cliff": 0.00309129184514101,
+ "mean_cliff_gap_on_cliff": 988.2803924204735,
+ "standard_errors": {
+  "people_on_cliff": 118691.42407737927,
+  "workers_on_cliff": 85520.06547422848,
+  "households_with_person_on_cliff": 77621.50124911092,
+  "people_in_those_households": 314601.42008255085
+ },
+ "people_on_cliff_by_driver": {
+  "snap": 189196.79347766173,
+  "commodity_supplemental_food_program": 165805.06566691282,
+  "tanf": 110447.92489461508,
+  "free_school_meals": 105965.94874701218,
+  "reduced_price_school_meals": 79446.54149155575,
+  "household_refundable_tax_credits": 65398.88437977678,
+  "wic": 58047.07149341202,
+  "household_tax_before_refundable_credits": 47941.676538145985,
+  "ssi": 15180.451904296875,
+  "household_state_benefits": 15044.619902724866
+ },
+ "premium_tax_credit_counted_once": {
+  "people_on_cliff": 852474.978496114,
+  "workers_on_cliff": 570233.6510191624,
+  "households_with_person_on_cliff": 545958.7989556607,
+  "people_in_those_households": 2050922.0107495617,
+  "sample_people_on_cliff": 574,
+  "standard_errors": {
+   "people_on_cliff": 118691.42407737927,
+   "workers_on_cliff": 85520.06547422848,
+   "households_with_person_on_cliff": 77621.50124911092,
+   "people_in_those_households": 314601.42008255085
+  },
+  "people_on_cliff_by_driver": {
+   "snap": 189196.79347766173,
+   "commodity_supplemental_food_program": 165805.06566691282,
+   "tanf": 110447.92489461508,
+   "free_school_meals": 105965.94874701218,
+   "reduced_price_school_meals": 79446.54149155575,
+   "household_refundable_tax_credits": 65398.88437977678,
+   "wic": 58047.07149341202,
+   "household_tax_before_refundable_credits": 47941.676538145985,
+   "ssi": 15180.451904296875,
+   "household_state_benefits": 15044.619902724866
+  }
+ },
+ "program_totals": {
+  "household_net_income": 16380719894258.879,
+  "household_benefits": 1955296884383.2544,
+  "aca_ptc": 170021861689.28226,
+  "snap": 98768488962.48003,
+  "eitc": 68898872321.24406,
+  "assigned_aca_ptc": 60629669178.20858,
+  "ssi": 55474627995.11743,
+  "refundable_ctc": 40110646587.29182,
+  "free_school_meals": 31669656494.363403,
+  "chip": 11827015142.72284,
+  "wic": 11511096871.095024,
+  "household_state_benefits": 7018737527.408087,
+  "housing_assistance": 5653307922.175089,
+  "tanf": 5377900541.592917,
+  "reduced_price_school_meals": 1680298956.3078148,
+  "household_head_start_benefits": 0.0
+ },
+ "people_in_recipient_units": {
+  "medicaid_enrolled": 71791455.31836921,
+  "snap": 64059611.32971762,
+  "aca_ptc": 52633122.51730484,
+  "assigned_aca_ptc": 22225959.387494817,
+  "ssi": 6235956.402285984,
+  "chip_enrolled": 4129515.7605198445,
+  "tanf": 3520493.0593344867
+ },
+ "program_totals_left_out": {
+  "medicaid_cost": "parts value Medicaid from their own state sums"
+ },
+ "seconds": 1676.5,
+ "part_files": [
+  "results/parts/run_2025_plain_p4_0_s0.json",
+  "results/parts/run_2025_plain_p4_1_s0.json",
+  "results/parts/run_2025_plain_p4_2_s0.json",
+  "results/parts/run_2025_plain_p4_3_s0.json"
+ ]
+}

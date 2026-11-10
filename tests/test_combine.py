@@ -109,6 +109,20 @@ def test_variances_add(data):
         assert combined["standard_errors"][key] == pytest.approx(expected)
 
 
+def test_leaves_out_medicaid_value_without_full_sample_totals():
+    """Parts without Medicaid's full-sample totals don't add up to its total value."""
+    people = pd.DataFrame(dict(household_id=[0, 1], weight=[1.0, 2.0], worker=[True, False]))
+    on_cliff = np.array([True, False])
+    a = part_result(people.iloc[:1], on_cliff[:1], 2, 0)
+    b = part_result(people.iloc[1:].reset_index(drop=True), on_cliff[1:], 2, 1)
+    for part in (a, b):
+        part["program_totals"] = {"snap": 1.0, "medicaid_cost": 5.0}
+    combined = combine([a, b])
+    assert "medicaid_cost" not in combined["program_totals"]
+    assert combined["program_totals"]["snap"] == 2.0
+    assert "medicaid_cost" in combined["program_totals_left_out"]
+
+
 def test_refuses_mismatched_or_missing_parts():
     people = pd.DataFrame(dict(household_id=[0, 1], weight=[1.0, 2.0], worker=[True, False]))
     on_cliff = np.array([True, False])
