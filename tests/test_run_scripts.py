@@ -59,3 +59,23 @@ def test_accepts_unset_or_keep(copy, script, csfp):
     result = run(copy, script, csfp)
     assert result.returncode == 0, result.stderr
     assert "CSFP must be" not in result.stderr
+
+
+def test_counted_once_logs_each_part_and_its_exit_code(copy):
+    """scripts/run_counted_once.sh logs a failed part's exit code, not the date's."""
+    name = "run_counted_once.sh"
+    shutil.copy(ROOT / "scripts" / name, copy / "scripts" / name)
+    result = subprocess.run(
+        ["zsh", str(copy / "scripts" / name), "4", "0", "0,1", "2017"],
+        cwd=copy,
+        env=dict(os.environ, CLIFFS_RUNNER="false"),  # a runner whose every run fails
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+    assert result.returncode == 0, result.stderr
+    log = (copy / "logs" / "counted_once.log").read_text()
+    for part in (0, 1):
+        assert f"start once 2017 part {part}/4 s=0" in log
+        assert f"end once 2017 part {part} rc=1" in log
+    assert not list((copy / "results" / "counted_once").glob("once_*.json"))  # nothing to combine
