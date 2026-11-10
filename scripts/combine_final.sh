@@ -14,7 +14,8 @@ combine() {  # <out> <year> <health> <leave_out_csfp> <part files...>
   local aca=false; [ $y -lt 2018 ] && aca=true
   .venv/bin/python -m cliffs2017.combine "$@" --out $out \
     --expect year=$y --expect health_benefits_in_net_income=$h \
-    --expect aca_before_2018=$aca --expect leave_out_csfp=$c --expect decompose=true
+    --expect aca_before_2018=$aca --expect leave_out_csfp=$c --expect decompose=true \
+    --expect 'stored_input_renames={"would_claim_wic": "takes_up_wic_if_eligible"}'
 }
 # results/ and results/parts/ hold the main runs, which leave CSFP out from 2024
 # (cliffs2017/benefits.py); results/csfp/ and results/parts/csfp/ the 2025 runs

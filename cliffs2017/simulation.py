@@ -62,11 +62,23 @@ def build_simulation(
     own uprating through ``year``. With health coverage counted, pass the
     full-sample ``medicaid_totals``: without them, each household's Medicaid
     value depends on the other households in ``dataset``.
+
+    Each simulation sets WIC take-up from Microcosm's stored draw for every
+    month it covers, as policyengine.py does when it loads US data
+    (cliffs2017.wic_take_up), and records the renames it applied in
+    ``stored_input_renames``.
     """
     from policyengine_us import Microsimulation
 
-    return Microsimulation(
+    from cliffs2017.wic_take_up import map_stored_wic_take_up
+
+    base = int(dataset.time_period)
+    sim = Microsimulation(
         dataset=dataset,
         reform=reforms(health, aca_before_2018, medicaid_totals, year, leave_out_csfp),
-        dataset_end_year=max(year, int(dataset.time_period)),
+        dataset_end_year=max(year, base),
     )
+    sim.stored_input_renames = map_stored_wic_take_up(
+        sim, dataset, range(min(year, base), max(year, base) + 1)
+    )
+    return sim

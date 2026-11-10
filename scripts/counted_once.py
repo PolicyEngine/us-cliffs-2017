@@ -75,6 +75,7 @@ SHARED = (
     "versions",
     "dataset",
     "code",
+    "stored_input_renames",
 )
 
 
@@ -252,6 +253,9 @@ def run_part(year: int, parts: int, part: int, seed: int) -> Path:
     system = CountryTaxBenefitSystem()
     dataset, _ = load_dataset(year, 1.0, seed, system, parts, part)
     sim = build_simulation(dataset, year, True, wanted["aca_before_2018"], totals, wanted["leave_out_csfp"])
+    if committed.get("stored_input_renames", {}) != sim.stored_input_renames:
+        sys.exit(f"{committed_path} mapped stored inputs {committed.get('stored_input_renames', {})!r}, "
+                 f"this run maps {sim.stored_input_renames!r}")
 
     def arr(variable, map_to=None):
         return np.asarray(sim.calculate(variable, year, map_to=map_to).values)
@@ -275,6 +279,7 @@ def run_part(year: int, parts: int, part: int, seed: int) -> Path:
         versions=versions,
         dataset=dataset_name,
         code=code,
+        stored_input_renames=sim.stored_input_renames,
         seconds=round(time.time() - started, 1),
     )
     path = OUT / "parts" / f"once_{year}_p{parts}_{part}_s{seed}.json"
@@ -297,8 +302,8 @@ def combine(parts: list[dict], final: dict) -> dict:
     indices = sorted(r["part"] for r in parts)
     if indices != list(range(first["parts"])):
         raise ValueError(f"parts {indices} don't cover 0 to {first['parts'] - 1} once each")
-    for key in ("year", "health_benefits_in_net_income", "aca_before_2018", "leave_out_csfp", "parts", "seed", "versions", "dataset"):
-        if final.get(key) != first[key]:
+    for key in ("year", "health_benefits_in_net_income", "aca_before_2018", "leave_out_csfp", "parts", "seed", "versions", "dataset", "stored_input_renames"):
+        if final.get(key, {} if key == "stored_input_renames" else None) != first[key]:
             raise ValueError(f"the final run's {key} is {final.get(key)!r}, not {first[key]!r}")
     out = {key: first[key] for key in SHARED}
     out["counted_once"] = add([r["counted_once"] for r in parts])

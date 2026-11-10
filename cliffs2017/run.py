@@ -303,6 +303,7 @@ def main():
         health_benefits_in_net_income=args.health,
         aca_before_2018=args.aca_before_2018,
         leave_out_csfp=args.leave_out_csfp,
+        stored_input_renames=sim.stored_input_renames,
         decompose=args.decompose,
         bootstrap_clusters=cluster_unit,
         fraction=args.fraction,

@@ -57,6 +57,7 @@ SAME = [
     "health_benefits_in_net_income",
     "aca_before_2018",
     "leave_out_csfp",
+    "stored_input_renames",
     "decompose",
     "bootstrap_clusters",
     "parts",
@@ -69,7 +70,7 @@ SAME = [
     "medicaid_totals",
 ]
 # Runs made before an option existed don't record it; they ran without it.
-DEFAULTS = {"leave_out_csfp": False}
+DEFAULTS = {"leave_out_csfp": False, "stored_input_renames": {}}
 MEDICAID_TOLERANCE = 1e-3
 
 
