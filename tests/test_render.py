@@ -90,6 +90,32 @@ def test_take_up_section(tmp_path, capsys):
     assert "| WIC |" not in out and "We set WIC take-up from the draw Microcosm stores" in out
 
 
+def test_share_text_never_shows_a_nonzero_share_as_zero():
+    from scripts.render_results import share_text
+
+    assert share_text(0.0) == "0%"
+    assert share_text(0.0004) == "<0.1%"
+    assert share_text(0.0049) == "0.5%"
+    assert share_text(0.00949) == "0.9%"
+    assert share_text(0.0096) == "1%"
+    assert share_text(0.013) == "1%"
+    assert share_text(0.486) == "49%"
+
+
+def test_take_up_section_shows_small_shares_with_a_decimal(tmp_path, capsys):
+    from scripts.render_results import take_up_section
+
+    def group(n, share):
+        return {"columns": [], "cliffs_that_disappear": n, "share": share, "sample_rows": 1}
+
+    plain = {"people_on_cliff": 680_000.0, "groups": {"school_meals": group(3_300.0, 0.0049), "state_benefits": group(200.0, 0.0003), "all_of_these": group(3_500.0, 0.0051)}}
+    path = tmp_path / "take_up_bounds.json"
+    path.write_text(json.dumps({"runs": {"2025_plain": {"as_modeled": plain}}}))
+    take_up_section(path)
+    out = capsys.readouterr().out
+    assert "(0.5%)" in out and "(<0.1%)" in out and "(0%)" not in out
+
+
 def test_no_take_up_section_without_file(tmp_path, capsys):
     from scripts.render_results import take_up_section
 

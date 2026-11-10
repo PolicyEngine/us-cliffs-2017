@@ -107,6 +107,16 @@ def test_check_refuses_rows_that_miss_the_committed_count():
         tub.check("run", result, 21.0)
 
 
+def test_check_catches_a_move_of_under_one_person_on_a_large_count():
+    # The WIC take-up mapping moved the health counts by 0.27 to 0.64 people out of about
+    # 3 million, so rows from before it must not pass for the committed run after it.
+    rows = frame(d_net=[-1, -1, -1], weight=[1e6, 1e6, 1e6])
+    result = tub.bounds(rows, "d_net", tub.groups(False))
+    tub.check("run", result, 3e6 + 1e-6)
+    with pytest.raises(ValueError):
+        tub.check("run", result, 3e6 + 0.27)
+
+
 @settings(max_examples=200, deadline=None)
 @given(
     st.lists(

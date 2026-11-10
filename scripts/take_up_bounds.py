@@ -77,7 +77,10 @@ HEALTH_GROUPS = {
     "medicare_savings_programs": ("d_msp_cost",),
     "state_health_programs": STATE_HEALTH,
 }
-TOLERANCE = 1e-6  # relative gap allowed between these rows and the committed count
+# Relative gap allowed between these rows and the committed count. Summing the same weights in
+# another order moves a count by far less; the WIC take-up mapping moved the health counts by
+# 0.27 to 0.64 people out of about 3 million, which 1e-6 (about 3 people) would have let through.
+TOLERANCE = 1e-9
 
 
 def groups(health: bool) -> dict[str, tuple[str, ...]]:

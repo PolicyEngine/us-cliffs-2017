@@ -81,6 +81,18 @@ def csfp_label(result):
     return "leaving CSFP out" if result.get("leave_out_csfp", False) else "counting CSFP"
 
 
+def share_text(share):
+    """A share as a whole percent, or with one decimal under 1%, so a nonzero share never reads 0%."""
+    pct = 100 * share
+    if pct == 0:
+        return "0%"
+    if pct < 0.05:
+        return "<0.1%"
+    if pct < 0.95:
+        return f"{pct:.1f}%"
+    return f"{pct:.0f}%"
+
+
 def millions(x, se=None):
     text = f"{x / 1e6:,.2f}M"
     if se is not None:
@@ -212,7 +224,7 @@ def take_up_section(path=TAKE_UP):
         for g in groups:
             if g in b["groups"]:
                 v = b["groups"][g]
-                cells.append(f"{millions(v['cliffs_that_disappear'])} ({100 * v['share']:.0f}%)")
+                cells.append(f"{millions(v['cliffs_that_disappear'])} ({share_text(v['share'])})")
             else:
                 cells.append("–")
         print(f"| {label} | {millions(b['people_on_cliff'])} | " + " | ".join(cells) + " |")
@@ -295,7 +307,7 @@ def main(argv):
             print("| Largest loss | Adults | Share |")
             print("|---|---|---|")
             for key, value in sorted(drivers.items(), key=lambda kv: -kv[1]):
-                print(f"| {PROGRAMS.get(key, key)} | {millions(value)} | {100 * value / total:.0f}% |")
+                print(f"| {PROGRAMS.get(key, key)} | {millions(value)} | {share_text(value / total)} |")
             print()
     take_up_section()
     print("## Program totals in each run ($ billions)\n")
