@@ -26,6 +26,8 @@ mkdir -p $partdir logs
 for i in ${(s:,:)I}; do
   for cfg in ${(s:,:)C}; do
     y=${cfg%-*}; m=${cfg#*-}
+    # CSFP=keep is a 2025 sensitivity: 2017 rules have no CSFP to keep.
+    [ "${CSFP:-}" = keep ] && [ $y -lt 2024 ] && continue
     flags=(--decompose)
     [ $y -lt 2018 ] && flags+=(--aca-before-2018)
     [ $y -ge 2024 ] && [ "${CSFP:-}" != keep ] && flags+=(--leave-out-csfp)

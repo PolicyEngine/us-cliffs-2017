@@ -158,3 +158,95 @@ def test_2017_credit_ends_above_400_percent(ptc_2017):
     assert np.all(ptc_2017["ptc"][above] == 0)
     just_below = (ptc_2017["magi_fraction"] > 3.6) & (ptc_2017["magi_fraction"] <= 4)
     assert np.all(ptc_2017["ptc"][just_below] > 0)
+
+
+# Age curves (cliffs2017.aca2017, item 3 of its docstring).
+
+AGES = [0, 5, 14, 15, 17, 20, 21, 30, 40, 63, 64, 70]
+STATES = ["NC", "NJ", "DC", "MA", "MN", "UT", "AL", "NY"]
+# The model's normalisation (parameters/gov/aca/age_curves/generate_age_curves.py).
+MODEL_BASES = {"default": 0.765, "DC": 0.654, "MA": 0.751, "MN": 0.890, "UT": 0.793}
+
+
+def curve_households(year):
+    people, households, tax_units = {}, {}, {}
+    for state in STATES:
+        members = []
+        for age in AGES:
+            name = f"{state}_{age}"
+            people[name] = {"age": {year: age}}
+            members.append(name)
+        households[state] = {"members": members, "state_code": {year: state}}
+        tax_units[state] = {"members": members}
+    return {"people": people, "tax_units": tax_units, "households": households}
+
+
+def multipliers(year, reform=None):
+    from policyengine_us import Simulation
+
+    sim = Simulation(situation=curve_households(year), reform=reform)
+    values = np.asarray(sim.calculate("slcsp_age_curve_multiplier", f"{year}-01"))
+    return {
+        (state, age): values[i * len(AGES) + j]
+        for i, state in enumerate(STATES)
+        for j, age in enumerate(AGES)
+    }
+
+
+@pytest.fixture(scope="module")
+def curves_2017():
+    return multipliers(2017, ACABefore2018), multipliers(2017)
+
+
+def test_cms_2014_2017_curves_equal_the_model_except_default_children():
+    # The 2014-2017 curves for DC, MA, MN and UT, and the default adult
+    # ratios, equal the model's 2018 curves; only the default children differ.
+    from policyengine_us import CountryTaxBenefitSystem
+
+    from cliffs2017.aca2017 import CURVES_BEFORE_2018
+
+    curves = CountryTaxBenefitSystem().parameters("2018-01-01").gov.aca.age_curves
+    ages = np.arange(65)
+    for state, base in MODEL_BASES.items():
+        model = curves.default if state == "default" else curves[state.lower()]
+        cms = CURVES_BEFORE_2018[state] / base
+        modelled = model.calc(ages)
+        compare = ages >= 21 if state == "default" else ages >= 0
+        np.testing.assert_allclose(cms[compare], modelled[compare], rtol=2e-4)
+    assert CURVES_BEFORE_2018["default"][0] == 0.635
+    assert curves.default.calc(np.array([0, 15, 20])).tolist() == pytest.approx(
+        [1.0, 0.833 / 0.765, 0.970 / 0.765], rel=2e-4
+    )
+
+
+def test_2017_default_children_use_the_2014_2017_ratio(curves_2017):
+    reform, model = curves_2017
+    for age in AGES:
+        if age < 21:
+            assert reform[("NC", age)] == pytest.approx(0.635 / 0.765)
+            assert reform[("NC", age)] < model[("NC", age)]
+        else:
+            assert reform[("NC", age)] == model[("NC", age)]
+
+
+def test_2017_new_jersey_uses_its_own_curve_anchored_at_40(curves_2017):
+    from cliffs2017.aca2017 import CURVES_BEFORE_2018
+
+    reform, model = curves_2017
+    nj = CURVES_BEFORE_2018["NJ"]
+    assert reform[("NJ", 40)] == pytest.approx(model[("NJ", 40)])
+    for age in AGES:
+        expected = nj[min(age, 64)] / nj[40] * model[("NJ", 40)]
+        assert reform[("NJ", age)] == pytest.approx(expected)
+
+
+def test_2017_other_state_curves_unchanged(curves_2017):
+    reform, model = curves_2017
+    for state in ["DC", "MA", "MN", "UT", "AL", "NY"]:
+        for age in AGES:
+            assert reform[(state, age)] == model[(state, age)]
+
+
+@pytest.mark.parametrize("year", [2018, 2024])
+def test_age_curves_match_model_from_2018(year):
+    assert multipliers(year, ACABefore2018) == multipliers(year)

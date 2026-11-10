@@ -185,8 +185,18 @@ def _keep_households(dataset: USSingleYearDataset, keep: np.ndarray, weight_divi
 
 
 def household_draws(dataset: USSingleYearDataset, seed: int = 0) -> np.ndarray:
-    """One uniform draw per household, the basis of subsample and partition."""
-    return np.random.default_rng(seed).random(len(dataset.household))
+    """One uniform draw per household, the basis of subsample and partition.
+
+    Households with the same ``household_source_id`` (a survey household and
+    its clone, cliffs2017.run.source_clusters) share one draw, so they land in
+    the same subsample and the same part, and the parts' bootstraps stay
+    independent.
+    """
+    household = dataset.household
+    if "household_source_id" not in household:
+        return np.random.default_rng(seed).random(len(household))
+    _, cluster = np.unique(household["household_source_id"].to_numpy(), return_inverse=True)
+    return np.random.default_rng(seed).random(cluster.max() + 1)[cluster]
 
 
 def subsample(dataset: USSingleYearDataset, fraction: float, seed: int = 0):
