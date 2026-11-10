@@ -4,13 +4,13 @@ Each count is a weighted national total. The ± figure in parentheses is half th
 width of its 95% interval, 1.96 standard errors from a bootstrap that resamples
 source households (sampling error only).
 PolicyEngine-US tests the two adults with the highest market income in each
-household, so everyone counted as facing a cliff is an adult. Share of workers
-divides the adults facing a cliff who have earnings (wages plus self-employment
+household, so we count only adults as facing a cliff. For the share of workers, we
+divide the adults facing a cliff who have earnings (wages plus self-employment
 income above zero) by everyone with earnings, including people the model
-doesn't test. The 2025 rows leave out the Commodity Supplemental Food Program
-(see the last section). The rows counting health coverage count the premium tax
-credit twice, as the model computes net income; the next table counts it once, as
-the headline counts in METHODOLOGY.md and the notes do.
+doesn't test. We leave the Commodity Supplemental Food Program out of the 2025 rows
+(see the last section). In the rows counting health coverage, we count the premium
+tax credit twice, as the model does when it computes net income. In the next table,
+as in the headline counts in METHODOLOGY.md, we count it once.
 
 | Configuration | Adults facing a cliff | Their households | Household members | Workers facing a cliff | Share of workers | Mean cliff gap |
 |---|---|---|---|---|---|---|
@@ -23,7 +23,7 @@ the headline counts in METHODOLOGY.md and the notes do.
 
 PolicyEngine-US's health-inclusive net income adds the premium tax credit and
 subtracts the premium net of that credit, so a change in the credit counts twice.
-These rows count it once.
+In these rows, we count it once.
 
 | Configuration | Adults facing a cliff | Their households | Household members | Workers facing a cliff | Share of workers |
 |---|---|---|---|---|---|
@@ -33,9 +33,9 @@ These rows count it once.
 ## Adults facing a cliff with Medicaid valued differently
 
 PolicyEngine-US holds state Medicaid spending for 2020 through 2023 only, so the
-2017 runs spread 2020 spending and the 2025 runs 2023 spending. Each column
-scales every enrollee's Medicaid value by the factor shown. These rows count the
-premium tax credit twice, as the model does.
+2017 runs spread 2020 spending and the 2025 runs 2023 spending. In each column, we
+scale every enrollee's Medicaid value by the factor shown. In these rows, we count
+the premium tax credit twice, as the model does.
 
 | Configuration | x0.8 | x0.9 | x1 | x1.1 | x1.2 |
 |---|---|---|---|---|---|
@@ -177,15 +177,15 @@ Under 2025 rules, counting health coverage, with the credit counted once, the cr
 
 ## Cliffs that rest on benefits the model gives to everyone eligible
 
-Microcosm carries take-up for SNAP, SSI, TANF, housing assistance, Head Start,
+Microcosm supplies take-up for SNAP, SSI, TANF, housing assistance, Head Start,
 Medicaid, the ACA premium tax credit and the EITC. PolicyEngine-US gives WIC, free and
 reduced-price school meals, CHIP, Medicare Savings Programs and several state health
-programs to everyone eligible, and counts school meals for every K-12 child in an
-eligible family on all 180 school days. Each cell gives the adults facing a cliff whose
-cliff would disappear if that benefit didn't change with the raise, from
-scripts/take_up_bounds.py. That bounds how far full take-up raises each count:
-realistic take-up would remove only part of each figure. The rows counting health
-coverage count the premium tax credit once.
+programs to everyone eligible. It counts school meals for every K-12 child in an
+eligible family on all 180 school days. In each cell, scripts/take_up_bounds.py counts
+the adults facing a cliff whose cliff would disappear if that benefit didn't change
+with the raise. If some families don't take up these benefits, only part of each
+figure would disappear. In the rows counting health coverage, we count the premium
+tax credit once.
 
 | Configuration | Adults facing a cliff | WIC | School meals | CHIP | Medicare Savings Programs | State health programs | Any of these |
 |---|---|---|---|---|---|---|---|
@@ -228,8 +228,9 @@ Medicaid's full-sample state totals, and their net income leaves Medicaid out.
 From 2024, PolicyEngine-US counts the Commodity Supplemental Food Program (CSFP) in
 household benefits and gives its food package to everyone the program's rules admit.
 Weighted up from a 25% household sample, the model gives 8.4 million people a package in 2025, at $5.0 billion. It values each package at $601, which divides the program's 2025 cost of $425 million by its 707,000 participants.
-A 2017 run reads the model's earlier list, which has no CSFP, so the main rows leave CSFP
-out of 2025 as well (cliffs2017/benefits.py). These rows count it as the model does.
+A 2017 run reads the model's earlier list, which has no CSFP, so we leave CSFP out of
+the main 2025 rows as well (cliffs2017/benefits.py). In these rows, we count it as the
+model does.
 
 | Configuration | Adults facing a cliff | Their households | Household members | Workers facing a cliff | Share of workers |
 |---|---|---|---|---|---|
