@@ -183,6 +183,8 @@ def leaves(node):
 def main():
     target = int(sys.argv[1])
     per_state = int(sys.argv[2])
+    # The CSV doesn't record the arguments that produced it, so the log does.
+    print(f"# audit_parameters.py {target} {per_state}: {per_state} households sampled per state, seed 0", file=sys.stderr)
     system = CountryTaxBenefitSystem()
     path = hf_hub_download(
         "policyengine/populace-us",

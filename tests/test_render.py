@@ -49,7 +49,7 @@ def test_counted_once_section(tmp_path, capsys):
     assert "| x0.8 | x1 | x1.2 |" in out
     assert "| 2017 rules, counting health coverage, premium tax credit counted once | 1.90M | 2.00M | 2.10M |" in out
     assert "for 0.06M adults (30 in the sample)" in out
-    assert "Under 2025 rules, counting health coverage, with the credit counted once, the credit is no adult's largest loss." in out
+    assert "Under 2025 rules, counting health coverage, with the credit counted once, losing the credit lowers no adult's net income most." in out
 
 
 def test_no_counted_once_section_without_files(tmp_path, capsys):
