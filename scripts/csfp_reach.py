@@ -4,7 +4,8 @@ usage: python scripts/csfp_reach.py --year 2025 --fraction 0.25 --out results/cs
 
 The model's gov.usda.csfp.amount cites the program's funding and participation
 for each year; this compares them with the model's own recipients and spending
-on a reweighted household subsample (cliffs2017.deflate.subsample).
+on a reweighted household subsample (cliffs2017.deflate.subsample). The
+result records the repository commit and a hash of cliffs2017/, as the runs do.
 """
 
 import argparse
@@ -17,7 +18,7 @@ import numpy as np
 from policyengine_us import CountryTaxBenefitSystem
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from cliffs2017.run import FILENAME, REPO, REVISION, load_dataset
+from cliffs2017.run import FILENAME, REPO, REVISION, code_version, load_dataset
 from cliffs2017.simulation import build_simulation
 
 
@@ -60,6 +61,7 @@ def main():
         model_spending=float((weight * value).sum()),
         sample_recipients=int((value > 0).sum()),
         cited=cited(system, year),
+        code=code_version(),
     )
     Path(args.out).write_text(json.dumps(result, indent=1))
     print(json.dumps(result, indent=1))

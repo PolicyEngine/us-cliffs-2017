@@ -1,4 +1,9 @@
 {
+ "survey_households": {
+  "records": 56250,
+  "survey_households": 28125,
+  "copy_id_offset": 89471
+ },
  "as_published": {
   "estimate": {
    "adults_on_cliff": 7360124.36810171,
@@ -7,25 +12,26 @@
   },
   "sample_adults_on_cliff": 2619,
   "sample_households_on_cliff": 1586,
+  "sample_survey_households_on_cliff": 1477,
   "largest_two_households_share_of_adults": 0.08105393776842712,
-  "kish_effective_households": 77.08932867382748,
+  "kish_effective_survey_households": 77.06251408066312,
   "standard_error": {
-   "adults_on_cliff": 823261.8188434775,
-   "households_with_adult_on_cliff": 499660.6517165359,
-   "people_in_those_households": 2127197.8214822356
+   "adults_on_cliff": 838018.8188461435,
+   "households_with_adult_on_cliff": 512135.62017693045,
+   "people_in_those_households": 2153118.251997412
   },
   "interval_95": {
    "adults_on_cliff": [
-    5814731.448677948,
-    8944036.575727072
+    5833424.604698625,
+    9112067.845643545
    ],
    "households_with_adult_on_cliff": [
-    3411517.3572788136,
-    5467971.398911051
+    3437804.216893072,
+    5437436.124301098
    ],
    "people_in_those_households": [
-    10181245.147993071,
-    18826131.51348225
+    10115210.9827788,
+    18436411.01170203
    ]
   }
  },
@@ -37,25 +43,26 @@
   },
   "sample_adults_on_cliff": 222,
   "sample_households_on_cliff": 151,
+  "sample_survey_households_on_cliff": 149,
   "largest_two_households_share_of_adults": 0.5025331710912678,
-  "kish_effective_households": 7.0271400345452575,
+  "kish_effective_survey_households": 7.027139873264215,
   "standard_error": {
-   "adults_on_cliff": 322678.3638813004,
-   "households_with_adult_on_cliff": 167282.10217245016,
-   "people_in_those_households": 702102.6286223523
+   "adults_on_cliff": 309053.34681930026,
+   "households_with_adult_on_cliff": 158944.74243345365,
+   "people_in_those_households": 663915.6728720405
   },
   "interval_95": {
    "adults_on_cliff": [
-    279841.51125115174,
-    1439119.356238736
+    318770.2834080721,
+    1513408.8027790035
    ],
    "households_with_adult_on_cliff": [
-    180073.30957549665,
-    811646.241817567
+    214959.76972080627,
+    830578.2906363062
    ],
    "people_in_those_households": [
-    726761.4920266089,
-    3368576.1841668496
+    833655.7623834757,
+    3399462.1795361885
    ]
   }
  },
@@ -63,22 +70,22 @@
   "adults_on_cliff": {
    "estimate": 8.93545499476195,
    "interval_95": [
-    5.287317170061037,
-    28.269967041204094
+    5.130824863636375,
+    21.53492085229097
    ]
   },
   "households_with_adult_on_cliff": {
    "estimate": 9.14751084729652,
    "interval_95": [
-    5.480516969578887,
-    23.884661822877046
+    5.414536285951955,
+    19.511299654676808
    ]
   },
   "people_in_those_households": {
    "estimate": 7.306420705886281,
    "interval_95": [
-    4.299590065241874,
-    19.461750711490087
+    4.200993449867662,
+    16.02533791911185
    ]
   }
  }

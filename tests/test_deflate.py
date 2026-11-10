@@ -5,7 +5,8 @@ For every target year before the dataset's year:
 2. every other column is unchanged, except calendar-year columns, which
    never exceed the target year;
 3. each factor equals the ratio of its index between the two years, and the
-   Social Security factor composes across intermediate years;
+   Social Security factor matches the published cost-of-living adjustments;
+   every dollar-valued input gets a factor (completeness);
 4. the household weights scale with the population index, so weighted
    household and person totals move by that factor;
 5. row counts and identifiers are unchanged.
@@ -13,6 +14,8 @@ Subsampling keeps whole households and divides weights by the fraction.
 Partitioning splits households into disjoint groups that cover every
 household once at full weight; group 0 equals the matching subsample.
 """
+
+from types import SimpleNamespace
 
 import numpy as np
 import pandas as pd
@@ -26,6 +29,7 @@ from cliffs2017.deflate import (
     cola_ratio,
     column_factors,
     deflate,
+    household_draws,
     index_factors,
     partition,
     subsample,
@@ -39,14 +43,6 @@ def tables(dataset):
     return dict(zip(dataset.table_names, dataset.tables))
 
 
-@given(st.lists(YEARS, min_size=2, max_size=2, unique=True))
-def test_cola_ratio_composes(system, pair):
-    target, middle = sorted(pair)
-    direct = cola_ratio(system.parameters, target, BASE)
-    stepped = cola_ratio(system.parameters, target, middle) * cola_ratio(
-        system.parameters, middle, BASE
-    )
-    assert direct == pytest.approx(stepped, rel=1e-12)
 
 
 def test_cola_ratio_identity(system):
@@ -195,3 +191,77 @@ def test_partition_zero_matches_subsample(small_dataset, parts, seed):
 def test_partition_rejects_out_of_range(small_dataset, index):
     with pytest.raises(ValueError):
         partition(small_dataset, 4, index)
+
+
+def source_pairs(household):
+    """How many source households hold two records."""
+    return int((household["household_source_id"].value_counts() > 1).sum())
+
+
+@pytest.fixture(scope="module")
+def full_households():
+    """The 2024 build's household table: 57,240 records, 9,963 source pairs."""
+    from huggingface_hub import hf_hub_download
+
+    from cliffs2017.run import FILENAME, REPO, REVISION
+
+    path = hf_hub_download(REPO, FILENAME, repo_type="dataset", revision=REVISION)
+    return pd.read_hdf(path, "household")
+
+
+@pytest.mark.parametrize("seed", [0, 1, 4])
+def test_both_records_of_a_source_household_share_a_draw(full_households, seed):
+    """Every source pair in the full build gets one draw, and distinct sources differ."""
+    draws = household_draws(SimpleNamespace(household=full_households), seed)
+    by_source = pd.Series(draws).groupby(full_households["household_source_id"].to_numpy())
+    assert source_pairs(full_households) > 9_000
+    assert (by_source.nunique() == 1).all()
+    assert by_source.first().nunique() == by_source.ngroups
+
+
+def test_small_dataset_holds_source_pairs(small_dataset):
+    """The two tests below would pass vacuously on a sample without pairs."""
+    assert source_pairs(small_dataset.household) >= 20
+
+
+def test_source_households_share_a_part(small_dataset):
+    """Both records of a source household (cliffs2017.run.source_clusters) land in one part."""
+    assert source_pairs(small_dataset.household) >= 20
+    source = small_dataset.household.set_index("household_id")["household_source_id"]
+    seen = {}
+    for i in range(3):
+        part = partition(small_dataset, 3, i, seed=4)
+        for cluster in part.household["household_source_id"]:
+            assert seen.setdefault(cluster, i) == i
+    assert set(seen) == set(source)
+
+
+def test_subsample_keeps_source_households_together(small_dataset):
+    out = subsample(small_dataset, 0.5, seed=2)
+    assert source_pairs(out.household) >= 5
+    kept = set(out.household["household_source_id"])
+    full = small_dataset.household
+    whole = full[full["household_source_id"].isin(kept)]
+    assert len(whole) == len(out.household)
+
+
+def test_every_dollar_input_gets_a_factor(system, small_dataset):
+    """No dollar-valued input keeps its 2024 level in an earlier year's run.
+
+    The model gives business_is_sstb, a true/false input, a currency unit, so
+    the check covers numeric inputs only.
+    """
+    adjusted = {(f.entity, f.column) for f in column_factors(small_dataset, system, 2017)}
+    missing = []
+    for entity, frame in tables(small_dataset).items():
+        for column in frame.columns:
+            variable = system.variables.get(column)
+            if (
+                variable is not None
+                and variable.unit == "currency-USD"
+                and variable.value_type is float
+                and (entity, column) not in adjusted
+            ):
+                missing.append(f"{entity}.{column}")
+    assert missing == []
+    assert len(adjusted) > 50

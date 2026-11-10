@@ -95,3 +95,85 @@ def test_branch_matches_fresh_simulation(system, small_dataset, year, health):
         rows = frame[frame["rank"] == k]
         expected = (fresh_net - base_net)[household_index[rows["person_index"]]]
         np.testing.assert_allclose(rows["d_net"], expected, atol=1.0)
+
+
+def test_counting_the_credit_once_on_one_household():
+    """decompose's d_net_single_ptc matches scripts/ptc_household.py's household.
+
+    A Texas adult earning $30,000 in 2025 loses $94 of credit to a $1,000 raise.
+    Counting health coverage, net income rises $615.50; counting the credit once,
+    $709.50, which is $94 more: d_net_single_ptc removes the net premium's
+    change, with the sign that undoes the second count.
+    """
+    import sys
+
+    from policyengine_us import Simulation
+
+    from cliffs2017.simulation import reforms
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from scripts.ptc_household import situation
+
+    sim = Simulation(situation=situation(2025, "TX", 30_000), reform=reforms(health=True, aca_before_2018=False))
+    frame = decompose(sim, 2025)
+    row = frame[frame["rank"] == 1].iloc[0]
+    assert row["d_assigned_aca_ptc"] == pytest.approx(-94.0, abs=0.01)
+    assert row["d_marketplace_net_premium"] == pytest.approx(-94.0, abs=0.01)
+    assert row["d_net"] == pytest.approx(615.5, abs=0.01)
+    assert row["d_net_single_ptc"] == pytest.approx(709.5, abs=0.01)
+
+
+def test_primary_driver_names_the_largest_loss():
+    import pandas as pd
+
+    from cliffs2017.decompose import primary_driver
+
+    frame = pd.DataFrame(
+        {
+            "d_household_market_income": [1000.0, 1000.0, 1000.0],
+            "d_snap": [-300.0, -50.0, 0.0],
+            "d_medicaid_cost": [-1200.0, 0.0, 0.0],
+            "d_household_tax_before_refundable_credits": [-100.0, -80.0, -10.0],
+            "d_net": [-600.0, 870.0, 990.0],
+            "d_parts": [-600.0, 870.0, 990.0],
+            "d_net_single_ptc": [-600.0, 870.0, 990.0],
+        }
+    )
+    assert primary_driver(frame).tolist() == [
+        "medicaid_cost",
+        "household_tax_before_refundable_credits",
+        "household_tax_before_refundable_credits",
+    ]
+    # Market income never counts as the loss, and no loss at all reads "none".
+    frame.loc[:, ["d_snap", "d_medicaid_cost", "d_household_tax_before_refundable_credits"]] = 0.0
+    assert primary_driver(frame).tolist() == ["none", "none", "none"]
+    # On a tie, it names the part that comes first among the frame's columns.
+    frame.loc[0, ["d_snap", "d_medicaid_cost"]] = -500.0
+    assert primary_driver(frame).iloc[0] == "snap"
+    assert primary_driver(frame[frame.columns[::-1]]).iloc[0] == "medicaid_cost"
+
+
+def test_scaling_medicaid_matches_the_shortcut(system, small_dataset):
+    """run.py's medicaid_value_scaled: scaling spending by f adds (f - 1) x the Medicaid change.
+
+    Scaling every state's denominator by 1 / f scales every Medicaid value by
+    f, so the cliffs of that simulation must match the shortcut's.
+    """
+    year, f = 2025, 1.5
+    data, options = configured(small_dataset, system, year, True)
+    options["leave_out_csfp"] = True
+    sim = build_simulation(data, year, **options)
+    frame = decompose(sim, year)
+    predicted = (frame["d_net"] + (f - 1) * frame["d_medicaid_cost"]).to_numpy()
+    totals = options["medicaid_totals"].copy()
+    totals["denominator"] = totals["denominator"] / f
+    scaled = build_simulation(data, year, **dict(options, medicaid_totals=totals))
+    people = frame["person_index"].to_numpy()
+    on_cliff = np.asarray(scaled.calculate("is_on_cliff", year)).astype(bool)[people]
+    mtr = np.asarray(scaled.calculate("marginal_tax_rate", year))[people]
+    # The shortcut gives the scaled run's change in net income, adult by adult.
+    np.testing.assert_allclose(predicted, frame["delta"] * (1 - mtr), atol=1.0)
+    clear = np.abs(predicted) > 1.0
+    np.testing.assert_array_equal(on_cliff[clear], predicted[clear] < 0)
+    assert clear.mean() > 0.95
+    assert (frame["d_medicaid_cost"] < 0).any()

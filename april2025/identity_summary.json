@@ -1,0 +1,47 @@
+{
+ "model": "policyengine-us 1.251.1 (c379969db9), policyengine-core 3.16.6",
+ "dataset": "hf://policyengine/policyengine-us-data/enhanced_cps_2024.h5@da98b4faccf44492e91d80c0112a34ef6c3da0bd",
+ "year": 2025,
+ "as_published": {
+  "rows": 94380,
+  "parts": 20,
+  "rows_missing_by_over_1_cent": 6629,
+  "rows_missing_by_over_1_dollar": 1050,
+  "largest_miss": 16.0,
+  "largest_miss_in_float32_steps": 5.375,
+  "rows_over_rounding_bound": 0,
+  "cliff_rows": 2619,
+  "cliff_rows_missing_by_over_1_dollar": 36,
+  "smallest_loss_in_those_rows": 72.0,
+  "cliff_rows_where_miss_could_change_largest_loss": 0,
+  "adults_on_cliff_where_miss_could_change_largest_loss": 0.0
+ },
+ "null_raise": {
+  "rows": 94380,
+  "parts": 20,
+  "rows_missing_by_over_1_cent": 875,
+  "rows_missing_by_over_1_dollar": 138,
+  "largest_miss": 12.0,
+  "largest_miss_in_float32_steps": 3.0,
+  "rows_over_rounding_bound": 0,
+  "cliff_rows": 3456,
+  "cliff_rows_missing_by_over_1_dollar": 62,
+  "smallest_loss_in_those_rows": 128.0,
+  "cliff_rows_where_miss_could_change_largest_loss": 0,
+  "adults_on_cliff_where_miss_could_change_largest_loss": 0.0
+ },
+ "draws_held": {
+  "rows": 94380,
+  "parts": 20,
+  "rows_missing_by_over_1_cent": 6000,
+  "rows_missing_by_over_1_dollar": 955,
+  "largest_miss": 16.0,
+  "largest_miss_in_float32_steps": 2.6875,
+  "rows_over_rounding_bound": 0,
+  "cliff_rows": 222,
+  "cliff_rows_missing_by_over_1_dollar": 0,
+  "smallest_loss_in_those_rows": null,
+  "cliff_rows_where_miss_could_change_largest_loss": 0,
+  "adults_on_cliff_where_miss_could_change_largest_loss": 0.0
+ }
+}

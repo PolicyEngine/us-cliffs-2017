@@ -8,7 +8,12 @@ For any set of households with household-level weights:
 4. with nobody on a cliff, every count and standard error is zero;
 5. the bootstrap standard error of each total agrees with the closed form for
    resampling n households with replacement, sqrt(sum y_i^2 - T^2 / n)
-   (differential test).
+   (differential test), and its per-household totals add up to headline's;
+6. headline gives exact totals on a hand-built example;
+7. households in one source cluster are drawn together: a household split
+   into two clones with half the weight each, sharing a cluster, gives the
+   same standard errors as the household alone, and one-household clusters
+   give the household bootstrap.
 """
 
 import numpy as np
@@ -96,8 +101,10 @@ def test_bootstrap_matches_closed_form():
         households_with_person_on_cliff=g.w * g.a,
         people_in_those_households=g.w * g.m * g.a,
     )
+    counts = headline(people, on_cliff)
     for key, y in totals.items():
         y = y.to_numpy(dtype=float)
+        assert y.sum() == pytest.approx(counts[key]), key
         closed = np.sqrt((y**2).sum() - y.sum() ** 2 / len(y))
         # With 4,000 draws the bootstrap SE has about 1% relative error.
         assert se[key] == pytest.approx(closed, rel=0.05), key
@@ -109,4 +116,63 @@ def test_bootstrap_is_deterministic(data):
     people, on_cliff = data
     assert bootstrap(people, on_cliff, draws=30, seed=5) == bootstrap(
         people, on_cliff, draws=30, seed=5
+    )
+
+
+def test_headline_exact_values():
+    # Household 1 (weight 10): a worker on a cliff, a non-worker, a child.
+    # Household 2 (weight 5): one non-worker on a cliff and one other person.
+    # Household 3 (weight 2): nobody on a cliff.
+    people = pd.DataFrame(
+        dict(
+            household_id=[1, 1, 1, 2, 2, 3],
+            weight=[10.0, 10.0, 10.0, 5.0, 5.0, 2.0],
+            worker=[True, False, False, False, True, True],
+        )
+    )
+    on_cliff = np.array([True, False, False, True, False, False])
+    assert headline(people, on_cliff) == dict(
+        people_on_cliff=15.0,
+        workers_on_cliff=10.0,
+        households_with_person_on_cliff=15.0,
+        people_in_those_households=40.0,
+    )
+
+
+def random_households(seed=3, n_households=300):
+    rng = np.random.default_rng(seed)
+    sizes = rng.integers(1, 6, n_households)
+    weights = rng.uniform(100, 3_000, n_households)
+    household_id = np.repeat(np.arange(n_households), sizes)
+    people = pd.DataFrame(dict(household_id=household_id, weight=weights[household_id]))
+    people["worker"] = rng.random(len(people)) < 0.6
+    on_cliff = rng.random(len(people)) < 0.15
+    return people, on_cliff
+
+
+def test_clones_in_one_cluster_bootstrap_like_the_household():
+    people, on_cliff = random_households()
+    clones = []
+    for copy in (0, 1):
+        clone = people.copy()
+        clone["cluster"] = clone["household_id"]
+        clone["household_id"] = clone["household_id"] * 2 + copy
+        clone["weight"] = clone["weight"] / 2
+        clones.append(clone)
+    doubled = pd.concat(clones, ignore_index=True)
+    doubled_flags = np.concatenate([on_cliff, on_cliff])
+    alone = bootstrap(people, on_cliff, draws=300, seed=7)
+    together = bootstrap(doubled, doubled_flags, draws=300, seed=7)
+    for key in alone:
+        assert together[key] == pytest.approx(alone[key], rel=1e-9), key
+    # Treated as independent households, the clones would understate the error.
+    apart = bootstrap(doubled.drop(columns="cluster"), doubled_flags, draws=300, seed=7)
+    assert apart["people_on_cliff"] < together["people_on_cliff"]
+
+
+def test_one_household_clusters_give_the_household_bootstrap():
+    people, on_cliff = random_households(seed=5)
+    clustered = people.assign(cluster=people["household_id"] + 1_000)
+    assert bootstrap(clustered, on_cliff, draws=50, seed=2) == bootstrap(
+        people, on_cliff, draws=50, seed=2
     )

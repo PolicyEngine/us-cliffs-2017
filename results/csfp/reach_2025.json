@@ -1,0 +1,18 @@
+{
+ "year": 2025,
+ "fraction": 0.25,
+ "seed": 0,
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "package_value": 601.0,
+ "model_recipients": 8363241.594567418,
+ "model_spending": 5026308198.335018,
+ "sample_recipients": 547,
+ "cited": {
+  "funding": 425000000.0,
+  "participation": 707000.0
+ },
+ "code": {
+  "commit": "efa0b34cae43e25b71373a19bda93f3501d0defc",
+  "cliffs2017_sha256": "070af058ee72c7acea5a2cc6def63526b2422281191b8e04ba6727981b50cd10"
+ }
+}

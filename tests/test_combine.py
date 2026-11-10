@@ -4,8 +4,12 @@
    headline counts gives the counts of the whole sample (differential test
    against cliffs2017.run.headline on the unsplit data).
 2. The result does not depend on the order of the parts.
-3. Combined standard errors add the parts' variances.
-4. Parts that disagree on configuration, or that leave a gap, are refused.
+3. Combined standard errors add the parts' variances, and with enough draws
+   they match the closed-form standard error of a bootstrap stratified by part
+   (differential test).
+4. Parts that disagree on configuration (including the code that ran them),
+   that miss an expected setting, or that leave a gap, are refused; a total a
+   part couldn't compute is left out, not summed over the other parts.
 """
 
 import math
@@ -147,3 +151,116 @@ def test_runs_without_the_csfp_option_count_as_leaving_csfp_in():
     assert combine([dict(a, leave_out_csfp=True), dict(b, leave_out_csfp=True)])["leave_out_csfp"] is True
     with pytest.raises(ValueError, match="disagree on leave_out_csfp"):
         combine([a, dict(b, leave_out_csfp=True)])
+
+
+def test_combined_se_matches_stratified_closed_form():
+    rng = np.random.default_rng(8)
+    n_households, parts = 600, 3
+    sizes = rng.integers(1, 6, n_households)
+    weights = rng.uniform(100, 3_000, n_households)
+    household_id = np.repeat(np.arange(n_households), sizes)
+    people = pd.DataFrame(dict(household_id=household_id, weight=weights[household_id]))
+    people["worker"] = rng.random(len(people)) < 0.6
+    on_cliff = rng.random(len(people)) < 0.15
+    group = rng.integers(0, parts, n_households)[household_id]
+    results, closed = [], 0.0
+    for i in range(parts):
+        keep = group == i
+        piece, flags = people[keep].reset_index(drop=True), on_cliff[keep]
+        result = part_result(piece, flags, parts, i)
+        result["standard_errors"] = bootstrap(piece, flags, draws=4_000, seed=i)
+        results.append(result)
+        y = (
+            piece.assign(on=flags)
+            .groupby("household_id")
+            .apply(lambda h: h["weight"].iloc[0] * h["on"].sum(), include_groups=False)
+            .to_numpy()
+        )
+        closed += (y**2).sum() - y.sum() ** 2 / len(y)
+    combined = combine(results)
+    assert combined["standard_errors"]["people_on_cliff"] == pytest.approx(math.sqrt(closed), rel=0.05)
+
+
+def two_parts():
+    people = pd.DataFrame(dict(household_id=[0, 1], weight=[1.0, 2.0], worker=[True, False]))
+    on_cliff = np.array([True, False])
+    a = part_result(people.iloc[:1], on_cliff[:1], 2, 0)
+    b = part_result(people.iloc[1:].reset_index(drop=True), on_cliff[1:], 2, 1)
+    return a, b
+
+
+@pytest.mark.parametrize(
+    "key, other",
+    [
+        ("code", {"commit": "b", "cliffs2017_sha256": "other"}),
+        ("decompose", False),
+        ("leave_out_csfp", True),
+        ("bootstrap_clusters", "household_id"),
+    ],
+)
+def test_refuses_parts_that_differ(key, other):
+    a, b = two_parts()
+    a[key] = {"commit": "a", "cliffs2017_sha256": "same"} if key == "code" else not other if isinstance(other, bool) else "household_source_id"
+    b[key] = other
+    with pytest.raises(ValueError, match=f"disagree on {key}"):
+        combine([a, b])
+
+
+def test_same_code_under_another_commit_combines():
+    a, b = two_parts()
+    a["code"] = {"commit": "a", "cliffs2017_sha256": "same"}
+    b["code"] = {"commit": "b", "cliffs2017_sha256": "same"}
+    combine([a, b])
+
+
+def test_medicaid_totals_compared_by_content():
+    a, b = two_parts()
+    totals = dict(sha256="x", parts=4, states_with_enrollees=51, spending_total=1.0, enrolled_weight_total=1.0)
+    a["medicaid_totals"] = dict(totals, file="results/medicaid/t.json")
+    b["medicaid_totals"] = dict(totals, file="./results/medicaid/t.json")
+    combine([a, b])
+    b["medicaid_totals"] = dict(totals, sha256="y", file="results/medicaid/t.json")
+    with pytest.raises(ValueError, match="disagree on medicaid_totals"):
+        combine([a, b])
+
+
+def test_expect_refuses_a_missing_setting():
+    a, b = two_parts()
+    with pytest.raises(ValueError, match="expected True"):
+        combine([a, b], expect={"leave_out_csfp": True})
+    combine([a, b], expect={"leave_out_csfp": False, "year": 2017})
+
+
+def test_leaves_out_a_total_a_part_could_not_compute():
+    a, b = two_parts()
+    a["program_totals"] = {"snap": 100.0, "wic": 3.0}
+    b["program_totals"] = {"snap": "error: VariableNotFoundError: snap", "wic": 4.0}
+    combined = combine([a, b])
+    assert "snap" not in combined["program_totals"]
+    assert combined["program_totals"]["wic"] == 7.0
+    assert "part 1" in combined["program_totals_left_out"]["snap"]
+
+
+def health_parts(costs, spending=10.0):
+    a, b = two_parts()
+    totals = dict(sha256="x", parts=2, states_with_enrollees=51, spending_total=spending, enrolled_weight_total=1.0)
+    for part, cost in zip((a, b), costs):
+        part["health_benefits_in_net_income"] = True
+        part["medicaid_totals"] = dict(totals, file="t.json")
+        part["program_totals"] = {"snap": 1.0} if cost is None else {"snap": 1.0, "medicaid_cost": cost}
+    return a, b
+
+
+def test_health_parts_must_spread_the_spending_they_were_given():
+    """A health run's Medicaid value over its parts must match the spending it spreads."""
+    combined = combine(list(health_parts([4.0, 6.0])))
+    assert combined["medicaid_value_check"]["relative_gap"] == pytest.approx(0.0)
+    with pytest.raises(ValueError, match="misses the spending"):
+        combine(list(health_parts([4.0, 6.5])))
+    with pytest.raises(ValueError, match="must all compute medicaid_cost"):
+        combine(list(health_parts([4.0, None])))
+    a, b = health_parts([4.0, 6.0])
+    for part in (a, b):
+        del part["medicaid_totals"]
+    with pytest.raises(ValueError, match="need full-sample Medicaid totals"):
+        combine([a, b])

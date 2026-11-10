@@ -42,7 +42,13 @@ SPENDING = {"AK": 2.5e9, "CA": 1.5e11, "TX": 4.0e10, "VT": 1.9e9}
 def people(draw):
     n = draw(st.integers(1, 60))
     state = STATES[draw(hnp.arrays(np.int64, n, elements=st.integers(0, len(STATES) - 1)))]
-    weight = draw(hnp.arrays(np.float64, n, elements=st.floats(0, 1e5)))
+    # Microcosm's positive household weights run from 5.5e-5 to 5.1e4. A weight
+    # near the smallest double (5e-324) makes spending / denominator overflow to
+    # infinity, in the model's formula as in this replica, so the weights stop at
+    # 1e-6, and exact zeros stay in.
+    weight = draw(
+        hnp.arrays(np.float64, n, elements=st.one_of(st.just(0.0), st.floats(1e-6, 1e5)))
+    )
     index = draw(
         hnp.arrays(np.float64, n, elements=st.one_of(st.just(0.0), st.floats(1e-3, 5e4)))
     )
@@ -237,8 +243,79 @@ def test_lookups_refuse_other_years_and_unknown_states(system, small_dataset):
         sim.calculate("medicaid_slcsp_state_average_cost_index", 2026)
 
 
-def test_reform_replaces_both_formulas():
+def one_person_in(state, year):
+    return {
+        "people": {"p": {"age": {year: 30}}},
+        "households": {"h": {"members": ["p"], "state_code": {year: state}}},
+    }
+
+
+def test_reform_returns_the_fixed_totals():
+    from policyengine_us import Simulation
+
     reform = fixed_state_totals(
         pd.DataFrame({"average_cost_index": [2.0], "denominator": [3.0]}, index=["CA"]), 2025
     )
-    assert reform.__name__ == "FixedMedicaidStateTotals"
+    sim = Simulation(situation=one_person_in("CA", 2025), reform=reform)
+    assert sim.calculate("medicaid_slcsp_state_average_cost_index", 2025).tolist() == [2.0]
+    assert sim.calculate("medicaid_slcsp_state_denominator", 2025).tolist() == [3.0]
+
+
+def raise_on_aggregates():
+    """A reform under which computing either state total raises, in any branch."""
+    from policyengine_core.reforms import Reform
+    from policyengine_us.model_api import USD, YEAR, Person, Variable
+
+    def formula(person, period, parameters):
+        raise AssertionError("a Medicaid state total was computed")
+
+    class medicaid_slcsp_state_average_cost_index(Variable):
+        value_type = float
+        entity = Person
+        label = "raises"
+        unit = USD
+        definition_period = YEAR
+
+    class medicaid_slcsp_state_denominator(Variable):
+        value_type = float
+        entity = Person
+        label = "raises"
+        unit = USD
+        definition_period = YEAR
+
+    medicaid_slcsp_state_average_cost_index.formula = formula
+    medicaid_slcsp_state_denominator.formula = formula
+
+    class RaiseOnAggregates(Reform):
+        def apply(self):
+            self.replace_variable(medicaid_slcsp_state_average_cost_index)
+            self.replace_variable(medicaid_slcsp_state_denominator)
+
+    return RaiseOnAggregates
+
+
+@pytest.mark.parametrize("year", YEARS)
+def test_sums_never_compute_the_totals(system, small_dataset, year):
+    """Gathering the sums' inputs never reaches either total, in any branch.
+
+    simulation_sums's own check sees only the main simulation's holders; a
+    branch made inside a formula keeps its own storage. Here the totals raise
+    whenever they are computed.
+    """
+    from policyengine_us import Microsimulation
+
+    from cliffs2017.simulation import reforms
+
+    data = small_dataset
+    if year < int(small_dataset.time_period):
+        data, _ = deflate(small_dataset, system, year)
+    base = reforms(True, year < 2018, None, year, year >= 2024) or ()
+    sim = Microsimulation(
+        dataset=data,
+        reform=tuple(base) + (raise_on_aggregates(),),
+        dataset_end_year=max(year, int(data.time_period)),
+    )
+    sums = simulation_sums(sim, year)
+    assert len(sums) > 10
+    with pytest.raises(AssertionError, match="state total was computed"):
+        sim.calculate("medicaid_cost_if_enrolled", year)

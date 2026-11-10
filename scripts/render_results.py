@@ -14,7 +14,7 @@ from pathlib import Path
 LABELS = {
     "people_on_cliff": "Adults facing a cliff",
     "households_with_person_on_cliff": "Their households",
-    "people_in_those_households": "People in those households",
+    "people_in_those_households": "Household members",
     "workers_on_cliff": "Workers facing a cliff",
 }
 PROGRAMS = {
@@ -48,6 +48,11 @@ def name(result):
     return f"{result['year']} rules, {health}"
 
 
+def csfp_label(result):
+    # Runs made before --leave-out-csfp existed don't record it; they ran without it.
+    return "leaving CSFP out" if result.get("leave_out_csfp", False) else "counting CSFP"
+
+
 def millions(x, se=None):
     text = f"{x / 1e6:,.2f}M"
     if se is not None:
@@ -68,20 +73,24 @@ def csfp_section(main_results, csfp_paths):
     kept = sorted((json.load(open(p)) for p in csfp_paths), key=lambda r: r["health_benefits_in_net_income"])
     if not kept:
         return
+    for r in kept:
+        if r.get("leave_out_csfp", False):
+            sys.exit("a --csfp result records leave_out_csfp; it belongs with the main results")
     print("\n## Counting the Commodity Supplemental Food Program\n")
     print("From 2024, PolicyEngine-US counts the Commodity Supplemental Food Program (CSFP) in")
     print("household benefits and gives its food package to everyone the program's rules admit.")
     if REACH.exists():
         reach = json.loads(REACH.read_text())
         line = (
-            f"On a {100 * reach['fraction']:.0f}% household sample, the model gives "
+            f"Weighted up from a {100 * reach['fraction']:.0f}% household sample, the model gives "
             f"{reach['model_recipients'] / 1e6:.1f} million people a package in {reach['year']}, "
             f"at ${reach['model_spending'] / 1e9:.1f} billion"
         )
         if reach.get("cited"):
             line += (
-                f"; the model's parameters cite the program's {reach['year']} funding and participation "
-                f"as ${reach['cited']['funding'] / 1e6:,.0f} million and {reach['cited']['participation']:,.0f} people"
+                f". It values each package at ${reach['package_value']:,.0f}, which divides the program's "
+                f"{reach['year']} cost of ${reach['cited']['funding'] / 1e6:,.0f} million by its "
+                f"{reach['cited']['participation']:,.0f} participants"
             )
         print(line + ".")
     print("A 2017 run reads the model's earlier list, which has no CSFP, so the main rows leave CSFP")
@@ -91,19 +100,19 @@ def csfp_section(main_results, csfp_paths):
     for r in kept:
         base = by_health.get(r["health_benefits_in_net_income"])
         if base:
-            rows.append((f"{name(base)}, leaving CSFP out", base))
-        rows.append((f"{name(r)}, counting CSFP", r))
+            rows.append((f"{name(base)}, {csfp_label(base)}", base))
+        rows.append((f"{name(r)}, {csfp_label(r)}", r))
         if r["health_benefits_in_net_income"] and "premium_tax_credit_counted_once" in r:
             if base and "premium_tax_credit_counted_once" in base:
-                rows.append((f"{name(base)}, leaving CSFP out, premium tax credit counted once", once_row(base)))
-            rows.append((f"{name(r)}, counting CSFP, premium tax credit counted once", once_row(r)))
+                rows.append((f"{name(base)}, {csfp_label(base)}, premium tax credit counted once", once_row(base)))
+            rows.append((f"{name(r)}, {csfp_label(r)}, premium tax credit counted once", once_row(r)))
     counts_table(rows)
     for r in kept:
         drivers = r.get("people_on_cliff_by_driver", {})
         csfp = drivers.get("commodity_supplemental_food_program")
         if csfp:
-            print(f"\nCounting CSFP, it is the largest loss for {millions(csfp)} of the {millions(r['people_on_cliff'])}"
-                  f" adults facing a cliff under {name(r)}.")
+            print(f"\nCounting CSFP, losing it lowers net income most for {millions(csfp)} of the"
+                  f" {millions(r['people_on_cliff'])} adults facing a cliff under {name(r)}.")
 
 
 def once_row(r):
@@ -120,9 +129,14 @@ def main(argv):
     results.sort(key=lambda r: (r["year"], r["health_benefits_in_net_income"]))
     print("# Cliff counts\n")
     print("Each count is a weighted national total. Parentheses give 95% intervals")
-    print("from a household bootstrap (sampling error only). PolicyEngine-US tests the")
-    print("two adults with the highest market income in each household, so everyone")
-    print("counted as facing a cliff is an adult.\n")
+    print("from a bootstrap that resamples source households (sampling error only).")
+    print("PolicyEngine-US tests the two adults with the highest market income in each")
+    print("household, so everyone counted as facing a cliff is an adult. Share of workers")
+    print("divides the adults facing a cliff who have earnings (wages plus self-employment")
+    print("income above zero) by everyone with earnings, including people the model")
+    print("doesn't test. The 2025 rows leave out the Commodity Supplemental Food Program")
+    print("(see the last section). The rows counting health coverage count the premium tax")
+    print("credit twice, as the model does; the next table counts it once.\n")
     header = "| Configuration | " + " | ".join(LABELS.values()) + " | Share of workers | Mean cliff gap |"
     print(header)
     print("|" + "---|" * (len(LABELS) + 3))
@@ -137,19 +151,15 @@ def main(argv):
         print("PolicyEngine-US's health-inclusive net income adds the premium tax credit and")
         print("subtracts the premium net of that credit, so a change in the credit counts twice.")
         print("These rows count it once.\n")
-        print("| Configuration | " + " | ".join(LABELS.values()) + " |")
-        print("|" + "---|" * (len(LABELS) + 1))
-        for r in once:
-            o = r["premium_tax_credit_counted_once"]
-            cells = [millions(o[k], o["standard_errors"].get(k)) for k in LABELS]
-            print(f"| {name(r)} | " + " | ".join(cells) + " |")
+        counts_table([(name(r), once_row(r)) for r in once])
     scaled = [r for r in results if "medicaid_value_scaled" in r]
     if scaled:
         scales = list(scaled[0]["medicaid_value_scaled"])
         print("\n## Adults facing a cliff with Medicaid valued differently\n")
         print("PolicyEngine-US holds state Medicaid spending for 2020 through 2023 only, so the")
         print("2017 runs spread 2020 spending and the 2025 runs 2023 spending. Each column")
-        print("scales every enrollee's Medicaid value by the factor shown.\n")
+        print("scales every enrollee's Medicaid value by the factor shown. These rows count the")
+        print("premium tax credit twice, as the model does.\n")
         cols = sorted(scales + ["1"], key=float)
         print("| Configuration | " + " | ".join(f"x{c}" for c in cols) + " |")
         print("|" + "---|" * (len(cols) + 1))
@@ -195,6 +205,16 @@ def main(argv):
     if any("medicaid_cost" in r.get("program_totals_left_out", {}) for r in results):
         print("\nThe runs without health coverage leave out Medicaid's value: they don't hold")
         print("Medicaid's full-sample state totals, and their net income leaves Medicaid out.")
+    other = {
+        (name(r), key, why)
+        for r in results
+        for key, why in r.get("program_totals_left_out", {}).items()
+        if key != "medicaid_cost"
+    }
+    if other:
+        print("\nTotals a part couldn't compute, left out:\n")
+        for config, key, why in sorted(other):
+            print(f"- {config}: {key} ({why})")
     csfp_section(results, csfp_paths)
 
 

@@ -1,0 +1,114 @@
+{
+ "year": 2025,
+ "health_benefits_in_net_income": false,
+ "aca_before_2018": false,
+ "leave_out_csfp": false,
+ "decompose": true,
+ "bootstrap_clusters": "household_source_id",
+ "fraction": 1.0,
+ "parts": 4,
+ "part": 0,
+ "seed": 0,
+ "people_total": 84385489.97160047,
+ "households_total": 30649704.89933465,
+ "workers": 46811496.562411815,
+ "workers_evaluated": 40221865.87499627,
+ "people_on_cliff": 181289.87873412762,
+ "workers_on_cliff": 153110.08311170986,
+ "households_with_person_on_cliff": 131477.74773358594,
+ "people_in_those_households": 505410.06157399423,
+ "mean_cliff_gap_on_cliff": 528.6006200710079,
+ "cliff_gap_total": 95829942.3114577,
+ "sample_people_on_cliff": 151,
+ "sample_households": 14304,
+ "sample_clusters": 11737,
+ "share_of_workers_on_cliff": 0.0032707794955364133,
+ "standard_errors": {
+  "people_on_cliff": 49181.06815193417,
+  "workers_on_cliff": 43513.49058557507,
+  "households_with_person_on_cliff": 39289.53055293846,
+  "people_in_those_households": 154806.25633123596
+ },
+ "decomposition_flag_mismatches": 0,
+ "premium_tax_credit_counted_once": {
+  "people_on_cliff": 181289.87873412762,
+  "workers_on_cliff": 153110.08311170986,
+  "households_with_person_on_cliff": 131477.74773358594,
+  "people_in_those_households": 505410.06157399423,
+  "standard_errors": {
+   "people_on_cliff": 49181.06815193417,
+   "workers_on_cliff": 43513.49058557507,
+   "households_with_person_on_cliff": 39289.53055293846,
+   "people_in_those_households": 154806.25633123596
+  },
+  "sample_people_on_cliff": 151,
+  "people_on_cliff_by_driver": {
+   "tanf": 50081.61426831479,
+   "household_tax_before_refundable_credits": 21039.866480384022,
+   "reduced_price_school_meals": 19485.113074234105,
+   "wic": 18298.650105404435,
+   "snap": 17274.385717485682,
+   "commodity_supplemental_food_program": 16968.196744703455,
+   "household_refundable_tax_credits": 14893.416429310339,
+   "ssi": 12072.6953125,
+   "free_school_meals": 11175.934048168128,
+   "household_state_benefits": 0.0065536226611584425
+  }
+ },
+ "people_on_cliff_by_driver": {
+  "tanf": 50081.61426831479,
+  "household_tax_before_refundable_credits": 21039.866480384022,
+  "reduced_price_school_meals": 19485.113074234105,
+  "wic": 18298.650105404435,
+  "snap": 17274.385717485682,
+  "commodity_supplemental_food_program": 16968.196744703455,
+  "household_refundable_tax_credits": 14893.416429310339,
+  "ssi": 12072.6953125,
+  "free_school_meals": 11175.934048168128,
+  "household_state_benefits": 0.0065536226611584425
+ },
+ "cliff_parts_file": "results/parts/csfp/per_person/run_2025_plain_p4_0_s0_cliff_parts.csv.gz",
+ "program_totals": {
+  "snap": 23432150548.199303,
+  "ssi": 12359365992.070597,
+  "tanf": 1411466742.7113013,
+  "wic": 3023662459.964241,
+  "free_school_meals": 7070020953.855684,
+  "reduced_price_school_meals": 471430452.95825624,
+  "eitc": 15731111097.441309,
+  "refundable_ctc": 9382465767.894003,
+  "aca_ptc": 40657127389.02775,
+  "assigned_aca_ptc": 12309024037.15674,
+  "medicaid_cost": 880018877892.1467,
+  "chip": 2107169786.6109219,
+  "housing_assistance": 623632396.1363939,
+  "household_head_start_benefits": 0.0,
+  "household_state_benefits": 1519409104.2182107,
+  "household_benefits": 478396445242.5058,
+  "household_net_income": 4138043983335.247
+ },
+ "people_in_recipient_units": {
+  "snap": 15148125.767344436,
+  "ssi": 1488054.7928919215,
+  "tanf": 743275.6892898036,
+  "medicaid_enrolled": 17342796.759712383,
+  "chip_enrolled": 746138.3969657267,
+  "aca_ptc": 12663524.157867122,
+  "assigned_aca_ptc": 4734362.28066006
+ },
+ "timing_seconds": {
+  "load": 17.8,
+  "cliffs": 277.9,
+  "total": 488.9
+ },
+ "versions": {
+  "policyengine-us": "2.116.0",
+  "policyengine-core": "3.34.10"
+ },
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "code": {
+  "commit": "efa0b34cae43e25b71373a19bda93f3501d0defc",
+  "cliffs2017_sha256": "070af058ee72c7acea5a2cc6def63526b2422281191b8e04ba6727981b50cd10"
+ },
+ "python": "3.13.13"
+}

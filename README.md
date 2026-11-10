@@ -26,7 +26,7 @@ How many American adults would see their household's net income fall if they ear
 | results/medicaid/ | The Medicaid sums and totals the health runs read |
 | results/csfp/ | The 2025 runs that count the Commodity Supplemental Food Program, and its reach |
 | scripts/render_results.py | Writes results/summary.md from the combined results |
-| scripts/audit_*.py | The parameter and formula audits behind the coverage notes in METHODOLOGY.md |
+| scripts/audit_*.py, scripts/summarize_parameters.py | The parameter and formula audits behind the coverage notes in METHODOLOGY.md, and the counts it quotes from the parameter audit |
 | tests/ | Property and example tests (pytest) |
 
 ## Running it
@@ -42,7 +42,9 @@ scripts/run_batch.sh 0.25 0 && CSFP=keep scripts/run_batch.sh 0.25 0
 scripts/combine_final.sh 4 0
 ```
 
-Each part needs about 11 GB of memory. To queue the runs under a memory limit, set `CLIFFS_RUNNER` (or write its value to a `.runner` file) to a command that takes a label and then the command to run. The tests read the Medicaid totals in results/medicaid/, so run scripts/medicaid_totals.sh before pytest in a fresh clone that lacks them. Per-person outputs go to results/per_person/, which git ignores.
+Each part needs about 11 GB of memory. To queue the runs under a memory limit, set `CLIFFS_RUNNER` (or write its value to a `.runner` file) to a command that takes a label and then the command to run. The tests read the Medicaid totals in results/medicaid/, so run scripts/medicaid_totals.sh before pytest in a fresh clone that lacks them. Per-person outputs go to the per_person/ folders under results/, which git ignores.
+
+Each result file records the repository commit and a hash of the cliffs2017/ code that produced it. The results in this repository came from commit efa0b34, whose cliffs2017/ code hashes to 070af058. Later commits change only docstrings in cliffs2017/ and when run.py takes the hash (before a run rather than after), so the current code computes the same counts and records a different hash.
 
 ## License
 
