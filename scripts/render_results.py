@@ -5,6 +5,9 @@ usage: python scripts/render_results.py results/final_*.json [--csfp results/csf
 With --csfp, a section compares the 2025 runs that count the Commodity
 Supplemental Food Program as the model does (CSFP=keep scripts/run_final.sh),
 using results/csfp/reach_2025.json from scripts/csfp_reach.py where it exists.
+Where results/counted_once/once_<year>.json exist (scripts/counted_once.py), a
+section repeats the Medicaid scaling with the premium tax credit counted once
+and says where the credit is the largest loss.
 """
 
 import json
@@ -28,6 +31,7 @@ PROGRAMS = {
     "household_refundable_tax_credits": "Refundable tax credits",
     "household_tax_before_refundable_credits": "Taxes",
     "medicaid_cost": "Medicaid",
+    "msp_cost": "Medicare Savings Programs",
     "chip": "CHIP",
     "assigned_aca_ptc": "ACA premium tax credit",
     "marketplace_net_premium": "Marketplace premium (net of credit)",
@@ -40,12 +44,36 @@ PROGRAMS = {
     "spm_unit_broadband_subsidy": "Broadband subsidy",
     "commodity_supplemental_food_program": "Commodity Supplemental Food Program",
 }
+# Labels for the program totals that PROGRAMS lacks or that need telling apart.
+TOTALS = {
+    "household_net_income": "Household net income",
+    "household_benefits": "All household benefits",
+    "aca_ptc": "ACA premium tax credit before take-up",
+    "assigned_aca_ptc": "ACA premium tax credit after take-up",
+    "eitc": "EITC",
+    "refundable_ctc": "Refundable child tax credit",
+    "household_head_start_benefits": "Head Start",
+}
 REACH = Path("results/csfp/reach_2025.json")
+ONCE = Path("results/counted_once")
+TAKE_UP = Path("results/take_up_bounds.json")
+TAKE_UP_GROUPS = {
+    "wic": "WIC",
+    "school_meals": "School meals",
+    "chip": "CHIP",
+    "medicare_savings_programs": "Medicare Savings Programs",
+    "state_health_programs": "State health programs",
+    "all_of_these": "Any of these",
+}
 
 
-def name(result):
+def name(result, credit=""):
+    """A run's label; with credit ("once" or "twice"), a health run says how it counts the credit."""
     health = "counting health coverage" if result["health_benefits_in_net_income"] else "cash and near-cash only"
-    return f"{result['year']} rules, {health}"
+    label = f"{result['year']} rules, {health}"
+    if credit and result["health_benefits_in_net_income"]:
+        label += f", premium tax credit counted {credit}"
+    return label
 
 
 def csfp_label(result):
@@ -100,12 +128,12 @@ def csfp_section(main_results, csfp_paths):
     for r in kept:
         base = by_health.get(r["health_benefits_in_net_income"])
         if base:
-            rows.append((f"{name(base)}, {csfp_label(base)}", base))
-        rows.append((f"{name(r)}, {csfp_label(r)}", r))
+            rows.append((f"{name(base, 'twice')}, {csfp_label(base)}", base))
+        rows.append((f"{name(r, 'twice')}, {csfp_label(r)}", r))
         if r["health_benefits_in_net_income"] and "premium_tax_credit_counted_once" in r:
             if base and "premium_tax_credit_counted_once" in base:
-                rows.append((f"{name(base)}, {csfp_label(base)}, premium tax credit counted once", once_row(base)))
-            rows.append((f"{name(r)}, {csfp_label(r)}, premium tax credit counted once", once_row(r)))
+                rows.append((f"{name(base, 'once')}, {csfp_label(base)}", once_row(base)))
+            rows.append((f"{name(r, 'once')}, {csfp_label(r)}", once_row(r)))
     counts_table(rows)
     for r in kept:
         drivers = r.get("people_on_cliff_by_driver", {})
@@ -113,6 +141,73 @@ def csfp_section(main_results, csfp_paths):
         if csfp:
             print(f"\nCounting CSFP, losing it lowers net income most for {millions(csfp)} of the"
                   f" {millions(r['people_on_cliff'])} adults facing a cliff under {name(r)}.")
+
+
+def counted_once_section(results, folder=ONCE):
+    """Medicaid's scaling and the credit as largest loss, counting the credit once."""
+    once = sorted((json.loads(p.read_text()) for p in folder.glob("once_*.json")), key=lambda r: r["year"])
+    if not once:
+        return
+    print("\n## Medicaid valued differently, with the premium tax credit counted once\n")
+    print("From scripts/counted_once.py, which rebuilds each part of the runs counting health")
+    print("coverage, reproduces their counted-once counts and the table above, and scales")
+    print("every enrollee's Medicaid value by the factor shown.\n")
+    cols = sorted(list(once[0]["medicaid_value_scaled_counted_once"]) + ["1"], key=float)
+    print("| Configuration | " + " | ".join(f"x{c}" for c in cols) + " |")
+    print("|" + "---|" * (len(cols) + 1))
+    for r in once:
+        row = {k: v["people_on_cliff"] for k, v in r["medicaid_value_scaled_counted_once"].items()}
+        row["1"] = r["counted_once"]["people_on_cliff"]
+        print(f"| {name(r, 'once')} | " + " | ".join(millions(row[c]) for c in cols) + " |")
+    print("\n## The premium tax credit as the largest loss\n")
+    for r in once:
+        p = r["premium_tax_credit_largest_loss"]
+        if not p["sample_people"]:
+            print(f"Under {name(r)}, with the credit counted once, the credit is no adult's largest loss.\n")
+            continue
+        print(
+            f"Under {name(r)}, with the credit counted once, losing the credit lowers net income most"
+            f" for {millions(p['people'])} adults ({p['sample_people']} in the sample). For"
+            f" {millions(p['lifted_past_400'])} ({p['sample_lifted_past_400']} in the sample), the raise lifts"
+            f" their tax unit's income from below 400% of the poverty line to 400% or more;"
+            f" {millions(p['lose_income_test'])} ({p['sample_lose_income_test']}) fail the credit's income test"
+            f" after the raise, and {millions(p['lose_whole_credit'])} ({p['sample_lose_whole_credit']}) lose"
+            f" their tax unit's whole credit.\n"
+        )
+
+
+def take_up_section(path=TAKE_UP):
+    """Cliffs that disappear without the change in benefits the model gives to everyone eligible."""
+    if not path.exists():
+        return
+    runs = json.loads(path.read_text())["runs"]
+    print("## Cliffs that rest on benefits the model gives to everyone eligible\n")
+    print("Microcosm carries take-up for SNAP, SSI, TANF, housing assistance, Head Start,")
+    print("Medicaid, the ACA premium tax credit and the EITC. PolicyEngine-US gives WIC, free and")
+    print("reduced-price school meals, CHIP, Medicare Savings Programs and several state health")
+    print("programs to everyone eligible, and counts school meals for every K-12 child in an")
+    print("eligible family on all 180 school days. Each cell gives the adults facing a cliff whose")
+    print("cliff would disappear if that benefit didn't change with the raise, from")
+    print("scripts/take_up_bounds.py. That bounds how far full take-up raises each count:")
+    print("realistic take-up would remove only part of each figure. The rows counting health")
+    print("coverage count the premium tax credit once.\n")
+    groups = [g for g in TAKE_UP_GROUPS if any(g in e[k]["groups"] for e in runs.values() for k in e)]
+    print("| Configuration | Adults facing a cliff | " + " | ".join(TAKE_UP_GROUPS[g] for g in groups) + " |")
+    print("|" + "---|" * (len(groups) + 2))
+    for run, entry in runs.items():
+        year, kind = run.split("_")
+        health = kind == "health"
+        b = entry["credit_counted_once" if health else "as_modeled"]
+        label = name({"year": year, "health_benefits_in_net_income": health}, "once")
+        cells = []
+        for g in groups:
+            if g in b["groups"]:
+                v = b["groups"][g]
+                cells.append(f"{millions(v['cliffs_that_disappear'])} ({100 * v['share']:.0f}%)")
+            else:
+                cells.append("–")
+        print(f"| {label} | {millions(b['people_on_cliff'])} | " + " | ".join(cells) + " |")
+    print()
 
 
 def once_row(r):
@@ -128,15 +223,17 @@ def main(argv):
     results = [json.load(open(p)) for p in paths]
     results.sort(key=lambda r: (r["year"], r["health_benefits_in_net_income"]))
     print("# Cliff counts\n")
-    print("Each count is a weighted national total. Parentheses give 95% intervals")
-    print("from a bootstrap that resamples source households (sampling error only).")
+    print("Each count is a weighted national total. The ± figure in parentheses is half the")
+    print("width of its 95% interval, 1.96 standard errors from a bootstrap that resamples")
+    print("source households (sampling error only).")
     print("PolicyEngine-US tests the two adults with the highest market income in each")
     print("household, so everyone counted as facing a cliff is an adult. Share of workers")
     print("divides the adults facing a cliff who have earnings (wages plus self-employment")
     print("income above zero) by everyone with earnings, including people the model")
     print("doesn't test. The 2025 rows leave out the Commodity Supplemental Food Program")
     print("(see the last section). The rows counting health coverage count the premium tax")
-    print("credit twice, as the model does; the next table counts it once.\n")
+    print("credit twice, as the model computes net income; the next table counts it once, as")
+    print("the headline counts in METHODOLOGY.md and the notes do.\n")
     header = "| Configuration | " + " | ".join(LABELS.values()) + " | Share of workers | Mean cliff gap |"
     print(header)
     print("|" + "---|" * (len(LABELS) + 3))
@@ -144,14 +241,14 @@ def main(argv):
         cells = [millions(r[k], r["standard_errors"].get(k)) for k in LABELS]
         cells.append(f"{100 * r['share_of_workers_on_cliff']:.2f}%")
         cells.append(f"${r['mean_cliff_gap_on_cliff']:,.0f}")
-        print(f"| {name(r)} | " + " | ".join(cells) + " |")
+        print(f"| {name(r, 'twice')} | " + " | ".join(cells) + " |")
     once = [r for r in results if "premium_tax_credit_counted_once" in r and r["health_benefits_in_net_income"]]
     if once:
         print("\n## Premium tax credit counted once\n")
         print("PolicyEngine-US's health-inclusive net income adds the premium tax credit and")
         print("subtracts the premium net of that credit, so a change in the credit counts twice.")
         print("These rows count it once.\n")
-        counts_table([(name(r), once_row(r)) for r in once])
+        counts_table([(name(r, "once"), once_row(r)) for r in once])
     scaled = [r for r in results if "medicaid_value_scaled" in r]
     if scaled:
         scales = list(scaled[0]["medicaid_value_scaled"])
@@ -165,7 +262,8 @@ def main(argv):
         print("|" + "---|" * (len(cols) + 1))
         for r in scaled:
             row = {**{k: v["people_on_cliff"] for k, v in r["medicaid_value_scaled"].items()}, "1": r["people_on_cliff"]}
-            print(f"| {name(r)} | " + " | ".join(millions(row[c]) for c in cols) + " |")
+            print(f"| {name(r, 'twice')} | " + " | ".join(millions(row[c]) for c in cols) + " |")
+    counted_once_section(results)
     checked = [r for r in results if "medicaid_value_check" in r]
     if checked:
         print("\n## Medicaid's value against the spending it spreads ($ billions)\n")
@@ -176,21 +274,20 @@ def main(argv):
             print(f"| {name(r)} | {c['medicaid_cost_total'] / 1e9:,.1f} | {c['spending_total'] / 1e9:,.1f} | {100 * c['relative_gap']:.3f}% |")
     print("\n## What lowers net income most, for adults facing a cliff\n")
     for r in results:
-        variants = [("", r.get("people_on_cliff_by_driver"))]
+        variants = [("twice", r.get("people_on_cliff_by_driver"))]
         if r["health_benefits_in_net_income"] and "premium_tax_credit_counted_once" in r:
-            variants.append(
-                (", premium tax credit counted once", r["premium_tax_credit_counted_once"].get("people_on_cliff_by_driver"))
-            )
-        for suffix, drivers in variants:
+            variants.append(("once", r["premium_tax_credit_counted_once"].get("people_on_cliff_by_driver")))
+        for credit, drivers in variants:
             if not drivers:
                 continue
             total = sum(drivers.values())
-            print(f"**{name(r)}{suffix}**\n")
+            print(f"**{name(r, credit)}**\n")
             print("| Largest loss | Adults | Share |")
             print("|---|---|---|")
             for key, value in sorted(drivers.items(), key=lambda kv: -kv[1]):
                 print(f"| {PROGRAMS.get(key, key)} | {millions(value)} | {100 * value / total:.0f}% |")
             print()
+    take_up_section()
     print("## Program totals in each run ($ billions)\n")
     keys = []
     for r in results:
@@ -201,7 +298,11 @@ def main(argv):
     print("|---|" + "---|" * len(results))
     for k in keys:
         cells = [f"{r['program_totals'][k] / 1e9:,.1f}" if k in r["program_totals"] else "–" for r in results]
-        print(f"| {k} | " + " | ".join(cells) + " |")
+        print(f"| {TOTALS.get(k, PROGRAMS.get(k, k))} ({k}) | " + " | ".join(cells) + " |")
+    if {"aca_ptc", "assigned_aca_ptc"} <= set(keys):
+        print("\nassigned_aca_ptc multiplies aca_ptc by takes_up_aca_if_eligible. Net income counting")
+        print("health coverage adds assigned_aca_ptc, the credit the tables above call the ACA")
+        print("premium tax credit.")
     if any("medicaid_cost" in r.get("program_totals_left_out", {}) for r in results):
         print("\nThe runs without health coverage leave out Medicaid's value: they don't hold")
         print("Medicaid's full-sample state totals, and their net income leaves Medicaid out.")
