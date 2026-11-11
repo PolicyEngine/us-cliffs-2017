@@ -41,7 +41,7 @@ def test_overlap_on_a_hand_built_example():
     # 2: only without it (loses SNAP, gains a larger credit). 3: on neither.
     plain, health = frames(
         wages=[1000, 1000, 1000, 1000], snap=[-1500, -300, -1200, 0],
-        medicaid=[0, -5000, 0, 0], credit=[0, 0, 400, 0], premium=[0, 0, -50, 0], weight=[2, 3, 5, 7],
+        medicaid=[0, -5000, 0, 0], credit=[0, 0, 400, 0], premium=[0, -50, -50, 0], weight=[2, 3, 5, 7],
     )
     out = ho.compare(plain, health)
     assert out["people_on_cliff_with_health_coverage"] == 5
@@ -53,8 +53,8 @@ def test_overlap_on_a_hand_built_example():
     assert only["share_of_count_with_health_coverage"] == pytest.approx(0.6)
     assert only["change_in_rest_of_net_income"]["smallest"] == 700
     assert only["change_in_health_parts"]["largest"] == -5000
-    # counted once, the premium net of the credit stays out of the health parts
-    assert out["only_without_health_coverage"]["people"] == 5.0
+    # counted once, adult 1's $50 rise in the premium net of the credit stays out of the health parts
+    assert only["change_in_health_parts"]["smallest"] == only["change_in_health_parts"]["largest"] == -5000
 
 
 def test_refuses_health_rows_that_lack_a_plain_part():

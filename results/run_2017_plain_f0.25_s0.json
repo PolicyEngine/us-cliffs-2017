@@ -3,6 +3,9 @@
  "health_benefits_in_net_income": false,
  "aca_before_2018": true,
  "leave_out_csfp": false,
+ "stored_input_renames": {
+  "would_claim_wic": "takes_up_wic_if_eligible"
+ },
  "decompose": false,
  "bootstrap_clusters": "household_source_id",
  "fraction": 0.25,
@@ -13,27 +16,27 @@
  "households_total": 116081707.21769388,
  "workers": 177292357.5442353,
  "workers_evaluated": 152334814.392665,
- "people_on_cliff": 602907.0690964948,
- "workers_on_cliff": 522645.7349553625,
- "households_with_person_on_cliff": 371921.8821432584,
- "people_in_those_households": 1322463.535111381,
- "mean_cliff_gap_on_cliff": 156.5566905206919,
- "cliff_gap_total": 94389135.42927733,
- "sample_people_on_cliff": 109,
+ "people_on_cliff": 602906.4621643726,
+ "workers_on_cliff": 522645.2004212602,
+ "households_with_person_on_cliff": 371921.5208219712,
+ "people_in_those_households": 1322461.7223423107,
+ "mean_cliff_gap_on_cliff": 156.55681843502754,
+ "cliff_gap_total": 94389117.53037247,
+ "sample_people_on_cliff": 96,
  "sample_households": 14304,
  "sample_clusters": 11737,
- "share_of_workers_on_cliff": 0.002947931553253557,
+ "share_of_workers_on_cliff": 0.002947928538266844,
  "standard_errors": {
-  "people_on_cliff": 277832.7883084871,
-  "workers_on_cliff": 267637.8384287657,
-  "households_with_person_on_cliff": 165076.21600520087,
-  "people_in_those_households": 662523.8478645075
+  "people_on_cliff": 277832.780150456,
+  "workers_on_cliff": 267637.8253597718,
+  "households_with_person_on_cliff": 165076.220552725,
+  "people_in_those_households": 662523.8482908476
  },
  "program_totals": {
   "snap": 54229603048.57559,
   "ssi": 37093728561.96042,
   "tanf": 3413618407.440825,
-  "wic": 6982997385.33931,
+  "wic": 3956560379.838832,
   "free_school_meals": 13293170780.276997,
   "reduced_price_school_meals": 2658192854.75741,
   "eitc": 52014717734.32917,
@@ -45,8 +48,8 @@
   "housing_assistance": 2341250950.563486,
   "household_head_start_benefits": 0.0,
   "household_state_benefits": 4695636669.942955,
-  "household_benefits": 1299255457243.942,
-  "household_net_income": 10860692441817.75
+  "household_benefits": 1296229020961.5596,
+  "household_net_income": 10857666003244.303
  },
  "people_in_recipient_units": {
   "snap": 57139651.79762851,
@@ -58,9 +61,9 @@
   "assigned_aca_ptc": 11660755.229420282
  },
  "timing_seconds": {
-  "load": 33.5,
-  "cliffs": 227.2,
-  "total": 325.9
+  "load": 27.6,
+  "cliffs": 203.7,
+  "total": 297.6
  },
  "versions": {
   "policyengine-us": "2.116.0",
@@ -68,8 +71,8 @@
  },
  "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
  "code": {
-  "commit": "efa0b34cae43e25b71373a19bda93f3501d0defc",
-  "cliffs2017_sha256": "070af058ee72c7acea5a2cc6def63526b2422281191b8e04ba6727981b50cd10"
+  "commit": "18be80d6f5ed2246003f1df6538ea24ea3ea3b71",
+  "cliffs2017_sha256": "04f6b6c399139cf514ae9cd8ed0a5aeaf95e9d728a1c360d0415eed929b97574"
  },
  "python": "3.13.13",
  "deflation": [

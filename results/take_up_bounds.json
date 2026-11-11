@@ -1,80 +1,88 @@
 {
-  "note": "Cliffs that disappear if a benefit group's change is removed. Upper bounds on how far full take-up of these benefits raises each count.",
-  "commit": "c0231c83b18bdd6bd3ce4e4e22f04cd6fa551593",
-  "script_sha256": "ac7b2973be32bc6579ac909df1f71158d89b0b93d8e328a0406d848a3b1ae1e1",
+  "note": "Cliffs that disappear if a benefit group's change is removed: upper bounds on how many cliffs realistic take-up of these benefits would remove. Counting health coverage, it could also add some, which these rows can't count. WIC follows Microcosm's stored take-up draw.",
+  "commit": "5a53e32c8ab44dfcb2889b8a12ac8ad2261da3b5",
+  "script_sha256": "968c13eaa88393bd23eb633ad02319963369fc626800a6b6eed37545f17f9d94",
   "runs": {
     "2017_plain": {
       "as_modeled": {
-        "people_on_cliff": 699247.163954508,
-        "sample_people_on_cliff": 409,
+        "people_on_cliff": 690879.1637878892,
+        "sample_people_on_cliff": 374,
         "groups": {
-          "wic": {
-            "columns": [
-              "d_wic"
-            ],
-            "cliffs_that_disappear": 87821.2397538622,
-            "share": 0.12559398776421168,
-            "sample_rows": 69
-          },
           "school_meals": {
             "columns": [
               "d_free_school_meals",
               "d_reduced_price_school_meals"
             ],
-            "cliffs_that_disappear": 300797.0559061182,
-            "share": 0.4301727220529529,
-            "sample_rows": 221
+            "cliffs_that_disappear": 300796.76037158753,
+            "share": 0.4353825909619369,
+            "sample_rows": 209,
+            "rises_in_cliff_rows": 0.0
+          },
+          "state_benefits": {
+            "columns": [
+              "d_household_state_benefits"
+            ],
+            "cliffs_that_disappear": 49621.17566100048,
+            "share": 0.07182323373155738,
+            "sample_rows": 7,
+            "rises_in_cliff_rows": 0.0
           },
           "all_of_these": {
             "columns": [
-              "d_wic",
               "d_free_school_meals",
-              "d_reduced_price_school_meals"
+              "d_reduced_price_school_meals",
+              "d_household_state_benefits"
             ],
-            "cliffs_that_disappear": 388617.9371256172,
-            "share": 0.5557661970737718,
-            "sample_rows": 277
+            "cliffs_that_disappear": 350417.936032588,
+            "share": 0.5072058246934943,
+            "sample_rows": 216,
+            "rises_in_cliff_rows": 0.0
           }
         }
       }
     },
     "2017_health": {
       "as_modeled": {
-        "people_on_cliff": 2747272.670579358,
-        "sample_people_on_cliff": 1531,
+        "people_on_cliff": 2747272.4050063896,
+        "sample_people_on_cliff": 1511,
         "groups": {
-          "wic": {
-            "columns": [
-              "d_wic"
-            ],
-            "cliffs_that_disappear": 11129.07037205511,
-            "share": 0.0040509522375542575,
-            "sample_rows": 34
-          },
           "school_meals": {
             "columns": [
               "d_free_school_meals",
               "d_reduced_price_school_meals"
             ],
-            "cliffs_that_disappear": 312275.7661913958,
-            "share": 0.11366755456623154,
-            "sample_rows": 223
+            "cliffs_that_disappear": 312275.5671960906,
+            "share": 0.11366749312045898,
+            "sample_rows": 217,
+            "rises_in_cliff_rows": 0.0
+          },
+          "state_benefits": {
+            "columns": [
+              "d_household_state_benefits"
+            ],
+            "cliffs_that_disappear": 35159.46733421652,
+            "share": 0.01279795453488521,
+            "sample_rows": 7,
+            "rises_in_cliff_rows": 0.0
           },
           "chip": {
             "columns": [
-              "d_chip"
+              "d_chip",
+              "d_chip_premium"
             ],
-            "cliffs_that_disappear": 36866.029645527015,
-            "share": 0.013419137474167255,
-            "sample_rows": 37
+            "cliffs_that_disappear": 44997.035504902015,
+            "share": 0.01637880372652648,
+            "sample_rows": 39,
+            "rises_in_cliff_rows": 238781.31326958013
           },
           "medicare_savings_programs": {
             "columns": [
               "d_msp_cost"
             ],
             "cliffs_that_disappear": 145989.96692116332,
-            "share": 0.053139962583465095,
-            "sample_rows": 46
+            "share": 0.05313996772039203,
+            "sample_rows": 46,
+            "rises_in_cliff_rows": 112996.4975312867
           },
           "state_health_programs": {
             "columns": [
@@ -92,14 +100,16 @@
             ],
             "cliffs_that_disappear": 0.0,
             "share": 0.0,
-            "sample_rows": 0
+            "sample_rows": 0,
+            "rises_in_cliff_rows": 0.0
           },
           "all_of_these": {
             "columns": [
-              "d_wic",
               "d_free_school_meals",
               "d_reduced_price_school_meals",
+              "d_household_state_benefits",
               "d_chip",
+              "d_chip_premium",
               "d_msp_cost",
               "d_assigned_ca_premium_subsidy",
               "d_co_omnisalud",
@@ -113,48 +123,54 @@
               "d_vt_premium_assistance",
               "d_wa_cascade_care_savings"
             ],
-            "cliffs_that_disappear": 506260.57113500347,
-            "share": 0.1842775114958796,
-            "sample_rows": 333
+            "cliffs_that_disappear": 538424.8767116691,
+            "share": 0.1959852527657944,
+            "sample_rows": 311,
+            "rises_in_cliff_rows": 347629.5051368043
           }
         }
       },
       "credit_counted_once": {
-        "people_on_cliff": 2678606.7032590043,
-        "sample_people_on_cliff": 1489,
+        "people_on_cliff": 2678606.3755043014,
+        "sample_people_on_cliff": 1465,
         "groups": {
-          "wic": {
-            "columns": [
-              "d_wic"
-            ],
-            "cliffs_that_disappear": 11129.131795080204,
-            "share": 0.004154821154423165,
-            "sample_rows": 36
-          },
           "school_meals": {
             "columns": [
               "d_free_school_meals",
               "d_reduced_price_school_meals"
             ],
-            "cliffs_that_disappear": 302519.58169925323,
-            "share": 0.11293915651416239,
-            "sample_rows": 220
+            "cliffs_that_disappear": 302519.2861647226,
+            "share": 0.11293906000196362,
+            "sample_rows": 208,
+            "rises_in_cliff_rows": 0.0
+          },
+          "state_benefits": {
+            "columns": [
+              "d_household_state_benefits"
+            ],
+            "cliffs_that_disappear": 35159.45788756298,
+            "share": 0.013126026357995025,
+            "sample_rows": 6,
+            "rises_in_cliff_rows": 0.0
           },
           "chip": {
             "columns": [
-              "d_chip"
+              "d_chip",
+              "d_chip_premium"
             ],
-            "cliffs_that_disappear": 44745.01816137647,
-            "share": 0.016704586793923927,
-            "sample_rows": 37
+            "cliffs_that_disappear": 52876.02402075147,
+            "share": 0.019740124754536396,
+            "sample_rows": 39,
+            "rises_in_cliff_rows": 232006.38992973638
           },
           "medicare_savings_programs": {
             "columns": [
               "d_msp_cost"
             ],
             "cliffs_that_disappear": 145989.96692116332,
-            "share": 0.05450220323257625,
-            "sample_rows": 46
+            "share": 0.05450220990147452,
+            "sample_rows": 46,
+            "rises_in_cliff_rows": 112996.4975312867
           },
           "state_health_programs": {
             "columns": [
@@ -172,14 +188,16 @@
             ],
             "cliffs_that_disappear": 0.0,
             "share": 0.0,
-            "sample_rows": 0
+            "sample_rows": 0,
+            "rises_in_cliff_rows": 0.0
           },
           "all_of_these": {
             "columns": [
-              "d_wic",
               "d_free_school_meals",
               "d_reduced_price_school_meals",
+              "d_household_state_benefits",
               "d_chip",
+              "d_chip_premium",
               "d_msp_cost",
               "d_assigned_ca_premium_subsidy",
               "d_co_omnisalud",
@@ -193,85 +211,94 @@
               "d_vt_premium_assistance",
               "d_wa_cascade_care_savings"
             ],
-            "cliffs_that_disappear": 504383.34004251,
-            "share": 0.18830063384401952,
-            "sample_rows": 326
+            "cliffs_that_disappear": 536547.574749497,
+            "share": 0.20030848117744854,
+            "sample_rows": 301,
+            "rises_in_cliff_rows": 340854.58179696056
           }
         }
       }
     },
     "2025_plain": {
       "as_modeled": {
-        "people_on_cliff": 686669.9128292012,
-        "sample_people_on_cliff": 502,
+        "people_on_cliff": 683004.0759690469,
+        "sample_people_on_cliff": 479,
         "groups": {
-          "wic": {
-            "columns": [
-              "d_wic"
-            ],
-            "cliffs_that_disappear": 58047.09921059117,
-            "share": 0.08453421087204313,
-            "sample_rows": 58
-          },
           "school_meals": {
             "columns": [
               "d_free_school_meals",
               "d_reduced_price_school_meals"
             ],
-            "cliffs_that_disappear": 102609.08394839137,
-            "share": 0.14942999836067353,
-            "sample_rows": 188
+            "cliffs_that_disappear": 107822.35250307887,
+            "share": 0.15786487415920675,
+            "sample_rows": 190,
+            "rises_in_cliff_rows": 0.0
+          },
+          "state_benefits": {
+            "columns": [
+              "d_household_state_benefits"
+            ],
+            "cliffs_that_disappear": 15044.616526520578,
+            "share": 0.022027125541198653,
+            "sample_rows": 7,
+            "rises_in_cliff_rows": 0.0
           },
           "all_of_these": {
             "columns": [
-              "d_wic",
               "d_free_school_meals",
-              "d_reduced_price_school_meals"
+              "d_reduced_price_school_meals",
+              "d_household_state_benefits"
             ],
-            "cliffs_that_disappear": 165869.4799211449,
-            "share": 0.24155635309217696,
-            "sample_rows": 252
+            "cliffs_that_disappear": 122866.97488366498,
+            "share": 0.17989200827146043,
+            "sample_rows": 201,
+            "rises_in_cliff_rows": 0.0
           }
         }
       }
     },
     "2025_health": {
       "as_modeled": {
-        "people_on_cliff": 3101513.355773528,
-        "sample_people_on_cliff": 1260,
+        "people_on_cliff": 3101512.718955323,
+        "sample_people_on_cliff": 1250,
         "groups": {
-          "wic": {
-            "columns": [
-              "d_wic"
-            ],
-            "cliffs_that_disappear": 16096.446433533216,
-            "share": 0.005189868489061756,
-            "sample_rows": 22
-          },
           "school_meals": {
             "columns": [
               "d_free_school_meals",
               "d_reduced_price_school_meals"
             ],
-            "cliffs_that_disappear": 102621.51508797158,
-            "share": 0.033087561882311295,
-            "sample_rows": 184
+            "cliffs_that_disappear": 107834.78936259181,
+            "share": 0.03476844982886725,
+            "sample_rows": 188,
+            "rises_in_cliff_rows": 0.0
+          },
+          "state_benefits": {
+            "columns": [
+              "d_household_state_benefits"
+            ],
+            "cliffs_that_disappear": 20260.871824247297,
+            "share": 0.006532577377619695,
+            "sample_rows": 6,
+            "rises_in_cliff_rows": 0.0
           },
           "chip": {
             "columns": [
-              "d_chip"
+              "d_chip",
+              "d_chip_premium"
             ],
-            "cliffs_that_disappear": 50162.80332337611,
-            "share": 0.016173653816449658,
-            "sample_rows": 26
+            "cliffs_that_disappear": 72175.96798657172,
+            "share": 0.023271214573926564,
+            "sample_rows": 30,
+            "rises_in_cliff_rows": 108370.98630813923
           },
           "medicare_savings_programs": {
             "columns": [
               "d_msp_cost"
             ],
             "cliffs_that_disappear": 135288.34172690578,
-            "share": 0.04362010612498698,
-            "sample_rows": 42
+            "share": 0.043620115081286756,
+            "sample_rows": 42,
+            "rises_in_cliff_rows": 11849.443440010044
           },
           "state_health_programs": {
             "columns": [
@@ -289,14 +316,16 @@
             ],
             "cliffs_that_disappear": 0.0,
             "share": 0.0,
-            "sample_rows": 0
+            "sample_rows": 0,
+            "rises_in_cliff_rows": 19310.951171875
           },
           "all_of_these": {
             "columns": [
-              "d_wic",
               "d_free_school_meals",
               "d_reduced_price_school_meals",
+              "d_household_state_benefits",
               "d_chip",
+              "d_chip_premium",
               "d_msp_cost",
               "d_assigned_ca_premium_subsidy",
               "d_co_omnisalud",
@@ -310,48 +339,54 @@
               "d_vt_premium_assistance",
               "d_wa_cascade_care_savings"
             ],
-            "cliffs_that_disappear": 309382.40905388177,
-            "share": 0.09975208021527952,
-            "sample_rows": 282
+            "cliffs_that_disappear": 335559.97675438214,
+            "share": 0.10819235874918746,
+            "sample_rows": 270,
+            "rises_in_cliff_rows": 139531.38092002427
           }
         }
       },
       "credit_counted_once": {
-        "people_on_cliff": 3079307.385472643,
-        "sample_people_on_cliff": 1255,
+        "people_on_cliff": 3079306.7486544377,
+        "sample_people_on_cliff": 1245,
         "groups": {
-          "wic": {
-            "columns": [
-              "d_wic"
-            ],
-            "cliffs_that_disappear": 16096.446433533216,
-            "share": 0.005227294458965671,
-            "sample_rows": 22
-          },
           "school_meals": {
             "columns": [
               "d_free_school_meals",
               "d_reduced_price_school_meals"
             ],
-            "cliffs_that_disappear": 102608.92851607234,
-            "share": 0.03332208047827706,
-            "sample_rows": 184
+            "cliffs_that_disappear": 107822.19707075984,
+            "share": 0.035015088093407656,
+            "sample_rows": 186,
+            "rises_in_cliff_rows": 0.0
+          },
+          "state_benefits": {
+            "columns": [
+              "d_household_state_benefits"
+            ],
+            "cliffs_that_disappear": 15044.611082059797,
+            "share": 0.004885713671960038,
+            "sample_rows": 5,
+            "rises_in_cliff_rows": 0.0
           },
           "chip": {
             "columns": [
-              "d_chip"
+              "d_chip",
+              "d_chip_premium"
             ],
-            "cliffs_that_disappear": 50162.84890869178,
-            "share": 0.01629030253535156,
-            "sample_rows": 28
+            "cliffs_that_disappear": 72176.0135718874,
+            "share": 0.023439046338409153,
+            "sample_rows": 32,
+            "rises_in_cliff_rows": 108370.98630813923
           },
           "medicare_savings_programs": {
             "columns": [
               "d_msp_cost"
             ],
             "cliffs_that_disappear": 135288.34172690578,
-            "share": 0.043934666076261286,
-            "sample_rows": 42
+            "share": 0.04393467516220092,
+            "sample_rows": 42,
+            "rises_in_cliff_rows": 11849.443440010044
           },
           "state_health_programs": {
             "columns": [
@@ -369,14 +404,16 @@
             ],
             "cliffs_that_disappear": 0.0,
             "share": 0.0,
-            "sample_rows": 0
+            "sample_rows": 0,
+            "rises_in_cliff_rows": 19310.951171875
           },
           "all_of_these": {
             "columns": [
-              "d_wic",
               "d_free_school_meals",
               "d_reduced_price_school_meals",
+              "d_household_state_benefits",
               "d_chip",
+              "d_chip_premium",
               "d_msp_cost",
               "d_assigned_ca_premium_subsidy",
               "d_co_omnisalud",
@@ -390,12 +427,16 @@
               "d_vt_premium_assistance",
               "d_wa_cascade_care_savings"
             ],
-            "cliffs_that_disappear": 309369.8623473655,
-            "share": 0.10046735308299864,
-            "sample_rows": 282
+            "cliffs_that_disappear": 330331.1792826903,
+            "share": 0.10727452840709514,
+            "sample_rows": 270,
+            "rises_in_cliff_rows": 139531.38092002427
           }
         }
       }
     }
+  },
+  "stored_input_renames": {
+    "would_claim_wic": "takes_up_wic_if_eligible"
   }
 }
