@@ -25,10 +25,23 @@ Intervals come from 5,000 resamples of Microcosm's source households, as in
 scripts/driver_intervals.py: the 2.5th and 97.5th percentiles, sampling error
 only. Households and members are the parts' totals, without intervals.
 
-It stops unless the rows reproduce every part's counts, the $1,000 raise
-reproduces the final runs' counts, and every part ran the same code. The
-output records HEAD, so it also stops if this script, scripts/earnings_changes.py
-or cliffs2017/ has uncommitted changes.
+Each change also gets its difference from the $1,000 raise, with a paired
+interval from the same resamples (the counts share households, so two marginal
+intervals can't tell whether they differ), and the adults it flags whose net
+income moves $12 or less: SNAP rounds net income to whole dollars each month,
+so a change of a few dollars, such as 1% of a small wage, can move SNAP by $12
+a year from rounding alone.
+
+It stops unless:
+- the rows reproduce every part's counts;
+- the $1,000 raise reproduces the final runs' counts, in total and by the part
+  that moves most, and the counted-once recount's adults whose largest loss is
+  the premium tax credit, and of them those lifted past 400% of the poverty line;
+- every part ran the same code: the same hashes of cliffs2017/ and
+  scripts/earnings_changes.py, each held by the commit the part recorded (parts
+  that started at different commits with the same code are fine).
+The output records HEAD, so it also stops if this script, the scripts it
+imports or cliffs2017/ has uncommitted changes.
 
 usage: python scripts/earnings_changes_summary.py
   # writes results/earnings_changes.json and results/earnings_changes.md
@@ -40,7 +53,7 @@ import hashlib
 import json
 import subprocess
 import sys
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 import numpy as np
 import pandas as pd
@@ -65,6 +78,50 @@ MEASURES = {"without_health": "d_net_without_health", "with_health": "d_net_sing
 HEADLINE = ("people_on_cliff", "workers_on_cliff", "households_with_person_on_cliff", "people_in_those_households")
 NOT_PARTS = ("d_net", "d_parts", "d_net_single_ptc", "d_net_without_health", "d_household_market_income")
 PTC = "assigned_aca_ptc"
+# SNAP's yearly rounding step: PolicyEngine-US rounds SNAP net income to whole dollars each month.
+SMALL = 12.0
+BASE = "raise_1000"
+
+
+def against(change, d_net) -> np.ndarray:
+    """Net income moves the opposite way to earnings, by sign (no product to underflow)."""
+    return np.sign(np.asarray(change, dtype=float)) * np.sign(np.asarray(d_net, dtype=float)) < 0
+
+
+def git_bytes(*args) -> bytes:
+    return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, check=True).stdout
+
+
+def code_hash_at(commit: str) -> str:
+    """cliffs2017.run.code_version()'s hash of cliffs2017/, from a commit's files.
+
+    code_version() sorts Path objects, which compare part by part, so this does too."""
+    names = git_bytes("ls-tree", "-r", "--name-only", commit, "--", "cliffs2017").decode().split("\n")
+    digest = hashlib.sha256()
+    for name in sorted((n for n in names if PurePosixPath(n).suffix in (".py", ".csv")),
+                       key=lambda n: PurePosixPath(n).parts):
+        digest.update(name.encode())
+        digest.update(git_bytes("show", f"{commit}:{name}"))
+    return digest.hexdigest()
+
+
+def script_hash_at(commit: str, path: str) -> str:
+    return hashlib.sha256(git_bytes("show", f"{commit}:{path}")).hexdigest()
+
+
+def check_code(year: int, parts: list[dict]) -> dict:
+    """The code every part ran: one hash of cliffs2017/ and of the script, held by each recorded commit."""
+    hashes = {(p["code"]["cliffs2017_sha256"], p["code"]["script_sha256"]) for p in parts}
+    if len(hashes) != 1:
+        raise ValueError(f"{year}: the parts ran different code: {sorted(hashes)}")
+    code, script = hashes.pop()
+    commits = sorted({p["code"]["commit"] for p in parts})
+    for commit in commits:
+        if code_hash_at(commit) != code:
+            raise ValueError(f"{year}: commit {commit[:7]} doesn't hold the cliffs2017/ the parts ran")
+        if script_hash_at(commit, "scripts/earnings_changes.py") != script:
+            raise ValueError(f"{year}: commit {commit[:7]} doesn't hold the scripts/earnings_changes.py the parts ran")
+    return dict(commits=commits, cliffs2017_sha256=code, script_sha256=script)
 
 
 def check(label: str, ours: float, committed: float) -> None:
@@ -119,13 +176,13 @@ def load_year(year: int, dataset: str) -> tuple[list[dict], pd.DataFrame]:
         for key, entry in part["changes"].items():
             block = frame[frame["change_key"] == key]
             for measure, column in MEASURES.items():
-                flags = block["change"].to_numpy() * block[column].to_numpy() < 0
+                flags = against(block["change"], block[column])
                 check(f"{path.name} {key} {measure}", float(block["weight"][flags].sum()),
                       entry[measure]["people_on_cliff"])
             check(f"{path.name} {key} reached", float(block["weight"].sum()), entry["adults_reached"])
         parts.append(part)
         rows.append(frame)
-    for key in ("code", "versions", "stored_input_renames", "health_parts"):
+    for key in ("versions", "stored_input_renames", "health_parts"):
         if any(p[key] != parts[0][key] for p in parts[1:]):
             raise ValueError(f"{year}: the parts differ in {key}")
     if sorted(p["part"] for p in parts) != list(range(N_PARTS)):
@@ -141,16 +198,35 @@ def check_finals(year: int, parts: list[dict]) -> None:
     health = json.loads((ROOT / "results" / f"final_{year}_health.json").read_text())
     for key in HEADLINE:
         check(f"{year} +1000 without health {key}",
-              sum(p["changes"]["raise_1000"]["without_health"][key] for p in parts), plain[key])
+              sum(p["changes"][BASE]["without_health"][key] for p in parts), plain[key])
         check(f"{year} +1000 with health {key}",
-              sum(p["changes"]["raise_1000"]["with_health"][key] for p in parts),
+              sum(p["changes"][BASE]["with_health"][key] for p in parts),
               health["premium_tax_credit_counted_once"][key])
+
+
+def check_base_details(year: int, base: dict) -> None:
+    """The $1,000 raise against the committed counts by part and the counted-once recount."""
+    plain = json.loads((ROOT / "results" / f"final_{year}_plain.json").read_text())
+    health = json.loads((ROOT / "results" / f"final_{year}_health.json").read_text())
+    for measure, committed in (("without_health", plain["people_on_cliff_by_driver"]),
+                               ("with_health", health["premium_tax_credit_counted_once"]["people_on_cliff_by_driver"])):
+        ours = base[measure]["by_part_moving_most_adults"]
+        if set(ours) != set(committed):
+            raise ValueError(f"{year} +1000 {measure}: parts {sorted(ours)}, committed {sorted(committed)}")
+        for name, value in committed.items():
+            check(f"{year} +1000 {measure} {name}", ours[name], value)
+    once = json.loads((ROOT / "results" / "counted_once" / f"once_{year}.json").read_text())
+    loss = once["premium_tax_credit_largest_loss"]
+    p = base["poverty_line_400"]
+    check(f"{year} +1000 credit moves most", p["credit_moves_most_with_health"]["adults"], loss["people"])
+    check(f"{year} +1000 lifted past 400%", p["crossed_400_credit_moves_most"]["adults"], loss["lifted_past_400"])
 
 
 def main() -> int:
     script = Path(__file__).resolve().relative_to(ROOT)
     dirty = subprocess.run(
-        ["git", "status", "--porcelain", "--", str(script), "scripts/earnings_changes.py", "cliffs2017"],
+        ["git", "status", "--porcelain", "--", str(script), "scripts/earnings_changes.py",
+         "scripts/driver_intervals.py", "cliffs2017"],
         cwd=ROOT, capture_output=True, text=True,
     ).stdout.strip()
     if dirty:
@@ -176,6 +252,7 @@ def main() -> int:
     }
     for year in YEARS:
         parts, rows = load_year(year, dataset)
+        code = check_code(year, parts)
         check_finals(year, parts)
         health_parts = parts[0]["health_parts"]
         workers = sum(p["workers"] for p in parts)
@@ -196,9 +273,10 @@ def main() -> int:
             change = rows["change"].to_numpy()
             add((key, "reached", None), block)
             for measure, column in MEASURES.items():
-                on = block & (change * rows[column].to_numpy() < 0)
+                on = block & against(change, rows[column])
                 flags[(key, measure)] = on
                 add((key, measure, None), on)
+                add((key, f"{measure}_small", None), on & (np.abs(rows[column].to_numpy()) <= SMALL))
             base, alt = rows["base_aca_magi_fraction"].to_numpy(), rows["alt_aca_magi_fraction"].to_numpy()
             crossed = block & ((base < LIMIT) != (alt < LIMIT))
             sign = np.sign(change)
@@ -224,13 +302,21 @@ def main() -> int:
         stats = np.column_stack(columns)
         draws = resample(stats, DRAWS, SEED)
         found = {}
+        column_of = {label: j for j, label in enumerate(labels)}
         for j, label in enumerate(labels):
             found[label] = dict(
                 adults=float(stats[:, j].sum()),
                 interval_95=interval(draws[:, j]),
                 **{k: v for k, v in support(stats[:, j], samples[j]).items()},
             )
-        year_out = {"workers": workers, "changes": {}}
+
+        def versus_base(key, measure):
+            """This change's count minus the $1,000 raise's, with a paired interval."""
+            j, b = column_of[(key, measure, None)], column_of[(BASE, measure, None)]
+            return dict(difference=float(stats[:, j].sum() - stats[:, b].sum()),
+                        interval_95=interval(draws[:, j] - draws[:, b]))
+
+        year_out = {"workers": workers, "parts_code": code, "changes": {}}
         for key in keys:
             entry = parts[0]["changes"][key]
             c = dict(label=entry["label"], amount=entry["amount"], share=entry["share"])
@@ -243,7 +329,9 @@ def main() -> int:
                 sign = 1 if entry["amount"] > 0 or entry["share"] > 0 else -1
                 cols = moving_parts(rows, measure, health_parts)
                 by = pd.Series(driver(rows[on], cols, sign), index=rows.index[on])
-                shares = rows["weight"][on].groupby(by).sum() / max(totals["people_on_cliff"], 1e-12)
+                adults_by = rows["weight"][on].groupby(by).sum().sort_values(ascending=False)
+                shares = adults_by / max(totals["people_on_cliff"], 1e-12)
+                small = found[(key, f"{measure}_small", None)]
                 c[measure] = dict(
                     **totals,
                     interval_95=f["interval_95"],
@@ -252,7 +340,11 @@ def main() -> int:
                     sample_people_on_cliff=f["sample_people_on_cliff"],
                     source_households=f["source_households"],
                     source_households_for_half=f["source_households_for_half"],
-                    by_part_moving_most={k: float(v) for k, v in shares.sort_values(ascending=False).items()},
+                    by_part_moving_most={k: float(v) for k, v in shares.items()},
+                    by_part_moving_most_adults={k: float(v) for k, v in adults_by.items()},
+                    net_income_moves_12_or_less=dict(adults=small["adults"], interval_95=small["interval_95"],
+                                                     sample=small["sample_people_on_cliff"]),
+                    versus_raise_1000=versus_base(key, measure),
                 )
                 check(f"{year} {key} {measure} rows vs parts", f["adults"], totals["people_on_cliff"])
             c["poverty_line_400"] = {
@@ -261,6 +353,7 @@ def main() -> int:
                              "credit_moves_most_with_health", "crossed_400_credit_moves_most")
             }
             year_out["changes"][key] = c
+        check_base_details(year, year_out["changes"][BASE])
         year_out["either_side"] = {
             f"{up}|{down}": {measure: found[(up, f"either_side_{measure}", down)] for measure in MEASURES}
             for up, down in pairs
@@ -293,22 +386,28 @@ def render(out: dict) -> str:
         "in dollars reaches every measured adult; a cut in dollars, only adults whose earnings reach it; a",
         "change in proportion to earnings, only adults with earnings. \"Counting health coverage\" counts",
         "the premium tax credit once. Intervals: 95%, from resampling source households, sampling error only.",
-        "The +$1,000 rows reproduce the final runs.",
+        "The +$1,000 rows reproduce the final runs. \"Versus +$1,000\" is each count minus the +$1,000",
+        "count, with a paired interval from the same resamples. \"Moves $12 or less\" counts the adults",
+        "flagged whose net income moves by $12 a year or less, the size of SNAP's rounding step.",
         "",
     ]
     for year, y in out["years"].items():
         rules = "2017 federal rules" if year == "2017" else "2025 rules"
-        lines += [f"## {rules}", "",
-                  "| Change | Adults reached | Before health coverage | 95% interval | Share of workers | Counting health coverage | 95% interval | Share of workers |",
-                  "|---|---:|---:|---|---:|---:|---|---:|"]
-        for c in y["changes"].values():
-            a, b = c["without_health"], c["with_health"]
-            lines.append(
-                f"| {c['label']} | {millions(c['adults_reached']['adults'])} | {millions(a['people_on_cliff'])} | "
-                f"{millions(a['interval_95'][0])} to {millions(a['interval_95'][1])} | {a['share_of_workers']:.2%} | "
-                f"{millions(b['people_on_cliff'])} | {millions(b['interval_95'][0])} to {millions(b['interval_95'][1])} | "
-                f"{b['share_of_workers']:.2%} |"
-            )
+        lines += [f"## {rules}", ""]
+        for measure, title in (("without_health", "Before health coverage"), ("with_health", "Counting health coverage")):
+            lines += [f"{title}:", "",
+                      "| Change | Adults reached | Adults flagged | 95% interval | Share of adults reached | Share of workers | Versus +$1,000 | 95% interval | Moves $12 or less |",
+                      "|---|---:|---:|---|---:|---:|---:|---|---:|"]
+            for c in y["changes"].values():
+                a = c[measure]
+                v, small = a["versus_raise_1000"], a["net_income_moves_12_or_less"]
+                lines.append(
+                    f"| {c['label']} | {millions(c['adults_reached']['adults'])} | {millions(a['people_on_cliff'])} | "
+                    f"{millions(a['interval_95'][0])} to {millions(a['interval_95'][1])} | {a['share_of_adults_reached']:.2%} | "
+                    f"{a['share_of_workers']:.2%} | {v['difference'] / 1e6:+.2f}M | "
+                    f"{v['interval_95'][0] / 1e6:+.2f}M to {v['interval_95'][1] / 1e6:+.2f}M | {thousands(small['adults'])} |"
+                )
+            lines.append("")
         lines += ["", "Households and their members:", "",
                   "| Change | Before: households | Before: members | Counting health: households | Counting health: members |",
                   "|---|---:|---:|---:|---:|"]
@@ -330,7 +429,12 @@ def render(out: dict) -> str:
                 f"{millions(a['interval_95'][0])} to {millions(a['interval_95'][1])} | {millions(b['adults'])} | "
                 f"{millions(b['interval_95'][0])} to {millions(b['interval_95'][1])} |"
             )
-        lines += ["", "400% of the poverty line (adults whose tax unit crosses it with the change):", "",
+        lines += ["", "400% of the poverty line (adults whose tax unit crosses it with the change):", ""]
+        if year != "2017":
+            lines += ["Under these rules the premium tax credit has no income limit at 400% of the poverty line",
+                      "(PolicyEngine-US's gov.aca.ptc_income_eligibility is true above 400% from 2021 through 2025),",
+                      "so crossing it ends no one's credit.", ""]
+        lines += [
                   "| Change | Cross 400% | Lose (raise) or gain (cut) the whole credit | Of those crossing, cliff counting health | 95% interval | Credit moves most, all adults on a cliff | 95% interval |",
                   "|---|---:|---:|---:|---|---:|---|"]
         for c in y["changes"].values():
@@ -342,12 +446,14 @@ def render(out: dict) -> str:
                 f"{thousands(on['adults'])} ({on['sample_people_on_cliff']}) | {thousands(on['interval_95'][0])} to {thousands(on['interval_95'][1])} | "
                 f"{thousands(most['adults'])} ({most['sample_people_on_cliff']}) | {thousands(most['interval_95'][0])} to {thousands(most['interval_95'][1])} |"
             )
-        lines += ["", "Sample adults in parentheses.", "", "The part that moves net income most against the change, counting health coverage (share of the count):", "",
-                  "| Change | First | Second | Third |", "|---|---|---|---|"]
-        for c in y["changes"].values():
-            top = list(c["with_health"]["by_part_moving_most"].items())[:3]
-            cells = [f"{name} {share:.0%}" for name, share in top] + [""] * (3 - len(top))
-            lines.append(f"| {c['label']} | " + " | ".join(cells) + " |")
+        lines += ["", "Sample adults in parentheses."]
+        for measure, title in (("without_health", "before health coverage"), ("with_health", "counting health coverage")):
+            lines += ["", f"The part that moves net income most against the change, {title} (share of the count):", "",
+                      "| Change | First | Second | Third |", "|---|---|---|---|"]
+            for c in y["changes"].values():
+                top = list(c[measure]["by_part_moving_most"].items())[:3]
+                cells = [f"{name} {share:.0%}" for name, share in top] + [""] * (3 - len(top))
+                lines.append(f"| {c['label']} | " + " | ".join(cells) + " |")
         lines.append("")
     return "\n".join(lines) + "\n"
 

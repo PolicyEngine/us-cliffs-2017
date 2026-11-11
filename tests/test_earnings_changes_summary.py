@@ -64,3 +64,47 @@ def test_driver_and_parts():
     assert moving_parts(rows, "without_health", health) == ["d_snap"]
     assert list(driver(rows.iloc[[0]], with_health, 1)) == ["medicaid_cost"]
     assert list(driver(rows.iloc[[1]], with_health, -1)) == ["assigned_aca_ptc"]
+
+
+def test_against_uses_signs_not_the_product():
+    from scripts.earnings_changes_summary import against
+
+    # The product of these underflows to -0.0, which isn't < 0; the signs still disagree.
+    assert against([5.8e-205], [-6.4e-167]).tolist() == [True]
+    assert against([1000.0, -1000.0, 1000.0, -1000.0, 0.0], [-1.0, 1.0, 1.0, -1.0, -5.0]).tolist() == [
+        True, True, False, False, False
+    ]
+
+
+def test_code_hash_at_head_matches_code_version():
+    """The summary's hash of a commit's cliffs2017/ equals what runs record (cliffs2017.run.code_version)."""
+    import subprocess
+
+    import pytest
+
+    from cliffs2017.run import ROOT, code_version
+    from scripts.earnings_changes_summary import code_hash_at
+
+    dirty = subprocess.run(["git", "status", "--porcelain", "--", "cliffs2017"], cwd=ROOT,
+                           capture_output=True, text=True).stdout.strip()
+    untracked = subprocess.run(["git", "ls-files", "--others", "--exclude-standard", "--", "cliffs2017"],
+                               cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    if dirty or untracked:
+        pytest.skip("cliffs2017/ differs from HEAD")
+    assert code_hash_at("HEAD") == code_version()["cliffs2017_sha256"]
+
+
+def test_check_code_accepts_commits_with_the_same_code_and_refuses_others():
+    import pytest
+
+    from cliffs2017.run import code_version
+    from scripts.earnings_changes_summary import check_code, script_hash_at
+
+    head = code_version()
+    good = dict(commit="HEAD", cliffs2017_sha256=head["cliffs2017_sha256"],
+                script_sha256=script_hash_at("HEAD", "scripts/earnings_changes.py"))
+    assert check_code(2017, [dict(code=good), dict(code=good)])["commits"] == ["HEAD"]
+    with pytest.raises(ValueError, match="different code"):
+        check_code(2017, [dict(code=good), dict(code=dict(good, script_sha256="0" * 64))])
+    with pytest.raises(ValueError, match="doesn't hold"):
+        check_code(2017, [dict(code=dict(good, cliffs2017_sha256="0" * 64))])
