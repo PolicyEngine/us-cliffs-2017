@@ -157,7 +157,9 @@ def test_parts_add_up_and_one_run_gives_both_counts(system, small_dataset, year,
     merged = frame.merge(other[["person_index", "rank", "change", "d_net"]], on=["person_index", "rank"], suffixes=("", "_plain"))
     assert len(merged) == len(frame) == len(other)
     np.testing.assert_array_equal(merged["change"], merged["change_plain"])
-    np.testing.assert_allclose(without_health(merged, health_parts(health, year)), merged["d_net_plain"], atol=1e-6)
+    # without_health reads a decompose_change frame; the plain run's change rides alongside, so drop it first.
+    rest = without_health(merged.drop(columns=["d_net_plain"]), health_parts(health, year))
+    np.testing.assert_allclose(rest, merged["d_net_plain"], atol=1e-6)
 
 
 @pytest.mark.parametrize("year", YEARS)
