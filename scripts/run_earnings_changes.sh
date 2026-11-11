@@ -12,7 +12,8 @@
 #   e.g. scripts/run_earnings_changes.sh 2017,2025 0,1 & scripts/run_earnings_changes.sh 2017,2025 2,3
 set -u
 Y=${1:?years}; I=${2:?part indices}
-BATCHES=(+1000,-1000 +2000,-2000 +5000,-5000 +1%,-1% +10%,-10%)
+# The sizes asked about first ($5,000 and 1%), so a partial summary can answer them early.
+BATCHES=(+1000,-1000 +5000,-5000 +1%,-1% +2000,-2000 +10%,-10%)
 cd ${0:A:h}/..
 source scripts/runner.zsh
 mkdir -p logs

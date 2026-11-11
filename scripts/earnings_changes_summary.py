@@ -47,9 +47,10 @@ It stops unless:
 The output records HEAD, so it also stops if this script, the scripts it
 imports or cliffs2017/ has uncommitted changes.
 
-usage: python scripts/earnings_changes_summary.py [--years 2017,2025]
+usage: python scripts/earnings_changes_summary.py [--years 2017,2025] [--changes +1000,-1000,+5000,-5000]
   # writes results/earnings_changes.json and results/earnings_changes.md
-  # (with --years, only the years named, so one year can land before the other)
+  # (with --years, only the years named, so one year can land before the other; with --changes, only
+  # the changes named, to results/earnings_changes_partial.json and .md, so early sizes can land first)
 """
 
 from __future__ import annotations
@@ -179,12 +180,15 @@ def either_side(person, key_col, up: str, down: str, up_flags, down_flags) -> np
     return either
 
 
-def load_year(year: int, dataset: str) -> tuple[list[dict], pd.DataFrame]:
-    """Every change of the year's four parts: one dict per part, and all the per-person rows.
+def load_year(year: int, dataset: str, wanted: list[str] | None = None) -> tuple[list[dict], pd.DataFrame]:
+    """The changes ``wanted`` (all of scripts/earnings_changes.py's list by default) of the
+    year's four parts: one dict per part, and all their per-person rows.
 
     Each part's dict holds the settings its changes share, its changes' totals
     under ``changes`` (in the order scripts/earnings_changes.py lists them) and
-    the change files themselves under ``records``."""
+    the change files themselves under ``records``. Every part must hold every
+    change wanted; files of other changes in the list are left unread."""
+    wanted = list(ORDER) if wanted is None else [key for key in ORDER if key in wanted]
     parts, rows = [], []
     for i in range(N_PARTS):
         folder = PARTS / f"changes_{year}_p{N_PARTS}_{i}_s0"
@@ -192,6 +196,10 @@ def load_year(year: int, dataset: str) -> tuple[list[dict], pd.DataFrame]:
         if not files:
             raise FileNotFoundError(f"{folder} holds no changes: run scripts/run_earnings_changes.sh {year} {i}")
         records = [json.loads(f.read_text()) for f in files]
+        unknown = {r["key"] for r in records} - set(ORDER)
+        if unknown:
+            raise ValueError(f"{folder.name}: changes {sorted(unknown)} aren't in scripts/earnings_changes.py's list")
+        records = [r for r in records if r["key"] in wanted]
         for r in records:
             if r["dataset"] != dataset:
                 raise ValueError(f"{folder.name}/{r['key']}.json read {r['dataset']}, not {dataset}")
@@ -213,15 +221,12 @@ def load_year(year: int, dataset: str) -> tuple[list[dict], pd.DataFrame]:
         by_key = {r["key"]: r for r in records}
         if BASE not in by_key or by_key[BASE]["reproduces_committed_part"] is not True:
             raise ValueError(f"{folder.name}: the $1,000 raise is missing or doesn't reproduce the committed part")
-        unknown = set(by_key) - set(ORDER)
-        if unknown:
-            raise ValueError(f"{folder.name}: changes {sorted(unknown)} aren't in scripts/earnings_changes.py's list")
-        missing = [key for key in ORDER if key not in by_key]
+        missing = [key for key in wanted if key not in by_key]
         if missing:
             # Without this, a change that failed in every part would drop out of the table silently.
             raise ValueError(f"{folder.name}: changes {missing} are missing: run scripts/run_earnings_changes.sh {year} {i}")
         part = {key: records[0][key] for key in SHARED}
-        part["changes"] = {key: by_key[key]["change"] for key in ORDER if key in by_key}
+        part["changes"] = {key: by_key[key]["change"] for key in wanted}
         part["records"] = records
         parts.append(part)
     for key in ("versions", "stored_input_renames", "health_parts", "dataset"):
@@ -269,9 +274,20 @@ def main() -> int:
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--years", default=",".join(str(y) for y in YEARS))
-    years = [int(y) for y in parser.parse_args().years.split(",")]
+    parser.add_argument("--changes", default=CHANGES,
+                        help="summarize only these changes (they must include +1000); the output then goes to "
+                             "results/earnings_changes_partial.json and .md")
+    args = parser.parse_args()
+    years = [int(y) for y in args.years.split(",")]
     if not set(years) <= set(YEARS) or not years:
         parser.error(f"--years takes some of {YEARS}")
+    asked = [parse(text).key for text in args.changes.split(",")]
+    if not set(asked) <= set(ORDER) or BASE not in asked:
+        parser.error(f"--changes takes some of {CHANGES}, including +1000")
+    wanted = [key for key in ORDER if key in asked]
+    partial = wanted != ORDER
+    out_path = OUT.with_name("earnings_changes_partial.json") if partial else OUT
+    markdown_path = MARKDOWN.with_name("earnings_changes_partial.md") if partial else MARKDOWN
     script = Path(__file__).resolve().relative_to(ROOT)
     dirty = subprocess.run(
         ["git", "status", "--porcelain", "--", str(script), "scripts/earnings_changes.py",
@@ -295,12 +311,14 @@ def main() -> int:
         "commit": subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip(),
         "script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "dataset": dataset,
+        "changes": wanted,
+        "partial": partial,
         "draws": DRAWS,
         "seed": SEED,
         "years": {},
     }
     for year in years:
-        parts, rows = load_year(year, dataset)
+        parts, rows = load_year(year, dataset, wanted)
         code = check_code(year, [r for p in parts for r in p["records"]])
         check_finals(year, parts)
         health_parts = parts[0]["health_parts"]
@@ -430,9 +448,9 @@ def main() -> int:
         out["years"][str(year)] = year_out
         print(f"{year}: done, {len(rows):,} rows, {n:,} source households", flush=True)
 
-    OUT.write_text(json.dumps(out, indent=1) + "\n")
-    MARKDOWN.write_text(render(out))
-    print(MARKDOWN.read_text())
+    out_path.write_text(json.dumps(out, indent=1) + "\n")
+    markdown_path.write_text(render(out))
+    print(markdown_path.read_text())
     return 0
 
 
@@ -465,6 +483,9 @@ def render(out: dict) -> str:
         "flagged whose net income moves by $12 a year or less, the size of SNAP's rounding step.",
         "",
     ]
+    if out.get("partial"):
+        lines += ["**Partial:** only the changes " + ", ".join(out["changes"]) + "; the full set goes to",
+                  "results/earnings_changes.md once every part has run every change.", ""]
     for year, y in out["years"].items():
         rules = "2017 federal rules" if year == "2017" else "2025 rules"
         lines += [f"## {rules}", ""]

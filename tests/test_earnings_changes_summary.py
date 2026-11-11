@@ -178,3 +178,27 @@ def test_reached_by_marks_every_row_of_the_adults_a_change_reaches():
     key_col = np.array(["raise_1000"] * 3 + ["cut_1000"] * 2 + ["raise_1pct"])
     np.testing.assert_array_equal(reached_by(person, key_col, "cut_1000"), [True, False, True, True, True, False])
     np.testing.assert_array_equal(reached_by(person, key_col, "cut_5000"), [False] * 6)
+
+
+def test_load_year_reads_only_the_changes_wanted(tmp_path, monkeypatch):
+    import pytest
+
+    import scripts.earnings_changes_summary as summary
+
+    monkeypatch.setattr(summary, "ROOT", tmp_path)
+    monkeypatch.setattr(summary, "PARTS", tmp_path / "results" / "earnings_changes" / "parts")
+    monkeypatch.setattr(summary, "ORDER", ["raise_1000", "cut_1000", "raise_5000", "cut_5000"])
+    for part in range(4):
+        _write_part(tmp_path, 2017, part, ["raise_1000", "cut_1000"])
+    # Part 1 has also run the $5,000 raise; asking for the $1,000 pair leaves it unread.
+    _write_part(tmp_path, 2017, 1, ["raise_5000"])
+    parts, rows = summary.load_year(2017, "d", ["cut_1000", "raise_1000"])
+    assert [list(p["changes"]) for p in parts] == [["raise_1000", "cut_1000"]] * 4
+    assert set(rows["change_key"]) == {"raise_1000", "cut_1000"}
+    # The full list still refuses the year until every part has run every change.
+    with pytest.raises(ValueError, match="missing"):
+        summary.load_year(2017, "d")
+    # And a change outside the list stops it either way.
+    _write_part(tmp_path, 2017, 2, ["raise_7000"])
+    with pytest.raises(ValueError, match="aren't in"):
+        summary.load_year(2017, "d", ["raise_1000", "cut_1000"])
