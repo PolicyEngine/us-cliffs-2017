@@ -2,7 +2,7 @@
 
 Properties, for any inputs:
 1. a change's label parses back to the same change;
-2. no change leaves anyone with negative earnings, a raise in dollars reaches
+2. no change takes more earnings than the adult has, a raise in dollars reaches
    every measured adult, a cut in dollars only those whose earnings reach it,
    a change in proportion to earnings only adults with earnings, and nobody
    the test doesn't measure;

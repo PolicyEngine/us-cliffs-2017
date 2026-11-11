@@ -5,7 +5,8 @@
 # 11 GB). Changes already written are skipped, so a rerun resumes. Set CLIFFS_RUNNER or a
 # .runner file to queue the runs (scripts/runner.zsh).
 # A part stops at its first failed batch. If its $1,000 raise didn't reproduce the committed
-# part, the script skips the part until you delete that change's file and rerun.
+# part, the script skips the part until you delete that change's file and rerun. It exits 1 if any
+# part stopped.
 # Then: python scripts/earnings_changes_summary.py [--years 2017]
 # usage: scripts/run_earnings_changes.sh <years, comma-separated> <part indices, comma-separated>
 #   e.g. scripts/run_earnings_changes.sh 2017,2025 0,1 & scripts/run_earnings_changes.sh 2017,2025 2,3
@@ -34,15 +35,21 @@ else:
 ' $1 $2 $3
 }
 
+stopped=0
 for y in ${(s:,:)Y}; do
   for i in ${(s:,:)I}; do
     n=0
     for b in $BATCHES; do
       n=$((n+1))
       state=$(batch_state $y $i $b)
+      if [[ "$state" != failed && "$state" != <-> ]]; then
+        # A torn change file or a failed import: don't start batches the check can't vouch for.
+        echo "$(date -u +%FT%TZ) stop $y part $i: couldn't read which changes are written (got '$state'); check results/earnings_changes/parts/changes_${y}_p4_${i}_s0/" | tee -a logs/earnings_changes.log
+        stopped=1; break
+      fi
       if [ "$state" = failed ]; then
         echo "$(date -u +%FT%TZ) stop $y part $i: its \$1,000 raise doesn't reproduce the committed part (logs/earnings_changes_${y}_p4_${i}_s0.log); delete results/earnings_changes/parts/changes_${y}_p4_${i}_s0/raise_1000.json to rerun it" | tee -a logs/earnings_changes.log
-        break
+        stopped=1; break
       fi
       if [ "$state" = 0 ]; then
         echo "$(date -u +%FT%TZ) skip $y part $i batch $n ($b): done" | tee -a logs/earnings_changes.log; continue
@@ -54,8 +61,9 @@ for y in ${(s:,:)Y}; do
       echo "$(date -u +%FT%TZ) end $y part $i batch $n rc=$rc" | tee -a logs/earnings_changes.log
       if [ $rc -ne 0 ]; then
         echo "$(date -u +%FT%TZ) stop $y part $i: batch $n failed; rerun the script to resume from it" | tee -a logs/earnings_changes.log
-        break
+        stopped=1; break
       fi
     done
   done
 done
+exit $stopped

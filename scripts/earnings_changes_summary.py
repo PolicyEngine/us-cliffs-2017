@@ -444,6 +444,11 @@ def thousands(x: float) -> str:
     return f"{x / 1e3:,.0f}k"
 
 
+def signed(x: float) -> str:
+    """A difference in adults, to the thousand: +1,446k, -12k."""
+    return f"{x / 1e3:+,.0f}k"
+
+
 def render(out: dict) -> str:
     lines = [
         "# Cliffs under other changes in earnings",
@@ -473,8 +478,8 @@ def render(out: dict) -> str:
                 lines.append(
                     f"| {c['label']} | {millions(c['adults_reached']['adults'])} | {millions(a['people_on_cliff'])} | "
                     f"{millions(a['interval_95'][0])} to {millions(a['interval_95'][1])} | {a['share_of_adults_reached']:.2%} | "
-                    f"{a['share_of_workers']:.2%} | {v['difference'] / 1e6:+.2f}M | "
-                    f"{v['interval_95'][0] / 1e6:+.2f}M to {v['interval_95'][1] / 1e6:+.2f}M | {thousands(small['adults'])} |"
+                    f"{a['share_of_workers']:.2%} | {signed(v['difference'])} | "
+                    f"{signed(v['interval_95'][0])} to {signed(v['interval_95'][1])} | {thousands(small['adults'])} |"
                 )
             lines.append("")
         lines += ["", "Households and their members:", "",
@@ -508,9 +513,9 @@ def render(out: dict) -> str:
                 d, w, wd = e[measure]["raise_minus_cut"], e[measure]["raise_where_cut_reaches"], e[measure]["raise_where_cut_reaches_minus_cut"]
                 lines.append(
                     f"| {y['changes'][up]['label']} / {y['changes'][down]['label']} | {title} | "
-                    f"{d['difference'] / 1e6:+.2f}M | {d['interval_95'][0] / 1e6:+.2f}M to {d['interval_95'][1] / 1e6:+.2f}M | "
-                    f"{millions(w['adults'])} | {wd['difference'] / 1e6:+.2f}M | "
-                    f"{wd['interval_95'][0] / 1e6:+.2f}M to {wd['interval_95'][1] / 1e6:+.2f}M |"
+                    f"{signed(d['difference'])} | {signed(d['interval_95'][0])} to {signed(d['interval_95'][1])} | "
+                    f"{millions(w['adults'])} | {signed(wd['difference'])} | "
+                    f"{signed(wd['interval_95'][0])} to {signed(wd['interval_95'][1])} |"
                 )
         lines += ["", "400% of the poverty line (adults whose tax unit crosses it with the change):", ""]
         if year != "2017":
