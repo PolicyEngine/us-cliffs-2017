@@ -43,8 +43,9 @@ It stops unless:
 The output records HEAD, so it also stops if this script, the scripts it
 imports or cliffs2017/ has uncommitted changes.
 
-usage: python scripts/earnings_changes_summary.py
+usage: python scripts/earnings_changes_summary.py [--years 2017,2025]
   # writes results/earnings_changes.json and results/earnings_changes.md
+  # (with --years, only the years named, so one year can land before the other)
 """
 
 from __future__ import annotations
@@ -223,6 +224,13 @@ def check_base_details(year: int, base: dict) -> None:
 
 
 def main() -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--years", default=",".join(str(y) for y in YEARS))
+    years = [int(y) for y in parser.parse_args().years.split(",")]
+    if not set(years) <= set(YEARS) or not years:
+        parser.error(f"--years takes some of {YEARS}")
     script = Path(__file__).resolve().relative_to(ROOT)
     dirty = subprocess.run(
         ["git", "status", "--porcelain", "--", str(script), "scripts/earnings_changes.py",
@@ -250,7 +258,7 @@ def main() -> int:
         "seed": SEED,
         "years": {},
     }
-    for year in YEARS:
+    for year in years:
         parts, rows = load_year(year, dataset)
         code = check_code(year, parts)
         check_finals(year, parts)
