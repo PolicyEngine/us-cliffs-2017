@@ -1,0 +1,4593 @@
+{
+ "note": "Adults whose household's net income moves against a change in their earnings (falls under a raise, rises under a cut), for several changes, with 95% percentile intervals from resampling Microcosm's source households (sampling error only).",
+ "commit": "30045d6d527703ba3035189a03c7701a8a2b2670",
+ "script_sha256": "3c386ac2de830156ac09bf761ded08bd28e9c952968db80394395550f409652e",
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "changes": [
+  "raise_1000",
+  "cut_1000",
+  "raise_2000",
+  "cut_2000",
+  "raise_5000",
+  "cut_5000",
+  "raise_1pct",
+  "cut_1pct",
+  "raise_10pct",
+  "cut_10pct"
+ ],
+ "partial": false,
+ "draws": 5000,
+ "seed": 0,
+ "years": {
+  "2017": {
+   "workers": 177824645.49019653,
+   "parts_code": {
+    "commits": [
+     "0e4313e36bc3ceee402750ae64be47b079394665",
+     "276c280d24def919578ea0d8ae0e95e7ff1e1ea9",
+     "30045d6d527703ba3035189a03c7701a8a2b2670",
+     "e86177b26373921325129eda682ce2777da18765"
+    ],
+    "cliffs2017_sha256": "e791e670d5407372c89fb549580813d6d82254fa590dd8049f85963ab09d4e73",
+    "script_sha256": "ced7b6efa97310f825083505e95e5e945195ba1ef3c41beb1e0d77e206fe8b12"
+   },
+   "changes": {
+    "raise_1000": {
+     "label": "+1,000",
+     "amount": 1000.0,
+     "share": 0.0,
+     "adults_reached": {
+      "adults": 211120399.10315922,
+      "interval_95": [
+       206755275.32637426,
+       215461410.26796293
+      ],
+      "sample_people_on_cliff": 102143,
+      "source_households": 47277,
+      "source_households_for_half": 2844,
+      "kish_effective_source_households": 7432.023337796699
+     },
+     "workers_reached": 154282227.29234767,
+     "without_health": {
+      "people_on_cliff": 690879.1637878892,
+      "workers_on_cliff": 607056.8392179117,
+      "households_with_person_on_cliff": 463793.39942106797,
+      "people_in_those_households": 1739261.3407978269,
+      "interval_95": [
+       479396.9365763685,
+       925318.1799785716
+      ],
+      "share_of_workers": 0.0034137947388815618,
+      "share_of_adults_reached": 0.003272441539153716,
+      "sample_people_on_cliff": 374,
+      "source_households": 213,
+      "source_households_for_half": 14,
+      "by_part_moving_most": {
+       "reduced_price_school_meals": 0.34150439781951647,
+       "tanf": 0.15669963917884708,
+       "wic": 0.11500299432004657,
+       "snap": 0.09411526654805373,
+       "free_school_meals": 0.09387841155845185,
+       "household_tax_before_refundable_credits": 0.08386883883121792,
+       "household_state_benefits": 0.07182323373155738,
+       "household_refundable_tax_credits": 0.04310711186002556,
+       "ssi": 1.0291607880866503e-07,
+       "housing_assistance": 3.2362046142072636e-09
+      },
+      "by_part_moving_most_adults": {
+       "reduced_price_school_meals": 235938.27279543417,
+       "tanf": 108260.51568174583,
+       "wic": 79453.17254893715,
+       "snap": 65022.27665239366,
+       "free_school_meals": 64858.63847523852,
+       "household_tax_before_refundable_credits": 57943.23323957308,
+       "household_state_benefits": 49621.17566100048,
+       "household_refundable_tax_credits": 29781.80539516546,
+       "ssi": 0.071102574467659,
+       "housing_assistance": 0.002235826337710023
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 6671.664808608359,
+       "interval_95": [
+        0.009418524568900466,
+        17024.116636187642
+       ],
+       "sample": 9
+      },
+      "versus_raise_1000": {
+       "difference": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 2678606.3755043014,
+      "workers_on_cliff": 2326465.2779594082,
+      "households_with_person_on_cliff": 1978948.1988386277,
+      "people_in_those_households": 6199717.092286909,
+      "interval_95": [
+       2254982.0585146113,
+       3111928.405779578
+      ],
+      "share_of_workers": 0.013082918127271994,
+      "share_of_adults_reached": 0.0126875772634148,
+      "sample_people_on_cliff": 1465,
+      "source_households": 952,
+      "source_households_for_half": 56,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.6830253325690612,
+       "reduced_price_school_meals": 0.08872660027161983,
+       "msp_cost": 0.05450220990147452,
+       "tanf": 0.04041673187661387,
+       "snap": 0.02427407900038838,
+       "free_school_meals": 0.02421357622674625,
+       "assigned_aca_ptc": 0.0223166429755555,
+       "household_tax_before_refundable_credits": 0.021631858181724854,
+       "chip": 0.01670458883789983,
+       "household_state_benefits": 0.013126026357995025,
+       "wic": 0.004154674275340494,
+       "household_refundable_tax_credits": 0.0038721162296313488,
+       "chip_premium": 0.0030355359166365664,
+       "ssi": 2.6544614810853837e-08,
+       "housing_assistance": 8.346976092331161e-10
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 1829556.010450433,
+       "reduced_price_school_meals": 237663.63716438256,
+       "msp_cost": 145989.96692116332,
+       "tanf": 108260.51568174583,
+       "snap": 65020.70276993539,
+       "free_school_meals": 64858.63965472189,
+       "assigned_aca_ptc": 59777.50215417624,
+       "household_tax_before_refundable_credits": 57943.23323957308,
+       "chip": 44745.01816137647,
+       "household_state_benefits": 35159.45788756298,
+       "wic": 11128.73700207076,
+       "household_refundable_tax_credits": 10371.875219384208,
+       "chip_premium": 8131.005859375,
+       "ssi": 0.071102574467659,
+       "housing_assistance": 0.002235826337710023
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 14802.668526973808,
+       "interval_95": [
+        0.5669259130954742,
+        37045.843935149715
+       ],
+       "sample": 10
+      },
+      "versus_raise_1000": {
+       "difference": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 1669452.250110899,
+       "interval_95": [
+        1331261.6815698263,
+        2035098.4330888889
+       ],
+       "sample_people_on_cliff": 689,
+       "source_households": 479,
+       "source_households_for_half": 33,
+       "kish_effective_source_households": 85.01654981756573
+      },
+      "crossed_400_whole_credit": {
+       "adults": 93862.22100860544,
+       "interval_95": [
+        22763.506955659428,
+        184690.18157315705
+       ],
+       "sample_people_on_cliff": 32,
+       "source_households": 20,
+       "source_households_for_half": 3,
+       "kish_effective_source_households": 5.061923358788679
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 59775.86466855288,
+       "interval_95": [
+        7951.80494706645,
+        127482.60500254412
+       ],
+       "sample_people_on_cliff": 26,
+       "source_households": 16,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 3.693350686644652
+      },
+      "credit_moves_most_with_health": {
+       "adults": 59777.50215417624,
+       "interval_95": [
+        7951.828856234211,
+        127484.20155102691
+       ],
+       "sample_people_on_cliff": 28,
+       "source_households": 17,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 3.6935530286956273
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 59775.86466855288,
+       "interval_95": [
+        7951.80494706645,
+        127482.60500254412
+       ],
+       "sample_people_on_cliff": 26,
+       "source_households": 16,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 3.693350686644652
+      }
+     }
+    },
+    "cut_1000": {
+     "label": "-1,000",
+     "amount": -1000.0,
+     "share": 0.0,
+     "adults_reached": {
+      "adults": 151527372.1153693,
+      "interval_95": [
+       147859808.44935086,
+       155147616.31591
+      ],
+      "sample_people_on_cliff": 72799,
+      "source_households": 38633,
+      "source_households_for_half": 2228,
+      "kish_effective_source_households": 5821.374458126924
+     },
+     "workers_reached": 151526687.4771077,
+     "without_health": {
+      "people_on_cliff": 510192.21839287924,
+      "workers_on_cliff": 510192.21839287924,
+      "households_with_person_on_cliff": 421541.11122187774,
+      "people_in_those_households": 1629598.218880102,
+      "interval_95": [
+       345836.90364302974,
+       690897.0485460676
+      ],
+      "share_of_workers": 0.0028690748517252417,
+      "share_of_adults_reached": 0.003366997073006923,
+      "sample_people_on_cliff": 343,
+      "source_households": 216,
+      "source_households_for_half": 13,
+      "by_part_moving_most": {
+       "reduced_price_school_meals": 0.4201979532633494,
+       "free_school_meals": 0.15138826024271573,
+       "snap": 0.10953971346098672,
+       "ssi": 0.10379435844945917,
+       "tanf": 0.09190033232258135,
+       "household_tax_before_refundable_credits": 0.035007581879706165,
+       "household_refundable_tax_credits": 0.03410611871623505,
+       "wic": 0.030701126756991746,
+       "household_state_benefits": 0.023364554907974747
+      },
+      "by_part_moving_most_adults": {
+       "reduced_price_school_meals": 214381.7259395756,
+       "free_school_meals": 77237.11233186966,
+       "snap": 55886.30941278115,
+       "ssi": 52955.07399399526,
+       "tanf": 46886.8344187006,
+       "household_tax_before_refundable_credits": 17860.595859777648,
+       "household_refundable_tax_credits": 17400.67636860686,
+       "wic": 15663.475967310602,
+       "household_state_benefits": 11920.41410026187
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 8005.201621572254,
+       "interval_95": [
+        0.007154158316552639,
+        24015.57217298334
+       ],
+       "sample": 7
+      },
+      "versus_raise_1000": {
+       "difference": -180686.94539500994,
+       "interval_95": [
+        -464050.5904236522,
+        93823.99408847853
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 2216496.1708351397,
+      "workers_on_cliff": 2216496.1708351397,
+      "households_with_person_on_cliff": 1856416.4192666544,
+      "people_in_those_households": 6409615.023253397,
+      "interval_95": [
+       1873143.072669994,
+       2586258.9174291166
+      ],
+      "share_of_workers": 0.012464504932514178,
+      "share_of_adults_reached": 0.014627694916714803,
+      "sample_people_on_cliff": 1230,
+      "source_households": 914,
+      "source_households_for_half": 55,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.6833396700802019,
+       "reduced_price_school_meals": 0.09915758773149495,
+       "msp_cost": 0.06403791442233973,
+       "free_school_meals": 0.034846578074477254,
+       "assigned_aca_ptc": 0.026255817627740874,
+       "snap": 0.0252137227758861,
+       "tanf": 0.02115358199669272,
+       "chip": 0.017120216337209178,
+       "household_refundable_tax_credits": 0.010446089886648318,
+       "household_tax_before_refundable_credits": 0.008058032069318346,
+       "household_state_benefits": 0.005378042808379605,
+       "ssi": 0.0049926684438919245,
+       "wic": 7.774571919260955e-08
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 1514619.7621125153,
+       "reduced_price_school_meals": 219782.41351610798,
+       "msp_cost": 141939.79210538437,
+       "free_school_meals": 77237.30686878657,
+       "assigned_aca_ptc": 58195.91923403341,
+       "snap": 55886.11998525029,
+       "tanf": 46886.83349511656,
+       "chip": 37946.893955293344,
+       "household_refundable_tax_credits": 23153.718233955675,
+       "household_tax_before_refundable_credits": 17860.59722611087,
+       "household_state_benefits": 11920.411291360855,
+       "ssi": 11066.230488135887,
+       "wic": 0.17232308888924308
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 8005.197025299771,
+       "interval_95": [
+        0.003035756526514888,
+        24015.56900573578
+       ],
+       "sample": 5
+      },
+      "versus_raise_1000": {
+       "difference": -462110.20466916123,
+       "interval_95": [
+        -1018356.5389317079,
+        105018.00955298853
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 1132807.9764102695,
+       "interval_95": [
+        850736.827312288,
+        1437553.9548040605
+       ],
+       "sample_people_on_cliff": 438,
+       "source_households": 344,
+       "source_households_for_half": 22,
+       "kish_effective_source_households": 57.463057581950366
+      },
+      "crossed_400_whole_credit": {
+       "adults": 45744.917522323056,
+       "interval_95": [
+        2261.0921533289484,
+        106450.32148899592
+       ],
+       "sample_people_on_cliff": 16,
+       "source_households": 11,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 2.87176260742591
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 45744.92307417534,
+       "interval_95": [
+        2261.1248681589905,
+        106450.32162779223
+       ],
+       "sample_people_on_cliff": 18,
+       "source_households": 12,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 2.8717633044913264
+      },
+      "credit_moves_most_with_health": {
+       "adults": 58195.91923403341,
+       "interval_95": [
+        6764.912853925736,
+        120463.8750887779
+       ],
+       "sample_people_on_cliff": 19,
+       "source_households": 13,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 3.8324488168084216
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 45744.917522323056,
+       "interval_95": [
+        2261.0921533289484,
+        106450.32148899592
+       ],
+       "sample_people_on_cliff": 16,
+       "source_households": 11,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 2.87176260742591
+      }
+     }
+    },
+    "raise_2000": {
+     "label": "+2,000",
+     "amount": 2000.0,
+     "share": 0.0,
+     "adults_reached": {
+      "adults": 211120399.10315922,
+      "interval_95": [
+       206755275.32637426,
+       215461410.26796293
+      ],
+      "sample_people_on_cliff": 102143,
+      "source_households": 47277,
+      "source_households_for_half": 2844,
+      "kish_effective_source_households": 7432.023337796699
+     },
+     "workers_reached": 154282227.29234767,
+     "without_health": {
+      "people_on_cliff": 666855.7433043221,
+      "workers_on_cliff": 538019.198004762,
+      "households_with_person_on_cliff": 428463.20358343836,
+      "people_in_those_households": 1837532.5908630514,
+      "interval_95": [
+       454762.0974650027,
+       896047.1635788098
+      ],
+      "share_of_workers": 0.003025560357630084,
+      "share_of_adults_reached": 0.0031586513957776205,
+      "sample_people_on_cliff": 416,
+      "source_households": 241,
+      "source_households_for_half": 13,
+      "by_part_moving_most": {
+       "reduced_price_school_meals": 0.4479019673553987,
+       "free_school_meals": 0.1374849908719456,
+       "snap": 0.1290737663088468,
+       "tanf": 0.11975372010173292,
+       "household_state_benefits": 0.05026896550996574,
+       "wic": 0.04616385795414995,
+       "household_refundable_tax_credits": 0.03963936326022913,
+       "ssi": 0.017141809966847908,
+       "household_tax_before_refundable_credits": 0.012571558670883188
+      },
+      "by_part_moving_most_adults": {
+       "reduced_price_school_meals": 298685.99936825264,
+       "free_school_meals": 91682.65578109922,
+       "snap": 86073.5823729744,
+       "tanf": 79858.45603189885,
+       "household_state_benefits": 33522.14836028754,
+       "wic": 30784.633809809806,
+       "household_refundable_tax_credits": 26433.737051010132,
+       "ssi": 11431.1144270238,
+       "household_tax_before_refundable_credits": 8383.416101965704
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 13432.972864336334,
+       "interval_95": [
+        0.005117356777191162,
+        38296.87518162839
+       ],
+       "sample": 6
+      },
+      "versus_raise_1000": {
+       "difference": -24023.420483567053,
+       "interval_95": [
+        -265956.1820558037,
+        207645.40663084967
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 4390641.7725528795,
+      "workers_on_cliff": 3791420.568032302,
+      "households_with_person_on_cliff": 3223557.9056844916,
+      "people_in_those_households": 10216943.103493266,
+      "interval_95": [
+       3820001.544234593,
+       4962630.167271628
+      ],
+      "share_of_workers": 0.021321119789558772,
+      "share_of_adults_reached": 0.020796861843783706,
+      "sample_people_on_cliff": 2313,
+      "source_households": 1511,
+      "source_households_for_half": 85,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.7145302132002822,
+       "msp_cost": 0.08864439316304532,
+       "reduced_price_school_meals": 0.06802799965947041,
+       "chip": 0.02832113536572074,
+       "assigned_aca_ptc": 0.026620405349405542,
+       "free_school_meals": 0.020881377629864868,
+       "tanf": 0.018188333316353937,
+       "snap": 0.017345660957834557,
+       "household_state_benefits": 0.007634908538848191,
+       "wic": 0.0029305542910936138,
+       "ssi": 0.002603495520779902,
+       "household_refundable_tax_credits": 0.002362140157082344,
+       "household_tax_before_refundable_credits": 0.0019093828502185638
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 3137246.201828274,
+       "msp_cost": 389205.77552426764,
+       "reduced_price_school_meals": 298686.57700808387,
+       "chip": 124347.95998285816,
+       "assigned_aca_ptc": 116880.6637293901,
+       "free_school_meals": 91682.64889013593,
+       "tanf": 79858.45603189885,
+       "snap": 76158.583574008,
+       "household_state_benefits": 33522.14836028754,
+       "wic": 12867.01408720971,
+       "ssi": 11431.016188190551,
+       "household_refundable_tax_credits": 10371.31124631036,
+       "household_tax_before_refundable_credits": 8383.416101965704
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 13433.201291437726,
+       "interval_95": [
+        0.007541901431977749,
+        38297.11634919138
+       ],
+       "sample": 6
+      },
+      "versus_raise_1000": {
+       "difference": 1712035.3970485781,
+       "interval_95": [
+        1311834.6443008007,
+        2123542.1543518906
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 3140975.392118726,
+       "interval_95": [
+        2634683.6262352252,
+        3659398.5595251513
+       ],
+       "sample_people_on_cliff": 1352,
+       "source_households": 933,
+       "source_households_for_half": 53,
+       "kish_effective_source_households": 141.3776055411858
+      },
+      "crossed_400_whole_credit": {
+       "adults": 150967.0612227041,
+       "interval_95": [
+        40967.345410915244,
+        291234.1623416194
+       ],
+       "sample_people_on_cliff": 57,
+       "source_households": 34,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 5.340056517699268
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 116880.6637293901,
+       "interval_95": [
+        18219.339030753246,
+        245087.14245053698
+       ],
+       "sample_people_on_cliff": 47,
+       "source_households": 28,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 3.908830515728993
+      },
+      "credit_moves_most_with_health": {
+       "adults": 116880.6637293901,
+       "interval_95": [
+        18219.339030753246,
+        245087.14245053698
+       ],
+       "sample_people_on_cliff": 47,
+       "source_households": 28,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 3.908830515728993
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 116880.6637293901,
+       "interval_95": [
+        18219.339030753246,
+        245087.14245053698
+       ],
+       "sample_people_on_cliff": 47,
+       "source_households": 28,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 3.908830515728993
+      }
+     }
+    },
+    "cut_2000": {
+     "label": "-2,000",
+     "amount": -2000.0,
+     "share": 0.0,
+     "adults_reached": {
+      "adults": 149195327.41050655,
+      "interval_95": [
+       145559651.6353484,
+       152785661.87499472
+      ],
+      "sample_people_on_cliff": 71918,
+      "source_households": 38325,
+      "source_households_for_half": 2200,
+      "kish_effective_source_households": 5744.5023572132795
+     },
+     "workers_reached": 149194642.772245,
+     "without_health": {
+      "people_on_cliff": 467450.22306636884,
+      "workers_on_cliff": 467450.22306636884,
+      "households_with_person_on_cliff": 352238.54986428114,
+      "people_in_those_households": 1456439.681003215,
+      "interval_95": [
+       316974.9870925909,
+       643245.2472903966
+      ],
+      "share_of_workers": 0.0026287144944266982,
+      "share_of_adults_reached": 0.00313314251310427,
+      "sample_people_on_cliff": 328,
+      "source_households": 208,
+      "source_households_for_half": 13,
+      "by_part_moving_most": {
+       "reduced_price_school_meals": 0.32313857948696734,
+       "free_school_meals": 0.16466335587955805,
+       "snap": 0.15399498833477607,
+       "ssi": 0.12261064482446855,
+       "tanf": 0.08886112594852935,
+       "household_state_benefits": 0.049467689112771426,
+       "household_tax_before_refundable_credits": 0.03820687453512391,
+       "wic": 0.03351327256907713,
+       "household_refundable_tax_credits": 0.025543469308728178
+      },
+      "by_part_moving_most_adults": {
+       "reduced_price_school_meals": 151051.20106253243,
+       "free_school_meals": 76971.92243675629,
+       "snap": 71984.99164819394,
+       "ssi": 57314.37327350915,
+       "tanf": 41538.153146568744,
+       "household_state_benefits": 23123.68231034279,
+       "household_tax_before_refundable_credits": 17859.81202411244,
+       "wic": 15665.786738099123,
+       "household_refundable_tax_credits": 11940.300426253933
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 1555.7130086380057,
+       "interval_95": [
+        0.0,
+        4667.130683898926
+       ],
+       "sample": 3
+      },
+      "versus_raise_1000": {
+       "difference": -223428.94072152034,
+       "interval_95": [
+        -500290.55174317677,
+        44495.82545600463
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 3661139.6118577975,
+      "workers_on_cliff": 3661139.6118577975,
+      "households_with_person_on_cliff": 3051405.6312241657,
+      "people_in_those_households": 10287784.955758596,
+      "interval_95": [
+       3194805.238837459,
+       4159843.9065018697
+      ],
+      "share_of_workers": 0.020588482556877282,
+      "share_of_adults_reached": 0.024539237758996833,
+      "sample_people_on_cliff": 1986,
+      "source_households": 1497,
+      "source_households_for_half": 83,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.7926004341459055,
+       "msp_cost": 0.05003065469367169,
+       "reduced_price_school_meals": 0.04125797300952472,
+       "assigned_aca_ptc": 0.0337526790724363,
+       "free_school_meals": 0.020949978796525503,
+       "snap": 0.02071271415003216,
+       "tanf": 0.011345689218856833,
+       "chip": 0.007277904985868457,
+       "household_refundable_tax_credits": 0.0066622186173344745,
+       "household_state_benefits": 0.006315979383973554,
+       "household_tax_before_refundable_credits": 0.00487821113575336,
+       "ssi": 0.004213312787271067,
+       "chip_premium": 2.1753414167193076e-06,
+       "wic": 7.46614296209799e-08
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 2901820.8458272624,
+       "msp_cost": 183169.21170618068,
+       "reduced_price_school_meals": 151051.1992901308,
+       "assigned_aca_ptc": 123573.27035842024,
+       "free_school_meals": 76700.79723954046,
+       "snap": 75832.13824377026,
+       "tanf": 41538.1522229847,
+       "chip": 26645.42623510037,
+       "household_refundable_tax_credits": 24391.31248277973,
+       "household_state_benefits": 23123.68231034279,
+       "household_tax_before_refundable_credits": 17859.81202411244,
+       "ssi": 15425.52634262509,
+       "chip_premium": 7.964228630065918,
+       "wic": 0.2733459174633026
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 1555.758356307866,
+       "interval_95": [
+        0.0014509011525660753,
+        4667.130683898926
+       ],
+       "sample": 4
+      },
+      "versus_raise_1000": {
+       "difference": 982533.2363534961,
+       "interval_95": [
+        357644.41908842855,
+        1617769.9876749634
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 2321814.425012702,
+       "interval_95": [
+        1905773.6443952927,
+        2765900.206667666
+       ],
+       "sample_people_on_cliff": 881,
+       "source_households": 685,
+       "source_households_for_half": 43,
+       "kish_effective_source_households": 114.71233634009432
+      },
+      "crossed_400_whole_credit": {
+       "adults": 136550.10103028317,
+       "interval_95": [
+        48262.51006668588,
+        244151.27200464316
+       ],
+       "sample_people_on_cliff": 32,
+       "source_households": 24,
+       "source_households_for_half": 4,
+       "kish_effective_source_households": 7.469194278031042
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 140479.51239291325,
+       "interval_95": [
+        50279.2025508286,
+        249442.16989921557
+       ],
+       "sample_people_on_cliff": 34,
+       "source_households": 24,
+       "source_households_for_half": 4,
+       "kish_effective_source_households": 7.550115588610765
+      },
+      "credit_moves_most_with_health": {
+       "adults": 123573.27035842024,
+       "interval_95": [
+        38592.7880115664,
+        228698.23439305037
+       ],
+       "sample_people_on_cliff": 30,
+       "source_households": 22,
+       "source_households_for_half": 3,
+       "kish_effective_source_households": 6.559490485084638
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 123573.22368097983,
+       "interval_95": [
+        38592.69465668559,
+        228698.18771560997
+       ],
+       "sample_people_on_cliff": 29,
+       "source_households": 21,
+       "source_households_for_half": 3,
+       "kish_effective_source_households": 6.5594855296474615
+      }
+     }
+    },
+    "raise_5000": {
+     "label": "+5,000",
+     "amount": 5000.0,
+     "share": 0.0,
+     "adults_reached": {
+      "adults": 211120399.10315922,
+      "interval_95": [
+       206755275.32637426,
+       215461410.26796293
+      ],
+      "sample_people_on_cliff": 102143,
+      "source_households": 47277,
+      "source_households_for_half": 2844,
+      "kish_effective_source_households": 7432.023337796699
+     },
+     "workers_reached": 154282227.29234767,
+     "without_health": {
+      "people_on_cliff": 298840.840834039,
+      "workers_on_cliff": 227551.4376855566,
+      "households_with_person_on_cliff": 231665.8213583895,
+      "people_in_those_households": 769570.8717014306,
+      "interval_95": [
+       175573.3792291061,
+       437848.87632047967
+      ],
+      "share_of_workers": 0.0012796394844948615,
+      "share_of_adults_reached": 0.0014154996016657638,
+      "sample_people_on_cliff": 113,
+      "source_households": 74,
+      "source_households_for_half": 8,
+      "by_part_moving_most": {
+       "tanf": 0.3677779180426587,
+       "snap": 0.23508813892549935,
+       "ssi": 0.18910544346446537,
+       "household_tax_before_refundable_credits": 0.14011672731263441,
+       "household_refundable_tax_credits": 0.03471476632100253,
+       "free_school_meals": 0.016780328176571085,
+       "wic": 0.016410484353274784,
+       "household_state_benefits": 5.304810898618019e-06,
+       "reduced_price_school_meals": 8.885929951099026e-07
+      },
+      "by_part_moving_most_adults": {
+       "tanf": 109907.0622680604,
+       "snap": 70253.93710660559,
+       "ssi": 56512.42973121465,
+       "household_tax_before_refundable_credits": 41872.60060502142,
+       "household_refundable_tax_credits": 10374.189956725575,
+       "free_school_meals": 5014.647381757619,
+       "wic": 4904.122942626476,
+       "household_state_benefits": 1.5852941494085826,
+       "reduced_price_school_meals": 0.26554787781788036
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 6589.6104736328125,
+       "interval_95": [
+        0.0,
+        19768.831420898438
+       ],
+       "sample": 2
+      },
+      "versus_raise_1000": {
+       "difference": -392038.3229538502,
+       "interval_95": [
+        -646536.4917551253,
+        -148826.5699941178
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 9415883.267218811,
+      "workers_on_cliff": 7965950.691713967,
+      "households_with_person_on_cliff": 7153063.285183715,
+      "people_in_those_households": 21673855.56286613,
+      "interval_95": [
+       8587812.795926984,
+       10274805.799557159
+      ],
+      "share_of_workers": 0.04479666285713546,
+      "share_of_adults_reached": 0.04459959012590703,
+      "sample_people_on_cliff": 4182,
+      "source_households": 2710,
+      "source_households_for_half": 179,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.9092217941781272,
+       "msp_cost": 0.02421201642912996,
+       "chip": 0.02043208514391193,
+       "assigned_aca_ptc": 0.018245600801685267,
+       "tanf": 0.011672517505681,
+       "snap": 0.0064084974753617465,
+       "household_tax_before_refundable_credits": 0.0045970320032533585,
+       "ssi": 0.003284851613259798,
+       "housing_assistance": 0.0010530296330331604,
+       "free_school_meals": 0.0008705684153557066,
+       "household_refundable_tax_credits": 1.714621249057187e-06,
+       "household_state_benefits": 1.6836382784478105e-07,
+       "wic": 9.079086857443533e-08,
+       "reduced_price_school_meals": 3.3025255360863615e-08
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 8561126.277992494,
+       "msp_cost": 227977.52036067174,
+       "chip": 192386.1286209504,
+       "assigned_aca_ptc": 171798.44728894244,
+       "tanf": 109907.0622680604,
+       "snap": 60341.66414627267,
+       "household_tax_before_refundable_credits": 43285.11671830267,
+       "ssi": 30929.779340589652,
+       "housing_assistance": 9915.2041015625,
+       "free_school_meals": 8197.170575116994,
+       "household_refundable_tax_credits": 16.144673528615385,
+       "household_state_benefits": 1.5852941494085826,
+       "wic": 0.8548762202262878,
+       "reduced_price_school_meals": 0.31096194934798405
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 28413.08799187222,
+       "interval_95": [
+        0.0612154845148325,
+        78649.53029498812
+       ],
+       "sample": 7
+      },
+      "versus_raise_1000": {
+       "difference": 6737276.891714511,
+       "interval_95": [
+        5962760.413596019,
+        7544936.119966593
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 7608620.676740274,
+       "interval_95": [
+        6828486.252200744,
+        8401511.515773011
+       ],
+       "sample_people_on_cliff": 3503,
+       "source_households": 2393,
+       "source_households_for_half": 134,
+       "kish_effective_source_households": 344.9022447736959
+      },
+      "crossed_400_whole_credit": {
+       "adults": 459394.1736488423,
+       "interval_95": [
+        273880.09081615845,
+        685899.4234310554
+       ],
+       "sample_people_on_cliff": 152,
+       "source_households": 100,
+       "source_households_for_half": 7,
+       "kish_effective_source_households": 18.717274781594828
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 171798.45653904686,
+       "interval_95": [
+        76188.77176569779,
+        288486.3216736841
+       ],
+       "sample_people_on_cliff": 89,
+       "source_households": 58,
+       "source_households_for_half": 4,
+       "kish_effective_source_households": 9.472814763171476
+      },
+      "credit_moves_most_with_health": {
+       "adults": 171798.44728894244,
+       "interval_95": [
+        76188.76205308814,
+        288486.30363598047
+       ],
+       "sample_people_on_cliff": 88,
+       "source_households": 57,
+       "source_households_for_half": 4,
+       "kish_effective_source_households": 9.47281374308663
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 171798.44728894244,
+       "interval_95": [
+        76188.76205308814,
+        288486.30363598047
+       ],
+       "sample_people_on_cliff": 88,
+       "source_households": 57,
+       "source_households_for_half": 4,
+       "kish_effective_source_households": 9.47281374308663
+      }
+     }
+    },
+    "cut_5000": {
+     "label": "-5,000",
+     "amount": -5000.0,
+     "share": 0.0,
+     "adults_reached": {
+      "adults": 143081257.96217072,
+      "interval_95": [
+       139508831.33336326,
+       146581996.71115223
+      ],
+      "sample_people_on_cliff": 69659,
+      "source_households": 37590,
+      "source_households_for_half": 2132,
+      "kish_effective_source_households": 5557.625192911732
+     },
+     "workers_reached": 143080573.32390913,
+     "without_health": {
+      "people_on_cliff": 225167.9706879995,
+      "workers_on_cliff": 225167.9706879995,
+      "households_with_person_on_cliff": 192107.4609465593,
+      "people_in_those_households": 771045.2256078501,
+      "interval_95": [
+       122446.09311531369,
+       346756.4059821841
+      ],
+      "share_of_workers": 0.0012662360162017756,
+      "share_of_adults_reached": 0.001573706954320542,
+      "sample_people_on_cliff": 107,
+      "source_households": 74,
+      "source_households_for_half": 7,
+      "by_part_moving_most": {
+       "ssi": 0.2937509071933798,
+       "snap": 0.26258408134404443,
+       "tanf": 0.1737374119053294,
+       "household_state_benefits": 0.1458712145604501,
+       "free_school_meals": 0.07795518401428213,
+       "household_refundable_tax_credits": 0.04606037541766817,
+       "wic": 4.081387660896836e-05,
+       "household_tax_before_refundable_credits": 8.749711128622487e-09,
+       "reduced_price_school_meals": 2.938525868540813e-09
+      },
+      "by_part_moving_most_adults": {
+       "ssi": 66143.29566049221,
+       "snap": 59125.52473121107,
+       "tanf": 39120.100471308106,
+       "household_state_benefits": 32845.52536437032,
+       "free_school_meals": 17553.010589105485,
+       "household_refundable_tax_credits": 10371.32126192376,
+       "wic": 9.189977771951817,
+       "household_tax_before_refundable_credits": 0.0019701546989381313,
+       "reduced_price_school_meals": 0.0006616619066335261
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 16131.294061899185,
+       "interval_95": [
+        0.0,
+        48393.24828004837
+       ],
+       "sample": 2
+      },
+      "versus_raise_1000": {
+       "difference": -465711.1930998897,
+       "interval_95": [
+        -714968.9630785768,
+        -225354.61619647793
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 7208942.63056952,
+      "workers_on_cliff": 7208942.63056952,
+      "households_with_person_on_cliff": 6033716.236748284,
+      "people_in_those_households": 20339263.225633018,
+      "interval_95": [
+       6495251.071054974,
+       7950062.267274246
+      ],
+      "share_of_workers": 0.04053961480253281,
+      "share_of_adults_reached": 0.050383556401744065,
+      "sample_people_on_cliff": 3870,
+      "source_households": 2865,
+      "source_households_for_half": 156,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.9248480991713092,
+       "assigned_aca_ptc": 0.02626496769600503,
+       "chip": 0.016822206663295355,
+       "msp_cost": 0.009106523190824372,
+       "snap": 0.008201386358111688,
+       "tanf": 0.005426606860885488,
+       "household_state_benefits": 0.0045561598427530155,
+       "free_school_meals": 0.0018002881114873013,
+       "ssi": 0.001535085846079893,
+       "household_refundable_tax_credits": 0.0014386744066937325,
+       "wic": 1.579261693207461e-09,
+       "household_tax_before_refundable_credits": 2.732931582204151e-10
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 6667176.888917238,
+       "assigned_aca_ptc": 189342.645314262,
+       "chip": 121270.32275528053,
+       "msp_cost": 65648.40324660379,
+       "snap": 59123.323746762646,
+       "tanf": 39120.09753877844,
+       "household_state_benefits": 32845.09492211114,
+       "free_school_meals": 12978.1737142083,
+       "ssi": 11066.345797389222,
+       "household_refundable_tax_credits": 10371.32126192376,
+       "wic": 0.011384806944988668,
+       "household_tax_before_refundable_credits": 0.0019701546989381313
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 3058.9523263772717,
+       "interval_95": [
+        0.0016552110901102424,
+        9176.84287905693
+       ],
+       "sample": 4
+      },
+      "versus_raise_1000": {
+       "difference": 4530336.2550652195,
+       "interval_95": [
+        3719670.427982994,
+        5382594.709479585
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 5202006.212633212,
+       "interval_95": [
+        4582583.727488572,
+        5852660.231641382
+       ],
+       "sample_people_on_cliff": 2114,
+       "source_households": 1623,
+       "source_households_for_half": 99,
+       "kish_effective_source_households": 263.0723683670325
+      },
+      "crossed_400_whole_credit": {
+       "adults": 347486.1351076708,
+       "interval_95": [
+        196998.32614152518,
+        527263.2312731702
+       ],
+       "sample_people_on_cliff": 86,
+       "source_households": 63,
+       "source_households_for_half": 7,
+       "kish_effective_source_households": 17.756605543099045
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 206248.96726292625,
+       "interval_95": [
+        100593.42247860607,
+        326613.9648529412
+       ],
+       "sample_people_on_cliff": 59,
+       "source_households": 44,
+       "source_households_for_half": 5,
+       "kish_effective_source_households": 12.545360620470525
+      },
+      "credit_moves_most_with_health": {
+       "adults": 189342.645314262,
+       "interval_95": [
+        87351.25568414202,
+        307547.1294104121
+       ],
+       "sample_people_on_cliff": 55,
+       "source_households": 41,
+       "source_households_for_half": 5,
+       "kish_effective_source_households": 11.54623044401881
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 189342.645314262,
+       "interval_95": [
+        87351.25568414202,
+        307547.1294104121
+       ],
+       "sample_people_on_cliff": 55,
+       "source_households": 41,
+       "source_households_for_half": 5,
+       "kish_effective_source_households": 11.54623044401881
+      }
+     }
+    },
+    "raise_1pct": {
+     "label": "+1%",
+     "amount": 0.0,
+     "share": 0.01,
+     "adults_reached": {
+      "adults": 154282911.93060923,
+      "interval_95": [
+       150562271.08369368,
+       157920051.3718292
+      ],
+      "sample_people_on_cliff": 73804,
+      "source_households": 38992,
+      "source_households_for_half": 2258,
+      "kish_effective_source_households": 5901.331227951906
+     },
+     "workers_reached": 154282227.29234767,
+     "without_health": {
+      "people_on_cliff": 501749.5789684867,
+      "workers_on_cliff": 501749.5789684867,
+      "households_with_person_on_cliff": 489879.2958182811,
+      "people_in_those_households": 1523849.63856098,
+      "interval_95": [
+       353893.5177605391,
+       663146.8003486745
+      ],
+      "share_of_workers": 0.002821597521453505,
+      "share_of_adults_reached": 0.003252139674380499,
+      "sample_people_on_cliff": 270,
+      "source_households": 233,
+      "source_households_for_half": 15,
+      "by_part_moving_most": {
+       "household_tax_before_refundable_credits": 0.3438952379955197,
+       "snap": 0.19586648122429903,
+       "reduced_price_school_meals": 0.16300014020303796,
+       "household_refundable_tax_credits": 0.13389084393025796,
+       "wic": 0.049785517029262864,
+       "free_school_meals": 0.04501490758506787,
+       "tanf": 0.04498559348656547,
+       "household_state_benefits": 0.023561267721516174,
+       "ssi": 1.0824472991961237e-08
+      },
+      "by_part_moving_most_adults": {
+       "household_tax_before_refundable_credits": 172549.29087351952,
+       "snap": 98275.92448833105,
+       "reduced_price_school_meals": 81785.2517186786,
+       "household_refundable_tax_credits": 67179.67456974229,
+       "wic": 24979.862208161067,
+       "free_school_meals": 22586.21092811314,
+       "tanf": 22571.502591531724,
+       "household_state_benefits": 11821.856159234536,
+       "ssi": 0.0054311747662723064
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 133664.59494930028,
+       "interval_95": [
+        65390.339544482784,
+        219377.23618189414
+       ],
+       "sample": 43
+      },
+      "versus_raise_1000": {
+       "difference": -189129.5848194025,
+       "interval_95": [
+        -447431.00222912244,
+        52436.568876365505
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 827891.3765597034,
+      "workers_on_cliff": 827891.3765597034,
+      "households_with_person_on_cliff": 799514.2956649542,
+      "people_in_those_households": 2511340.9604132613,
+      "interval_95": [
+       635688.4975864907,
+       1037444.1210100537
+      ],
+      "share_of_workers": 0.004655661616968301,
+      "share_of_adults_reached": 0.005366060091814047,
+      "sample_people_on_cliff": 479,
+      "source_households": 415,
+      "source_households_for_half": 24,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.3817402728551758,
+       "household_tax_before_refundable_credits": 0.2114448109859722,
+       "snap": 0.11870630286876031,
+       "reduced_price_school_meals": 0.09878741829457945,
+       "household_refundable_tax_credits": 0.08114551796505834,
+       "assigned_aca_ptc": 0.028023571824185092,
+       "free_school_meals": 0.027281609072416384,
+       "tanf": 0.027263845512351437,
+       "household_state_benefits": 0.014279477349263105,
+       "chip": 0.008782807113705677,
+       "wic": 0.0025045147234149323,
+       "chip_premium": 3.816681651571076e-05,
+       "msp_cost": 1.6780583510420106e-06,
+       "ssi": 6.560250438700683e-09
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 316039.4799823483,
+       "household_tax_before_refundable_credits": 175053.3356335828,
+       "snap": 98275.92448833105,
+       "reduced_price_school_meals": 81785.2517186786,
+       "household_refundable_tax_credits": 67179.67456974229,
+       "assigned_aca_ptc": 23200.473453644314,
+       "free_school_meals": 22586.20888972649,
+       "tanf": 22571.502591531724,
+       "household_state_benefits": 11821.856159234536,
+       "chip": 7271.210271424148,
+       "wic": 2073.466141982033,
+       "chip_premium": 31.5979782640934,
+       "msp_cost": 1.3892500381916761,
+       "ssi": 0.0054311747662723064
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 126531.39210816007,
+       "interval_95": [
+        59044.696126999435,
+        208800.52663160578
+       ],
+       "sample": 44
+      },
+      "versus_raise_1000": {
+       "difference": -1850714.998944598,
+       "interval_95": [
+        -2257193.6311234636,
+        -1445765.640154889
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 495024.17711455224,
+       "interval_95": [
+        328887.4138238385,
+        695892.3815125816
+       ],
+       "sample_people_on_cliff": 179,
+       "source_households": 150,
+       "source_households_for_half": 11,
+       "kish_effective_source_households": 27.588866838738323
+      },
+      "crossed_400_whole_credit": {
+       "adults": 13080.663277911488,
+       "interval_95": [
+        3.834846054436639,
+        35301.76085718939
+       ],
+       "sample_people_on_cliff": 8,
+       "source_households": 8,
+       "source_households_for_half": 1,
+       "kish_effective_source_households": 1.7347841616815969
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 13080.663277911488,
+       "interval_95": [
+        3.834846054436639,
+        35301.76085718939
+       ],
+       "sample_people_on_cliff": 8,
+       "source_households": 8,
+       "source_households_for_half": 1,
+       "kish_effective_source_households": 1.7347841616815969
+      },
+      "credit_moves_most_with_health": {
+       "adults": 23200.473453644314,
+       "interval_95": [
+        1337.4174691139197,
+        53408.19625914435
+       ],
+       "sample_people_on_cliff": 18,
+       "source_households": 17,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 3.029740889434347
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 13080.663277911488,
+       "interval_95": [
+        3.834846054436639,
+        35301.76085718939
+       ],
+       "sample_people_on_cliff": 8,
+       "source_households": 8,
+       "source_households_for_half": 1,
+       "kish_effective_source_households": 1.7347841616815969
+      }
+     }
+    },
+    "cut_1pct": {
+     "label": "-1%",
+     "amount": 0.0,
+     "share": -0.01,
+     "adults_reached": {
+      "adults": 154282911.93060923,
+      "interval_95": [
+       150562271.08369368,
+       157920051.3718292
+      ],
+      "sample_people_on_cliff": 73804,
+      "source_households": 38992,
+      "source_households_for_half": 2258,
+      "kish_effective_source_households": 5901.331227951906
+     },
+     "workers_reached": 154282227.29234767,
+     "without_health": {
+      "people_on_cliff": 530855.385846767,
+      "workers_on_cliff": 530855.385846767,
+      "households_with_person_on_cliff": 485123.39573953825,
+      "people_in_those_households": 1888350.3052422416,
+      "interval_95": [
+       375810.9949164749,
+       702290.8744122257
+      ],
+      "share_of_workers": 0.0029852745348283743,
+      "share_of_adults_reached": 0.003440791849232961,
+      "sample_people_on_cliff": 301,
+      "source_households": 245,
+      "source_households_for_half": 17,
+      "by_part_moving_most": {
+       "household_tax_before_refundable_credits": 0.22122176830057877,
+       "free_school_meals": 0.17997239297018117,
+       "reduced_price_school_meals": 0.14384639163267482,
+       "snap": 0.13979788633038634,
+       "household_refundable_tax_credits": 0.11707805541389711,
+       "tanf": 0.09309854727298701,
+       "household_state_benefits": 0.05871900230620821,
+       "wic": 0.04626509176810115,
+       "ssi": 8.640049854044387e-07
+      },
+      "by_part_moving_most_adults": {
+       "household_tax_before_refundable_credits": 117436.76716890783,
+       "free_school_meals": 95539.3141119515,
+       "reduced_price_school_meals": 76361.63173282874,
+       "snap": 74212.46088847972,
+       "household_refundable_tax_credits": 62151.516280933516,
+       "tanf": 49421.865234375,
+       "household_state_benefits": 31171.29862579936,
+       "wic": 24560.07314179142,
+       "ssi": 0.4586616999004036
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 124476.85029889178,
+       "interval_95": [
+        57975.12475490657,
+        202509.05940915618
+       ],
+       "sample": 40
+      },
+      "versus_raise_1000": {
+       "difference": -160023.77794112219,
+       "interval_95": [
+        -438540.1562731702,
+        112814.27375957259
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 973728.2970848356,
+      "workers_on_cliff": 973728.2970848356,
+      "households_with_person_on_cliff": 866415.1678258097,
+      "people_in_those_households": 3155531.6483655656,
+      "interval_95": [
+       770110.0874847994,
+       1199933.6113873199
+      ],
+      "share_of_workers": 0.00547577808689357,
+      "share_of_adults_reached": 0.0063113165605973446,
+      "sample_people_on_cliff": 534,
+      "source_households": 444,
+      "source_households_for_half": 30,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.3151973099395912,
+       "household_tax_before_refundable_credits": 0.12060527180033323,
+       "free_school_meals": 0.09811702834526058,
+       "chip_premium": 0.07855349298749614,
+       "reduced_price_school_meals": 0.0784219088234793,
+       "snap": 0.07621475221646352,
+       "household_refundable_tax_credits": 0.06382844805379827,
+       "assigned_aca_ptc": 0.05873949061475664,
+       "tanf": 0.050755293219201934,
+       "household_state_benefits": 0.03201231669976166,
+       "msp_cost": 0.01583417160630741,
+       "chip": 0.011719899602012194,
+       "ssi": 4.7103663442209995e-07,
+       "wic": 1.4505490344395685e-07
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 306916.53985319927,
+       "household_tax_before_refundable_credits": 117436.76592959222,
+       "free_school_meals": 95539.32692565513,
+       "chip_premium": 76489.75895678019,
+       "reduced_price_school_meals": 76361.63173282874,
+       "snap": 74212.46088847972,
+       "household_refundable_tax_credits": 62151.56602899288,
+       "assigned_aca_ptc": 57196.30416793766,
+       "tanf": 49421.865234375,
+       "household_state_benefits": 31171.29862579936,
+       "msp_cost": 15418.18095395877,
+       "chip": 11411.997881472576,
+       "ssi": 0.4586616999004036,
+       "wic": 0.14124406411428936
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 124485.97993440274,
+       "interval_95": [
+        57992.74593701018,
+        202517.7227917723
+       ],
+       "sample": 41
+      },
+      "versus_raise_1000": {
+       "difference": -1704878.078419466,
+       "interval_95": [
+        -2189315.790018886,
+        -1230674.858453814
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 422309.7149305205,
+       "interval_95": [
+        259283.33038756048,
+        605940.9745495237
+       ],
+       "sample_people_on_cliff": 186,
+       "source_households": 161,
+       "source_households_for_half": 9,
+       "kish_effective_source_households": 22.22958306287407
+      },
+      "crossed_400_whole_credit": {
+       "adults": 43487.42219851748,
+       "interval_95": [
+        338.5069512457994,
+        102060.6558620305
+       ],
+       "sample_people_on_cliff": 9,
+       "source_households": 6,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 2.6135917311202927
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 56397.84505007998,
+       "interval_95": [
+        6134.490135414759,
+        120486.70580976349
+       ],
+       "sample_people_on_cliff": 10,
+       "source_households": 7,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 3.5727791999951957
+      },
+      "credit_moves_most_with_health": {
+       "adults": 57196.30416793766,
+       "interval_95": [
+        6141.532824111024,
+        122817.70062035073
+       ],
+       "sample_people_on_cliff": 25,
+       "source_households": 20,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 3.590035664279659
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 43487.42219851748,
+       "interval_95": [
+        338.5069512457994,
+        102060.6558620305
+       ],
+       "sample_people_on_cliff": 9,
+       "source_households": 6,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 2.6135917311202927
+      }
+     }
+    },
+    "raise_10pct": {
+     "label": "+10%",
+     "amount": 0.0,
+     "share": 0.1,
+     "adults_reached": {
+      "adults": 154282911.93060923,
+      "interval_95": [
+       150562271.08369368,
+       157920051.3718292
+      ],
+      "sample_people_on_cliff": 73804,
+      "source_households": 38992,
+      "source_households_for_half": 2258,
+      "kish_effective_source_households": 5901.331227951906
+     },
+     "workers_reached": 154282227.29234767,
+     "without_health": {
+      "people_on_cliff": 433647.7128252284,
+      "workers_on_cliff": 433647.7128252284,
+      "households_with_person_on_cliff": 428396.1744382163,
+      "people_in_those_households": 1567904.6509688834,
+      "interval_95": [
+       293339.8074803636,
+       594868.8511768557
+      ],
+      "share_of_workers": 0.0024386254876528654,
+      "share_of_adults_reached": 0.002810730672624763,
+      "sample_people_on_cliff": 247,
+      "source_households": 196,
+      "source_households_for_half": 13,
+      "by_part_moving_most": {
+       "reduced_price_school_meals": 0.25534363089009776,
+       "household_tax_before_refundable_credits": 0.22700445752776777,
+       "snap": 0.12899523860716092,
+       "tanf": 0.12183429108115375,
+       "household_refundable_tax_credits": 0.08842031358187985,
+       "wic": 0.08249495168918448,
+       "free_school_meals": 0.042284944307596745,
+       "household_state_benefits": 0.027262129598681788,
+       "ssi": 0.026360042716476923
+      },
+      "by_part_moving_most_adults": {
+       "reduced_price_school_meals": 110729.18151998022,
+       "household_tax_before_refundable_credits": 98439.9638080482,
+       "snap": 55938.490187339936,
+       "tanf": 52833.161671025446,
+       "household_refundable_tax_credits": 38343.26675207168,
+       "wic": 35773.74711964256,
+       "free_school_meals": 18336.76938593149,
+       "household_state_benefits": 11822.160147213319,
+       "ssi": 11430.972233975539
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 40351.162256745854,
+       "interval_95": [
+        6553.11626270776,
+        81872.23328602083
+       ],
+       "sample": 10
+      },
+      "versus_raise_1000": {
+       "difference": -257231.45096266083,
+       "interval_95": [
+        -486705.0803438826,
+        -43605.31805067355
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 3376797.905069085,
+      "workers_on_cliff": 3376797.905069085,
+      "households_with_person_on_cliff": 3074550.3383204346,
+      "people_in_those_households": 10850996.854913507,
+      "interval_95": [
+       2935316.116030728,
+       3825186.9153022827
+      ],
+      "share_of_workers": 0.018989482002117912,
+      "share_of_adults_reached": 0.021887050631944543,
+      "sample_people_on_cliff": 1933,
+      "source_households": 1547,
+      "source_households_for_half": 85,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.7983021862496328,
+       "msp_cost": 0.04264425200199478,
+       "reduced_price_school_meals": 0.03279118523028574,
+       "household_tax_before_refundable_credits": 0.02915186711655883,
+       "chip": 0.027531565847118626,
+       "assigned_aca_ptc": 0.02124858169870837,
+       "snap": 0.01656228988703318,
+       "tanf": 0.015645935337650758,
+       "free_school_meals": 0.007010618015270529,
+       "household_state_benefits": 0.003500997240452698,
+       "ssi": 0.0033851411500093282,
+       "chip_premium": 0.0022213570196808353,
+       "household_refundable_tax_credits": 3.936258752962395e-06,
+       "wic": 8.694685059665353e-08
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 2695705.1501398305,
+       "msp_cost": 144001.0208235741,
+       "reduced_price_school_meals": 110729.2055903612,
+       "household_tax_before_refundable_credits": 98439.9638080482,
+       "chip": 92968.53387582174,
+       "assigned_aca_ptc": 71752.16616588773,
+       "snap": 55927.50579368054,
+       "tanf": 52833.161671025446,
+       "free_school_meals": 23673.44022720511,
+       "household_state_benefits": 11822.160147213319,
+       "ssi": 11430.937543714652,
+       "chip_premium": 7501.07373046875,
+       "household_refundable_tax_credits": 13.291950310813263,
+       "wic": 0.2936019429471344
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 40351.163317115395,
+       "interval_95": [
+        6553.116289216999,
+        81872.23328602083
+       ],
+       "sample": 11
+      },
+      "versus_raise_1000": {
+       "difference": 698191.5295647834,
+       "interval_95": [
+        337343.58363135485,
+        1053695.8653100969
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 4065661.3906702725,
+       "interval_95": [
+        3567906.358018137,
+        4592849.322721882
+       ],
+       "sample_people_on_cliff": 1771,
+       "source_households": 1453,
+       "source_households_for_half": 85,
+       "kish_effective_source_households": 224.7352915817114
+      },
+      "crossed_400_whole_credit": {
+       "adults": 297044.643717624,
+       "interval_95": [
+        159248.4163087728,
+        464661.8794934271
+       ],
+       "sample_people_on_cliff": 83,
+       "source_households": 65,
+       "source_households_for_half": 6,
+       "kish_effective_source_households": 14.431897090731518
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 85106.11779880465,
+       "interval_95": [
+        27202.894395934083,
+        156621.7072123657
+       ],
+       "sample_people_on_cliff": 41,
+       "source_households": 33,
+       "source_households_for_half": 3,
+       "kish_effective_source_households": 6.391540258467163
+      },
+      "credit_moves_most_with_health": {
+       "adults": 71752.16616588773,
+       "interval_95": [
+        19408.97184055336,
+        141169.36314535493
+       ],
+       "sample_people_on_cliff": 38,
+       "source_households": 31,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 5.391548795186331
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 71752.16616588773,
+       "interval_95": [
+        19408.97184055336,
+        141169.36314535493
+       ],
+       "sample_people_on_cliff": 38,
+       "source_households": 31,
+       "source_households_for_half": 2,
+       "kish_effective_source_households": 5.391548795186331
+      }
+     }
+    },
+    "cut_10pct": {
+     "label": "-10%",
+     "amount": 0.0,
+     "share": -0.1,
+     "adults_reached": {
+      "adults": 154282911.93060923,
+      "interval_95": [
+       150562271.08369368,
+       157920051.3718292
+      ],
+      "sample_people_on_cliff": 73804,
+      "source_households": 38992,
+      "source_households_for_half": 2258,
+      "kish_effective_source_households": 5901.331227951906
+     },
+     "workers_reached": 154282227.29234767,
+     "without_health": {
+      "people_on_cliff": 460497.8650252217,
+      "workers_on_cliff": 460497.8650252217,
+      "households_with_person_on_cliff": 443609.07122932444,
+      "people_in_those_households": 1705291.5961197773,
+      "interval_95": [
+       314926.5704000429,
+       637478.7856227963
+      ],
+      "share_of_workers": 0.0025896177875445784,
+      "share_of_adults_reached": 0.0029847625978976643,
+      "sample_people_on_cliff": 265,
+      "source_households": 198,
+      "source_households_for_half": 14,
+      "by_part_moving_most": {
+       "household_tax_before_refundable_credits": 0.22219350641888727,
+       "reduced_price_school_meals": 0.20551149715211445,
+       "snap": 0.17373043199246213,
+       "ssi": 0.12523050768559615,
+       "tanf": 0.12441054034328838,
+       "free_school_meals": 0.08025649579753374,
+       "household_state_benefits": 0.046140394326527716,
+       "household_refundable_tax_credits": 0.022521967672047536,
+       "wic": 4.658611542551659e-06
+      },
+      "by_part_moving_most_adults": {
+       "household_tax_before_refundable_credits": 102319.63532836549,
+       "reduced_price_school_meals": 94637.60567668563,
+       "snap": 80002.49302243828,
+       "ssi": 57668.38142524165,
+       "tanf": 57290.788214718516,
+       "free_school_meals": 36957.94496916997,
+       "household_state_benefits": 21247.553078787867,
+       "household_refundable_tax_credits": 10371.318029144953,
+       "wic": 2.145280669326894
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 17459.146574854385,
+       "interval_95": [
+        0.03822587685426697,
+        52377.28138476267
+       ],
+       "sample": 9
+      },
+      "versus_raise_1000": {
+       "difference": -230381.29876266746,
+       "interval_95": [
+        -508221.5288206353,
+        36196.948011598055
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 3875651.9410485383,
+      "workers_on_cliff": 3875651.9410485383,
+      "households_with_person_on_cliff": 3544907.792385389,
+      "people_in_those_households": 12748727.666775148,
+      "interval_95": [
+       3420941.7503003716,
+       4346580.863997439
+      ],
+      "share_of_workers": 0.021794796386995767,
+      "share_of_adults_reached": 0.025120422557176416,
+      "sample_people_on_cliff": 2221,
+      "source_households": 1776,
+      "source_households_for_half": 102,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.803382859749189,
+       "msp_cost": 0.036630314224891276,
+       "assigned_aca_ptc": 0.036411222951989654,
+       "household_tax_before_refundable_credits": 0.02640062497901668,
+       "reduced_price_school_meals": 0.02441847418810023,
+       "snap": 0.01979810112535173,
+       "chip": 0.014838013560381752,
+       "tanf": 0.014782232296028817,
+       "free_school_meals": 0.009501074585741991,
+       "household_state_benefits": 0.005482261118449797,
+       "household_refundable_tax_credits": 0.004283358544132199,
+       "ssi": 0.0040714538249049265,
+       "wic": 8.851821974090154e-09
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 3113632.33979207,
+       "msp_cost": 141966.34842691777,
+       "assigned_aca_ptc": 141117.2269098298,
+       "household_tax_before_refundable_credits": 102319.63344482053,
+       "reduced_price_school_meals": 94637.50688455428,
+       "snap": 76730.54905554469,
+       "chip": 57506.97605659807,
+       "tanf": 57290.787291134475,
+       "free_school_meals": 36822.85816027789,
+       "household_state_benefits": 21247.33594505489,
+       "household_refundable_tax_credits": 16600.806855772797,
+       "ssi": 15779.537919382274,
+       "wic": 0.03430658101569861
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 17459.190561408643,
+       "interval_95": [
+        0.05958954684901983,
+        52377.342188113296
+       ],
+       "sample": 9
+      },
+      "versus_raise_1000": {
+       "difference": 1197045.565544237,
+       "interval_95": [
+        588772.914799853,
+        1805585.155307727
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 4526237.477051554,
+       "interval_95": [
+        3989060.7822441123,
+        5088518.762818608
+       ],
+       "sample_people_on_cliff": 1939,
+       "source_households": 1599,
+       "source_households_for_half": 100,
+       "kish_effective_source_households": 261.99895750071164
+      },
+      "crossed_400_whole_credit": {
+       "adults": 244813.42910738874,
+       "interval_95": [
+        141136.08164580388,
+        362384.3868765225
+       ],
+       "sample_people_on_cliff": 68,
+       "source_households": 57,
+       "source_households_for_half": 8,
+       "kish_effective_source_households": 18.479818021691617
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 158023.5472534738,
+       "interval_95": [
+        77876.98676234155,
+        257926.83729417846
+       ],
+       "sample_people_on_cliff": 44,
+       "source_households": 36,
+       "source_households_for_half": 5,
+       "kish_effective_source_households": 11.741207915122855
+      },
+      "credit_moves_most_with_health": {
+       "adults": 141117.2269098298,
+       "interval_95": [
+        65080.893247130116,
+        232626.83812396493
+       ],
+       "sample_people_on_cliff": 41,
+       "source_households": 34,
+       "source_households_for_half": 5,
+       "kish_effective_source_households": 10.81699295163963
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 141117.22530480954,
+       "interval_95": [
+        65080.893166879105,
+        232626.83812396493
+       ],
+       "sample_people_on_cliff": 40,
+       "source_households": 33,
+       "source_households_for_half": 5,
+       "kish_effective_source_households": 10.81699270558191
+      }
+     }
+    }
+   },
+   "either_side": {
+    "raise_1000|cut_1000": {
+     "without_health": {
+      "adults": 1167077.909617857,
+      "interval_95": [
+       900674.6347958792,
+       1453843.5453308222
+      ],
+      "sample_people_on_cliff": 708,
+      "source_households": 419,
+      "source_households_for_half": 26,
+      "kish_effective_source_households": 65.99076273671388
+     },
+     "with_health": {
+      "adults": 4835684.082326779,
+      "interval_95": [
+       4273227.290304325,
+       5400285.849183389
+      ],
+      "sample_people_on_cliff": 2659,
+      "source_households": 1799,
+      "source_households_for_half": 104,
+      "kish_effective_source_households": 272.20521045232914
+     }
+    },
+    "raise_2000|cut_2000": {
+     "without_health": {
+      "adults": 1103297.02666067,
+      "interval_95": [
+       842923.4589536863,
+       1393511.1591569253
+      ],
+      "sample_people_on_cliff": 739,
+      "source_households": 442,
+      "source_households_for_half": 24,
+      "kish_effective_source_households": 63.65883355184796
+     },
+     "with_health": {
+      "adults": 7903552.0294679245,
+      "interval_95": [
+       7118023.745332264,
+       8674126.85197673
+      ],
+      "sample_people_on_cliff": 4213,
+      "source_households": 2853,
+      "source_households_for_half": 155,
+      "kish_effective_source_households": 391.5631911969831
+     }
+    },
+    "raise_5000|cut_5000": {
+     "without_health": {
+      "adults": 504821.7565345289,
+      "interval_95": [
+       345198.5848363262,
+       686214.3923518823
+      ],
+      "sample_people_on_cliff": 216,
+      "source_households": 144,
+      "source_households_for_half": 13,
+      "kish_effective_source_households": 34.251540930924996
+     },
+     "with_health": {
+      "adults": 16248617.419561816,
+      "interval_95": [
+       15157226.417994788,
+       17374923.27948484
+      ],
+      "sample_people_on_cliff": 7796,
+      "source_households": 5182,
+      "source_households_for_half": 305,
+      "kish_effective_source_households": 786.037679650352
+     }
+    },
+    "raise_1pct|cut_1pct": {
+     "without_health": {
+      "adults": 983283.3102513521,
+      "interval_95": [
+       774457.5117197162,
+       1212548.7018149088
+      ],
+      "sample_people_on_cliff": 552,
+      "source_households": 459,
+      "source_households_for_half": 29,
+      "kish_effective_source_households": 75.99965631478975
+     },
+     "with_health": {
+      "adults": 1743738.6821406442,
+      "interval_95": [
+       1464637.009873823,
+       2057617.9406235588
+      ],
+      "sample_people_on_cliff": 986,
+      "source_households": 826,
+      "source_households_for_half": 50,
+      "kish_effective_source_households": 129.91228279114895
+     }
+    },
+    "raise_10pct|cut_10pct": {
+     "without_health": {
+      "adults": 860153.0677792779,
+      "interval_95": [
+       650644.6691221786,
+       1089376.7616170116
+      ],
+      "sample_people_on_cliff": 502,
+      "source_households": 384,
+      "source_households_for_half": 24,
+      "kish_effective_source_households": 60.64275424657023
+     },
+     "with_health": {
+      "adults": 7061336.632778987,
+      "interval_95": [
+       6412893.193899866,
+       7719911.840015934
+      ],
+      "sample_people_on_cliff": 4001,
+      "source_households": 3082,
+      "source_households_for_half": 168,
+      "kish_effective_source_households": 429.0356102276481
+     }
+    }
+   },
+   "raise_versus_cut": {
+    "raise_1000|cut_1000": {
+     "without_health": {
+      "raise_minus_cut": {
+       "difference": 180686.94539500994,
+       "interval_95": [
+        -93823.99408847859,
+        464050.5904236519
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 599636.9703421929,
+       "interval_95": [
+        403981.05707397393,
+        817537.3761444647
+       ],
+       "sample_people_on_cliff": 303,
+       "source_households": 202,
+       "source_households_for_half": 13,
+       "kish_effective_source_households": 31.660710741206277
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 89444.75194931368,
+       "interval_95": [
+        -173296.98930227465,
+        363289.02144627593
+       ]
+      }
+     },
+     "with_health": {
+      "raise_minus_cut": {
+       "difference": 462110.20466916123,
+       "interval_95": [
+        -105018.00955298854,
+        1018356.5389317074
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 2306716.4205006706,
+       "interval_95": [
+        1926331.7353232023,
+        2696172.1046345746
+       ],
+       "sample_people_on_cliff": 1209,
+       "source_households": 903,
+       "source_households_for_half": 52,
+       "kish_effective_source_households": 132.94356354652885
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 90220.2496655304,
+       "interval_95": [
+        -435172.03203254176,
+        613927.8612305041
+       ]
+      }
+     }
+    },
+    "raise_2000|cut_2000": {
+     "without_health": {
+      "raise_minus_cut": {
+       "difference": 199405.5202379533,
+       "interval_95": [
+        -75905.8350367214,
+        468895.3986710061
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 518497.03989070957,
+       "interval_95": [
+        344873.8979282495,
+        705147.3699574635
+       ],
+       "sample_people_on_cliff": 336,
+       "source_households": 230,
+       "source_households_for_half": 12,
+       "kish_effective_source_households": 30.84102497562534
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 51046.81682434073,
+       "interval_95": [
+        -197775.85525525053,
+        284223.0362980565
+       ]
+      }
+     },
+     "with_health": {
+      "raise_minus_cut": {
+       "difference": 729502.160695082,
+       "interval_95": [
+        16622.812632731002,
+        1451928.675274214
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 3698717.5999407554,
+       "interval_95": [
+        3195536.5314798844,
+        4219172.379368606
+       ],
+       "sample_people_on_cliff": 1874,
+       "source_households": 1411,
+       "source_households_for_half": 76,
+       "kish_effective_source_households": 193.05510798560448
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 37577.98808295792,
+       "interval_95": [
+        -627044.0700916168,
+        708311.2513381866
+       ]
+      }
+     }
+    },
+    "raise_5000|cut_5000": {
+     "without_health": {
+      "raise_minus_cut": {
+       "difference": 73672.87014603947,
+       "interval_95": [
+        -91097.15840900382,
+        239727.75112073787
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 208771.62912250299,
+       "interval_95": [
+        113153.2211810199,
+        322005.6770321111
+       ],
+       "sample_people_on_cliff": 88,
+       "source_households": 67,
+       "source_households_for_half": 6,
+       "kish_effective_source_households": 15.477644093427273
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": -16396.34156549652,
+       "interval_95": [
+        -164539.702511142,
+        132721.23051490367
+       ]
+      }
+     },
+     "with_health": {
+      "raise_minus_cut": {
+       "difference": 2206940.636649293,
+       "interval_95": [
+        1169931.7015581152,
+        3307333.708637322
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 7415084.204389449,
+       "interval_95": [
+        6702010.581450644,
+        8162363.511728611
+       ],
+       "sample_people_on_cliff": 3273,
+       "source_households": 2444,
+       "source_households_for_half": 157,
+       "kish_effective_source_households": 401.5915108351231
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 206141.5738199288,
+       "interval_95": [
+        -749397.0798607692,
+        1176780.8594132997
+       ]
+      }
+     }
+    },
+    "raise_1pct|cut_1pct": {
+     "without_health": {
+      "raise_minus_cut": {
+       "difference": -29105.806878280302,
+       "interval_95": [
+        -250473.22207691925,
+        185221.37588430766
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 501749.5789684867,
+       "interval_95": [
+        353893.5177605391,
+        663146.8003486745
+       ],
+       "sample_people_on_cliff": 270,
+       "source_households": 233,
+       "source_households_for_half": 15,
+       "kish_effective_source_households": 39.24393537678875
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": -29105.806878280302,
+       "interval_95": [
+        -250473.22207691925,
+        185221.37588430766
+       ]
+      }
+     },
+     "with_health": {
+      "raise_minus_cut": {
+       "difference": -145836.9205251321,
+       "interval_95": [
+        -444466.369921432,
+        134142.2446694455
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 827891.3765597034,
+       "interval_95": [
+        635688.4975864907,
+        1037444.1210100537
+       ],
+       "sample_people_on_cliff": 479,
+       "source_households": 415,
+       "source_households_for_half": 24,
+       "kish_effective_source_households": 63.07925829022456
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": -145836.9205251321,
+       "interval_95": [
+        -444466.369921432,
+        134142.2446694455
+       ]
+      }
+     }
+    },
+    "raise_10pct|cut_10pct": {
+     "without_health": {
+      "raise_minus_cut": {
+       "difference": -26850.152199993376,
+       "interval_95": [
+        -247818.25387958618,
+        187595.65782903013
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 433647.71282522834,
+       "interval_95": [
+        293339.8074803636,
+        594868.8511768557
+       ],
+       "sample_people_on_cliff": 247,
+       "source_households": 196,
+       "source_households_for_half": 13,
+       "kish_effective_source_households": 32.40227577788019
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": -26850.152199993376,
+       "interval_95": [
+        -247818.25387958618,
+        187595.65782903013
+       ]
+      }
+     },
+     "with_health": {
+      "raise_minus_cut": {
+       "difference": -498854.0359794535,
+       "interval_95": [
+        -1104064.2071782784,
+        102465.77454836214
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 3376797.905069085,
+       "interval_95": [
+        2935316.116030728,
+        3825186.9153022827
+       ],
+       "sample_people_on_cliff": 1933,
+       "source_households": 1547,
+       "source_households_for_half": 85,
+       "kish_effective_source_households": 218.3489816128609
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": -498854.0359794535,
+       "interval_95": [
+        -1104064.2071782784,
+        102465.77454836214
+       ]
+      }
+     }
+    }
+   }
+  },
+  "2025": {
+   "workers": 187808158.32340604,
+   "parts_code": {
+    "commits": [
+     "30045d6d527703ba3035189a03c7701a8a2b2670",
+     "e86177b26373921325129eda682ce2777da18765"
+    ],
+    "cliffs2017_sha256": "e791e670d5407372c89fb549580813d6d82254fa590dd8049f85963ab09d4e73",
+    "script_sha256": "ced7b6efa97310f825083505e95e5e945195ba1ef3c41beb1e0d77e206fe8b12"
+   },
+   "changes": {
+    "raise_1000": {
+     "label": "+1,000",
+     "amount": 1000.0,
+     "share": 0.0,
+     "adults_reached": {
+      "adults": 222973217.37325993,
+      "interval_95": [
+       218363024.99660242,
+       227557943.588368
+      ],
+      "sample_people_on_cliff": 102143,
+      "source_households": 47277,
+      "source_households_for_half": 2844,
+      "kish_effective_source_households": 7432.023337531698
+     },
+     "workers_reached": 162911776.0340101,
+     "without_health": {
+      "people_on_cliff": 683004.0759690469,
+      "workers_on_cliff": 521309.3210505366,
+      "households_with_person_on_cliff": 450579.8525703065,
+      "people_in_those_households": 1845674.8510399638,
+      "interval_95": [
+       490776.38749273424,
+       897692.7927059623
+      ],
+      "share_of_workers": 0.002775754395891795,
+      "share_of_adults_reached": 0.003063166437723727,
+      "sample_people_on_cliff": 479,
+      "source_households": 273,
+      "source_households_for_half": 16,
+      "by_part_moving_most": {
+       "snap": 0.2770068292919469,
+       "tanf": 0.16170902748700502,
+       "free_school_meals": 0.15514687609538433,
+       "reduced_price_school_meals": 0.11631931082187608,
+       "household_refundable_tax_credits": 0.09575182152022851,
+       "wic": 0.07962062692291481,
+       "household_tax_before_refundable_credits": 0.07019237252739126,
+       "ssi": 0.022226004848885907,
+       "household_state_benefits": 0.022027130484367233
+      },
+      "by_part_moving_most_adults": {
+       "snap": 189196.79347766173,
+       "tanf": 110447.92489461508,
+       "free_school_meals": 105965.94874701218,
+       "reduced_price_school_meals": 79446.56340525183,
+       "household_refundable_tax_credits": 65398.88437977678,
+       "wic": 54381.21271956165,
+       "household_tax_before_refundable_credits": 47941.676538145985,
+       "ssi": 15180.451904296875,
+       "household_state_benefits": 15044.619902724866
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 0.019020247040316463,
+       "interval_95": [
+        0.0,
+        0.05030084075406194
+       ],
+       "sample": 4
+      },
+      "versus_raise_1000": {
+       "difference": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 3079306.748654438,
+      "workers_on_cliff": 2592638.400889024,
+      "households_with_person_on_cliff": 2423365.91942764,
+      "people_in_those_households": 7333084.455185217,
+      "interval_95": [
+       2621551.332095444,
+       3575098.4400618924
+      ],
+      "share_of_workers": 0.013804716600353938,
+      "share_of_adults_reached": 0.013810209068740488,
+      "sample_people_on_cliff": 1245,
+      "source_households": 833,
+      "source_households_for_half": 61,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.7259606341314471,
+       "snap": 0.059137723141148485,
+       "msp_cost": 0.04393467516220091,
+       "tanf": 0.035867789054428376,
+       "free_school_meals": 0.034412226633587666,
+       "reduced_price_school_meals": 0.02580014642017724,
+       "household_refundable_tax_credits": 0.02184539851874965,
+       "chip": 0.01629030590427907,
+       "household_tax_before_refundable_credits": 0.015568983687349438,
+       "chip_premium": 0.007148740434130079,
+       "wic": 0.005227072616746067,
+       "household_state_benefits": 0.0048857155730585656,
+       "ssi": 0.003920588722697209
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 2235455.4799384205,
+       "snap": 182103.18996859627,
+       "msp_cost": 135288.34172690578,
+       "tanf": 110447.92489461508,
+       "free_school_meals": 105965.8017090325,
+       "reduced_price_school_meals": 79446.56498792442,
+       "household_refundable_tax_credits": 67268.68308583146,
+       "chip": 50162.84890869178,
+       "household_tax_before_refundable_credits": 47941.676538145985,
+       "chip_premium": 22013.16466319561,
+       "wic": 16095.759984452976,
+       "household_state_benefits": 15044.616936125327,
+       "ssi": 12072.6953125
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 0.019020247040316463,
+       "interval_95": [
+        0.0,
+        0.05030084075406194
+       ],
+       "sample": 4
+      },
+      "versus_raise_1000": {
+       "difference": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 935644.1426352838,
+       "interval_95": [
+        686338.016098955,
+        1210189.5323628779
+       ],
+       "sample_people_on_cliff": 475,
+       "source_households": 349,
+       "source_households_for_half": 18,
+       "kish_effective_source_households": 46.982851668936355
+      },
+      "crossed_400_whole_credit": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "credit_moves_most_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      }
+     }
+    },
+    "cut_1000": {
+     "label": "-1,000",
+     "amount": -1000.0,
+     "share": 0.0,
+     "adults_reached": {
+      "adults": 160671460.98008525,
+      "interval_95": [
+       156782601.42272666,
+       164499533.0572999
+      ],
+      "sample_people_on_cliff": 73001,
+      "source_households": 38710,
+      "source_households_for_half": 2235,
+      "kish_effective_source_households": 5840.304466075546
+     },
+     "workers_reached": 160670737.90452445,
+     "without_health": {
+      "people_on_cliff": 718009.5335922635,
+      "workers_on_cliff": 718009.5335922635,
+      "households_with_person_on_cliff": 619663.5711005598,
+      "people_in_those_households": 2087636.9645127032,
+      "interval_95": [
+       510280.5544064451,
+       944442.0350042088
+      ],
+      "share_of_workers": 0.003823100870601423,
+      "share_of_adults_reached": 0.004468805656041546,
+      "sample_people_on_cliff": 344,
+      "source_households": 239,
+      "source_households_for_half": 16,
+      "by_part_moving_most": {
+       "free_school_meals": 0.2808025172082173,
+       "reduced_price_school_meals": 0.1938588142031113,
+       "snap": 0.149075643430299,
+       "wic": 0.14019297167620823,
+       "tanf": 0.12958851243526942,
+       "household_tax_before_refundable_credits": 0.05602629363178623,
+       "household_refundable_tax_credits": 0.02722856393838851,
+       "ssi": 0.023226025954624047,
+       "household_state_benefits": 6.575220958424461e-07
+      },
+      "by_part_moving_most_adults": {
+       "free_school_meals": 201618.88441220566,
+       "reduced_price_school_meals": 139192.4767687252,
+       "snap": 107037.73320935556,
+       "wic": 100659.89020614767,
+       "tanf": 93045.78737256303,
+       "household_tax_before_refundable_credits": 40227.41295946203,
+       "household_refundable_tax_credits": 19550.368493789458,
+       "ssi": 16676.508062881418,
+       "household_state_benefits": 0.47210713336244226
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 16042.952333250782,
+       "interval_95": [
+        0.021990028908476233,
+        40362.054020419484
+       ],
+       "sample": 5
+      },
+      "versus_raise_1000": {
+       "difference": 35005.45762321656,
+       "interval_95": [
+        -233609.00377598495,
+        304298.4448590123
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 1844169.9667000375,
+      "workers_on_cliff": 1844169.9667000375,
+      "households_with_person_on_cliff": 1560881.7341561778,
+      "people_in_those_households": 4853238.684154896,
+      "interval_95": [
+       1498700.077940689,
+       2216169.284945539
+      ],
+      "share_of_workers": 0.009819434806044863,
+      "share_of_adults_reached": 0.011477893805475614,
+      "sample_people_on_cliff": 873,
+      "source_households": 650,
+      "source_households_for_half": 39,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.565663637183378,
+       "free_school_meals": 0.1093275629548581,
+       "reduced_price_school_meals": 0.07547703232466756,
+       "msp_cost": 0.06984985425441069,
+       "snap": 0.052373835896586396,
+       "tanf": 0.050454019451937726,
+       "wic": 0.03599411128198959,
+       "household_tax_before_refundable_credits": 0.0218132892769342,
+       "household_refundable_tax_credits": 0.010601169986344191,
+       "ssi": 0.006546445436634261,
+       "chip": 0.0018948732767106434,
+       "chip_premium": 3.912675753684226e-06,
+       "household_state_benefits": 2.5599979496859066e-07
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 1043179.8909478922,
+       "free_school_meals": 201618.6081338569,
+       "reduced_price_school_meals": 139192.47618879983,
+       "msp_cost": 128815.00339435902,
+       "snap": 96586.25520136097,
+       "tanf": 93045.78737256303,
+       "wic": 66379.25900430419,
+       "household_tax_before_refundable_credits": 40227.41295946203,
+       "household_refundable_tax_credits": 19550.359300697804,
+       "ssi": 12072.758062881418,
+       "chip": 3494.468387612258,
+       "chip_premium": 7.215639114379883,
+       "household_state_benefits": 0.47210713336244226
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 16042.952333250782,
+       "interval_95": [
+        0.021990028908476233,
+        40362.054020419484
+       ],
+       "sample": 5
+      },
+      "versus_raise_1000": {
+       "difference": -1235136.7819544002,
+       "interval_95": [
+        -1806511.6444486657,
+        -649055.1254656787
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 1092825.676818978,
+       "interval_95": [
+        803478.9383121699,
+        1414472.226298875
+       ],
+       "sample_people_on_cliff": 337,
+       "source_households": 269,
+       "source_households_for_half": 20,
+       "kish_effective_source_households": 49.97606605850831
+      },
+      "crossed_400_whole_credit": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "credit_moves_most_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      }
+     }
+    },
+    "raise_2000": {
+     "label": "+2,000",
+     "amount": 2000.0,
+     "share": 0.0,
+     "adults_reached": {
+      "adults": 222973217.37325993,
+      "interval_95": [
+       218363024.99660242,
+       227557943.588368
+      ],
+      "sample_people_on_cliff": 102143,
+      "source_households": 47277,
+      "source_households_for_half": 2844,
+      "kish_effective_source_households": 7432.023337531698
+     },
+     "workers_reached": 162911776.0340101,
+     "without_health": {
+      "people_on_cliff": 888734.0369488893,
+      "workers_on_cliff": 672768.2566908314,
+      "households_with_person_on_cliff": 552559.6384635696,
+      "people_in_those_households": 2175457.648535694,
+      "interval_95": [
+       632392.644533077,
+       1177471.2096839345
+      ],
+      "share_of_workers": 0.0035822099673238,
+      "share_of_adults_reached": 0.003985833130178758,
+      "sample_people_on_cliff": 502,
+      "source_households": 286,
+      "source_households_for_half": 16,
+      "by_part_moving_most": {
+       "snap": 0.4037598683889453,
+       "tanf": 0.20318418045928527,
+       "free_school_meals": 0.16167391342220944,
+       "reduced_price_school_meals": 0.08691993422446587,
+       "household_refundable_tax_credits": 0.06436159357350772,
+       "wic": 0.05181812731529505,
+       "ssi": 0.017081059562839535,
+       "household_state_benefits": 0.011200920675066676,
+       "household_tax_before_refundable_credits": 4.0237838517055395e-07
+      },
+      "by_part_moving_most_adults": {
+       "snap": 358835.13779125956,
+       "tanf": 180576.6969437322,
+       "free_school_meals": 143685.1097450454,
+       "reduced_price_school_meals": 77248.70403464147,
+       "household_refundable_tax_credits": 57200.33888104721,
+       "wic": 46052.53347605368,
+       "ssi": 15180.51902064681,
+       "household_state_benefits": 9954.639449096285,
+       "household_tax_before_refundable_credits": 0.3576073666336015
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 0.011013400740921497,
+       "interval_95": [
+        0.0,
+        0.03304020222276449
+       ],
+       "sample": 1
+      },
+      "versus_raise_1000": {
+       "difference": 205729.96097984235,
+       "interval_95": [
+        -10996.343222128615,
+        450060.10232989007
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 4887384.994427767,
+      "workers_on_cliff": 3967199.647741952,
+      "households_with_person_on_cliff": 3762431.075083475,
+      "people_in_those_households": 11672120.801772824,
+      "interval_95": [
+       4283718.561116045,
+       5526393.098216486
+      ],
+      "share_of_workers": 0.02112368111778417,
+      "share_of_adults_reached": 0.021919157161580636,
+      "sample_people_on_cliff": 1890,
+      "source_households": 1267,
+      "source_households_for_half": 93,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.7545486223198379,
+       "msp_cost": 0.06531948264556738,
+       "snap": 0.05981736329446862,
+       "tanf": 0.03694750815612283,
+       "free_school_meals": 0.029399161282345727,
+       "chip": 0.018140144427562652,
+       "reduced_price_school_meals": 0.015290820155950258,
+       "household_refundable_tax_credits": 0.00823264676663419,
+       "chip_premium": 0.004503858375971312,
+       "wic": 0.0032933417919244583,
+       "ssi": 0.0024701748125560787,
+       "household_state_benefits": 0.0020368028015893625,
+       "household_tax_before_refundable_credits": 7.316946936681248e-08
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 3687769.61429212,
+       "msp_cost": 319241.4593257309,
+       "snap": 292350.4837716202,
+       "tanf": 180576.6969437322,
+       "free_school_meals": 143685.0197000983,
+       "chip": 88657.86967202218,
+       "reduced_price_school_meals": 74732.12498268494,
+       "household_refundable_tax_credits": 40236.11427167221,
+       "chip_premium": 22012.08984375,
+       "wic": 16095.82925537345,
+       "ssi": 12072.6953125,
+       "household_state_benefits": 9954.639449096285,
+       "household_tax_before_refundable_credits": 0.3576073666336015
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample": 0
+      },
+      "versus_raise_1000": {
+       "difference": 1808078.245773329,
+       "interval_95": [
+        1415395.241049329,
+        2207729.8639848945
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 1887795.481776125,
+       "interval_95": [
+        1512449.1408450697,
+        2278787.954176818
+       ],
+       "sample_people_on_cliff": 976,
+       "source_households": 702,
+       "source_households_for_half": 34,
+       "kish_effective_source_households": 91.51419296116777
+      },
+      "crossed_400_whole_credit": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "credit_moves_most_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      }
+     }
+    },
+    "cut_2000": {
+     "label": "-2,000",
+     "amount": -2000.0,
+     "share": 0.0,
+     "adults_reached": {
+      "adults": 158814251.56562713,
+      "interval_95": [
+       154956953.7104615,
+       162612494.23788077
+      ],
+      "sample_people_on_cliff": 72373,
+      "source_households": 38469,
+      "source_households_for_half": 2212,
+      "kish_effective_source_households": 5781.5917451283985
+     },
+     "workers_reached": 158813528.49006635,
+     "without_health": {
+      "people_on_cliff": 647269.8065617284,
+      "workers_on_cliff": 647269.8065617284,
+      "households_with_person_on_cliff": 549092.8848399228,
+      "people_in_those_households": 2033168.035843881,
+      "interval_95": [
+       456231.9887188361,
+       851315.6325220473
+      ],
+      "share_of_workers": 0.0034464413704921614,
+      "share_of_adults_reached": 0.004075640568656748,
+      "sample_people_on_cliff": 387,
+      "source_households": 259,
+      "source_households_for_half": 16,
+      "by_part_moving_most": {
+       "snap": 0.28172232989319584,
+       "reduced_price_school_meals": 0.24034582025661635,
+       "tanf": 0.13741327861732666,
+       "free_school_meals": 0.11795406697245833,
+       "household_tax_before_refundable_credits": 0.0937046469153264,
+       "ssi": 0.07275112069497786,
+       "wic": 0.028761576389105932,
+       "household_refundable_tax_credits": 0.02734642523663182,
+       "household_state_benefits": 7.35024360807674e-07
+      },
+      "by_part_moving_most_adults": {
+       "snap": 182350.35797408829,
+       "reduced_price_school_meals": 155568.59258542,
+       "tanf": 88943.46626964991,
+       "free_school_meals": 76348.10611243226,
+       "household_tax_before_refundable_credits": 60652.18868281838,
+       "ssi": 47089.60381938727,
+       "wic": 18616.49998578697,
+       "household_refundable_tax_credits": 17700.515373069444,
+       "household_state_benefits": 0.47575907583814114
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 10296.221018249402,
+       "interval_95": [
+        0.013287658104673028,
+        28151.961415291014
+       ],
+       "sample": 6
+      },
+      "versus_raise_1000": {
+       "difference": -35734.269407318556,
+       "interval_95": [
+        -266620.5638752011,
+        203472.75016039016
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 2977915.972291167,
+      "workers_on_cliff": 2977915.972291167,
+      "households_with_person_on_cliff": 2577701.3051694515,
+      "people_in_those_households": 8143898.657859081,
+      "interval_95": [
+       2544977.888160115,
+       3425910.8635803256
+      ],
+      "share_of_workers": 0.015856158746646084,
+      "share_of_adults_reached": 0.01875093666301476,
+      "sample_people_on_cliff": 1507,
+      "source_households": 1140,
+      "source_households_for_half": 67,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.7134829430426454,
+       "snap": 0.060700913828570756,
+       "msp_cost": 0.0595355793374281,
+       "reduced_price_school_meals": 0.05464352710460961,
+       "free_school_meals": 0.0324353562081212,
+       "tanf": 0.02986768837577981,
+       "household_tax_before_refundable_credits": 0.020367327099613704,
+       "household_refundable_tax_credits": 0.00818964309735078,
+       "ssi": 0.007978822184237608,
+       "chip": 0.007404301209694199,
+       "wic": 0.0053913153760147695,
+       "chip_premium": 2.423049938789331e-06,
+       "household_state_benefits": 1.5976242454957478e-07,
+       "co_omnisalud": 3.235706425148696e-10
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 2124692.2520440025,
+       "snap": 180762.2208227706,
+       "msp_cost": 177291.9526285351,
+       "reduced_price_school_meals": 162723.83214714227,
+       "free_school_meals": 96589.76531911758,
+       "tanf": 88943.46626964991,
+       "household_tax_before_refundable_credits": 60652.18868281838,
+       "household_refundable_tax_credits": 24388.068986964994,
+       "ssi": 23760.262022512266,
+       "chip": 22049.386836003163,
+       "wic": 16054.88416989334,
+       "chip_premium": 7.215639114379883,
+       "household_state_benefits": 0.47575907583814114,
+       "co_omnisalud": 0.0009635661845095456
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 17451.505197936902,
+       "interval_95": [
+        0.20853897320921533,
+        42058.09359498733
+       ],
+       "sample": 7
+      },
+      "versus_raise_1000": {
+       "difference": -101390.77636327082,
+       "interval_95": [
+        -718328.07180549,
+        517816.98858683096
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 1819730.5314280977,
+       "interval_95": [
+        1464522.080947584,
+        2214741.2434666404
+       ],
+       "sample_people_on_cliff": 646,
+       "source_households": 519,
+       "source_households_for_half": 36,
+       "kish_effective_source_households": 91.1595852741464
+      },
+      "crossed_400_whole_credit": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "credit_moves_most_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      }
+     }
+    },
+    "raise_5000": {
+     "label": "+5,000",
+     "amount": 5000.0,
+     "share": 0.0,
+     "adults_reached": {
+      "adults": 222973217.37325993,
+      "interval_95": [
+       218363024.99660242,
+       227557943.588368
+      ],
+      "sample_people_on_cliff": 102143,
+      "source_households": 47277,
+      "source_households_for_half": 2844,
+      "kish_effective_source_households": 7432.023337531698
+     },
+     "workers_reached": 162911776.0340101,
+     "without_health": {
+      "people_on_cliff": 631843.2841085169,
+      "workers_on_cliff": 517643.7365392062,
+      "households_with_person_on_cliff": 418106.83153843426,
+      "people_in_those_households": 1744528.6773871232,
+      "interval_95": [
+       442655.894747079,
+       842412.3922769395
+      ],
+      "share_of_workers": 0.0027562366893978192,
+      "share_of_adults_reached": 0.0028337182893620957,
+      "sample_people_on_cliff": 279,
+      "source_households": 164,
+      "source_households_for_half": 14,
+      "by_part_moving_most": {
+       "snap": 0.4618602766301793,
+       "tanf": 0.21841075049543768,
+       "ssi": 0.09718815970055908,
+       "free_school_meals": 0.09467157161300128,
+       "wic": 0.04527005804404799,
+       "household_refundable_tax_credits": 0.04471997781374242,
+       "household_tax_before_refundable_credits": 0.022121757012757686,
+       "household_state_benefits": 0.015754959040622237,
+       "reduced_price_school_meals": 2.4896496522300655e-06
+      },
+      "by_part_moving_most_adults": {
+       "snap": 291823.3139852806,
+       "tanf": 138001.36587764323,
+       "ssi": 61407.68600166426,
+       "free_school_meals": 59817.59671967337,
+       "wic": 28603.582146334462,
+       "household_refundable_tax_credits": 28256.017647095025,
+       "household_tax_before_refundable_credits": 13977.48360119143,
+       "household_state_benefits": 9954.665061221924,
+       "reduced_price_school_meals": 1.5730684125446714
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 5208.2633705493645,
+       "interval_95": [
+        0.0051446110010147095,
+        15624.568767597957
+       ],
+       "sample": 7
+      },
+      "versus_raise_1000": {
+       "difference": -51160.79186053004,
+       "interval_95": [
+        -301042.0553470667,
+        196753.27855640725
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 9737856.13296812,
+      "workers_on_cliff": 8060232.344123543,
+      "households_with_person_on_cliff": 7512335.555928895,
+      "people_in_those_households": 23046133.72413555,
+      "interval_95": [
+       8866984.18131978,
+       10656910.280465642
+      ],
+      "share_of_workers": 0.04291737066205509,
+      "share_of_adults_reached": 0.04367276145397691,
+      "sample_people_on_cliff": 3480,
+      "source_households": 2284,
+      "source_households_for_half": 183,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.8940409921406294,
+       "msp_cost": 0.03559778266149302,
+       "chip": 0.02018130649902782,
+       "snap": 0.019638934123269017,
+       "tanf": 0.014171637369998822,
+       "household_refundable_tax_credits": 0.00464363824675358,
+       "ssi": 0.0045639882932571926,
+       "free_school_meals": 0.002536413220294239,
+       "household_tax_before_refundable_credits": 0.001435376471134638,
+       "reduced_price_school_meals": 0.0012566052590483655,
+       "household_state_benefits": 0.0010222642056869054,
+       "wic": 0.0009110615094071223
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 8706042.55844153,
+       "msp_cost": 346646.086210286,
+       "chip": 196522.6592628674,
+       "snap": 191241.11509723208,
+       "tanf": 138001.36587764323,
+       "household_refundable_tax_credits": 45219.081180434674,
+       "ssi": 44443.46139228926,
+       "free_school_meals": 24699.227032983676,
+       "household_tax_before_refundable_credits": 13977.489572556573,
+       "reduced_price_school_meals": 12236.641228544118,
+       "household_state_benefits": 9954.661764862016,
+       "wic": 8871.785906891339
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 16977.359073674364,
+       "interval_95": [
+        0.0051446110010147095,
+        50931.864683976535
+       ],
+       "sample": 7
+      },
+      "versus_raise_1000": {
+       "difference": 6658549.384313684,
+       "interval_95": [
+        5928583.760524095,
+        7413023.373667131
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 5584746.601519771,
+       "interval_95": [
+        4916235.110179081,
+        6284463.797950228
+       ],
+       "sample_people_on_cliff": 2562,
+       "source_households": 1820,
+       "source_households_for_half": 97,
+       "kish_effective_source_households": 257.5281116770235
+      },
+      "crossed_400_whole_credit": {
+       "adults": 10952.804183189757,
+       "interval_95": [
+        0.0,
+        32858.409147629514
+       ],
+       "sample_people_on_cliff": 2,
+       "source_households": 2,
+       "source_households_for_half": 1,
+       "kish_effective_source_households": 1.0000006211999697
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 11117.204668599472,
+       "interval_95": [
+        0.002907528367359191,
+        33351.5235741163
+       ],
+       "sample_people_on_cliff": 6,
+       "source_households": 5,
+       "source_households_for_half": 1,
+       "kish_effective_source_households": 1.0000159137877922
+      },
+      "credit_moves_most_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      }
+     }
+    },
+    "cut_5000": {
+     "label": "-5,000",
+     "amount": -5000.0,
+     "share": 0.0,
+     "adults_reached": {
+      "adults": 154000086.87407494,
+      "interval_95": [
+       150199347.51056314,
+       157771597.459643
+      ],
+      "sample_people_on_cliff": 70725,
+      "source_households": 37928,
+      "source_households_for_half": 2163,
+      "kish_effective_source_households": 5644.093929594471
+     },
+     "workers_reached": 153999363.7985142,
+     "without_health": {
+      "people_on_cliff": 329738.6017985293,
+      "workers_on_cliff": 329738.6017985293,
+      "households_with_person_on_cliff": 276976.97394955537,
+      "people_in_those_households": 1235427.4976790315,
+      "interval_95": [
+       204806.50679149458,
+       474990.50756008626
+      ],
+      "share_of_workers": 0.0017557203304806317,
+      "share_of_adults_reached": 0.002141158544073776,
+      "sample_people_on_cliff": 257,
+      "source_households": 180,
+      "source_households_for_half": 9,
+      "by_part_moving_most": {
+       "snap": 0.42815626684434055,
+       "tanf": 0.16385225607413273,
+       "household_state_benefits": 0.14350770750642364,
+       "ssi": 0.10085492026797505,
+       "reduced_price_school_meals": 0.06052318233196203,
+       "household_tax_before_refundable_credits": 0.057204254668154236,
+       "free_school_meals": 0.0177649205824765,
+       "wic": 0.01571260505552136,
+       "household_refundable_tax_credits": 0.012423886669013938
+      },
+      "by_part_moving_most_adults": {
+       "snap": 141179.64878053084,
+       "tanf": 54028.413819419104,
+       "household_state_benefits": 47320.03082048043,
+       "ssi": 33255.76039366424,
+       "reduced_price_school_meals": 19956.82951853861,
+       "household_tax_before_refundable_credits": 18862.45095120417,
+       "free_school_meals": 5857.780073927715,
+       "wic": 5181.052421620116,
+       "household_refundable_tax_credits": 4096.635019144043
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 0.007443409587722272,
+       "interval_95": [
+        0.0,
+        0.020359843969345093
+       ],
+       "sample": 4
+      },
+      "versus_raise_1000": {
+       "difference": -353265.47417051764,
+       "interval_95": [
+        -577201.3948468253,
+        -145812.16512033003
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 5507067.590284114,
+      "workers_on_cliff": 5507067.590284114,
+      "households_with_person_on_cliff": 4795085.647776375,
+      "people_in_those_households": 15646755.799757775,
+      "interval_95": [
+       4893412.913322934,
+       6155185.812448666
+      ],
+      "share_of_workers": 0.029322834745021734,
+      "share_of_adults_reached": 0.03576015898476222,
+      "sample_people_on_cliff": 2968,
+      "source_households": 2241,
+      "source_households_for_half": 112,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.9219697879207424,
+       "snap": 0.02467996178696248,
+       "chip": 0.012524531298995278,
+       "msp_cost": 0.011691781530550926,
+       "tanf": 0.009810741003930866,
+       "household_state_benefits": 0.007359860368880645,
+       "reduced_price_school_meals": 0.0036238646828594145,
+       "household_tax_before_refundable_credits": 0.0034251351816495575,
+       "household_refundable_tax_credits": 0.0022852696589827867,
+       "ssi": 0.002122324738652111,
+       "free_school_meals": 0.0005063120194940975,
+       "wic": 4.2980829962239444e-07
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 5077349.938279438,
+       "snap": 135914.21768643148,
+       "chip": 68973.44040019589,
+       "msp_cost": 64387.43113957939,
+       "tanf": 54028.413819419104,
+       "household_state_benefits": 40531.24850647908,
+       "reduced_price_school_meals": 19956.8677465503,
+       "household_tax_before_refundable_credits": 18862.45095120417,
+       "household_refundable_tax_credits": 12585.134474043734,
+       "ssi": 11687.78578428924,
+       "free_school_meals": 2788.2945131272427,
+       "wic": 2.366983356885612
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 0.006786614656448364,
+       "interval_95": [
+        0.0,
+        0.020359843969345093
+       ],
+       "sample": 3
+      },
+      "versus_raise_1000": {
+       "difference": 2427760.841629676,
+       "interval_95": [
+        1661813.2986680327,
+        3192339.2658925066
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 4140807.7537550693,
+       "interval_95": [
+        3609954.889764684,
+        4726293.3642977895
+       ],
+       "sample_people_on_cliff": 1614,
+       "source_households": 1260,
+       "source_households_for_half": 81,
+       "kish_effective_source_households": 209.01933261022967
+      },
+      "crossed_400_whole_credit": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 54.10850165784359,
+       "interval_95": [
+        0.0,
+        162.3149456679821
+       ],
+       "sample_people_on_cliff": 2,
+       "source_households": 2,
+       "source_households_for_half": 1,
+       "kish_effective_source_households": 1.0003903773299772
+      },
+      "credit_moves_most_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      }
+     }
+    },
+    "raise_1pct": {
+     "label": "+1%",
+     "amount": 0.0,
+     "share": 0.01,
+     "adults_reached": {
+      "adults": 162912499.1095709,
+      "interval_95": [
+       158985079.71717578,
+       166747141.1875103
+      ],
+      "sample_people_on_cliff": 73781,
+      "source_households": 38989,
+      "source_households_for_half": 2258,
+      "kish_effective_source_households": 5901.216667338123
+     },
+     "workers_reached": 162911776.0340101,
+     "without_health": {
+      "people_on_cliff": 576521.6794468504,
+      "workers_on_cliff": 576521.6794468504,
+      "households_with_person_on_cliff": 536252.289979165,
+      "people_in_those_households": 2013639.6506191425,
+      "interval_95": [
+       416130.26202206325,
+       755851.4381327877
+      ],
+      "share_of_workers": 0.0030697371434422935,
+      "share_of_adults_reached": 0.0035388425234278453,
+      "sample_people_on_cliff": 303,
+      "source_households": 242,
+      "source_households_for_half": 18,
+      "by_part_moving_most": {
+       "snap": 0.36136740873636874,
+       "household_tax_before_refundable_credits": 0.16144546785747463,
+       "household_refundable_tax_credits": 0.14287238855035686,
+       "tanf": 0.08147415672502656,
+       "wic": 0.07777765630064588,
+       "reduced_price_school_meals": 0.0634837001319854,
+       "free_school_meals": 0.05488425804203268,
+       "ssi": 0.029240541109845905,
+       "household_state_benefits": 0.027454422546263423
+      },
+      "by_part_moving_most_adults": {
+       "snap": 208336.14538204775,
+       "household_tax_before_refundable_credits": 93076.81226827379,
+       "household_refundable_tax_credits": 82369.0293936347,
+       "tanf": 46971.61766662821,
+       "wic": 44840.50503388827,
+       "reduced_price_school_meals": 36599.72941759246,
+       "free_school_meals": 31641.964621586987,
+       "ssi": 16857.805868583033,
+       "household_state_benefits": 15828.069794615265
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 104814.02347008543,
+       "interval_95": [
+        40113.761174980114,
+        187226.9831883756
+       ],
+       "sample": 36
+      },
+      "versus_raise_1000": {
+       "difference": -106482.39652219648,
+       "interval_95": [
+        -306410.11836153996,
+        96498.7741530575
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 960160.1284049316,
+      "workers_on_cliff": 960160.1284049316,
+      "households_with_person_on_cliff": 893732.4854250392,
+      "people_in_those_households": 3202061.9112312617,
+      "interval_95": [
+       748249.1534109772,
+       1188009.0556892797
+      ],
+      "share_of_workers": 0.005112451647342891,
+      "share_of_adults_reached": 0.005893716772211271,
+      "sample_people_on_cliff": 461,
+      "source_households": 377,
+      "source_households_for_half": 28,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.41134173029848087,
+       "snap": 0.2169806202163401,
+       "household_tax_before_refundable_credits": 0.09656844206919638,
+       "household_refundable_tax_credits": 0.08578676301677976,
+       "tanf": 0.048920608424617595,
+       "reduced_price_school_meals": 0.03811835998480155,
+       "free_school_meals": 0.032954882925780596,
+       "ssi": 0.01755728588374952,
+       "household_state_benefits": 0.016484823027289923,
+       "wic": 0.012143763570012369,
+       "chip": 0.011670650569617318,
+       "msp_cost": 0.005361300478996849,
+       "chip_premium": 0.004054218519858902,
+       "assigned_aca_ptc": 0.002056551014478337
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 394953.9285816961,
+       "snap": 208336.1401683028,
+       "household_tax_before_refundable_credits": 92721.16773702379,
+       "household_refundable_tax_credits": 82369.0293936347,
+       "tanf": 46971.61766662821,
+       "reduced_price_school_meals": 36599.72941759246,
+       "free_school_meals": 31641.964621586987,
+       "ssi": 16857.805868583033,
+       "household_state_benefits": 15828.069794615265,
+       "wic": 11659.957588702207,
+       "chip": 11205.693349492853,
+       "msp_cost": 5147.706956331036,
+       "chip_premium": 3892.698974609375,
+       "assigned_aca_ptc": 1974.6182861328125
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 94212.25142644063,
+       "interval_95": [
+        31207.590551363883,
+        174205.07301592754
+       ],
+       "sample": 35
+      },
+      "versus_raise_1000": {
+       "difference": -2119146.620249506,
+       "interval_95": [
+        -2583512.884044065,
+        -1690967.5085216607
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 263452.03641471115,
+       "interval_95": [
+        151566.93584993083,
+        398578.9701050952
+       ],
+       "sample_people_on_cliff": 158,
+       "source_households": 139,
+       "source_households_for_half": 7,
+       "kish_effective_source_households": 17.78759653152868
+      },
+      "crossed_400_whole_credit": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "credit_moves_most_with_health": {
+       "adults": 1974.6182861328125,
+       "interval_95": [
+        0.0,
+        5923.8548583984375
+       ],
+       "sample_people_on_cliff": 1,
+       "source_households": 1,
+       "source_households_for_half": 1,
+       "kish_effective_source_households": 1.0
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      }
+     }
+    },
+    "cut_1pct": {
+     "label": "-1%",
+     "amount": 0.0,
+     "share": -0.01,
+     "adults_reached": {
+      "adults": 162912499.1095709,
+      "interval_95": [
+       158985079.71717578,
+       166747141.1875103
+      ],
+      "sample_people_on_cliff": 73781,
+      "source_households": 38989,
+      "source_households_for_half": 2258,
+      "kish_effective_source_households": 5901.216667338123
+     },
+     "workers_reached": 162911776.0340101,
+     "without_health": {
+      "people_on_cliff": 549981.9150166527,
+      "workers_on_cliff": 549981.9150166527,
+      "households_with_person_on_cliff": 533187.3017674776,
+      "people_in_those_households": 1599000.4973146513,
+      "interval_95": [
+       390131.599499056,
+       731455.5462628469
+      ],
+      "share_of_workers": 0.0029284239828899373,
+      "share_of_adults_reached": 0.003375934431198852,
+      "sample_people_on_cliff": 240,
+      "source_households": 196,
+      "source_households_for_half": 16,
+      "by_part_moving_most": {
+       "snap": 0.2203646087875174,
+       "free_school_meals": 0.19572564420191807,
+       "household_tax_before_refundable_credits": 0.16357959904163397,
+       "reduced_price_school_meals": 0.13813188288375183,
+       "wic": 0.12712714093963012,
+       "tanf": 0.06753613326849675,
+       "ssi": 0.052796186928726174,
+       "household_refundable_tax_credits": 0.03473838850086492,
+       "household_state_benefits": 4.1544746086837487e-07
+      },
+      "by_part_moving_most_adults": {
+       "snap": 121196.5495428543,
+       "free_school_meals": 107645.5646160389,
+       "household_tax_before_refundable_credits": 89965.82113857404,
+       "reduced_price_school_meals": 75970.03747326182,
+       "wic": 69917.62842456967,
+       "tanf": 37143.651907827705,
+       "ssi": 29036.947992637986,
+       "household_refundable_tax_credits": 19105.485432298156,
+       "household_state_benefits": 0.2284885901171947
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 83188.83107844053,
+       "interval_95": [
+        26178.90446404098,
+        158159.59882103515
+       ],
+       "sample": 22
+      },
+      "versus_raise_1000": {
+       "difference": -133022.16095239413,
+       "interval_95": [
+        -381197.5122971922,
+        112451.89488534212
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 969459.569197126,
+      "workers_on_cliff": 969459.569197126,
+      "households_with_person_on_cliff": 924749.2427268995,
+      "people_in_those_households": 2792307.9222484087,
+      "interval_95": [
+       742420.3048967621,
+       1216801.0127590252
+      ],
+      "share_of_workers": 0.0051619672854025574,
+      "share_of_adults_reached": 0.005950799198931271,
+      "sample_people_on_cliff": 416,
+      "source_households": 351,
+      "source_households_for_half": 27,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.3406542615039279,
+       "snap": 0.12026576790552758,
+       "free_school_meals": 0.11103638875995117,
+       "household_tax_before_refundable_credits": 0.09279998374490288,
+       "msp_cost": 0.08822145234121101,
+       "reduced_price_school_meals": 0.07836328598641579,
+       "wic": 0.043541973773014775,
+       "tanf": 0.0383137709792156,
+       "ssi": 0.029951685367018883,
+       "chip_premium": 0.019772845494227694,
+       "household_refundable_tax_credits": 0.019709212264541365,
+       "assigned_aca_ptc": 0.013764671980907153,
+       "chip": 0.0036044643680125756,
+       "household_state_benefits": 2.3553112554880003e-07
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 330250.533602763,
+       "snap": 116592.7995428543,
+       "free_school_meals": 107645.28961242686,
+       "household_tax_before_refundable_credits": 89965.83226283384,
+       "msp_cost": 85527.13118065521,
+       "reduced_price_school_meals": 75970.03747326182,
+       "wic": 42212.18313597946,
+       "tanf": 37143.651907827705,
+       "ssi": 29036.947992637986,
+       "chip_premium": 19168.974274635315,
+       "household_refundable_tax_credits": 19107.284431196982,
+       "assigned_aca_ptc": 13344.29296875,
+       "chip": 3494.3824733998626,
+       "household_state_benefits": 0.22833790350705385
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 100343.21126995853,
+       "interval_95": [
+        37747.29662713235,
+        183255.0308252956
+       ],
+       "sample": 28
+      },
+      "versus_raise_1000": {
+       "difference": -2109847.1794573115,
+       "interval_95": [
+        -2634085.8549361476,
+        -1591148.4911312072
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 554356.1824991081,
+       "interval_95": [
+        371434.7139059102,
+        758635.6989992862
+       ],
+       "sample_people_on_cliff": 198,
+       "source_households": 170,
+       "source_households_for_half": 14,
+       "kish_effective_source_households": 33.305705724257656
+      },
+      "crossed_400_whole_credit": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "credit_moves_most_with_health": {
+       "adults": 13344.29296875,
+       "interval_95": [
+        0.0,
+        40032.87890625
+       ],
+       "sample_people_on_cliff": 1,
+       "source_households": 1,
+       "source_households_for_half": 1,
+       "kish_effective_source_households": 1.0
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      }
+     }
+    },
+    "raise_10pct": {
+     "label": "+10%",
+     "amount": 0.0,
+     "share": 0.1,
+     "adults_reached": {
+      "adults": 162912499.1095709,
+      "interval_95": [
+       158985079.71717578,
+       166747141.1875103
+      ],
+      "sample_people_on_cliff": 73781,
+      "source_households": 38989,
+      "source_households_for_half": 2258,
+      "kish_effective_source_households": 5901.216667338123
+     },
+     "workers_reached": 162911776.0340101,
+     "without_health": {
+      "people_on_cliff": 583088.387792799,
+      "workers_on_cliff": 583088.387792799,
+      "households_with_person_on_cliff": 546939.4742667244,
+      "people_in_those_households": 2302256.5495903096,
+      "interval_95": [
+       425771.4251155656,
+       751840.8171631894
+      ],
+      "share_of_workers": 0.0031047021226240853,
+      "share_of_adults_reached": 0.0035791507157509647,
+      "sample_people_on_cliff": 324,
+      "source_households": 254,
+      "source_households_for_half": 19,
+      "by_part_moving_most": {
+       "snap": 0.49555696720862313,
+       "tanf": 0.1511011826322453,
+       "reduced_price_school_meals": 0.0861813563250881,
+       "free_school_meals": 0.082084081733003,
+       "wic": 0.06499370876438312,
+       "ssi": 0.055128423585489875,
+       "household_refundable_tax_credits": 0.030615799820174656,
+       "household_tax_before_refundable_credits": 0.025801877121479855,
+       "household_state_benefits": 0.008536602809512892
+      },
+      "by_part_moving_most_adults": {
+       "snap": 288953.51306916506,
+       "tanf": 88105.3449746212,
+       "reduced_price_school_meals": 50251.348117392365,
+       "free_school_meals": 47862.27488114906,
+       "wic": 37897.07686009887,
+       "ssi": 32144.74363002181,
+       "household_refundable_tax_credits": 17851.717358132708,
+       "household_tax_before_refundable_credits": 15044.774932791595,
+       "household_state_benefits": 4977.593969426351
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 7720.968928722665,
+       "interval_95": [
+        0.5747359117958695,
+        20111.402453017094
+       ],
+       "sample": 10
+      },
+      "versus_raise_1000": {
+       "difference": -99915.68817624787,
+       "interval_95": [
+        -295654.1621736886,
+        82884.04364658632
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 4816467.912465247,
+      "workers_on_cliff": 4816467.912465247,
+      "households_with_person_on_cliff": 4449897.816471393,
+      "people_in_those_households": 15297690.741999071,
+      "interval_95": [
+       4275639.307748594,
+       5379128.61902736
+      ],
+      "share_of_workers": 0.025645679907958414,
+      "share_of_adults_reached": 0.029564753710062546,
+      "sample_people_on_cliff": 1978,
+      "source_households": 1564,
+      "source_households_for_half": 114,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.8538507871114941,
+       "snap": 0.0415302012593166,
+       "chip": 0.02888148809890933,
+       "msp_cost": 0.02714460594403743,
+       "tanf": 0.018292521942604535,
+       "reduced_price_school_meals": 0.009910743107892259,
+       "free_school_meals": 0.00746468330882405,
+       "wic": 0.004189348633416749,
+       "household_tax_before_refundable_credits": 0.0031236115772421123,
+       "ssi": 0.0025065453630979855,
+       "household_refundable_tax_credits": 0.002072010496227115,
+       "household_state_benefits": 0.0010334531569377015
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 4112544.9181557065,
+       "snap": 200028.8817637222,
+       "chip": 139106.7606926437,
+       "msp_cost": 130741.1235259697,
+       "tanf": 88105.3449746212,
+       "reduced_price_school_meals": 47734.776167849166,
+       "free_school_meals": 35953.40763366595,
+       "wic": 20177.863266981905,
+       "household_tax_before_refundable_credits": 15044.774932791595,
+       "ssi": 12072.6953125,
+       "household_refundable_tax_credits": 9979.772069369094,
+       "household_state_benefits": 4977.593969426351
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 7720.809301505564,
+       "interval_95": [
+        0.42220682274783033,
+        20111.275778671632
+       ],
+       "sample": 10
+      },
+      "versus_raise_1000": {
+       "difference": 1737161.1638108096,
+       "interval_95": [
+        1318981.000787564,
+        2131105.8941159486
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 3908568.4809613135,
+       "interval_95": [
+        3391226.2246233355,
+        4426719.52160472
+       ],
+       "sample_people_on_cliff": 1814,
+       "source_households": 1489,
+       "source_households_for_half": 82,
+       "kish_effective_source_households": 215.7086217856697
+      },
+      "crossed_400_whole_credit": {
+       "adults": 0.003401939757168293,
+       "interval_95": [
+        0.0,
+        0.010205819271504879
+       ],
+       "sample_people_on_cliff": 1,
+       "source_households": 1,
+       "source_households_for_half": 1,
+       "kish_effective_source_households": 1.0
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 11117.136816790793,
+       "interval_95": [
+        0.0,
+        33351.389844519086
+       ],
+       "sample_people_on_cliff": 3,
+       "source_households": 3,
+       "source_households_for_half": 1,
+       "kish_effective_source_households": 1.0000037070511691
+      },
+      "credit_moves_most_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      }
+     }
+    },
+    "cut_10pct": {
+     "label": "-10%",
+     "amount": 0.0,
+     "share": -0.1,
+     "adults_reached": {
+      "adults": 162912499.1095709,
+      "interval_95": [
+       158985079.71717578,
+       166747141.1875103
+      ],
+      "sample_people_on_cliff": 73781,
+      "source_households": 38989,
+      "source_households_for_half": 2258,
+      "kish_effective_source_households": 5901.216667338123
+     },
+     "workers_reached": 162911776.0340101,
+     "without_health": {
+      "people_on_cliff": 422675.77149514935,
+      "workers_on_cliff": 422675.77149514935,
+      "households_with_person_on_cliff": 392598.79642914014,
+      "people_in_those_households": 1684362.9136683985,
+      "interval_95": [
+       284273.95782811363,
+       576710.6437106665
+      ],
+      "share_of_workers": 0.0022505719414345183,
+      "share_of_adults_reached": 0.0025944956575177707,
+      "sample_people_on_cliff": 337,
+      "source_households": 258,
+      "source_households_for_half": 12,
+      "by_part_moving_most": {
+       "snap": 0.28336197991823814,
+       "tanf": 0.19389593430845373,
+       "household_tax_before_refundable_credits": 0.1926876461938521,
+       "reduced_price_school_meals": 0.08893544648804212,
+       "ssi": 0.08284587739883424,
+       "free_school_meals": 0.07063167621044113,
+       "household_state_benefits": 0.06568590304001107,
+       "wic": 0.01225667681690814,
+       "household_refundable_tax_credits": 0.009698859625219311
+      },
+      "by_part_moving_most_adults": {
+       "snap": 119770.24347433433,
+       "tanf": 81955.11362359847,
+       "household_tax_before_refundable_credits": 81444.39951257082,
+       "reduced_price_school_meals": 37590.85845759878,
+       "ssi": 35016.94514474482,
+       "free_school_meals": 29854.29823424379,
+       "household_state_benefits": 27763.839743792254,
+       "wic": 5180.600329553359,
+       "household_refundable_tax_credits": 4099.472974712728
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 4.011818119557574,
+       "interval_95": [
+        0.026713324710726738,
+        11.540324761980445
+       ],
+       "sample": 7
+      },
+      "versus_raise_1000": {
+       "difference": -260328.30447389756,
+       "interval_95": [
+        -468777.41739470995,
+        -54439.57289467804
+       ]
+      }
+     },
+     "with_health": {
+      "people_on_cliff": 3664855.234801589,
+      "workers_on_cliff": 3664855.234801589,
+      "households_with_person_on_cliff": 3381277.5221402654,
+      "people_in_those_households": 11777514.243721088,
+      "interval_95": [
+       3196567.928604396,
+       4164616.9929211847
+      ],
+      "share_of_workers": 0.01951382340106174,
+      "share_of_adults_reached": 0.022495850562925183,
+      "sample_people_on_cliff": 2164,
+      "source_households": 1741,
+      "source_households_for_half": 87,
+      "by_part_moving_most": {
+       "medicaid_cost": 0.8527348599420421,
+       "msp_cost": 0.03279824378512411,
+       "snap": 0.03267935804075732,
+       "tanf": 0.022362436902087144,
+       "household_tax_before_refundable_credits": 0.022223087760512898,
+       "reduced_price_school_meals": 0.010257108048323957,
+       "chip": 0.009226777240505071,
+       "household_state_benefits": 0.007575698892590871,
+       "free_school_meals": 0.0035170762462915384,
+       "household_refundable_tax_credits": 0.003434795733353206,
+       "ssi": 0.00318910368870343,
+       "chip_premium": 9.844371267192125e-07,
+       "wic": 4.692825815585265e-07
+      },
+      "by_part_moving_most_adults": {
+       "medicaid_cost": 3125149.815356393,
+       "msp_cost": 120200.81542821077,
+       "snap": 119765.11638562486,
+       "tanf": 81955.0939435343,
+       "household_tax_before_refundable_credits": 81444.39951257082,
+       "reduced_price_school_meals": 37590.816124825564,
+       "chip": 33814.80287021317,
+       "household_state_benefits": 27763.839743792254,
+       "free_school_meals": 12889.575292417867,
+       "household_refundable_tax_credits": 12588.02912385366,
+       "ssi": 11687.603347869823,
+       "chip_premium": 3.6078195571899414,
+       "wic": 1.7198527256259695
+      },
+      "net_income_moves_12_or_less": {
+       "adults": 4.009544811444357,
+       "interval_95": [
+        0.024881763383746147,
+        11.53808290340821
+       ],
+       "sample": 6
+      },
+      "versus_raise_1000": {
+       "difference": 585548.4861471513,
+       "interval_95": [
+        -55322.070210291,
+        1246507.6272366557
+       ]
+      }
+     },
+     "poverty_line_400": {
+      "crossed_400": {
+       "adults": 4666071.906658771,
+       "interval_95": [
+        4126923.6052618898,
+        5255962.351152556
+       ],
+       "sample_people_on_cliff": 1928,
+       "source_households": 1589,
+       "source_households_for_half": 99,
+       "kish_effective_source_households": 256.52904243275657
+      },
+      "crossed_400_whole_credit": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_on_cliff_with_health": {
+       "adults": 0.2160584768280387,
+       "interval_95": [
+        0.0020772619172930717,
+        0.6265593115240335
+       ],
+       "sample_people_on_cliff": 4,
+       "source_households": 4,
+       "source_households_for_half": 1,
+       "kish_effective_source_households": 1.237818153382253
+      },
+      "credit_moves_most_with_health": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      },
+      "crossed_400_credit_moves_most": {
+       "adults": 0.0,
+       "interval_95": [
+        0.0,
+        0.0
+       ],
+       "sample_people_on_cliff": 0,
+       "source_households": 0,
+       "source_households_for_half": 0,
+       "kish_effective_source_households": 0.0
+      }
+     }
+    }
+   },
+   "either_side": {
+    "raise_1000|cut_1000": {
+     "without_health": {
+      "adults": 1296024.6988167276,
+      "interval_95": [
+       1022349.3319668222,
+       1589503.1368091789
+      ],
+      "sample_people_on_cliff": 781,
+      "source_households": 472,
+      "source_households_for_half": 29,
+      "kish_effective_source_households": 76.56357084812657
+     },
+     "with_health": {
+      "adults": 4810089.025991059,
+      "interval_95": [
+       4208754.325284637,
+       5426378.33110708
+      ],
+      "sample_people_on_cliff": 2058,
+      "source_households": 1408,
+      "source_households_for_half": 95,
+      "kish_effective_source_households": 246.83279833178116
+     }
+    },
+    "raise_2000|cut_2000": {
+     "without_health": {
+      "adults": 1381820.7292893499,
+      "interval_95": [
+       1070274.2920759446,
+       1715809.378719242
+      ],
+      "sample_people_on_cliff": 848,
+      "source_households": 506,
+      "source_households_for_half": 27,
+      "kish_effective_source_households": 69.70022872225708
+     },
+     "with_health": {
+      "adults": 7619786.507298374,
+      "interval_95": [
+       6889220.94724166,
+       8376620.189603467
+      ],
+      "sample_people_on_cliff": 3281,
+      "source_households": 2260,
+      "source_households_for_half": 151,
+      "kish_effective_source_households": 391.73808227033606
+     }
+    },
+    "raise_5000|cut_5000": {
+     "without_health": {
+      "adults": 917252.7401611021,
+      "interval_95": [
+       689329.5991855788,
+       1167575.8979879161
+      ],
+      "sample_people_on_cliff": 519,
+      "source_households": 329,
+      "source_households_for_half": 21,
+      "kish_effective_source_households": 56.17844110273678
+     },
+     "with_health": {
+      "adults": 14716509.983724413,
+      "interval_95": [
+       13627914.593483122,
+       15810992.687837044
+      ],
+      "sample_people_on_cliff": 6125,
+      "source_households": 4174,
+      "source_households_for_half": 268,
+      "kish_effective_source_households": 691.9526171583192
+     }
+    },
+    "raise_1pct|cut_1pct": {
+     "without_health": {
+      "adults": 1033991.571926524,
+      "interval_95": [
+       815722.8649340844,
+       1281756.7103070717
+      ],
+      "sample_people_on_cliff": 523,
+      "source_households": 413,
+      "source_households_for_half": 30,
+      "kish_effective_source_households": 75.88204674609092
+     },
+     "with_health": {
+      "adults": 1834303.4788586104,
+      "interval_95": [
+       1532481.7006827665,
+       2164957.7169158896
+      ],
+      "sample_people_on_cliff": 853,
+      "source_households": 696,
+      "source_households_for_half": 51,
+      "kish_effective_source_households": 128.04424917922555
+     }
+    },
+    "raise_10pct|cut_10pct": {
+     "without_health": {
+      "adults": 907251.0561330519,
+      "interval_95": [
+       701479.9488239879,
+       1128555.1507594825
+      ],
+      "sample_people_on_cliff": 636,
+      "source_households": 484,
+      "source_households_for_half": 27,
+      "kish_effective_source_households": 69.91769314468934
+     },
+     "with_health": {
+      "adults": 8069029.12511621,
+      "interval_95": [
+       7366973.5915691955,
+       8808672.822301283
+      ],
+      "sample_people_on_cliff": 3908,
+      "source_households": 3024,
+      "source_households_for_half": 182,
+      "kish_effective_source_households": 478.8594195429292
+     }
+    }
+   },
+   "raise_versus_cut": {
+    "raise_1000|cut_1000": {
+     "without_health": {
+      "raise_minus_cut": {
+       "difference": -35005.45762321656,
+       "interval_95": [
+        -304298.44485901267,
+        233609.00377598495
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 519205.6062067866,
+       "interval_95": [
+        371324.8194935876,
+        682871.3401562767
+       ],
+       "sample_people_on_cliff": 389,
+       "source_households": 263,
+       "source_households_for_half": 16,
+       "kish_effective_source_households": 41.12190542568963
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": -198803.92738547688,
+       "interval_95": [
+        -450731.1186768991,
+        39611.682097939134
+       ]
+      }
+     },
+     "with_health": {
+      "raise_minus_cut": {
+       "difference": 1235136.7819544002,
+       "interval_95": [
+        649055.1254656783,
+        1806511.6444486652
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 2557570.583262071,
+       "interval_95": [
+        2151553.5856787963,
+        2981627.831137599
+       ],
+       "sample_people_on_cliff": 1045,
+       "source_households": 792,
+       "source_households_for_half": 55,
+       "kish_effective_source_households": 142.4143328546021
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 713400.6165620335,
+       "interval_95": [
+        171315.39807978875,
+        1235288.6672062443
+       ]
+      }
+     }
+    },
+    "raise_2000|cut_2000": {
+     "without_health": {
+      "raise_minus_cut": {
+       "difference": 241464.2303871609,
+       "interval_95": [
+        -51744.84763026886,
+        542655.5472903493
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 672768.2024404979,
+       "interval_95": [
+        468311.2454543695,
+        908351.8536377049
+       ],
+       "sample_people_on_cliff": 390,
+       "source_households": 273,
+       "source_households_for_half": 16,
+       "kish_effective_source_households": 36.39193294803755
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 25498.395878769574,
+       "interval_95": [
+        -231218.03716880045,
+        285003.29761301086
+       ]
+      }
+     },
+     "with_health": {
+      "raise_minus_cut": {
+       "difference": 1909469.0221365998,
+       "interval_95": [
+        1150555.2439558734,
+        2642679.5680900393
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 3918639.429452072,
+       "interval_95": [
+        3412824.808403221,
+        4448387.953236957
+       ],
+       "sample_people_on_cliff": 1538,
+       "source_households": 1172,
+       "source_households_for_half": 85,
+       "kish_effective_source_households": 220.28981490472623
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 940723.457160905,
+       "interval_95": [
+        273902.37665140745,
+        1594654.2274218411
+       ]
+      }
+     }
+    },
+    "raise_5000|cut_5000": {
+     "without_health": {
+      "raise_minus_cut": {
+       "difference": 302104.6823099876,
+       "interval_95": [
+        75885.97653303435,
+        540521.8610829567
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 510518.15626107506,
+       "interval_95": [
+        347855.35537846264,
+        688059.2484773432
+       ],
+       "sample_people_on_cliff": 223,
+       "source_households": 159,
+       "source_households_for_half": 13,
+       "kish_effective_source_households": 32.481485895961896
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 180779.55446254578,
+       "interval_95": [
+        -25244.32387092002,
+        391486.70205311495
+       ]
+      }
+     },
+     "with_health": {
+      "raise_minus_cut": {
+       "difference": 4230788.542684008,
+       "interval_95": [
+        3169837.771517124,
+        5261823.871611495
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 7811124.035486661,
+       "interval_95": [
+        7065486.638515786,
+        8588481.694404185
+       ],
+       "sample_people_on_cliff": 2802,
+       "source_households": 2090,
+       "source_households_for_half": 164,
+       "kish_effective_source_households": 423.00385427228923
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 2304056.445202547,
+       "interval_95": [
+        1372669.6231075262,
+        3222609.6251132633
+       ]
+      }
+     }
+    },
+    "raise_1pct|cut_1pct": {
+     "without_health": {
+      "raise_minus_cut": {
+       "difference": 26539.764430197654,
+       "interval_95": [
+        -196635.70720443793,
+        250548.6893735609
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 576521.6794468504,
+       "interval_95": [
+        416130.26202206325,
+        755851.4381327877
+       ],
+       "sample_people_on_cliff": 303,
+       "source_households": 242,
+       "source_households_for_half": 18,
+       "kish_effective_source_households": 43.0143706107286
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 26539.764430197654,
+       "interval_95": [
+        -196635.70720443793,
+        250548.6893735609
+       ]
+      }
+     },
+     "with_health": {
+      "raise_minus_cut": {
+       "difference": -9299.440792194335,
+       "interval_95": [
+        -317479.517363879,
+        296243.9774565058
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 960160.1284049316,
+       "interval_95": [
+        748249.1534109772,
+        1188009.0556892797
+       ],
+       "sample_people_on_cliff": 461,
+       "source_households": 377,
+       "source_households_for_half": 28,
+       "kish_effective_source_households": 70.63276441709985
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": -9299.440792194335,
+       "interval_95": [
+        -317479.517363879,
+        296243.9774565058
+       ]
+      }
+     }
+    },
+    "raise_10pct|cut_10pct": {
+     "without_health": {
+      "raise_minus_cut": {
+       "difference": 160412.61629764969,
+       "interval_95": [
+        -32960.42951021038,
+        345026.87858528213
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 583088.387792799,
+       "interval_95": [
+        425771.4251155656,
+        751840.8171631894
+       ],
+       "sample_people_on_cliff": 324,
+       "source_households": 254,
+       "source_households_for_half": 19,
+       "kish_effective_source_households": 46.635315427846045
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 160412.61629764969,
+       "interval_95": [
+        -32960.42951021038,
+        345026.87858528213
+       ]
+      }
+     },
+     "with_health": {
+      "raise_minus_cut": {
+       "difference": 1151612.6776636583,
+       "interval_95": [
+        478994.9106753022,
+        1834974.523934857
+       ]
+      },
+      "raise_where_cut_reaches": {
+       "adults": 4816467.912465247,
+       "interval_95": [
+        4275639.307748594,
+        5379128.61902736
+       ],
+       "sample_people_on_cliff": 1978,
+       "source_households": 1564,
+       "source_households_for_half": 114,
+       "kish_effective_source_households": 296.3975539934814
+      },
+      "raise_where_cut_reaches_minus_cut": {
+       "difference": 1151612.6776636583,
+       "interval_95": [
+        478994.9106753022,
+        1834974.523934857
+       ]
+      }
+     }
+    }
+   }
+  }
+ }
+}
