@@ -18,6 +18,10 @@ On about 300 Microcosm households, in 2017 and 2025:
    premise that lets one run give both counts);
 7. a cut matches a fresh simulation of the same households with the adult's
    earnings lowered (differential test of the branch machinery for cuts).
+
+Test 6 allows a dollar, as tests/test_decompose.py does: the model holds
+household values in float32, so the sum of the parts and a run's own total
+differ by rounding.
 """
 
 from pathlib import Path
@@ -118,7 +122,11 @@ def test_person_changes(change, rows):
         assert (amounts[reached] == change.amount).all()
 
 
-@given(st.lists(st.tuples(st.floats(-1e5, 1e5), st.floats(-1e5, 1e5)), min_size=1, max_size=30))
+# Dollar amounts: zero, or at least a hundredth of a cent either way, so the product can't underflow.
+dollars = st.one_of(st.just(0.0), st.floats(1e-4, 1e5), st.floats(-1e5, -1e-4))
+
+
+@given(st.lists(st.tuples(dollars, dollars), min_size=1, max_size=30))
 def test_moves_against_is_symmetric(pairs):
     c = np.array([p[0] for p in pairs])
     d = np.array([p[1] for p in pairs])
@@ -159,7 +167,15 @@ def test_parts_add_up_and_one_run_gives_both_counts(system, small_dataset, year,
     np.testing.assert_array_equal(merged["change"], merged["change_plain"])
     # without_health reads a decompose_change frame; the plain run's change rides alongside, so drop it first.
     rest = without_health(merged.drop(columns=["d_net_plain"]), health_parts(health, year))
-    np.testing.assert_allclose(rest, merged["d_net_plain"], atol=1e-6)
+    # The model holds household values in float32, so the sum of the parts and the plain run's
+    # total differ by rounding: $0.125 is float32's step between $1 million and $2 million.
+    # A dollar, as tests/test_decompose.py allows.
+    np.testing.assert_allclose(rest, merged["d_net_plain"], atol=1.0)
+    clear = np.abs(merged["d_net_plain"]) > 1.0
+    np.testing.assert_array_equal(
+        moves_against(merged["change"][clear], rest[clear]),
+        moves_against(merged["change"][clear], merged["d_net_plain"][clear]),
+    )
 
 
 @pytest.mark.parametrize("year", YEARS)
