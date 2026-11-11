@@ -14,7 +14,7 @@ machine that ran the committed parts shows up there, and the summary refuses tha
 
 usage:
   modal run --detach scripts/modal_earnings_changes.py [--years 2017,2025] [--parts 0,1,2,3]
-      [--changes +5000,-5000] [--dry-run]
+      [--changes=+5000,-5000] [--dry-run]   # "=" so a leading minus is not read as a flag
   modal run scripts/modal_earnings_changes.py --check      # one container: environment only
   modal run scripts/modal_earnings_changes.py --fetch      # copy what the volume holds
 """
@@ -70,7 +70,7 @@ volume = modal.Volume.from_name(VOLUME, create_if_missing=True)
 def run_change(year: int, part: int, change: str) -> dict:
     os.chdir(REMOTE)
     run = subprocess.run(
-        [sys.executable, "scripts/earnings_changes.py", "--year", str(year), "--part", str(part), "--changes", change],
+        [sys.executable, "scripts/earnings_changes.py", "--year", str(year), "--part", str(part), f"--changes={change}"],
         capture_output=True, text=True,
     )
     files = {}
@@ -161,7 +161,7 @@ def main(years: str = "2017,2025", parts: str = "0,1,2,3", changes: str = ALL_CH
     log(f"{len(jobs)} changes to run: {jobs}")
     if dry_run:
         return
-    for result in run_change.starmap(jobs, return_exceptions=True, order_outputs=False):
+    for result in run_change.starmap(jobs, return_exceptions=True, wrap_returned_exceptions=False, order_outputs=False):
         if isinstance(result, BaseException):
             log(f"a container failed: {result!r}")
             continue
