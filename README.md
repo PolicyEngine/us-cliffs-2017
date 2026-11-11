@@ -15,6 +15,7 @@ How many American adults would see their household's net income fall if they ear
 | cliffs2017/deflate.py | Scales the 2024 data to 2017 dollar levels and population; splits and subsamples households |
 | cliffs2017/aca2017.py | The ACA premium tax credit before 2018, which PolicyEngine-US leaves at $0 |
 | cliffs2017/decompose.py | Breaks each tested adult's change in net income into programs and taxes |
+| cliffs2017/changes.py | The cliff test with other changes in earnings: raises and cuts, in dollars or in proportion to earnings |
 | cliffs2017/medicaid.py | Medicaid's full-sample state totals, which the health runs hold fixed so each household's Medicaid value doesn't depend on the other households in a run |
 | cliffs2017/benefits.py | Leaves the Commodity Supplemental Food Program out of household benefits, so 2025 runs count the benefits 2017 runs do |
 | cliffs2017/wic_take_up.py | Sets WIC take-up from the draw Microcosm stores, as policyengine.py does |
@@ -27,6 +28,8 @@ How many American adults would see their household's net income fall if they ear
 | scripts/take_up_bounds.py | Counts the cliffs that would disappear without the change in benefits the model gives to everyone eligible: school meals, state benefits such as child care subsidies, CHIP, Medicare Savings Programs and state health programs (results/take_up_bounds.json) |
 | scripts/driver_intervals.py | Gives each count by largest loss, and its share of the total, a 95% interval from resampling survey households, and counts the survey households that carry it (results/driver_intervals.json) |
 | scripts/health_only.py | Compares the counts with and without health coverage adult by adult: which adults appear in both, which in only one, and what moves for the adults only in the count with health coverage (results/health_only.json) |
+| scripts/earnings_changes.py, scripts/run_earnings_changes.sh | Rebuild each part of the final runs with health coverage and repeat the test for each change in earnings, writing each change as it finishes (results/earnings_changes/parts/) |
+| scripts/earnings_changes_summary.py | Adds the parts for each change, with 95% intervals; counts the adults whose tax unit crosses 400% of the poverty line and the adults on either side of each raise and cut; and checks the $1,000 raise against the final runs (results/earnings_changes.json and .md) |
 | scripts/runner.zsh | Runs each job directly, or through a queue you name |
 | results/medicaid/ | The Medicaid sums and totals the health runs read |
 | results/csfp/ | The 2025 runs that count the Commodity Supplemental Food Program, and its reach |
@@ -49,6 +52,8 @@ scripts/run_counted_once.sh 4 0 0,1 && scripts/run_counted_once.sh 4 0 2,3
 python scripts/take_up_bounds.py
 python scripts/driver_intervals.py
 python scripts/health_only.py
+scripts/run_earnings_changes.sh 2017,2025 0,1 && scripts/run_earnings_changes.sh 2017,2025 2,3
+python scripts/earnings_changes_summary.py
 python scripts/render_results.py results/final_*.json --csfp results/csfp/final_*.json > results/summary.md
 ```
 
