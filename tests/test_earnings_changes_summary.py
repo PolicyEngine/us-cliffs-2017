@@ -148,6 +148,7 @@ def test_load_year_reads_one_file_per_change(tmp_path, monkeypatch):
 
     monkeypatch.setattr(summary, "ROOT", tmp_path)
     monkeypatch.setattr(summary, "PARTS", tmp_path / "results" / "earnings_changes" / "parts")
+    monkeypatch.setattr(summary, "ORDER", ["raise_1000", "cut_1000"])
     for part in range(4):
         # Written cut first: the summary must still list the changes in the script's order.
         _write_part(tmp_path, 2017, part, ["cut_1000", "raise_1000"])
@@ -159,7 +160,21 @@ def test_load_year_reads_one_file_per_change(tmp_path, monkeypatch):
     with pytest.raises(ValueError, match="doesn't reproduce"):
         summary.load_year(2017, "d")
     _write_part(tmp_path, 2017, 2, ["raise_1000"], reproduces=True)
-    # A part missing a change the others ran stops it too.
+    # A part missing a change stops it too.
     (tmp_path / "results" / "earnings_changes" / "parts" / "changes_2017_p4_3_s0" / "cut_1000.json").unlink()
-    with pytest.raises(ValueError, match="different changes"):
+    with pytest.raises(ValueError, match="missing"):
         summary.load_year(2017, "d")
+    # So does a change every part lacks, which would otherwise drop out of the table.
+    for part in range(3):
+        (tmp_path / "results" / "earnings_changes" / "parts" / f"changes_2017_p4_{part}_s0" / "cut_1000.json").unlink()
+    with pytest.raises(ValueError, match=r"\['cut_1000'\] are missing"):
+        summary.load_year(2017, "d")
+
+
+def test_reached_by_marks_every_row_of_the_adults_a_change_reaches():
+    from scripts.earnings_changes_summary import reached_by
+
+    person = np.array([1, 2, 3, 1, 3, 4])
+    key_col = np.array(["raise_1000"] * 3 + ["cut_1000"] * 2 + ["raise_1pct"])
+    np.testing.assert_array_equal(reached_by(person, key_col, "cut_1000"), [True, False, True, True, True, False])
+    np.testing.assert_array_equal(reached_by(person, key_col, "cut_5000"), [False] * 6)

@@ -134,6 +134,13 @@ def test_moves_against_is_symmetric(pairs):
     np.testing.assert_array_equal(moves_against(c, d), (c > 0) & (d < 0) | (c < 0) & (d > 0))
 
 
+def test_moves_against_handles_tiny_values():
+    # The product of these underflows to -0.0; the signs still disagree (review round 1, F5).
+    assert moves_against([5.8e-205, 1e-300, -1e-300, 0.0], [-6.4e-167, -1e-300, 1e-300, -5.0]).tolist() == [
+        True, True, True, False,
+    ]
+
+
 @pytest.mark.parametrize("year", YEARS)
 def test_raise_of_1000_reproduces_decompose(system, small_dataset, year):
     data, options = configured(small_dataset, system, year, True)

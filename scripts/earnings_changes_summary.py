@@ -20,7 +20,9 @@ results/parts/per_person/) and reports, for each year and change:
   how many of them face the cliff counting health coverage, and for how many
   the credit is the part that moves most against the change;
 - for each raise and cut of the same size, the adults on either side: those
-  whose household would lose from the raise or gain from the cut.
+  whose household would lose from the raise or gain from the cut; and the
+  raise's count minus the cut's, both as counted and with the raise counted
+  only among the adults the cut reaches, with paired intervals.
 
 Intervals come from 5,000 resamples of Microcosm's source households, as in
 scripts/driver_intervals.py: the 2.5th and 97.5th percentiles, sampling error
@@ -34,6 +36,7 @@ so a change of a few dollars, such as 1% of a small wage, can move SNAP by $12
 a year from rounding alone.
 
 It stops unless:
+- every part holds every change in scripts/earnings_changes.py's list;
 - the rows reproduce every part's counts;
 - the $1,000 raise reproduces the final runs' counts, in total and by the part
   that moves most, and the counted-once recount's adults whose largest loss is
@@ -152,6 +155,12 @@ def driver(rows: pd.DataFrame, columns: list[str], sign: int) -> pd.Series:
     return primary_driver(frame).to_numpy()
 
 
+def reached_by(person, key_col, key: str) -> np.ndarray:
+    """Each row whose adult the change ``key`` also reaches (any change's row)."""
+    person = np.asarray(person)
+    return np.isin(person, person[np.asarray(key_col) == key])
+
+
 def either_side(person, key_col, up: str, down: str, up_flags, down_flags) -> np.ndarray:
     """One row for each adult flagged under the raise ``up`` or the cut ``down``.
 
@@ -207,6 +216,10 @@ def load_year(year: int, dataset: str) -> tuple[list[dict], pd.DataFrame]:
         unknown = set(by_key) - set(ORDER)
         if unknown:
             raise ValueError(f"{folder.name}: changes {sorted(unknown)} aren't in scripts/earnings_changes.py's list")
+        missing = [key for key in ORDER if key not in by_key]
+        if missing:
+            # Without this, a change that failed in every part would drop out of the table silently.
+            raise ValueError(f"{folder.name}: changes {missing} are missing: run scripts/run_earnings_changes.sh {year} {i}")
         part = {key: records[0][key] for key in SHARED}
         part["changes"] = {key: by_key[key]["change"] for key in ORDER if key in by_key}
         part["records"] = records
@@ -332,9 +345,13 @@ def main() -> int:
         key_col = rows["change_key"].to_numpy()
         person = rows["person_id"].to_numpy()
         for up, down in pairs:
+            # A raise in dollars reaches adults the cut of the same size can't (those earning less than it), so
+            # for a like-for-like comparison we also count the raise among the adults the cut reaches.
+            cut_reaches = reached_by(person, key_col, down)
             for measure in MEASURES:
                 add((up, f"either_side_{measure}", down),
                     either_side(person, key_col, up, down, flags[(up, measure)], flags[(down, measure)]))
+                add((up, f"{measure}_where_cut_reaches", down), flags[(up, measure)] & cut_reaches)
         stats = np.column_stack(columns)
         draws = resample(stats, DRAWS, SEED)
         found = {}
@@ -346,11 +363,15 @@ def main() -> int:
                 **{k: v for k, v in support(stats[:, j], samples[j]).items()},
             )
 
+        def paired(a, b):
+            """Count ``a`` minus count ``b``, with an interval from the same resamples."""
+            j, k = column_of[a], column_of[b]
+            return dict(difference=float(stats[:, j].sum() - stats[:, k].sum()),
+                        interval_95=interval(draws[:, j] - draws[:, k]))
+
         def versus_base(key, measure):
             """This change's count minus the $1,000 raise's, with a paired interval."""
-            j, b = column_of[(key, measure, None)], column_of[(BASE, measure, None)]
-            return dict(difference=float(stats[:, j].sum() - stats[:, b].sum()),
-                        interval_95=interval(draws[:, j] - draws[:, b]))
+            return paired((key, measure, None), (BASE, measure, None))
 
         year_out = {"workers": workers, "parts_code": code, "changes": {}}
         for key in keys:
@@ -392,6 +413,18 @@ def main() -> int:
         check_base_details(year, year_out["changes"][BASE])
         year_out["either_side"] = {
             f"{up}|{down}": {measure: found[(up, f"either_side_{measure}", down)] for measure in MEASURES}
+            for up, down in pairs
+        }
+        year_out["raise_versus_cut"] = {
+            f"{up}|{down}": {
+                measure: dict(
+                    raise_minus_cut=paired((up, measure, None), (down, measure, None)),
+                    raise_where_cut_reaches=found[(up, f"{measure}_where_cut_reaches", down)],
+                    raise_where_cut_reaches_minus_cut=paired((up, f"{measure}_where_cut_reaches", down),
+                                                             (down, measure, None)),
+                )
+                for measure in MEASURES
+            }
             for up, down in pairs
         }
         out["years"][str(year)] = year_out
@@ -465,11 +498,26 @@ def render(out: dict) -> str:
                 f"{millions(a['interval_95'][0])} to {millions(a['interval_95'][1])} | {millions(b['adults'])} | "
                 f"{millions(b['interval_95'][0])} to {millions(b['interval_95'][1])} |"
             )
+        lines += ["", "Raise against the cut of the same size: the raise's count minus the cut's, then the raise",
+                  "counted only among the adults the cut reaches, minus the cut (paired 95% intervals):", "",
+                  "| Sizes | Measure | Raise minus cut | 95% interval | Raise where the cut reaches | Minus cut | 95% interval |",
+                  "|---|---|---:|---|---:|---:|---|"]
+        for pair, e in y["raise_versus_cut"].items():
+            up, down = pair.split("|")
+            for measure, title in (("without_health", "before health coverage"), ("with_health", "counting health coverage")):
+                d, w, wd = e[measure]["raise_minus_cut"], e[measure]["raise_where_cut_reaches"], e[measure]["raise_where_cut_reaches_minus_cut"]
+                lines.append(
+                    f"| {y['changes'][up]['label']} / {y['changes'][down]['label']} | {title} | "
+                    f"{d['difference'] / 1e6:+.2f}M | {d['interval_95'][0] / 1e6:+.2f}M to {d['interval_95'][1] / 1e6:+.2f}M | "
+                    f"{millions(w['adults'])} | {wd['difference'] / 1e6:+.2f}M | "
+                    f"{wd['interval_95'][0] / 1e6:+.2f}M to {wd['interval_95'][1] / 1e6:+.2f}M |"
+                )
         lines += ["", "400% of the poverty line (adults whose tax unit crosses it with the change):", ""]
         if year != "2017":
-            lines += ["Under these rules the premium tax credit has no income limit at 400% of the poverty line",
-                      "(PolicyEngine-US's gov.aca.ptc_income_eligibility is true above 400% from 2021 through 2025),",
-                      "so crossing it ends no one's credit.", ""]
+            lines += ["Under these rules the 400% line ends no credit: PolicyEngine-US's gov.aca.ptc_income_eligibility",
+                      "admits incomes above it from 2021 through 2025, and aca_required_contribution_percentage holds the",
+                      "required contribution at 8.5% of income there. A credit that ends for these adults ends because",
+                      "8.5% of the tax unit's income reaches its benchmark premium.", ""]
         lines += [
                   "| Change | Cross 400% | Lose (raise) or gain (cut) the whole credit | Of those crossing, cliff counting health | 95% interval | Credit moves most, all adults on a cliff | 95% interval |",
                   "|---|---:|---:|---:|---|---:|---|"]
