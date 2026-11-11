@@ -107,11 +107,12 @@ def test_support_at_the_edges_of_the_float_range(values, households, kish):
     assert s["kish_effective_source_households"] == pytest.approx(kish)
 
 
-@given(totals_lists, st.sampled_from([1e-300, 1e-150, 1e-3, 1.0, 1e150, 1e290]))
+@given(
+    st.lists(st.floats(min_value=1e-2, max_value=1e6, allow_nan=False), min_size=1, max_size=40),
+    st.sampled_from([1e-300, 1e-150, 1e-3, 1.0, 1e150, 1e290]),
+)
 def test_support_ignores_the_totals_scale(values, scale):
-    totals = np.array(values)
-    if not (totals > 1e-3).all():  # keep every scaled total a normal float
-        return
+    totals = np.array(values)  # from 0.01 up, so every scaled total stays a normal float
     a, b = di.support(totals, len(values)), di.support(totals * scale, len(values))
     assert a["source_households"] == b["source_households"]
     assert a["kish_effective_source_households"] == pytest.approx(b["kish_effective_source_households"], rel=1e-9)
@@ -129,7 +130,8 @@ def test_support_invariants(values):
         return
     k = s["source_households_for_half"]
     assert 1 <= k <= s["source_households"] == len(held)
-    # Written without halving, so the smallest floats can't round a half to zero.
+    # Written without halving, so the smallest floats can't round a half to zero. The 1e-12
+    # allowance covers rounding at an exact tie; test_support_on_a_small_example pins ties.
     assert 2 * held[:k].sum() >= held.sum() * (1 - 1e-12)
     assert 2 * held[: k - 1].sum() < held.sum() * (1 + 1e-12)
     assert 1 - 1e-9 <= s["kish_effective_source_households"] <= len(held) * (1 + 1e-9)
