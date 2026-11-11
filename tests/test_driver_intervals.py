@@ -3,7 +3,7 @@
 Invariants the tests check, for every input they draw:
 - support(): the fewest households that supply half of a count do supply at least half,
   one fewer don't, and Kish's effective number lies between 1 and the households that
-  carry the count;
+  carry the count, at any scale of the totals from the smallest floats to the largest;
 - resample(): every resample draws as many source households as the dataset holds, it
   skips only rows that are all zero without changing a draw, and with run.py's clusters
   and seed it reproduces cliffs2017.run.bootstrap's standard error;
@@ -93,6 +93,32 @@ def test_support_on_a_small_example():
     assert empty["source_households"] == empty["source_households_for_half"] == 0
 
 
+@pytest.mark.parametrize("values, households, kish", [
+    ([5e-324], 1, 1.0),           # the smallest positive float: half of it rounds to 0
+    ([2.2250738585e-313], 1, 1.0),  # Hypothesis's first example: its square underflows to 0
+    ([1.5e-190], 1, 1.0),
+    ([1e-200, 1e-200], 2, 2.0),
+    ([1e160, 1e160], 2, 2.0),     # their squared sum overflows a float
+])
+def test_support_at_the_edges_of_the_float_range(values, households, kish):
+    s = di.support(np.array(values), sample_people=len(values))
+    assert s["source_households"] == households
+    assert s["source_households_for_half"] == 1
+    assert s["kish_effective_source_households"] == pytest.approx(kish)
+
+
+@given(totals_lists, st.sampled_from([1e-300, 1e-150, 1e-3, 1.0, 1e150, 1e290]))
+def test_support_ignores_the_totals_scale(values, scale):
+    totals = np.array(values)
+    if not (totals > 1e-3).all():  # keep every scaled total a normal float
+        return
+    a, b = di.support(totals, len(values)), di.support(totals * scale, len(values))
+    assert a["source_households"] == b["source_households"]
+    assert a["kish_effective_source_households"] == pytest.approx(b["kish_effective_source_households"], rel=1e-9)
+    # The fewest households for half can move only where a running sum ties with half the total.
+    assert abs(a["source_households_for_half"] - b["source_households_for_half"]) <= 1
+
+
 @given(totals_lists)
 def test_support_invariants(values):
     totals = np.array(values)
@@ -103,8 +129,9 @@ def test_support_invariants(values):
         return
     k = s["source_households_for_half"]
     assert 1 <= k <= s["source_households"] == len(held)
-    assert held[:k].sum() >= held.sum() / 2 * (1 - 1e-12)
-    assert held[: k - 1].sum() < held.sum() / 2
+    # Written without halving, so the smallest floats can't round a half to zero.
+    assert 2 * held[:k].sum() >= held.sum() * (1 - 1e-12)
+    assert 2 * held[: k - 1].sum() < held.sum() * (1 + 1e-12)
     assert 1 - 1e-9 <= s["kish_effective_source_households"] <= len(held) * (1 + 1e-9)
 
 

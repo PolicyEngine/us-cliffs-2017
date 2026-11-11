@@ -96,20 +96,23 @@ def source_index(household_id: np.ndarray, households: pd.DataFrame) -> tuple[np
 def support(totals: np.ndarray, sample_people: int) -> dict:
     """How many source households carry a count, from each one's total of it."""
     held = np.sort(totals[totals > 0])[::-1]
-    total = float(held.sum())
-    if total == 0:
+    if len(held) == 0:
         return dict(
             sample_people_on_cliff=int(sample_people),
             source_households=0,
             source_households_for_half=0,
             kish_effective_source_households=0.0,
         )
-    half = int(np.searchsorted(np.cumsum(held), total / 2, side="left")) + 1
+    # Shares of the largest total: neither a square nor a half can underflow or overflow,
+    # whatever the totals' scale, and both statistics depend only on these shares.
+    shares = held / held[0]
+    total = float(shares.sum())
+    half = int(np.searchsorted(np.cumsum(shares), total / 2, side="left")) + 1
     return dict(
         sample_people_on_cliff=int(sample_people),
         source_households=int(len(held)),
         source_households_for_half=min(half, int(len(held))),
-        kish_effective_source_households=float(total**2 / np.square(held).sum()),
+        kish_effective_source_households=float(total**2 / np.square(shares).sum()),
     )
 
 
