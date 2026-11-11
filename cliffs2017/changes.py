@@ -21,7 +21,8 @@ earnings, so neither leaves anyone with negative earnings. "Earnings" here are
 the positive parts of wages and both kinds of self-employment income, the
 amounts PolicyEngine-US's ``earnings_increments`` splits a change across: each
 part moves in proportion to its share, so a cut no larger than the total
-leaves every part at zero or above.
+leaves every part at zero or above, to float32 rounding (a cut of exactly the
+total can leave a part at about -1e-5).
 
 For each change, :func:`decompose_change` builds the same branches as
 cliffs2017.decompose (PolicyEngine-US's ``create_perturbed_branch`` and
@@ -34,6 +35,7 @@ reproduces cliffs2017.decompose exactly.
 
 from __future__ import annotations
 
+import gc
 import re
 from dataclasses import dataclass
 
@@ -115,8 +117,8 @@ def person_changes(change: Change, measured: np.ndarray, earnings: np.ndarray) -
 
 def moves_against(change_values, d_net) -> np.ndarray:
     """Whether net income moves the opposite way to earnings: a cliff under a
-    raise, a gain from a cut."""
-    return np.asarray(change_values, dtype=float) * np.asarray(d_net, dtype=float) < 0
+    raise, a gain from a cut. Compares signs, so tiny values can't underflow."""
+    return np.sign(np.asarray(change_values, dtype=float)) * np.sign(np.asarray(d_net, dtype=float)) < 0
 
 
 def decompose_change(
@@ -168,6 +170,10 @@ def decompose_change(
             for v in person_variables
         }
         del simulation.branches[name]
+        # Simulations hold reference cycles, so a deleted branch's arrays wait for the
+        # collector; collect now, or memory grows with every branch.
+        del branch
+        gc.collect()
         households = household_index[people]
         frame = pd.DataFrame({"person_index": people, "rank": k, "change": amounts[people]})
         for variable, sign in parts:

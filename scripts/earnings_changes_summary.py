@@ -1,8 +1,9 @@
 """Cliff counts for other changes in earnings, with intervals, from all four parts.
 
 scripts/earnings_changes.py tests every adult with several changes in
-earnings, one household part at a time. This script reads the four parts of
-each year (results/earnings_changes/parts/ and their per-person rows in
+earnings, one household part and one change at a time. This script reads every
+change of the four parts of each year (results/earnings_changes/parts/, one
+folder per part and one file per change, and their per-person rows in
 results/parts/per_person/) and reports, for each year and change:
 
 - the adults the change reaches, and those whose household's net income moves
@@ -64,7 +65,9 @@ sys.path.insert(0, str(ROOT))
 
 from cliffs2017.decompose import primary_driver  # noqa: E402
 from cliffs2017.run import FILENAME, REPO, REVISION  # noqa: E402
+from cliffs2017.changes import parse  # noqa: E402
 from scripts.driver_intervals import interval, resample, source_index, support  # noqa: E402
+from scripts.earnings_changes import CHANGES  # noqa: E402
 
 PARTS = ROOT / "results" / "earnings_changes" / "parts"
 OUT = ROOT / "results" / "earnings_changes.json"
@@ -82,6 +85,9 @@ PTC = "assigned_aca_ptc"
 # SNAP's yearly rounding step: PolicyEngine-US rounds SNAP net income to whole dollars each month.
 SMALL = 12.0
 BASE = "raise_1000"
+ORDER = [parse(text).key for text in CHANGES.split(",")]
+SHARED = ("year", "parts", "part", "seed", "versions", "stored_input_renames", "health_parts", "workers",
+          "people_total", "dataset")
 
 
 def against(change, d_net) -> np.ndarray:
@@ -165,29 +171,51 @@ def either_side(person, key_col, up: str, down: str, up_flags, down_flags) -> np
 
 
 def load_year(year: int, dataset: str) -> tuple[list[dict], pd.DataFrame]:
+    """Every change of the year's four parts: one dict per part, and all the per-person rows.
+
+    Each part's dict holds the settings its changes share, its changes' totals
+    under ``changes`` (in the order scripts/earnings_changes.py lists them) and
+    the change files themselves under ``records``."""
     parts, rows = [], []
     for i in range(N_PARTS):
-        path = PARTS / f"changes_{year}_p{N_PARTS}_{i}_s0.json"
-        if not path.exists():
-            raise FileNotFoundError(f"{path} is missing: run scripts/earnings_changes.py --year {year} --part {i}")
-        part = json.loads(path.read_text())
-        if part["dataset"] != dataset:
-            raise ValueError(f"{path} read {part['dataset']}, not {dataset}")
-        frame = pd.read_csv(ROOT / part["per_person_file"])
-        for key, entry in part["changes"].items():
-            block = frame[frame["change_key"] == key]
+        folder = PARTS / f"changes_{year}_p{N_PARTS}_{i}_s0"
+        files = sorted(folder.glob("*.json"))
+        if not files:
+            raise FileNotFoundError(f"{folder} holds no changes: run scripts/run_earnings_changes.sh {year} {i}")
+        records = [json.loads(f.read_text()) for f in files]
+        for r in records:
+            if r["dataset"] != dataset:
+                raise ValueError(f"{folder.name}/{r['key']}.json read {r['dataset']}, not {dataset}")
+            if r["part"] != i or r["year"] != year:
+                raise ValueError(f"{folder.name}/{r['key']}.json is year {r['year']} part {r['part']}")
+            for key in SHARED:
+                if r[key] != records[0][key]:
+                    raise ValueError(f"{folder.name}: the changes differ in {key}")
+            frame = pd.read_csv(ROOT / r["per_person_file"])
+            if set(frame["change_key"]) != {r["key"]}:
+                raise ValueError(f"{r['per_person_file']} holds rows of other changes")
+            entry = r["change"]
             for measure, column in MEASURES.items():
-                flags = against(block["change"], block[column])
-                check(f"{path.name} {key} {measure}", float(block["weight"][flags].sum()),
+                flags = against(frame["change"], frame[column])
+                check(f"{folder.name} {r['key']} {measure}", float(frame["weight"][flags].sum()),
                       entry[measure]["people_on_cliff"])
-            check(f"{path.name} {key} reached", float(block["weight"].sum()), entry["adults_reached"])
+            check(f"{folder.name} {r['key']} reached", float(frame["weight"].sum()), entry["adults_reached"])
+            rows.append(frame)
+        by_key = {r["key"]: r for r in records}
+        if BASE not in by_key or by_key[BASE]["reproduces_committed_part"] is not True:
+            raise ValueError(f"{folder.name}: the $1,000 raise is missing or doesn't reproduce the committed part")
+        unknown = set(by_key) - set(ORDER)
+        if unknown:
+            raise ValueError(f"{folder.name}: changes {sorted(unknown)} aren't in scripts/earnings_changes.py's list")
+        part = {key: records[0][key] for key in SHARED}
+        part["changes"] = {key: by_key[key]["change"] for key in ORDER if key in by_key}
+        part["records"] = records
         parts.append(part)
-        rows.append(frame)
-    for key in ("versions", "stored_input_renames", "health_parts"):
+    for key in ("versions", "stored_input_renames", "health_parts", "dataset"):
         if any(p[key] != parts[0][key] for p in parts[1:]):
             raise ValueError(f"{year}: the parts differ in {key}")
-    if sorted(p["part"] for p in parts) != list(range(N_PARTS)):
-        raise ValueError(f"{year}: parts {sorted(p['part'] for p in parts)}")
+    if any(list(p["changes"]) != list(parts[0]["changes"]) for p in parts[1:]):
+        raise ValueError(f"{year}: the parts ran different changes: {[list(p['changes']) for p in parts]}")
     out = pd.concat(rows, ignore_index=True)
     if out[["change_key", "person_id"]].duplicated().any():
         raise ValueError(f"{year}: a person appears twice under one change")
@@ -260,7 +288,7 @@ def main() -> int:
     }
     for year in years:
         parts, rows = load_year(year, dataset)
-        code = check_code(year, parts)
+        code = check_code(year, [r for p in parts for r in p["records"]])
         check_finals(year, parts)
         health_parts = parts[0]["health_parts"]
         workers = sum(p["workers"] for p in parts)

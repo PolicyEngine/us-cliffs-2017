@@ -20,25 +20,33 @@ fraction of the poverty line (``aca_magi_fraction``) and its premium tax credit
 (``assigned_aca_ptc``) before and after, so scripts/earnings_changes_summary.py
 can count who crosses 400% of the poverty line.
 
-It stops unless the $1,000 raise reproduces the committed part: the count
-before health coverage must equal the part of the final run without health
-coverage, and the count with it the part's count with the credit counted once,
-in adults, workers, households and members, to 1e-9. That checks both this
-code and the premise that one simulation gives both counts. It also stops if
-cliffs2017/ or this script has uncommitted changes, so the commit it records
-holds the code that ran.
+Each change is written as soon as it is done: its weighted totals to
+results/earnings_changes/parts/changes_<year>_p<parts>_<part>_s<seed>/<key>.json
+and its per-person rows to results/parts/per_person/ (git-ignored record-level
+output). A rerun skips the changes already written, so a run that stops loses
+at most the change it was on. Each change builds two branches, and memory grows
+with the branches one process builds, so scripts/run_earnings_changes.sh runs
+two changes per process.
 
-Per-person rows go to results/parts/per_person/ (git-ignored record-level
-output); the part file holds weighted totals and counts of records.
+The $1,000 raise must reproduce the committed part: the count before health
+coverage must equal the part of the final run without health coverage, and the
+count with it the part's count with the credit counted once, in adults,
+workers, households and members, to 1e-9. That checks both this code and the
+premise that one simulation gives both counts. The change's file records
+``reproduces_committed_part``; if it is false, the script writes the change and
+then stops with an error, and scripts/earnings_changes_summary.py refuses the
+part. The script also stops if cliffs2017/ or this script has uncommitted
+changes, so the commit it records holds the code that ran.
 
 usage:
   python scripts/earnings_changes.py --year 2017 --part 0 [--parts 4] [--seed 0]
-      [--changes +1000,-1000,+2000,-2000,+5000,-5000,+1%,-1%,+10%,-10%]
+      [--changes +1000,-1000] [--todo]
 """
 
 from __future__ import annotations
 
 import argparse
+import gc
 import hashlib
 import json
 import math
@@ -73,7 +81,18 @@ HEADLINE = (
     "households_with_person_on_cliff",
     "people_in_those_households",
 )
+BASE = "raise_1000"
 TOLERANCE = 1e-9
+
+
+def stem(year: int, parts: int, part: int, seed: int) -> str:
+    return f"changes_{year}_p{parts}_{part}_s{seed}"
+
+
+def change_files(year: int, parts: int, part: int, seed: int, key: str) -> tuple[Path, Path]:
+    """Where one change's totals and per-person rows go."""
+    name = stem(year, parts, part, seed)
+    return OUT / name / f"{key}.json", PER_PERSON / f"{name}_{key}.csv.gz"
 
 
 def uncommitted() -> str:
@@ -103,10 +122,18 @@ def main() -> int:
     parser.add_argument("--part", type=int, required=True)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--changes", default=CHANGES)
+    parser.add_argument("--todo", action="store_true", help="print how many of the changes aren't written yet, and stop")
     args = parser.parse_args()
     changes = [parse(text) for text in args.changes.split(",")]
     if len({c.key for c in changes}) != len(changes):
         parser.error("a change appears twice")
+    todo = [c for c in changes if not change_files(args.year, args.parts, args.part, args.seed, c.key)[0].exists()]
+    if args.todo:
+        print(len(todo))
+        return 0
+    if not todo:
+        print(f"{args.year} part {args.part}: every change in {args.changes} is done")
+        return 0
 
     from policyengine_us import CountryTaxBenefitSystem
 
@@ -166,9 +193,21 @@ def main() -> int:
     cluster, _ = source_clusters(dataset, household_id)
     people = pd.DataFrame(dict(household_id=household_id, cluster=cluster, weight=weight, worker=earnings > 0))
     health_columns = health_parts(sim, year)
+    shared = dict(
+        wanted,
+        health_benefits_in_net_income=True,
+        health_parts=health_columns,
+        person_variables=list(PERSON_VARIABLES),
+        workers=float(weight[people["worker"].to_numpy()].sum()),
+        people_total=float(weight.sum()),
+        versions=versions,
+        dataset=dataset_name,
+        code=code,
+        stored_input_renames=sim.stored_input_renames,
+    )
 
-    results, frames, problems = {}, [], []
-    for change in changes:
+    failed = []
+    for change in todo:
         t = time.time()
         frame = decompose_change(sim, year, change, PERSON_VARIABLES)
         frame["d_net_without_health"] = without_health(frame, health_columns)
@@ -187,51 +226,47 @@ def main() -> int:
             flags = np.zeros(len(people), dtype=bool)
             flags[index] = moves_against(frame["change"], frame[column])
             entry[name] = dict(**headline(people, flags), sample_people_on_cliff=int(flags.sum()))
-        entry["seconds"] = round(time.time() - t, 1)
-        results[change.key] = entry
-        if change.key == "raise_1000":
-            problems += mismatches("without_health vs " + plain_path.name, entry["without_health"], plain)
+        reproduces, problems = None, []
+        if change.key == BASE:
+            problems = mismatches("without_health vs " + plain_path.name, entry["without_health"], plain)
             problems += mismatches(
                 "with_health vs " + health_path.name, entry["with_health"], health["premium_tax_credit_counted_once"]
             )
+            reproduces = not problems
+        json_path, rows_path = change_files(year, args.parts, args.part, args.seed, change.key)
         frame.insert(0, "change_key", change.key)
         frame.insert(1, "person_id", person_id[index])
         frame.insert(2, "household_id", household_id[index])
         frame["weight"] = weight[index]
         frame["worker"] = people["worker"].to_numpy()[index]
-        frames.append(frame)
+        rows_path.parent.mkdir(parents=True, exist_ok=True)
+        frame.to_csv(rows_path, index=False)
+        json_path.parent.mkdir(parents=True, exist_ok=True)
+        record = dict(
+            shared,
+            key=change.key,
+            change=entry,
+            reproduces_committed_part=reproduces,
+            reproduces=[str(plain_path.relative_to(ROOT)), str(health_path.relative_to(ROOT))] if change.key == BASE else None,
+            problems=problems,
+            per_person_file=str(rows_path.relative_to(ROOT)),
+            seconds=round(time.time() - t, 1),
+        )
+        # Write to a temporary name and rename, so a stopped run never leaves half a file
+        # that a rerun would take as done.
+        tmp = json_path.with_suffix(".json.tmp")
+        tmp.write_text(json.dumps(record, indent=1) + "\n")
+        tmp.replace(json_path)
         print(f"{change.label}: reached {entry['adults_reached']:,.0f}; "
               f"without health {entry['without_health']['people_on_cliff']:,.0f}, "
-              f"with health {entry['with_health']['people_on_cliff']:,.0f} ({entry['seconds']} s)", flush=True)
-    if "raise_1000" not in results:
-        problems.append("--changes must include +1000, which checks this run against the committed part")
-    if problems:
-        sys.exit("doesn't reproduce the committed parts:\n" + "\n".join(problems))
-
-    stem = f"changes_{year}_p{args.parts}_{args.part}_s{args.seed}"
-    detail = PER_PERSON / f"{stem}.csv.gz"
-    detail.parent.mkdir(parents=True, exist_ok=True)
-    pd.concat(frames, ignore_index=True).to_csv(detail, index=False)
-    out = dict(
-        wanted,
-        health_benefits_in_net_income=True,
-        changes=results,
-        health_parts=health_columns,
-        person_variables=list(PERSON_VARIABLES),
-        reproduces=[str(plain_path.relative_to(ROOT)), str(health_path.relative_to(ROOT))],
-        workers=float(weight[people["worker"].to_numpy()].sum()),
-        people_total=float(weight.sum()),
-        versions=versions,
-        dataset=dataset_name,
-        code=code,
-        stored_input_renames=sim.stored_input_renames,
-        per_person_file=str(detail.relative_to(ROOT)),
-        seconds=round(time.time() - started, 1),
-    )
-    path = OUT / f"{stem}.json"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(out, indent=1) + "\n")
-    print(path)
+              f"with health {entry['with_health']['people_on_cliff']:,.0f} ({record['seconds']} s)", flush=True)
+        if problems:
+            failed += problems
+        del frame
+        gc.collect()
+    if failed:
+        sys.exit("doesn't reproduce the committed parts:\n" + "\n".join(failed))
+    print(f"done in {time.time() - started:.0f} s")
     return 0
 
 

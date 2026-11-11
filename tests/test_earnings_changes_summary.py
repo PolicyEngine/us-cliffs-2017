@@ -97,14 +97,69 @@ def test_code_hash_at_head_matches_code_version():
 def test_check_code_accepts_commits_with_the_same_code_and_refuses_others():
     import pytest
 
-    from cliffs2017.run import code_version
-    from scripts.earnings_changes_summary import check_code, script_hash_at
+    from scripts.earnings_changes_summary import check_code, code_hash_at, script_hash_at
 
-    head = code_version()
-    good = dict(commit="HEAD", cliffs2017_sha256=head["cliffs2017_sha256"],
+    good = dict(commit="HEAD", cliffs2017_sha256=code_hash_at("HEAD"),
                 script_sha256=script_hash_at("HEAD", "scripts/earnings_changes.py"))
     assert check_code(2017, [dict(code=good), dict(code=good)])["commits"] == ["HEAD"]
     with pytest.raises(ValueError, match="different code"):
         check_code(2017, [dict(code=good), dict(code=dict(good, script_sha256="0" * 64))])
     with pytest.raises(ValueError, match="doesn't hold"):
         check_code(2017, [dict(code=dict(good, cliffs2017_sha256="0" * 64))])
+
+
+def _write_part(root, year, part, keys, reproduces=True):
+    import json
+
+    folder = root / "results" / "earnings_changes" / "parts" / f"changes_{year}_p4_{part}_s0"
+    folder.mkdir(parents=True, exist_ok=True)
+    rows_dir = root / "results" / "parts" / "per_person"
+    rows_dir.mkdir(parents=True, exist_ok=True)
+    for key in keys:
+        sign = 1 if key.startswith("raise") else -1
+        frame = pd.DataFrame(
+            {
+                "change_key": key,
+                "person_id": [10 * part + 1, 10 * part + 2],
+                "household_id": [part, part],
+                "change": [sign * 1000.0, sign * 1000.0],
+                "d_net_without_health": [-sign * 5.0, sign * 600.0],
+                "d_net_single_ptc": [-sign * 5.0, -sign * 7.0],
+                "weight": [2.0, 3.0],
+            }
+        )
+        rows = rows_dir / f"changes_{year}_p4_{part}_s0_{key}.csv.gz"
+        frame.to_csv(rows, index=False)
+        record = dict(
+            year=year, parts=4, part=part, seed=0, versions={"x": "1"}, stored_input_renames={}, health_parts=[],
+            workers=10.0, people_total=20.0, dataset="d", key=key,
+            change=dict(adults_reached=5.0, without_health=dict(people_on_cliff=2.0),
+                        with_health=dict(people_on_cliff=5.0)),
+            reproduces_committed_part=reproduces if key == "raise_1000" else None,
+            per_person_file=str(rows.relative_to(root)), code=dict(commit="c", cliffs2017_sha256="a", script_sha256="b"),
+        )
+        (folder / f"{key}.json").write_text(json.dumps(record))
+
+
+def test_load_year_reads_one_file_per_change(tmp_path, monkeypatch):
+    import pytest
+
+    import scripts.earnings_changes_summary as summary
+
+    monkeypatch.setattr(summary, "ROOT", tmp_path)
+    monkeypatch.setattr(summary, "PARTS", tmp_path / "results" / "earnings_changes" / "parts")
+    for part in range(4):
+        # Written cut first: the summary must still list the changes in the script's order.
+        _write_part(tmp_path, 2017, part, ["cut_1000", "raise_1000"])
+    parts, rows = summary.load_year(2017, "d")
+    assert [list(p["changes"]) for p in parts] == [["raise_1000", "cut_1000"]] * 4
+    assert len(rows) == 16 and set(rows["change_key"]) == {"raise_1000", "cut_1000"}
+    # A $1,000 raise that doesn't reproduce the committed part stops the summary.
+    _write_part(tmp_path, 2017, 2, ["raise_1000"], reproduces=False)
+    with pytest.raises(ValueError, match="doesn't reproduce"):
+        summary.load_year(2017, "d")
+    _write_part(tmp_path, 2017, 2, ["raise_1000"], reproduces=True)
+    # A part missing a change the others ran stops it too.
+    (tmp_path / "results" / "earnings_changes" / "parts" / "changes_2017_p4_3_s0" / "cut_1000.json").unlink()
+    with pytest.raises(ValueError, match="different changes"):
+        summary.load_year(2017, "d")
