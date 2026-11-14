@@ -1,0 +1,1 @@
+Add explicit input-currency and field-disposition helpers, synthetic tests, and a proposed protocol for historical-law comparisons on one recent reference population. This change computes no new policy results.

@@ -1,9 +1,11 @@
-# Tax-benefit cliffs under 2017 federal rules
+# Cliffs: archived experiments and counterfactual preparation
 
-How many American adults would see their household's net income fall if they earned $1,000 more? We estimate that count under 2017 federal tax and benefit rules and, for comparison, under 2025 rules, with and without counting health coverage as income. Where PolicyEngine-US holds no 2017 value for a rule, as for state Medicaid limits and most state taxes, the 2017 runs read its earliest later value; METHODOLOGY.md lists them. We use [PolicyEngine-US](https://github.com/PolicyEngine/policyengine-us) and Microcosm, PolicyEngine's US microdata.
+This repository contains archived experiments measuring whether a specified earnings increase lowers household resources, with and without government-valued health coverage. The 2017-oriented experiments combine dated policies with later rule fallbacks, selected monetary rescaling and population reweighting. They are hybrid sensitivities, not estimates of actual 2017 incidence or a comparison holding the recent population and real incomes fixed.
+
+The [proposed counterfactual protocol](docs/counterfactual-protocol.md) describes a fresh comparison on one recent reference population. Its helper converts declared monetary inputs and preserves household characteristics. The managed population adapter, model/data qualification and fresh policy results remain pending; existing result files report the hybrid experiments.
 
 - [results/summary.md](results/summary.md): the counts, with 95% intervals.
-- [METHODOLOGY.md](METHODOLOGY.md): how we define a cliff, build the 2017 population and measure uncertainty, and what the model leaves out.
+- [METHODOLOGY.md](METHODOLOGY.md): the archived experiment's definition, construction of 2017-oriented inputs, uncertainty and coverage limits.
 - [CORRECTION.md](CORRECTION.md): why our April 2025 estimate overstated the count, and the evidence.
 - [april2025/](april2025/): the scripts that reproduce the April 2025 estimate and trace the error.
 
@@ -12,6 +14,8 @@ How many American adults would see their household's net income fall if they ear
 | Path | Contents |
 |---|---|
 | cliffs2017/run.py | One run: a year, with or without health coverage, on the full sample, a household subsample or one of several disjoint household groups |
+| cliffs2017/native_currency.py | Explicit input-currency and field-disposition helper for the proposed counterfactual; no engine adapter or policy calculations |
+| docs/counterfactual-protocol.md, docs/price_basis.csv | Proposed comparison and published annual-average CPI-U price basis |
 | cliffs2017/deflate.py | Scales the 2024 data to 2017 dollar levels and population; splits and subsamples households |
 | cliffs2017/aca2017.py | The ACA premium tax credit before 2018, which PolicyEngine-US leaves at $0 |
 | cliffs2017/decompose.py | Breaks each tested adult's change in net income into programs and taxes |
@@ -34,7 +38,17 @@ How many American adults would see their household's net income fall if they ear
 | scripts/audit_*.py, scripts/summarize_parameters.py | The parameter and formula audits behind the coverage notes in METHODOLOGY.md, and the counts it quotes from the parameter audit |
 | tests/ | Property and example tests (pytest) |
 
-## Running it
+## Testing counterfactual preparation
+
+The new helper tests use synthetic inputs and mock price indices. They require no model import or population data:
+
+```bash
+uv run --no-project --python 3.13 --with pytest==9.2.0 --with hypothesis==6.170.15 python -m pytest tests/test_native_currency.py
+```
+
+The existing package pins and drivers below reproduce the archived experiments. New policy analysis will use the qualified managed `policyengine` interface described in the proposed protocol.
+
+## Reproducing archived experiments
 
 ```bash
 uv venv --python 3.13 && uv pip install -e ".[test]" && source .venv/bin/activate
