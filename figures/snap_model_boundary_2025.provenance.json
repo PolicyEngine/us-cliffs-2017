@@ -23,6 +23,7 @@
   "analytic_limits_or_open_endpoints": false,
   "interpolated_output_rows": 0,
   "nominal_currency_year": 2025,
+  "fiscal_year_attribution": "INFERRED from observed annual totals, dated fiscal-year rules and calendar arithmetic; monthly amounts not calculated.",
   "font": "DejaVu Sans",
   "figure_inches": [
     6.8,
@@ -31,5 +32,5 @@
   "dpi": 300,
   "matplotlib": "3.11.2",
   "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]",
-  "caption_sha256": "1a09105a36e8598df1d8f347281fe595a9f46a977d0d82b63df7e6673cc346f2"
+  "caption_sha256": "a70c6d1d39532eb94fa8bba58519bc514bb8c72a20a688948a8bc48e6e7e6f40"
 }

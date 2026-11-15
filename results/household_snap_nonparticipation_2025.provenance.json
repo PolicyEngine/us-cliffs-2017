@@ -152,7 +152,7 @@
   ],
   "scope_limits": [
     "Calendar 2025 combines January\u2013September FY2025 and October\u2013December FY2026 SNAP limits.",
-    "The later 201-point model-illustration zoom observes the FY2025 portion dropping while annual SNAP retains $183 from FY2026 months.",
+    "We infer the fiscal-year attribution from annual totals, dated rules and calendar arithmetic: the FY2025 months lose SNAP at the jump while three FY2026 months retain it. No monthly API amounts were calculated.",
     "Texas publishes $2,811/month for the FY2025 categorical limit against the model's $2,810.50; exact legal rounding and source priority remain unresolved.",
     "The coarse full-range data show SNAP reaching zero between $34,000 and $35,000 but do not locate the later change at $1 resolution.",
     "No other program, complete 2025 law, historical 2017 comparison or population result gains qualification.",

@@ -299,7 +299,7 @@ def render(args: argparse.Namespace) -> None:
     axes[0].set_xticks([0, 20000, 40000, 60000])
     axes[0].set_yticks([0, 15000, 30000, 45000, 60000])
     axes[0].set_ylabel("Annual household resources ($)", labelpad=8)
-    axes[1].set_title("B  FY2025 portion drops")
+    axes[1].set_title("B  Annual resource drop")
     axes[1].set_xlim(33650, 33850)
     axes[1].set_ylim(
         min(r["household_net_income"] for r in zoom) - 65,
@@ -324,16 +324,17 @@ def render(args: argparse.Namespace) -> None:
     )
     figure_notes = [
         (0.235, "Calendar 2025 SNAP: Jan–Sep FY2025; Oct–Dec FY2026."),
-        (0.195, "At $33,727 earnings, annual SNAP falls from $597 to $183."),
+        (0.195, "Fiscal-year attribution inferred from annual totals and dated rules."),
+        (0.155, "At $33,727 earnings, annual SNAP falls from $597 to $183."),
         (
-            0.155,
+            0.115,
             "FY2025 categorical gross limit: Texas $2,811/month; PolicyEngine $2,810.50/month.",
         ),
         (
-            0.115,
+            0.075,
             "This model illustration does not establish the exact Texas legal cutoff.",
         ),
-        (0.045, "Sources: PolicyEngine 6.19.0; Texas HHSC Bulletin 24-12, p. 5."),
+        (0.025, "Sources: PolicyEngine 6.19.0; Texas HHSC Bulletin 24-12, p. 5."),
     ]
     for y, note in figure_notes:
         fig.text(0.15, y, note, fontsize=8, parse_math=False)
@@ -384,12 +385,13 @@ def render(args: argparse.Namespace) -> None:
         "over $0–$60,000 and 201 points over $33,650–$33,850; lines join calculated points and "
         "break across the observed drop. "
         f"Between ${before['employment_income']:,.0f} and ${after['employment_income']:,.0f} "
-        f"of earnings, annual resources fall ${-delta:,.2f} and SNAP falls ${-snap_delta:,.2f}. "
-        "Calendar 2025 spans two SNAP fiscal years: January–September uses FY2025 limits, "
-        "and October–December uses FY2026 limits. At $33,727 of earnings, annual SNAP falls "
-        "from $597 to $183; the three FY2026 months continue to contribute benefits. The "
-        "full-range observations also show SNAP reaching zero between $34,000 and $35,000 "
-        "of earnings. They do not locate that later change at $1 resolution. "
+        f"of earnings, we calculate annual resources falling ${-delta:,.2f} and annual SNAP "
+        "falling from $597 to $183. "
+        "USDA's tables set FY2025 limits for January–September and FY2026 limits for "
+        "October–December in calendar 2025. We infer from these dates and annual totals "
+        "that the FY2025 months lose SNAP at this jump and the three FY2026 months retain it; "
+        "we did not calculate monthly amounts. We calculate annual SNAP of $159 at $34,000 "
+        "and zero at $35,000 on the coarse grid, without locating the later change at $1 resolution. "
         "Texas's Health and Human Services Commission publishes a $2,811 monthly categorical "
         "gross-income limit for a two-person household in FY2025; PolicyEngine applies "
         "$2,810.50. This model illustration does not establish the exact Texas legal cutoff. "
@@ -413,6 +415,7 @@ def render(args: argparse.Namespace) -> None:
         "analytic_limits_or_open_endpoints": False,
         "interpolated_output_rows": 0,
         "nominal_currency_year": 2025,
+        "fiscal_year_attribution": "INFERRED from observed annual totals, dated fiscal-year rules and calendar arithmetic; monthly amounts not calculated.",
         "font": font_name,
         "figure_inches": [6.8, 5.4],
         "dpi": 300,
