@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "status": "ACTUAL_EXPLORATORY122ROWS__SOURCE_VALIDATION_HOLD",
+  "classification": "EXPLORATORY_HYPOTHETICAL_HOUSEHOLDS__NOT_SOURCE_QUALIFIED_PAPER_FIGURES",
+  "resource_label": "Annual household resources after modeled taxes, excluding health benefits; includes SNAP, WIC and other noncash benefits valued by the model. Housing/utility expenses affect benefit rules but are not subtracted from this resource measure.",
+  "config_file": "examples/household_curves_2025.json",
+  "config_sha256": "ace1db95e3d4de24552a8177700311eb6935b32f6c600476a431d44c9ec18ac0",
+  "script_file": "scripts/calculate_household_curves_2025.py",
+  "script_sha256": "feb7ae33b137029b480b1e6afa65275f9c866f3e96532f26d1fac327867152b8",
+  "versions": {
+    "policyengine": "6.19.0",
+    "policyengine-us": "2.2.1",
+    "policyengine-core": "3.33.3",
+    "spm-calculator": "1.0.0"
+  },
+  "source_wheel_sha256": {
+    "policyengine": "03748947dcf6b98d17598343605388437a443fba283bff6229d8adf13c10281b",
+    "policyengine-us": "0993a6c73fcdfbe171a796aca9d302741bd8e00ab83388ad81c15a08740318c6",
+    "policyengine-core": "5847d9938412095fe9848c2ce535838a7dc8fac9238d8fd9e6c9d0a0648e0888",
+    "spm-calculator": "e354937a5e1a4045d4966ed594a528d8b02866fabaac9bb5672017004b627305"
+  },
+  "SPM_content_sha256": "3d86d5c4c0423480e6b69b75d222ffa4a7a2639e4094df5ba2504af01be17173",
+  "rows_planned": 122,
+  "API_calls_planned": 2,
+  "assumptions": [
+    "All members are US citizens with citizen SSN cards and live together in Harris County, Texas throughout2025. Memberships remain constant throughout the year.",
+    "One unmarried male adult is the tax-unit/household head. The parent scenario adds one4-year-old dependent daughter. Each person has a separate marital unit. Filing status is a stated scenario premise, not a new legal-eligibility finding.",
+    "The adult earns a fixed$30 hourly wage over52weeks. Annual earnings0\u201360000 and usual weekly hours0\u201338.461538 vary together at61 paired points. The child has no earnings or work hours.",
+    "Annual rent is12000; electricity1800, telephone600 and water360 are paid separately. Electricity provides heat and cooling. Other utility bills and paid childcare are0. Formula-owned childcare expense outputs are not supplied.",
+    "Bank assets are1000 for the adult and0 for the child; stocks/bonds/other assets are0. The input-only SPM-unit asset measure is1000. Any low-earnings housing-budget shortfall may be debt-financed; no additional income is imputed.",
+    "Listed input-only nonwage income facts are0. Remaining primitive monetary inputs use model zero defaults; no calculated tax bases or benefit awards are supplied.",
+    "Neither person has employer health insurance or a disqualifying offer. They do not buy ACA coverage; Medicaid/CHIP take-up istrue if eligible, with enrollment derived. Health benefits are excluded from resources under the unchanged baseline.",
+    "SNAP/TANF and EITC take-up istrue if eligible. No housing-assistance allocation or Head Start placement is assumed; those take-up inputs arefalse. No eligibility or final award is overridden.",
+    "The child has a hypothetical independently stated WIC nutritional-risk assessment and claims WIC if eligible. The adult is not pregnant, disabled, blind or a college student.",
+    "The adult control uses the model steady-state ABAWD approximation: initial3 countable months within36 months are not tracked, and noncompliance can cause immediate exclusion. This does not establish universal year-long entitlement or absence of SNAP cliffs. The parent child-age exemption is calculated.",
+    "Requested input/calculation year is2025; native structural selection defaults2024. These curves do not certify every2025 legal branch or a2017comparison."
+  ],
+  "law_qualification": "UNQUALIFIED; exploratory inputs for source validation; no population or historical comparison",
+  "figures_rendered": false,
+  "API_calls_observed": 2,
+  "rows_observed": 122,
+  "data_file": "results/household_curves_2025.csv",
+  "data_sha256": "812873c91d12693f72731ead7bdbcb0bfb81d36ed9403045da88d6e5329f4491",
+  "native_runs": [
+    {
+      "scenario": "single_adult",
+      "exit_code": 0,
+      "real_seconds": 15.32,
+      "user_seconds": 10.86,
+      "system_seconds": 2.27,
+      "max_RSS_bytes": 1604337664,
+      "peak_footprint_bytes": 1569408896,
+      "raw_sha256": "daf222626bc3bac2ecc0df83e7da0899f064247a32c4e447c7b12283e49a12f3",
+      "receipt_sha256": "b09af0e7ceaa6d7bc09bb00e9d3972af7bc123443d92e8387ffacabec9b66ca1",
+      "csv_sha256": "e7890ca6ec5dd4a4b312c8f964f71a0724d124014319f84b283fb66c7a14fc00",
+      "identity_residuals_USD": {
+        "market_income": 0.0,
+        "benefits": 0.0,
+        "tax_before_refundable_credits": 0.0,
+        "refundable_tax_credits": 0.0,
+        "net_tax": 6.103515625e-05,
+        "net_resources": 0.000335693359375
+      },
+      "SPM_years": [
+        "2025"
+      ],
+      "SPM_geography": "national",
+      "SPM_hash": "3d86d5c4c0423480e6b69b75d222ffa4a7a2639e4094df5ba2504af01be17173",
+      "rows": 61,
+      "min_adjacent_changes": [
+        {
+          "lower_earnings": 16000.0,
+          "upper_earnings": 17000.0,
+          "net_resource_change": 747.0,
+          "benefit_refund_changes": [
+            {
+              "variable": "income_tax_refundable_credits",
+              "change": -76.49996948242188,
+              "old": 237.42999267578125,
+              "new": 160.93002319335938
+            }
+          ]
+        },
+        {
+          "lower_earnings": 17000.0,
+          "upper_earnings": 18000.0,
+          "net_resource_change": 747.0,
+          "benefit_refund_changes": [
+            {
+              "variable": "income_tax_refundable_credits",
+              "change": -76.50003051757812,
+              "old": 160.93002319335938,
+              "new": 84.42999267578125
+            }
+          ]
+        },
+        {
+          "lower_earnings": 18000.0,
+          "upper_earnings": 19000.0,
+          "net_resource_change": 747.0,
+          "benefit_refund_changes": [
+            {
+              "variable": "income_tax_refundable_credits",
+              "change": -76.5,
+              "old": 84.42999267578125,
+              "new": 7.92999267578125
+            }
+          ]
+        }
+      ],
+      "negative_adjacent_count": 0,
+      "benefit_nonzero_variables": [],
+      "all_post_seals_exact": true
+    },
+    {
+      "scenario": "single_parent",
+      "exit_code": 0,
+      "real_seconds": 13.16,
+      "user_seconds": 10.78,
+      "system_seconds": 1.79,
+      "max_RSS_bytes": 1607254016,
+      "peak_footprint_bytes": 1572308864,
+      "raw_sha256": "2472af6841cd2186bfd2eccaf0285b929d636445c3f3510d1f98fac8da3d13e5",
+      "receipt_sha256": "1a276cddafae83b686c856c4867f269e75740eaf2b831cccb9089f1d2cb7e353",
+      "csv_sha256": "5be2bf61a760e0fe3f2d4e3cd5ff22294b181650a36789e565fdf1bdeab3c085",
+      "identity_residuals_USD": {
+        "market_income": 0.0,
+        "benefits": 0.000244140625,
+        "tax_before_refundable_credits": 0.0,
+        "refundable_tax_credits": 0.0,
+        "net_tax": 0.0,
+        "net_resources": 0.003173828125
+      },
+      "SPM_years": [
+        "2025"
+      ],
+      "SPM_geography": "national",
+      "SPM_hash": "3d86d5c4c0423480e6b69b75d222ffa4a7a2639e4094df5ba2504af01be17173",
+      "rows": 61,
+      "min_adjacent_changes": [
+        {
+          "lower_earnings": 4000.0,
+          "upper_earnings": 5000.0,
+          "net_resource_change": -744.2998046875,
+          "benefit_refund_changes": [
+            {
+              "variable": "tanf",
+              "change": -2157.800048828125,
+              "old": 2157.800048828125,
+              "new": 0.0
+            },
+            {
+              "variable": "income_tax_refundable_credits",
+              "change": 490.0,
+              "old": 1585.0,
+              "new": 2075.0
+            }
+          ]
+        },
+        {
+          "lower_earnings": 33000.0,
+          "upper_earnings": 34000.0,
+          "net_resource_change": -38.30078125,
+          "benefit_refund_changes": [
+            {
+              "variable": "snap",
+              "change": -702.0,
+              "old": 861.0,
+              "new": 159.0
+            },
+            {
+              "variable": "income_tax_refundable_credits",
+              "change": -259.800048828125,
+              "old": 4048.43017578125,
+              "new": 3788.630126953125
+            }
+          ]
+        },
+        {
+          "lower_earnings": 29000.0,
+          "upper_earnings": 30000.0,
+          "net_resource_change": 303.69921875,
+          "benefit_refund_changes": [
+            {
+              "variable": "snap",
+              "change": -360.0,
+              "old": 2301.0,
+              "new": 1941.0
+            },
+            {
+              "variable": "income_tax_refundable_credits",
+              "change": -259.7998046875,
+              "old": 5087.6298828125,
+              "new": 4827.830078125
+            }
+          ]
+        }
+      ],
+      "negative_adjacent_count": 2,
+      "benefit_nonzero_variables": [
+        "snap",
+        "wic",
+        "tanf"
+      ],
+      "all_post_seals_exact": true
+    }
+  ],
+  "selected_policy_validation": {
+    "candidate": "Texas TANF applicant recognizable-needs boundary",
+    "status": "HOLD",
+    "official_source": {
+      "url": "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-1420-types-deductions",
+      "section": "A-1425.2; Revision15-4; Effective2015-10-01",
+      "wording": "a disregard of 1/3 of the remaining income",
+      "native_html_sha256": "0a89002b7dc165144038e19c35181b428a51af53f97fce9bf530d9f9a6ab1b63"
+    },
+    "questions": [
+      "The released0.33 parameter differs from the handbook1/3 fraction. Determine whether any operative rounding authority changes this before labeling a legal boundary.",
+      "The run does not supply historical TANF enrollment; is_tanf_enrolled derives from reported receipt, defaultFalse. The applicant rule has a prior4-month condition; a repeated-month static applicant calculation does not reproduce a longitudinal receipt path.",
+      "Grant amounts320Jan\u2013Sep/331Oct\u2013Dec are frozen model dates; current native C-110 and its revision/context are preserved, but the complete2025 grant schedule has not been independently authenticated in this unit.",
+      "Budgetary needs650 and25% recognizable share are model source cells; official A-1340/C-110 native texts are captured for a later clause/table review, not blanket2025 qualification.",
+      "Official A-1341 (effective2021-07-01) and A-1425.3 require applicants to pass recognizable PartA andPartB; the native applicant countable-income/payment branch does not implement both staged disregards or the four-month90% window. Exact lawful payment treatment requires a separate source contract.",
+      "Official A-1342 (effective2024-10-01) rounds adjusted gross income down to whole dollars before calculating the grant; native regular_tanf subtracts fractional countable income directly.",
+      "Current C-110 is Revision26-4, effective2026-10-01. Its size2 caretaker table shows budget650/recognizable163. It cannot authenticate2025 grant values or justify a2025 needs-rounding assertion. The4365 number is explicitly conditional on the MODEL162.50 limit, not a sourced final legal cutoff."
+    ],
+    "zoom_executed": false,
+    "precise_legal_cutoff": null,
+    "scope": "Model source discontinuity candidate only; independent eligibility/disregard/rounding/payment chronology remains unresolved."
+  },
+  "TANF_enrollment_assumption": "Unspecified enrollment derives from reported TANF receipt; no reported receipt is supplied, so the model treats the scenario as a non-enrolled applicant. This is not a source-authenticated year-long eligibility history.",
+  "scope": "Two genuinely calculated hypothetical household curves. All six native component identities/finite/axis/SPM guards passed. No figure qualification, population estimate, historical-law comparison or precise legal cliff magnitude follows.",
+  "column_units": {
+    "scenario": "scenario identifier",
+    "year": "calendar year",
+    "acp": "USD/year, summed over the native members of this one household",
+    "ak_permanent_fund_dividend": "USD/year, summed over the native members of this one household",
+    "alimony_income": "USD/year, summed over the native members of this one household",
+    "basic_income": "USD/year, summed over the native members of this one household",
+    "capital_gains": "USD/year, summed over the native members of this one household",
+    "child_support_received": "USD/year, summed over the native members of this one household",
+    "commodity_supplemental_food_program": "USD/year, summed over the native members of this one household",
+    "ctc": "USD/year, summed over the native members of this one household",
+    "debt_relief": "USD/year, summed over the native members of this one household",
+    "dividend_income": "USD/year, summed over the native members of this one household",
+    "ebb": "USD/year, summed over the native members of this one household",
+    "educational_assistance": "USD/year, summed over the native members of this one household",
+    "eitc": "USD/year, summed over the native members of this one household",
+    "employee_payroll_tax": "USD/year, summed over the native members of this one household",
+    "employment_income": "USD/year, summed over the native members of this one household",
+    "farm_operations_income": "USD/year, summed over the native members of this one household",
+    "farm_rent_income": "USD/year, summed over the native members of this one household",
+    "financial_assistance": "USD/year, summed over the native members of this one household",
+    "flat_tax": "USD/year, summed over the native members of this one household",
+    "free_school_meals": "USD/year, summed over the native members of this one household",
+    "gi_cash_assistance": "USD/year, summed over the native members of this one household",
+    "high_efficiency_electric_home_rebate": "USD/year, summed over the native members of this one household",
+    "household_benefits": "USD/year, summed over the native members of this one household",
+    "household_head_start_benefits": "USD/year, summed over the native members of this one household",
+    "household_health_benefits": "USD/year, summed over the native members of this one household",
+    "household_health_costs": "USD/year, summed over the native members of this one household",
+    "household_market_income": "USD/year, summed over the native members of this one household",
+    "household_net_income": "USD/year, summed over the native members of this one household",
+    "household_refundable_state_tax_credits": "USD/year, summed over the native members of this one household",
+    "household_refundable_tax_credits": "USD/year, summed over the native members of this one household",
+    "household_state_benefits": "USD/year, summed over the native members of this one household",
+    "household_state_tax_before_refundable_credits": "USD/year, summed over the native members of this one household",
+    "household_tax": "USD/year, summed over the native members of this one household",
+    "household_tax_before_refundable_credits": "USD/year, summed over the native members of this one household",
+    "housing_assistance": "USD/year, summed over the native members of this one household",
+    "illicit_income": "USD/year, summed over the native members of this one household",
+    "income_tax_before_refundable_credits": "USD/year, summed over the native members of this one household",
+    "income_tax_refundable_credits": "USD/year, summed over the native members of this one household",
+    "interest_income": "USD/year, summed over the native members of this one household",
+    "local_income_tax_before_refundable_credits": "USD/year, summed over the native members of this one household",
+    "local_occupational_tax": "USD/year, summed over the native members of this one household",
+    "miscellaneous_income": "USD/year, summed over the native members of this one household",
+    "partnership_s_corp_income": "USD/year, summed over the native members of this one household",
+    "pension_income": "USD/year, summed over the native members of this one household",
+    "reduced_price_school_meals": "USD/year, summed over the native members of this one household",
+    "rental_income": "USD/year, summed over the native members of this one household",
+    "residential_efficiency_electrification_rebate": "USD/year, summed over the native members of this one household",
+    "retirement_distributions": "USD/year, summed over the native members of this one household",
+    "self_employment_income": "USD/year, summed over the native members of this one household",
+    "self_employment_tax": "USD/year, summed over the native members of this one household",
+    "snap": "USD/year, summed over the native members of this one household",
+    "social_security": "USD/year, summed over the native members of this one household",
+    "ssi": "USD/year, summed over the native members of this one household",
+    "sstb_self_employment_income": "USD/year, summed over the native members of this one household",
+    "strike_benefits": "USD/year, summed over the native members of this one household",
+    "survivor_benefits": "USD/year, summed over the native members of this one household",
+    "tanf": "USD/year, summed over the native members of this one household",
+    "trump_dividend": "USD/year, summed over the native members of this one household",
+    "unemployment_compensation": "USD/year, summed over the native members of this one household",
+    "weekly_hours_worked_before_lsr": "hours/week, summed only over this one household",
+    "wic": "USD/year, summed over the native members of this one household",
+    "workers_compensation": "USD/year, summed over the native members of this one household"
+  },
+  "reproduction": [
+    "Create a separate Python3.14.7 environment outside this repository.",
+    "uv pip sync requirements/household-curves-2025.lock --python <separate-env>/bin/python --require-hashes --only-binary :all:",
+    "Run scripts/calculate_household_curves_2025.py through uv run --no-project --no-sync --python <separate-env>/bin/python python -I, with --config examples/household_curves_2025.json, exactly one --scenario and external --receipt/--csv paths per process.",
+    "Use the shared resource guard, numeric threads1,8GiB-or-lower memory and300s-or-lower native timeout; keep full API receipts outside the repository."
+  ]
+}

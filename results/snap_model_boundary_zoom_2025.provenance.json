@@ -1,0 +1,59 @@
+{
+  "status": "ONE_GENUINE201POINT_ZOOM_PASS__MODEL_ILLUSTRATION_ONLY",
+  "native_real_seconds": 15.47,
+  "user_seconds": 10.92,
+  "system_seconds": 2.3,
+  "max_RSS_bytes": 1608499200,
+  "peak_footprint_bytes": 1573570432,
+  "API_calls": 1,
+  "rows": 201,
+  "identity_residuals_USD": {
+    "market_income": 0.0,
+    "benefits": 0.0,
+    "tax_before_refundable_credits": 6.103515625e-05,
+    "refundable_tax_credits": 0.0,
+    "net_tax": 0.0,
+    "net_resources": 0.005859375
+  },
+  "observed_drop": {
+    "before": {
+      "employment_income": 33726.0,
+      "household_net_income": 36314.83984375,
+      "snap": 597.0
+    },
+    "after": {
+      "employment_income": 33727.0,
+      "household_net_income": 35901.5,
+      "snap": 183.0
+    },
+    "resources_change": -413.33984375,
+    "SNAP_change": -414.0
+  },
+  "all390_seals_exact": true,
+  "SPM_years": [
+    "2025"
+  ],
+  "SPM_hash": "3d86d5c4c0423480e6b69b75d222ffa4a7a2639e4094df5ba2504af01be17173",
+  "exact_statutory_boundary_qualified": false,
+  "Texas_published_monthly_limit": 2811,
+  "model_monthly_limit": 2810.5,
+  "config_file": "examples/snap_model_boundary_zoom_2025.json",
+  "config_sha256": "3cdbd355552e888131160cdc81014f1867e1949603c6dd2e2a0f6c324445e644",
+  "CSV_file": "results/snap_model_boundary_zoom_2025.csv",
+  "CSV_sha256": "d3fd6dce9bacbebb787f478b58745e02d9a3afb3789fb30d1aa690db7536359e",
+  "script_file": "scripts/illustrate_snap_model_boundary_2025.py",
+  "script_sha256": "9e0f0e5229bd71916ec12cb5a0f183cd5cba23c8229d6e5b0fe242a18ee3951f",
+  "raw_log_sha256": "d9eb7fb1eaa96e35c6180bca11bc559d56bb72f08d4a3f7cd128eeb8f29bc924",
+  "full_private_receipt_sha256": "d740bc960ca57899cf71ff41f7782580f1598a848c50275c0bd40733d22c4e72",
+  "version_pins": {
+    "policyengine": "6.19.0",
+    "policyengine-us": "2.2.1",
+    "policyengine-core": "3.33.3",
+    "spm-calculator": "1.0.0"
+  },
+  "scope": "Genuine adjacent1-dollar model observations. Published Texas chart differs; no statutory-boundary, population or whole-law accuracy claim. No interpolation or model patch.",
+  "script_sha256_scope": "Exact script executed for the sole native zoom; subsequent edits affect rendering/caption only.",
+  "current_reproduction_script_sha256": "cf06af67eb25d1db5f44d875e3e4c69948500ac457010a046e1b7620e1793d66",
+  "compute_zoom_AST_identical_after_layout_edit": true,
+  "all390_seals_exact_scope": "Native pre/post execution only; final plot-only source edit is separately recorded."
+}

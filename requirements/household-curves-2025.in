@@ -1,0 +1,5 @@
+# Separate released-wrapper environment; Python3.14.7, with --no-project.
+policyengine[us] @ https://files.pythonhosted.org/packages/5e/47/dfc019e4981cdc1b336306dc3523a4008ac03dd02329c1d15d0e0d0a0425/policyengine-6.19.0-py3-none-any.whl#sha256=03748947dcf6b98d17598343605388437a443fba283bff6229d8adf13c10281b
+policyengine-us==2.2.1
+policyengine-core==3.33.3
+spm-calculator==1.0.0

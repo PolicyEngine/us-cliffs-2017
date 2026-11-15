@@ -1,0 +1,564 @@
+{
+  "schema_version": 1,
+  "classification": "EXPLORATORY_HYPOTHETICAL_HOUSEHOLDS__NOT_SOURCE_QUALIFIED_PAPER_FIGURES",
+  "versions": {
+    "policyengine": "6.19.0",
+    "policyengine-us": "2.2.1",
+    "policyengine-core": "3.33.3",
+    "spm-calculator": "1.0.0"
+  },
+  "spm_content_sha256": "3d86d5c4c0423480e6b69b75d222ffa4a7a2639e4094df5ba2504af01be17173",
+  "resource_label": "Annual household resources after modeled taxes, excluding health benefits; includes SNAP, WIC and other noncash benefits valued by the model. Housing/utility expenses affect benefit rules but are not subtracted from this resource measure.",
+  "assumptions": [
+    "All members are US citizens with citizen SSN cards and live together in Harris County, Texas throughout2025. Memberships remain constant throughout the year.",
+    "One unmarried male adult is the tax-unit/household head. The parent scenario adds one4-year-old dependent daughter. Each person has a separate marital unit. Filing status is a stated scenario premise, not a new legal-eligibility finding.",
+    "The adult earns a fixed$30 hourly wage over52weeks. Annual earnings0\u201360000 and usual weekly hours0\u201338.461538 vary together at61 paired points. The child has no earnings or work hours.",
+    "Annual rent is12000; electricity1800, telephone600 and water360 are paid separately. Electricity provides heat and cooling. Other utility bills and paid childcare are0. Formula-owned childcare expense outputs are not supplied.",
+    "Bank assets are1000 for the adult and0 for the child; stocks/bonds/other assets are0. The input-only SPM-unit asset measure is1000. Any low-earnings housing-budget shortfall may be debt-financed; no additional income is imputed.",
+    "Listed input-only nonwage income facts are0. Remaining primitive monetary inputs use model zero defaults; no calculated tax bases or benefit awards are supplied.",
+    "Neither person has employer health insurance or a disqualifying offer. They do not buy ACA coverage; Medicaid/CHIP take-up istrue if eligible, with enrollment derived. Health benefits are excluded from resources under the unchanged baseline.",
+    "SNAP/TANF and EITC take-up istrue if eligible. No housing-assistance allocation or Head Start placement is assumed; those take-up inputs arefalse. No eligibility or final award is overridden.",
+    "The child has a hypothetical independently stated WIC nutritional-risk assessment and claims WIC if eligible. The adult is not pregnant, disabled, blind or a college student.",
+    "The adult control uses the model steady-state ABAWD approximation: initial3 countable months within36 months are not tracked, and noncompliance can cause immediate exclusion. This does not establish universal year-long entitlement or absence of SNAP cliffs. The parent child-age exemption is calculated.",
+    "Requested input/calculation year is2025; native structural selection defaults2024. These curves do not certify every2025 legal branch or a2017comparison."
+  ],
+  "accounts": {
+    "benefits": [
+      "social_security",
+      "ssi",
+      "snap",
+      "wic",
+      "free_school_meals",
+      "reduced_price_school_meals",
+      "acp",
+      "ebb",
+      "tanf",
+      "high_efficiency_electric_home_rebate",
+      "residential_efficiency_electrification_rebate",
+      "unemployment_compensation",
+      "child_support_received",
+      "workers_compensation",
+      "educational_assistance",
+      "financial_assistance",
+      "survivor_benefits",
+      "household_head_start_benefits",
+      "basic_income",
+      "trump_dividend",
+      "housing_assistance",
+      "household_state_benefits",
+      "commodity_supplemental_food_program",
+      "household_health_benefits"
+    ],
+    "market_income": [
+      "employment_income",
+      "self_employment_income",
+      "sstb_self_employment_income",
+      "partnership_s_corp_income",
+      "gi_cash_assistance",
+      "farm_operations_income",
+      "farm_rent_income",
+      "capital_gains",
+      "interest_income",
+      "rental_income",
+      "dividend_income",
+      "pension_income",
+      "debt_relief",
+      "illicit_income",
+      "retirement_distributions",
+      "miscellaneous_income",
+      "alimony_income",
+      "strike_benefits",
+      "ak_permanent_fund_dividend"
+    ],
+    "tax_before_refundable_credits": [
+      "employee_payroll_tax",
+      "self_employment_tax",
+      "income_tax_before_refundable_credits",
+      "flat_tax",
+      "household_state_tax_before_refundable_credits",
+      "local_income_tax_before_refundable_credits",
+      "local_occupational_tax"
+    ],
+    "refundable_tax_credits": [
+      "income_tax_refundable_credits",
+      "household_refundable_state_tax_credits"
+    ]
+  },
+  "output_entities": {
+    "acp": "SPMUnit",
+    "ak_permanent_fund_dividend": "Person",
+    "alimony_income": "Person",
+    "basic_income": "TaxUnit",
+    "capital_gains": "Person",
+    "child_support_received": "Person",
+    "commodity_supplemental_food_program": "Person",
+    "ctc": "TaxUnit",
+    "debt_relief": "Person",
+    "dividend_income": "Person",
+    "ebb": "SPMUnit",
+    "educational_assistance": "Person",
+    "eitc": "TaxUnit",
+    "employee_payroll_tax": "TaxUnit",
+    "employment_income": "Person",
+    "farm_operations_income": "Person",
+    "farm_rent_income": "Person",
+    "financial_assistance": "Person",
+    "flat_tax": "TaxUnit",
+    "free_school_meals": "SPMUnit",
+    "gi_cash_assistance": "Person",
+    "high_efficiency_electric_home_rebate": "TaxUnit",
+    "household_benefits": "Household",
+    "household_head_start_benefits": "Household",
+    "household_health_benefits": "Household",
+    "household_health_costs": "Household",
+    "household_market_income": "Household",
+    "household_net_income": "Household",
+    "household_refundable_state_tax_credits": "Household",
+    "household_refundable_tax_credits": "Household",
+    "household_state_benefits": "Household",
+    "household_state_tax_before_refundable_credits": "Household",
+    "household_tax": "Household",
+    "household_tax_before_refundable_credits": "Household",
+    "housing_assistance": "SPMUnit",
+    "illicit_income": "Person",
+    "income_tax_before_refundable_credits": "TaxUnit",
+    "income_tax_refundable_credits": "TaxUnit",
+    "interest_income": "Person",
+    "local_income_tax_before_refundable_credits": "TaxUnit",
+    "local_occupational_tax": "TaxUnit",
+    "miscellaneous_income": "Person",
+    "partnership_s_corp_income": "Person",
+    "pension_income": "Person",
+    "reduced_price_school_meals": "SPMUnit",
+    "rental_income": "Person",
+    "residential_efficiency_electrification_rebate": "TaxUnit",
+    "retirement_distributions": "Person",
+    "self_employment_income": "Person",
+    "self_employment_tax": "Person",
+    "snap": "SPMUnit",
+    "social_security": "Person",
+    "ssi": "Person",
+    "sstb_self_employment_income": "Person",
+    "strike_benefits": "Person",
+    "survivor_benefits": "Person",
+    "tanf": "SPMUnit",
+    "trump_dividend": "Person",
+    "unemployment_compensation": "Person",
+    "wic": "Person",
+    "workers_compensation": "Person",
+    "weekly_hours_worked_before_lsr": "Person"
+  },
+  "scenarios": {
+    "single_adult": {
+      "label": "40-year-old single adult",
+      "request": {
+        "people": [
+          {
+            "age": 40,
+            "employment_income": 0,
+            "weekly_hours_worked_before_lsr": 0,
+            "immigration_status": "CITIZEN",
+            "ssn_card_type": "CITIZEN",
+            "is_tax_unit_head": true,
+            "is_tax_unit_spouse": false,
+            "is_tax_unit_dependent": false,
+            "is_household_head": true,
+            "is_male": true,
+            "is_disabled": false,
+            "is_blind": false,
+            "is_pregnant": false,
+            "is_full_time_college_student": false,
+            "has_esi": false,
+            "offered_aca_disqualifying_esi": false,
+            "bank_account_assets": 1000,
+            "stock_assets": 0,
+            "bond_assets": 0,
+            "pre_subsidy_rent": 12000,
+            "takes_up_wic_if_eligible": true,
+            "is_wic_at_nutritional_risk": false,
+            "takes_up_medicaid_if_eligible": true,
+            "takes_up_chip_if_eligible": true,
+            "takes_up_head_start_if_eligible": false,
+            "takes_up_early_head_start_if_eligible": false,
+            "self_employment_income_before_lsr": 0,
+            "taxable_interest_income": 0,
+            "tax_exempt_interest_income": 0,
+            "qualified_dividend_income": 0,
+            "non_qualified_dividend_income": 0,
+            "alimony_income": 0,
+            "child_support_received": 0,
+            "educational_assistance": 0,
+            "financial_assistance": 0,
+            "short_term_capital_gains": 0,
+            "miscellaneous_income": 0
+          }
+        ],
+        "marital_unit": [
+          {
+            "members": [
+              0
+            ]
+          }
+        ],
+        "family": [
+          {
+            "members": [
+              0
+            ]
+          }
+        ],
+        "spm_unit": [
+          {
+            "members": [
+              0
+            ],
+            "spm_unit_tenure_type": "RENTER",
+            "spm_unit_assets": 1000,
+            "spm_unit_pre_subsidy_childcare_expenses": 0,
+            "heating_type": "ELECTRICITY",
+            "pre_subsidy_electricity_expense": 1800,
+            "heat_expense_included_in_rent": false,
+            "has_cooling_expense": true,
+            "phone_cost": 600,
+            "water_expense": 360,
+            "sewage_expense": 0,
+            "trash_expense": 0,
+            "takes_up_snap_if_eligible": true,
+            "takes_up_tanf_if_eligible": true,
+            "takes_up_housing_assistance_if_eligible": false
+          }
+        ],
+        "tax_unit": [
+          {
+            "members": [
+              0
+            ],
+            "filing_status": "SINGLE",
+            "takes_up_aca_if_eligible": false,
+            "takes_up_eitc": true
+          }
+        ],
+        "household": {
+          "state_code": "TX",
+          "county_fips": "48201",
+          "tenure_type": "RENTED"
+        },
+        "year": 2025,
+        "spm": {
+          "geography_kind": "national"
+        },
+        "axes": [
+          [
+            {
+              "name": "employment_income",
+              "index": 0,
+              "min": 0,
+              "max": 60000,
+              "count": 61
+            },
+            {
+              "name": "weekly_hours_worked_before_lsr",
+              "index": 0,
+              "min": 0,
+              "max": 38.46153846153846,
+              "count": 61
+            }
+          ]
+        ],
+        "extra_variables": [
+          "acp",
+          "ak_permanent_fund_dividend",
+          "alimony_income",
+          "basic_income",
+          "capital_gains",
+          "child_support_received",
+          "commodity_supplemental_food_program",
+          "ctc",
+          "debt_relief",
+          "dividend_income",
+          "ebb",
+          "educational_assistance",
+          "eitc",
+          "employee_payroll_tax",
+          "employment_income",
+          "farm_operations_income",
+          "farm_rent_income",
+          "financial_assistance",
+          "flat_tax",
+          "free_school_meals",
+          "gi_cash_assistance",
+          "high_efficiency_electric_home_rebate",
+          "household_benefits",
+          "household_head_start_benefits",
+          "household_health_benefits",
+          "household_health_costs",
+          "household_market_income",
+          "household_net_income",
+          "household_refundable_state_tax_credits",
+          "household_refundable_tax_credits",
+          "household_state_benefits",
+          "household_state_tax_before_refundable_credits",
+          "household_tax",
+          "household_tax_before_refundable_credits",
+          "housing_assistance",
+          "illicit_income",
+          "income_tax_before_refundable_credits",
+          "income_tax_refundable_credits",
+          "interest_income",
+          "local_income_tax_before_refundable_credits",
+          "local_occupational_tax",
+          "miscellaneous_income",
+          "partnership_s_corp_income",
+          "pension_income",
+          "reduced_price_school_meals",
+          "rental_income",
+          "residential_efficiency_electrification_rebate",
+          "retirement_distributions",
+          "self_employment_income",
+          "self_employment_tax",
+          "snap",
+          "social_security",
+          "ssi",
+          "sstb_self_employment_income",
+          "strike_benefits",
+          "survivor_benefits",
+          "tanf",
+          "trump_dividend",
+          "unemployment_compensation",
+          "weekly_hours_worked_before_lsr",
+          "wic",
+          "workers_compensation"
+        ]
+      }
+    },
+    "single_parent": {
+      "label": "40-year-old single parent with a4-year-old dependent",
+      "request": {
+        "people": [
+          {
+            "age": 40,
+            "employment_income": 0,
+            "weekly_hours_worked_before_lsr": 0,
+            "immigration_status": "CITIZEN",
+            "ssn_card_type": "CITIZEN",
+            "is_tax_unit_head": true,
+            "is_tax_unit_spouse": false,
+            "is_tax_unit_dependent": false,
+            "is_household_head": true,
+            "is_male": true,
+            "is_disabled": false,
+            "is_blind": false,
+            "is_pregnant": false,
+            "is_full_time_college_student": false,
+            "has_esi": false,
+            "offered_aca_disqualifying_esi": false,
+            "bank_account_assets": 1000,
+            "stock_assets": 0,
+            "bond_assets": 0,
+            "pre_subsidy_rent": 12000,
+            "takes_up_wic_if_eligible": true,
+            "is_wic_at_nutritional_risk": false,
+            "takes_up_medicaid_if_eligible": true,
+            "takes_up_chip_if_eligible": true,
+            "takes_up_head_start_if_eligible": false,
+            "takes_up_early_head_start_if_eligible": false,
+            "self_employment_income_before_lsr": 0,
+            "taxable_interest_income": 0,
+            "tax_exempt_interest_income": 0,
+            "qualified_dividend_income": 0,
+            "non_qualified_dividend_income": 0,
+            "alimony_income": 0,
+            "child_support_received": 0,
+            "educational_assistance": 0,
+            "financial_assistance": 0,
+            "short_term_capital_gains": 0,
+            "miscellaneous_income": 0
+          },
+          {
+            "age": 4,
+            "employment_income": 0,
+            "weekly_hours_worked_before_lsr": 0,
+            "immigration_status": "CITIZEN",
+            "ssn_card_type": "CITIZEN",
+            "is_tax_unit_head": false,
+            "is_tax_unit_spouse": false,
+            "is_tax_unit_dependent": true,
+            "is_household_head": false,
+            "is_male": false,
+            "is_disabled": false,
+            "is_blind": false,
+            "is_pregnant": false,
+            "is_full_time_college_student": false,
+            "has_esi": false,
+            "offered_aca_disqualifying_esi": false,
+            "bank_account_assets": 0,
+            "stock_assets": 0,
+            "bond_assets": 0,
+            "pre_subsidy_rent": 0,
+            "takes_up_wic_if_eligible": true,
+            "is_wic_at_nutritional_risk": true,
+            "takes_up_medicaid_if_eligible": true,
+            "takes_up_chip_if_eligible": true,
+            "takes_up_head_start_if_eligible": false,
+            "takes_up_early_head_start_if_eligible": false,
+            "self_employment_income_before_lsr": 0,
+            "taxable_interest_income": 0,
+            "tax_exempt_interest_income": 0,
+            "qualified_dividend_income": 0,
+            "non_qualified_dividend_income": 0,
+            "alimony_income": 0,
+            "child_support_received": 0,
+            "educational_assistance": 0,
+            "financial_assistance": 0,
+            "short_term_capital_gains": 0,
+            "miscellaneous_income": 0
+          }
+        ],
+        "marital_unit": [
+          {
+            "members": [
+              0
+            ]
+          },
+          {
+            "members": [
+              1
+            ]
+          }
+        ],
+        "family": [
+          {
+            "members": [
+              0,
+              1
+            ]
+          }
+        ],
+        "spm_unit": [
+          {
+            "members": [
+              0,
+              1
+            ],
+            "spm_unit_tenure_type": "RENTER",
+            "spm_unit_assets": 1000,
+            "spm_unit_pre_subsidy_childcare_expenses": 0,
+            "heating_type": "ELECTRICITY",
+            "pre_subsidy_electricity_expense": 1800,
+            "heat_expense_included_in_rent": false,
+            "has_cooling_expense": true,
+            "phone_cost": 600,
+            "water_expense": 360,
+            "sewage_expense": 0,
+            "trash_expense": 0,
+            "takes_up_snap_if_eligible": true,
+            "takes_up_tanf_if_eligible": true,
+            "takes_up_housing_assistance_if_eligible": false
+          }
+        ],
+        "tax_unit": [
+          {
+            "members": [
+              0,
+              1
+            ],
+            "filing_status": "HEAD_OF_HOUSEHOLD",
+            "takes_up_aca_if_eligible": false,
+            "takes_up_eitc": true
+          }
+        ],
+        "household": {
+          "state_code": "TX",
+          "county_fips": "48201",
+          "tenure_type": "RENTED"
+        },
+        "year": 2025,
+        "spm": {
+          "geography_kind": "national"
+        },
+        "axes": [
+          [
+            {
+              "name": "employment_income",
+              "index": 0,
+              "min": 0,
+              "max": 60000,
+              "count": 61
+            },
+            {
+              "name": "weekly_hours_worked_before_lsr",
+              "index": 0,
+              "min": 0,
+              "max": 38.46153846153846,
+              "count": 61
+            }
+          ]
+        ],
+        "extra_variables": [
+          "acp",
+          "ak_permanent_fund_dividend",
+          "alimony_income",
+          "basic_income",
+          "capital_gains",
+          "child_support_received",
+          "commodity_supplemental_food_program",
+          "ctc",
+          "debt_relief",
+          "dividend_income",
+          "ebb",
+          "educational_assistance",
+          "eitc",
+          "employee_payroll_tax",
+          "employment_income",
+          "farm_operations_income",
+          "farm_rent_income",
+          "financial_assistance",
+          "flat_tax",
+          "free_school_meals",
+          "gi_cash_assistance",
+          "high_efficiency_electric_home_rebate",
+          "household_benefits",
+          "household_head_start_benefits",
+          "household_health_benefits",
+          "household_health_costs",
+          "household_market_income",
+          "household_net_income",
+          "household_refundable_state_tax_credits",
+          "household_refundable_tax_credits",
+          "household_state_benefits",
+          "household_state_tax_before_refundable_credits",
+          "household_tax",
+          "household_tax_before_refundable_credits",
+          "housing_assistance",
+          "illicit_income",
+          "income_tax_before_refundable_credits",
+          "income_tax_refundable_credits",
+          "interest_income",
+          "local_income_tax_before_refundable_credits",
+          "local_occupational_tax",
+          "miscellaneous_income",
+          "partnership_s_corp_income",
+          "pension_income",
+          "reduced_price_school_meals",
+          "rental_income",
+          "residential_efficiency_electrification_rebate",
+          "retirement_distributions",
+          "self_employment_income",
+          "self_employment_tax",
+          "snap",
+          "social_security",
+          "ssi",
+          "sstb_self_employment_income",
+          "strike_benefits",
+          "survivor_benefits",
+          "tanf",
+          "trump_dividend",
+          "unemployment_compensation",
+          "weekly_hours_worked_before_lsr",
+          "wic",
+          "workers_compensation"
+        ]
+      }
+    }
+  }
+}
