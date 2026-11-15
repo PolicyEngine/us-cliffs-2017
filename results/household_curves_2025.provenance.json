@@ -300,5 +300,7 @@
     "uv pip sync requirements/household-curves-2025.lock --python <separate-env>/bin/python --require-hashes --only-binary :all:",
     "Run scripts/calculate_household_curves_2025.py through uv run --no-project --no-sync --python <separate-env>/bin/python python -I, with --config examples/household_curves_2025.json, exactly one --scenario and external --receipt/--csv paths per process.",
     "Use the shared resource guard, numeric threads1,8GiB-or-lower memory and300s-or-lower native timeout; keep full API receipts outside the repository."
-  ]
+  ],
+  "current_reproduction_config_sha256": "c997aaa62f13dffad3f20d8c0e168ae2055a8911d3bf97d04ede0b30347984ba",
+  "config_sha256_scope": "Original executed config bytes at c56e5013; later edits change assumption prose only. Current reproduction config hash appears separately."
 }

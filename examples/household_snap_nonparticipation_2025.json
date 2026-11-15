@@ -10,17 +10,17 @@
   "spm_content_sha256": "3d86d5c4c0423480e6b69b75d222ffa4a7a2639e4094df5ba2504af01be17173",
   "resource_label": "Annual household resources after modeled taxes, excluding health benefits; includes SNAP, WIC and other noncash benefits valued by the model. Housing/utility expenses affect benefit rules but are not subtracted from this resource measure.",
   "assumptions": [
-    "All members are US citizens with citizen SSN cards and live together in Harris County, Texas throughout2025. Memberships remain constant throughout the year.",
-    "One unmarried male adult is the tax-unit/household head. The parent scenario adds one4-year-old dependent daughter. Each person has a separate marital unit. Filing status is a stated scenario premise, not a new legal-eligibility finding.",
-    "The adult earns a fixed$30 hourly wage over52weeks. Annual earnings0\u201360000 and usual weekly hours0\u201338.461538 vary together at61 paired points. The child has no earnings or work hours.",
-    "Annual rent is12000; electricity1800, telephone600 and water360 are paid separately. Electricity provides heat and cooling. Other utility bills and paid childcare are0. Formula-owned childcare expense outputs are not supplied.",
-    "Bank assets are1000 for the adult and0 for the child; stocks/bonds/other assets are0. The input-only SPM-unit asset measure is1000. Any low-earnings housing-budget shortfall may be debt-financed; no additional income is imputed.",
-    "Listed input-only nonwage income facts are0. Remaining primitive monetary inputs use model zero defaults; no calculated tax bases or benefit awards are supplied.",
-    "Neither person has employer health insurance or a disqualifying offer. They do not buy ACA coverage; Medicaid/CHIP take-up istrue if eligible, with enrollment derived. Health benefits are excluded from resources under the unchanged baseline.",
-    "SNAP and EITC take-up istrue if eligible. Cash TANF take-up isfalse: stated nonparticipation, while all TANF eligibility and SNAP income formulas remain live. No housing-assistance allocation or Head Start placement is assumed; those take-up inputs arefalse. No eligibility or final award is overridden.",
-    "The child has a hypothetical independently stated WIC nutritional-risk assessment and claims WIC if eligible. The adult is not pregnant, disabled, blind or a college student.",
-    "The adult control uses the model steady-state ABAWD approximation: initial3 countable months within36 months are not tracked, and noncompliance can cause immediate exclusion. This does not establish universal year-long entitlement or absence of SNAP cliffs. The parent child-age exemption is calculated.",
-    "Requested input/calculation year is2025; native structural selection defaults2024. These curves do not certify every2025 legal branch or a2017comparison."
+    "All members hold US citizenship and citizen SSN cards and live together in Harris County, Texas throughout 2025. Memberships remain constant throughout the year.",
+    "One unmarried male adult heads the tax unit and household. The parent has a 4-year-old dependent daughter. Each person has a separate marital unit. The scenario stipulates filing status without establishing legal eligibility.",
+    "The adult earns $30 per hour over 52 weeks. Annual earnings of $0\u2013$60,000 and weekly hours of 0\u201338.461538 vary together at 61 paired points. The child in the parent scenario has no earnings or work hours.",
+    "The household pays $12,000 annual rent, $1,800 electricity, $600 telephone and $360 water separately. Electricity provides heat and cooling. Other utility bills and paid childcare cost $0. The scenario supplies no formula-owned childcare expense output.",
+    "The adult owns $1,000 in bank assets; the child owns $0. Stocks, bonds and other assets total $0. The input-only SPM-unit asset measure totals $1,000. Debt may finance a low-earnings housing-budget shortfall; the scenario imputes no additional income.",
+    "The scenario sets listed input-only nonwage income facts to $0. Remaining primitive monetary inputs use model zero defaults; the scenario supplies no calculated tax base or benefit award.",
+    "Neither person has employer health insurance or a disqualifying offer. They do not buy ACA coverage. They claim Medicaid/CHIP if eligible; formulas determine enrollment. Resources exclude health benefits under the unchanged baseline.",
+    "Members claim SNAP and EITC if eligible. They do not claim cash TANF; TANF eligibility and SNAP income formulas remain live. The scenario assumes no housing-assistance allocation or Head Start placement and sets those take-up inputs to false. It overrides no eligibility or final award.",
+    "The child has a hypothetical, independently stated WIC nutritional-risk assessment and claims WIC if eligible. The adult has no pregnancy, disability, blindness or college-student status.",
+    "Formulas calculate the parent's child-age exemption from SNAP work requirements.",
+    "We request 2025 inputs and calculations; native structural selection defaults to 2024. These illustrations do not certify every 2025 legal branch or a 2017 comparison."
   ],
   "accounts": {
     "benefits": [

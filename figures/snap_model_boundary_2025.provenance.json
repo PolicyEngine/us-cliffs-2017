@@ -26,10 +26,10 @@
   "font": "DejaVu Sans",
   "figure_inches": [
     6.8,
-    4.6
+    5.4
   ],
   "dpi": 300,
   "matplotlib": "3.11.2",
   "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]",
-  "caption_sha256": "4a482161e2f671e687c083282085283f610a170d9fa7f4a9b4edda6410f9b72e"
+  "caption_sha256": "1a09105a36e8598df1d8f347281fe595a9f46a977d0d82b63df7e6673cc346f2"
 }

@@ -249,13 +249,13 @@ def render(args: argparse.Namespace) -> None:
             "svg.fonttype": "path",
         }
     )
-    fig, axes = plt.subplots(1, 2, figsize=(6.8, 4.6))
-    fig.subplots_adjust(left=0.15, right=0.94, bottom=0.29, top=0.78, wspace=0.48)
+    fig, axes = plt.subplots(1, 2, figsize=(6.8, 5.4))
+    fig.subplots_adjust(left=0.15, right=0.94, bottom=0.35, top=0.78, wspace=0.48)
     fig.text(0.15, 0.93, "Illustrative model outputs", fontsize=13, weight="bold")
     fig.text(
         0.15,
         0.872,
-        "Single parent, age 40, and child, age 4 - Harris County, Texas",
+        "Single parent, age 40, and child, age 4, Harris County, Texas",
         fontsize=9,
     )
     fig.text(
@@ -299,7 +299,7 @@ def render(args: argparse.Namespace) -> None:
     axes[0].set_xticks([0, 20000, 40000, 60000])
     axes[0].set_yticks([0, 15000, 30000, 45000, 60000])
     axes[0].set_ylabel("Annual household resources ($)", labelpad=8)
-    axes[1].set_title("B  Near the model cutoff")
+    axes[1].set_title("B  FY2025 portion drops")
     axes[1].set_xlim(33650, 33850)
     axes[1].set_ylim(
         min(r["household_net_income"] for r in zoom) - 65,
@@ -310,7 +310,7 @@ def render(args: argparse.Namespace) -> None:
     axes[1].text(
         0.04,
         0.96,
-        f"+$1 earnings\n-${-delta:,.2f} resources",
+        f"+$1 earnings\n−${-delta:,.2f} resources",
         transform=axes[1].transAxes,
         va="top",
         fontsize=8,
@@ -322,24 +322,21 @@ def render(args: argparse.Namespace) -> None:
         color=TEAL,
         zorder=4,
     )
-    fig.text(
-        0.15,
-        0.154,
-        "FY2025 SNAP categorical gross-income limit: Texas table $2,811/month;",
-        fontsize=8,
-    )
-    fig.text(
-        0.15,
-        0.116,
-        "model $2,810.50/month.",
-        fontsize=8,
-    )
-    fig.text(
-        0.15,
-        0.057,
-        "Sources: PolicyEngine 6.19.0 calculations; Texas HHSC Bulletin 24-12, p. 5.",
-        fontsize=7.5,
-    )
+    figure_notes = [
+        (0.235, "Calendar 2025 SNAP: Jan–Sep FY2025; Oct–Dec FY2026."),
+        (0.195, "At $33,727 earnings, annual SNAP falls from $597 to $183."),
+        (
+            0.155,
+            "FY2025 categorical gross limit: Texas $2,811/month; PolicyEngine $2,810.50/month.",
+        ),
+        (
+            0.115,
+            "This model illustration does not establish the exact Texas legal cutoff.",
+        ),
+        (0.045, "Sources: PolicyEngine 6.19.0; Texas HHSC Bulletin 24-12, p. 5."),
+    ]
+    for y, note in figure_notes:
+        fig.text(0.15, y, note, fontsize=8, parse_math=False)
     fig.canvas.draw()
     renderer = fig.canvas.get_renderer()
     labels = list(fig.texts)
@@ -384,15 +381,21 @@ def render(args: argparse.Namespace) -> None:
         "and Children (WIC). The "
         "[configuration](../examples/snap_model_boundary_zoom_2025.json) records rent, "
         "utilities, assets, coverage and other claiming assumptions. We calculate 61 points "
-        "over $0-$60,000 and 201 points over $33,650-$33,850; lines join calculated points and "
+        "over $0–$60,000 and 201 points over $33,650–$33,850; lines join calculated points and "
         "break across the observed drop. "
         f"Between ${before['employment_income']:,.0f} and ${after['employment_income']:,.0f} "
         f"of earnings, annual resources fall ${-delta:,.2f} and SNAP falls ${-snap_delta:,.2f}. "
-        "Texas's Health and Human Services Commission publishes a $2,811 monthly gross-income limit for this fiscal-year 2025 "
-        "SNAP category; the model applies $2,810.50. "
+        "Calendar 2025 spans two SNAP fiscal years: January–September uses FY2025 limits, "
+        "and October–December uses FY2026 limits. At $33,727 of earnings, annual SNAP falls "
+        "from $597 to $183; the three FY2026 months continue to contribute benefits. The "
+        "full-range observations also show SNAP reaching zero between $34,000 and $35,000 "
+        "of earnings. They do not locate that later change at $1 resolution. "
+        "Texas's Health and Human Services Commission publishes a $2,811 monthly categorical "
+        "gross-income limit for a two-person household in FY2025; PolicyEngine applies "
+        "$2,810.50. This model illustration does not establish the exact Texas legal cutoff. "
         "[Texas HHSC Bulletin 24-12](https://fhb.hhs.texas.gov/sites/default/files/documents/"
-        "mepd-and-twh-Bulletin-24-12.pdf#page=5) supplies the published limit. "
-        "PolicyEngine 6.19.0 uses US 2.2.1, Core 3.33.3 and SPM 1.0.0 for these calculations.\n"
+        "mepd-and-twh-Bulletin-24-12.pdf#page=5) supplies the published 165% categorical limit. "
+        "PolicyEngine 6.19.0 uses US 2.2.1, Core 3.33.3 and spm-calculator 1.0.0 for these calculations.\n"
     )
     stem.with_suffix(".caption.md").write_text(caption)
     report = {
@@ -411,7 +414,7 @@ def render(args: argparse.Namespace) -> None:
         "interpolated_output_rows": 0,
         "nominal_currency_year": 2025,
         "font": font_name,
-        "figure_inches": [6.8, 4.6],
+        "figure_inches": [6.8, 5.4],
         "dpi": 300,
         "matplotlib": metadata.version("matplotlib"),
         "python": sys.version,

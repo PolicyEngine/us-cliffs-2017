@@ -53,7 +53,9 @@
   },
   "scope": "Genuine adjacent1-dollar model observations. Published Texas chart differs; no statutory-boundary, population or whole-law accuracy claim. No interpolation or model patch.",
   "script_sha256_scope": "Exact script executed for the sole native zoom; subsequent edits affect rendering/caption only.",
-  "current_reproduction_script_sha256": "cf06af67eb25d1db5f44d875e3e4c69948500ac457010a046e1b7620e1793d66",
+  "current_reproduction_script_sha256": "bf821af5dc22e1bb09939aaa4db2ac1fc404d6e01f3b047c81a04e14a1f726db",
   "compute_zoom_AST_identical_after_layout_edit": true,
-  "all390_seals_exact_scope": "Native pre/post execution only; final plot-only source edit is separately recorded."
+  "all390_seals_exact_scope": "Native pre/post execution only; final plot-only source edit is separately recorded.",
+  "current_reproduction_config_sha256": "eb67c014d3de6a5d2965d00ebde1e1c368868936dc0a45178c3896e7ec46502f",
+  "config_sha256_scope": "Original executed config bytes at c56e5013; later edits change assumption prose only. Current reproduction config hash appears separately."
 }
