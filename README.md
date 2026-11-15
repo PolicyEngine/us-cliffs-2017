@@ -1,8 +1,8 @@
 # Cliffs: archived experiments and counterfactual preparation
 
-This repository contains archived experiments measuring whether a specified earnings increase lowers household resources, with and without government-valued health coverage. The 2017-oriented experiments combine dated policies with later rule fallbacks, selected monetary rescaling and population reweighting. They are hybrid sensitivities, not estimates of actual 2017 incidence or a comparison holding the recent population and real incomes fixed.
+This repository contains archived experiments measuring whether a specified earnings increase lowers household resources, with and without government-valued health coverage. The 2017-oriented experiments combine dated policies with later rule fallbacks, selected monetary rescaling and population reweighting. These hybrid sensitivities do not estimate actual 2017 incidence or compare laws while holding a recent population and real incomes fixed.
 
-The [proposed counterfactual protocol](docs/counterfactual-protocol.md) describes a fresh comparison on one recent reference population. Its helper converts declared monetary inputs and preserves household characteristics. The managed population adapter, model/data qualification and fresh policy results remain pending; existing result files report the hybrid experiments.
+The [proposed counterfactual protocol](docs/counterfactual-protocol.md) describes a fresh comparison on one recent reference population. Its helper converts declared monetary inputs and preserves household characteristics. Fresh policy results require the managed population adapter and model/data qualification; existing result files report the hybrid experiments.
 
 - [results/summary.md](results/summary.md): the counts, with 95% intervals.
 - [METHODOLOGY.md](METHODOLOGY.md): the archived experiment's definition, construction of 2017-oriented inputs, uncertainty and coverage limits.
@@ -40,13 +40,23 @@ The [proposed counterfactual protocol](docs/counterfactual-protocol.md) describe
 
 ## Testing counterfactual preparation
 
-The new helper tests use synthetic inputs and mock price indices. They require no model import or population data:
+The helper tests use synthetic inputs and mock price indices and execute without model imports or population data.
+
+Numeric facts retain their finite numeric types, including fractional ages; numeric strings fail validation. Money converts to exact fractions. Representation guards limit integers and ratio components to 4,096 bits, decimal coefficients to 1,000 digits, decimal exponents to ±1,000 and numeric text to 2,048 characters. These resource limits apply to supplied numbers.
+
+Declare every input field explicitly. For age-derived birth facts, supply `calendar_scope` and `calendar_reason`, approve the scope in `InputContract.calendar_scopes`, and choose the reviewed drop or compatible hold. The returned `calendar_dispositions` records the scope, reason and disposition; `dropped_fields` also lists any dropped birth fact. Retained calendar values never shift or clamp. Lexical name guards cover selected common names; the complete reviewed field contract must identify other date and cohort facts.
+
+Run the isolated pure suite:
 
 ```bash
 uv run --no-project --python 3.13 --with pytest==9.2.0 --with hypothesis==6.170.15 python -m pytest tests/test_native_currency.py
 ```
 
-The existing package pins and drivers below reproduce the archived experiments. New policy analysis will use the qualified managed `policyengine` interface described in the proposed protocol.
+The existing package pins and drivers below reproduce the archived experiments. New policy analysis requires the qualified managed `policyengine` interface described in the proposed protocol and entity-aware MicroSeries operations for weighted statistics.
+
+## Counterfactual qualification status
+
+A November 14, 2026 compatibility check in `policyengine` 6.19.0 refused the development target declaring US 2.124.0 and Core 3.36.0 at country source `43ca7bd3cd8615cac187db1b270ec2c3dd77f85f`. That certificate bound the 20260915 data release. Qualification of any replacement target must verify genuine package identities and prepared inputs; identical raw H5 bytes do not establish compatibility.
 
 ## Reproducing archived experiments
 
@@ -69,6 +79,8 @@ python scripts/render_results.py results/final_*.json --csfp results/csfp/final_
 Each part needs about 11 GB of memory. To queue the runs under a memory limit, set `CLIFFS_RUNNER` (or write its value to a `.runner` file) to a command that takes a label and then the command to run. The tests read the Medicaid totals in results/medicaid/, so run scripts/medicaid_totals.sh before pytest in a fresh clone that lacks them. Per-person outputs go to the per_person/ folders under results/, which git ignores.
 
 Each result file records the repository commit and a hash of the cliffs2017/ code that produced it. The final results in this repository came from commit cd77a87, whose cliffs2017/ code hashes to 04f6b6c3. The files in results/counted_once/ came from commit cd77a87; each part stops unless it reproduces the counts of the committed run it rebuilds. results/take_up_bounds.json came from commit 5a53e32; the script reads the per-person files of the final runs, which those runs write and git ignores, and stops unless the files reproduce each run's count. results/driver_intervals.json came from commit 79a52f4; scripts/driver_intervals.py reads the same files and stops unless they reproduce each run's counts, in total and by largest loss. results/health_only.json came from commit 13e1553; scripts/health_only.py reads the same files and stops unless they reproduce each headline count. results/csfp/reach_2025.json holds the number of people the model gives a Commodity Supplemental Food Program package. It came from commit efa0b34, before the runs set WIC take-up, and no formula behind that program reads WIC. The Medicaid totals in results/medicaid/ also predate cliffs2017/wic_take_up.py, and tests/test_wic_take_up.py checks on a sample that setting WIC take-up from the draw leaves Medicaid's sums unchanged. We last regenerated the parameter and formula audit files before cliffs2017/wic_take_up.py existed (commits 3286bdd and 6915a57).
+
+The run provenance digest covers every Python and CSV file under `cliffs2017/`, including the currency helper. A new helper changes that digest even when the archived calculation drivers remain untouched. The combination and part-scaling checks reject runs with different code digests. Reproduce an archived run from its recorded code version, or regenerate all compared parts together at one version; do not mix old and new parts or bypass the checks.
 
 ## License
 

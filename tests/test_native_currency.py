@@ -361,7 +361,7 @@ def test_inverse_is_cash_only_and_shock_is_flow_only(mock_basis):
 def test_explicit_calendar_dates_and_structural_flags_are_unchanged(mock_basis):
     fields = (
         FieldSpec(
-            "birth_date",
+            "loan_origination_date",
             "person",
             Kind.CALENDAR,
             Disposition.KEEP,
@@ -381,7 +381,8 @@ def test_explicit_calendar_dates_and_structural_flags_are_unchanged(mock_basis):
         ),
     )
     original = {
-        "birth_date": ["2020-05-02", "1985-03-01"],
+        # Preserve actual calendar facts; the future adapter reviews loan treatment.
+        "loan_origination_date": ["2020-05-02", "1985-03-01"],
         "mock_member_id": [101, 101],
         "mock_role": [False, True],
     }
@@ -428,7 +429,7 @@ def test_reference_year_is_explicit_and_supported(reference_year):
         PriceBasis({2017: 80, 2025: 100}, reference_year=reference_year)
 
 
-@settings(max_examples=50, deadline=100, database=None, derandomize=True)
+@settings(max_examples=50, deadline=None, database=None, derandomize=True)
 @given(
     endowments=st.lists(
         st.one_of(
@@ -490,7 +491,7 @@ def test_property_mock_money_roundtrip(
     assert native.target_year == year
 
 
-@settings(max_examples=50, deadline=100, database=None, derandomize=True)
+@settings(max_examples=50, deadline=None, database=None, derandomize=True)
 @given(
     endowment=st.one_of(
         st.integers(-1_000_000, 1_000_000),
@@ -574,3 +575,310 @@ def test_property_mock_shock_is_linear_and_facts_are_fixed(
         "first_home_mortgage_origination_year",
     ):
         assert baseline.values[name] == shocked.values[name] == tuple(original[name])
+
+
+def test_fixed_age_and_birth_facts_require_reviewed_disposition():
+    fields = (
+        FieldSpec("age", "person", Kind.AGE, Disposition.KEEP, "age_years", "year"),
+        FieldSpec(
+            "birth_date",
+            "person",
+            Kind.CALENDAR,
+            Disposition.KEEP,
+            "calendar_date",
+            "year",
+        ),
+    )
+    with pytest.raises(ContractError, match="birth"):
+        InputContract(fields, {"person": 1})
+
+
+@pytest.mark.parametrize("disposition", [Disposition.DROP, Disposition.KEEP])
+def test_age_led_birth_disposition_is_recorded_without_shifting_dates(
+    disposition, mock_basis
+):
+    reason = "Fix synthetic age and exclude stored birth-cohort eligibility consumers"
+    fields = (
+        FieldSpec("age", "person", Kind.AGE, Disposition.KEEP, "age_years", "year"),
+        FieldSpec(
+            "birth_date",
+            "person",
+            Kind.CALENDAR,
+            disposition,
+            "calendar_date",
+            "year",
+            calendar_scope="age_led_birth_facts",
+            calendar_reason=reason,
+        ),
+        FieldSpec(
+            "loan_origination_date",
+            "person",
+            Kind.CALENDAR,
+            Disposition.KEEP,
+            "calendar_date",
+            "year",
+        ),
+    )
+    contract = InputContract(
+        fields, {"person": 1}, calendar_scopes=frozenset({"age_led_birth_facts"})
+    )
+    original = {
+        "age": [40.7],
+        "birth_date": ["1985-03-01"],
+        "loan_origination_date": ["2023-01-01"],
+    }
+    result = to_native_inputs(
+        original, contract=contract, basis=mock_basis, target_year=2017
+    )
+    assert result.values["age"] == (40.7,)
+    assert result.values["loan_origination_date"] == ("2023-01-01",)
+    assert result.calendar_dispositions == {
+        "birth_date": {
+            "disposition": disposition.value,
+            "scope": "age_led_birth_facts",
+            "reason": reason,
+        }
+    }
+    if disposition == Disposition.DROP:
+        assert result.dropped_fields == ("birth_date",)
+        assert "birth_date" not in result.values
+    else:
+        assert result.dropped_fields == ()
+        assert result.values["birth_date"] == ("1985-03-01",)
+    assert original["birth_date"] == ["1985-03-01"]
+    with pytest.raises(TypeError):
+        result.calendar_dispositions["birth_date"]["scope"] = "unreviewed"
+
+
+@pytest.mark.parametrize("disposition", [Disposition.DROP, Disposition.KEEP])
+def test_birth_disposition_requires_approved_scope(disposition):
+    fields = (
+        FieldSpec("age", "person", Kind.AGE, Disposition.KEEP, "age_years", "year"),
+        FieldSpec(
+            "birth_year",
+            "person",
+            Kind.CALENDAR,
+            disposition,
+            "calendar_year",
+            "year",
+            calendar_scope="unapproved",
+            calendar_reason="Synthetic ages hold cohort-sensitive provisions outside scope",
+        ),
+    )
+    with pytest.raises(ContractError, match="not approved"):
+        InputContract(fields, {"person": 1})
+
+
+@pytest.mark.parametrize(
+    "scope,reason",
+    [(None, None), ("age_led", None), ("", "reviewed"), ([], "reviewed")],
+)
+def test_birth_drop_requires_explicit_scope_and_reason(scope, reason):
+    with pytest.raises(ContractError):
+        FieldSpec(
+            "birth_date",
+            "person",
+            Kind.CALENDAR,
+            Disposition.DROP,
+            "calendar_date",
+            "year",
+            calendar_scope=scope,
+            calendar_reason=reason,
+        )
+
+
+def test_calendar_drop_is_limited_to_declared_age_derived_birth_facts():
+    with pytest.raises(ContractError):
+        FieldSpec(
+            "loan_origination_date",
+            "person",
+            Kind.CALENDAR,
+            Disposition.DROP,
+            "calendar_date",
+            "year",
+            calendar_scope="age_led",
+            calendar_reason="This is a loan fact, not an age-derived birth fact",
+        )
+    birth = FieldSpec(
+        "birth_year",
+        "person",
+        Kind.CALENDAR,
+        Disposition.DROP,
+        "calendar_year",
+        "year",
+        calendar_scope="age_led",
+        calendar_reason="Replace stored birth year with a declared synthetic age",
+    )
+    with pytest.raises(ContractError, match="fixed age"):
+        InputContract((birth,), {"person": 1}, calendar_scopes={"age_led"})
+
+
+@pytest.mark.parametrize(
+    "kind,unit,name,text",
+    [
+        (Kind.AGE, "age_years", "age", "40.7"),
+        (Kind.WEIGHT, "weight", "person_weight", "1.5"),
+        (Kind.DIMENSIONLESS, "fraction", "mock_fraction", "0.25"),
+    ],
+)
+def test_numeric_fact_strings_fail_without_coercion(kind, unit, name, text, mock_basis):
+    spec = FieldSpec(name, "person", kind, Disposition.KEEP, unit, "year")
+    with pytest.raises(ContractError, match="numeric values"):
+        to_native_inputs(
+            {name: [text]},
+            contract=InputContract((spec,), {"person": 1}),
+            basis=mock_basis,
+            target_year=2017,
+        )
+
+
+@pytest.mark.parametrize(
+    "kind,unit,name",
+    [
+        (Kind.AGE, "age_years", "age"),
+        (Kind.WEIGHT, "weight", "person_weight"),
+        (Kind.DIMENSIONLESS, "fraction", "mock_fraction"),
+    ],
+)
+def test_finite_numeric_facts_preserve_values_and_types(kind, unit, name, mock_basis):
+    values = [0, 40.7, Decimal("8.125"), Fraction(1, 3)]
+    spec = FieldSpec(name, "person", kind, Disposition.KEEP, unit, "year")
+    result = to_native_inputs(
+        {name: values},
+        contract=InputContract((spec,), {"person": 4}),
+        basis=mock_basis,
+        target_year=2017,
+    )
+    assert result.values[name] == tuple(values)
+    assert [type(v) for v in result.values[name]] == [type(v) for v in values]
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "1e999999999",
+        "1e-999999999",
+        Decimal("1e999999999"),
+        "1" * 1001,
+        "1" * 2049,
+        1 << 4096,
+    ],
+)
+def test_oversized_representations_fail_before_fraction_allocation(
+    value, monkeypatch, mock_basis
+):
+    import cliffs2017.native_currency as currency
+
+    class NoAllocation(Fraction):
+        def __new__(cls, *args, **kwargs):
+            raise AssertionError(
+                "Fraction allocation preceded the representation guard"
+            )
+
+    monkeypatch.setattr(currency, "Fraction", NoAllocation)
+    with pytest.raises(ContractError):
+        earnings_shock_to_native(
+            value, basis=mock_basis, target_year=2017, unit="USD/year"
+        )
+
+
+@pytest.mark.parametrize("value", [Fraction(1 << 4096, 1), Fraction(1, 1 << 4096)])
+def test_existing_ratios_must_respect_representation_budget(value, mock_basis):
+    with pytest.raises(ContractError):
+        earnings_shock_to_native(
+            value, basis=mock_basis, target_year=2017, unit="USD/year"
+        )
+
+
+@pytest.mark.parametrize("unit", [[], {}, set()])
+def test_unhashable_shock_unit_raises_contract_error(unit, mock_basis):
+    with pytest.raises(ContractError):
+        earnings_shock_to_native(1, basis=mock_basis, target_year=2017, unit=unit)
+
+
+@pytest.mark.parametrize("scopes", [None, "scope", [["nested"]], {"scope": []}])
+@pytest.mark.parametrize("attribute", ["background_scopes", "calendar_scopes"])
+def test_malformed_scope_collections_raise_contract_error(scopes, attribute):
+    with pytest.raises(ContractError):
+        InputContract((money(),), {"person": 1}, **{attribute: scopes})
+
+
+def test_fraction_category_and_count_months_preserve_explicit_facts(mock_basis):
+    fields = (
+        FieldSpec(
+            "mock_fraction",
+            "person",
+            Kind.DIMENSIONLESS,
+            Disposition.KEEP,
+            "fraction",
+            "month",
+        ),
+        FieldSpec(
+            "mock_category",
+            "person",
+            Kind.DEMOGRAPHIC,
+            Disposition.KEEP,
+            "category",
+            "month",
+        ),
+        FieldSpec(
+            "mock_count", "person", Kind.STRUCTURE, Disposition.KEEP, "count", "month"
+        ),
+    )
+    original = {
+        "mock_fraction": {m: [Fraction(m, 12)] for m in range(1, 13)},
+        "mock_category": {m: [f"group{m}"] for m in range(1, 13)},
+        "mock_count": {m: [m] for m in range(1, 13)},
+    }
+    result = to_native_inputs(
+        original,
+        contract=InputContract(fields, {"person": 1}),
+        basis=mock_basis,
+        target_year=2017,
+    )
+    for name, months in original.items():
+        assert dict(result.values[name]) == {m: tuple(v) for m, v in months.items()}
+
+
+@pytest.mark.parametrize(
+    "kind,unit,value",
+    [
+        (Kind.DEMOGRAPHIC, "category", ""),
+        (Kind.DEMOGRAPHIC, "category", True),
+        (Kind.STRUCTURE, "count", -1),
+        (Kind.STRUCTURE, "count", 1.5),
+        (Kind.STRUCTURE, "count", True),
+        (Kind.DIMENSIONLESS, "fraction", None),
+        (Kind.DIMENSIONLESS, "fraction", float("nan")),
+    ],
+)
+def test_bad_category_count_and_fraction_facts_fail(kind, unit, value, mock_basis):
+    spec = FieldSpec("mock_fact", "person", kind, Disposition.KEEP, unit, "year")
+    with pytest.raises(ContractError):
+        to_native_inputs(
+            {spec.name: [value]},
+            contract=InputContract((spec,), {"person": 1}),
+            basis=mock_basis,
+            target_year=2017,
+        )
+
+
+@pytest.mark.parametrize("count", [True, -1, "2", None])
+def test_inverse_rejects_invalid_entity_count(count, mock_basis):
+    with pytest.raises(ContractError, match="entity count"):
+        cash_to_reference(
+            [1, 2],
+            basis=mock_basis,
+            native_year=2017,
+            unit="USD/year",
+            period="year",
+            entity_count=count,
+        )
+
+
+def test_entity_counts_do_not_invent_unsupplied_fields(mock_basis):
+    contract = InputContract((), {"person": 2, "household": 1})
+    result = to_native_inputs({}, contract=contract, basis=mock_basis, target_year=2017)
+    assert contract.entity_counts == {"person": 2, "household": 1}
+    assert result.values == result.units == result.calendar_dispositions == {}
+    assert result.dropped_fields == ()

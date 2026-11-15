@@ -5,6 +5,11 @@ This module does not discover inputs, classify the actual population, fetch weig
 change periods, broadcast annual amounts into months, or round currency to cents.
 Fractions retain exact declared numeric ratios until a future engine adapter chooses
 its own numeric representation. No such adapter is included.
+
+Numeric facts retain their supplied finite numeric types; numeric strings are invalid
+facts. Monetary strings remain explicit exact decimals. Birth facts dropped for a
+fixed-age experiment, or held alongside fixed age, require a reviewed scope and reason.
+The result records those dispositions without altering any retained calendar value.
 """
 
 import math
@@ -55,6 +60,11 @@ FACT_UNITS = {
     Kind.DIMENSIONLESS: frozenset({"fraction", "count", "flag"}),
 }
 ALL_UNITS = MONEY_UNITS | frozenset().union(*FACT_UNITS.values())
+# Representation limits bound arithmetic resources, not economic values or tax rules.
+MAX_NUMERIC_BITS = 4096
+MAX_DECIMAL_DIGITS = 1000
+MAX_DECIMAL_EXPONENT = 1000
+MAX_NUMERIC_TEXT_LENGTH = 2048
 
 
 def _year(value):
@@ -68,20 +78,50 @@ def _number(value):
     if isinstance(value, bool):
         raise ContractError("Boolean is not a monetary/numeric value")
     if isinstance(value, Fraction):
+        if (
+            max(value.numerator.bit_length(), value.denominator.bit_length())
+            > MAX_NUMERIC_BITS
+        ):
+            raise ContractError("Numeric ratio exceeds representation limits")
         return value
     if isinstance(value, int):
+        if value.bit_length() > MAX_NUMERIC_BITS:
+            raise ContractError("Integer exceeds representation limits")
         return Fraction(value)
     if isinstance(value, float) and not math.isfinite(value):
         raise ContractError("Non-finite numeric value")
     if not isinstance(value, (Decimal, float, str)):
         raise ContractError("Expected a finite numeric value, without defaults")
+    if isinstance(value, str) and len(value) > MAX_NUMERIC_TEXT_LENGTH:
+        raise ContractError("Numeric text exceeds representation limits")
     try:
         decimal = value if isinstance(value, Decimal) else Decimal(str(value))
         if not decimal.is_finite():
             raise ContractError("Non-finite numeric value")
+        parts = decimal.as_tuple()
+        if (
+            len(parts.digits) > MAX_DECIMAL_DIGITS
+            or abs(parts.exponent) > MAX_DECIMAL_EXPONENT
+            or decimal.adjusted() >= MAX_DECIMAL_DIGITS
+        ):
+            raise ContractError("Decimal exceeds representation limits")
         return Fraction(decimal)
     except (InvalidOperation, ValueError, ZeroDivisionError) as error:
         raise ContractError("Invalid numeric value") from error
+
+
+def _scope_names(values):
+    if not isinstance(values, (list, tuple, set, frozenset)) or any(
+        not isinstance(value, str) or not value.strip() for value in values
+    ):
+        raise ContractError("Scopes must be a collection of explicit names")
+    return frozenset(values)
+
+
+def _birth_field(name):
+    return name in {"birth_year", "birth_date"} or name.endswith(
+        ("_birth_year", "_birth_date")
+    )
 
 
 def _period_unit(period, unit):
@@ -133,6 +173,8 @@ class FieldSpec:
     unit: str
     period: str
     background_scope: str | None = None
+    calendar_scope: str | None = None
+    calendar_reason: str | None = None
 
     def __post_init__(self):
         if not isinstance(self.name, str) or not self.name.strip():
@@ -151,6 +193,11 @@ class FieldSpec:
             valid = self.disposition == Disposition.DROP or (
                 self.disposition == Disposition.BACKGROUND and self.unit in MONEY_UNITS
             )
+        elif self.kind == Kind.CALENDAR:
+            valid = self.unit in FACT_UNITS[self.kind] and (
+                self.disposition == Disposition.KEEP
+                or (_birth_field(self.name) and self.disposition == Disposition.DROP)
+            )
         else:
             valid = (
                 self.disposition == Disposition.KEEP
@@ -166,7 +213,20 @@ class FieldSpec:
                 raise ContractError("Derived background needs a named excluded scope")
         elif self.background_scope is not None:
             raise ContractError("Scope is only valid for named background money")
-        # Protect common model facts even against an accidentally wrong manifest row.
+        if self.calendar_scope is not None or self.calendar_reason is not None:
+            if (
+                self.kind != Kind.CALENDAR
+                or not _birth_field(self.name)
+                or not isinstance(self.calendar_scope, str)
+                or not self.calendar_scope.strip()
+                or not isinstance(self.calendar_reason, str)
+                or not self.calendar_reason.strip()
+            ):
+                raise ContractError("Birth disposition needs a named scope and reason")
+        elif self.kind == Kind.CALENDAR and self.disposition == Disposition.DROP:
+            raise ContractError("Dropped birth fact needs a named scope and reason")
+        # These lexical backstops do not discover every possible fact/date name.
+        # The caller must still review every field's complete declaration.
         if (self.name == "age" or self.name.endswith("_age")) and self.kind != Kind.AGE:
             raise ContractError("Age facts cannot be converted or reclassified")
         if self.name.endswith("_weight") and self.kind != Kind.WEIGHT:
@@ -190,6 +250,7 @@ class InputContract:
     fields: tuple[FieldSpec, ...]
     entity_counts: Mapping
     background_scopes: frozenset[str] = frozenset()
+    calendar_scopes: frozenset[str] = frozenset()
 
     def __post_init__(self):
         if not isinstance(self.fields, (list, tuple)):
@@ -211,11 +272,9 @@ class InputContract:
                 or count < 0
             ):
                 raise ContractError("Invalid entity/count")
-        if isinstance(self.background_scopes, str):
-            raise ContractError("Background scopes must be a collection of names")
-        scopes = frozenset(self.background_scopes)
-        if any(not isinstance(scope, str) or not scope.strip() for scope in scopes):
-            raise ContractError("Background scopes must have explicit names")
+        scopes = _scope_names(self.background_scopes)
+        calendar_scopes = _scope_names(self.calendar_scopes)
+        age_entities = {field.entity for field in fields if field.kind == Kind.AGE}
         for field in fields:
             if field.entity not in counts:
                 raise ContractError("Missing entity count")
@@ -224,9 +283,29 @@ class InputContract:
                 and field.background_scope not in scopes
             ):
                 raise ContractError("Background scope was not approved in the contract")
+            if field.kind == Kind.CALENDAR and _birth_field(field.name):
+                if (
+                    field.calendar_scope is not None
+                    and field.calendar_scope not in calendar_scopes
+                ):
+                    raise ContractError(
+                        "Calendar scope was not approved in the contract"
+                    )
+                if field.entity in age_entities and field.calendar_scope is None:
+                    raise ContractError(
+                        "Fixed age with a birth fact needs a reviewed disposition"
+                    )
+                if (
+                    field.disposition == Disposition.DROP
+                    and field.entity not in age_entities
+                ):
+                    raise ContractError(
+                        "Dropped birth fact requires a declared fixed age"
+                    )
         object.__setattr__(self, "fields", fields)
         object.__setattr__(self, "entity_counts", MappingProxyType(counts))
         object.__setattr__(self, "background_scopes", scopes)
+        object.__setattr__(self, "calendar_scopes", calendar_scopes)
 
 
 def _fact(value, unit):
@@ -252,6 +331,8 @@ def _fact(value, unit):
         if type(value) is not int or value < 0:
             raise ContractError("Count must be a nonnegative integer")
     else:
+        if isinstance(value, str):
+            raise ContractError("Numeric facts require numeric values, not text")
         numeric = _number(value)
         if unit in {"weight", "age_years"} and numeric < 0:
             raise ContractError("Weight/age cannot be negative")
@@ -290,6 +371,7 @@ class ConvertedInputs:
     target_year: int
     reference_year: int
     factor: Fraction
+    calendar_dispositions: Mapping
 
 
 def to_native_inputs(values, *, contract, basis, target_year):
@@ -303,6 +385,7 @@ def to_native_inputs(values, *, contract, basis, target_year):
         raise ContractError("Unknown or missing fields; no implicit defaults")
     factor = basis.factor(target_year)
     converted, units, backgrounds, dropped = {}, {}, {}, []
+    calendars = {}
     for field in contract.fields:
         mapper = (
             (lambda value: _number(value) * factor)
@@ -315,6 +398,14 @@ def to_native_inputs(values, *, contract, basis, target_year):
             period=field.period,
             convert=mapper,
         )
+        if field.calendar_scope is not None:
+            calendars[field.name] = MappingProxyType(
+                {
+                    "disposition": field.disposition.value,
+                    "scope": field.calendar_scope,
+                    "reason": field.calendar_reason,
+                }
+            )
         if field.disposition == Disposition.DROP:
             dropped.append(field.name)
             continue
@@ -330,6 +421,7 @@ def to_native_inputs(values, *, contract, basis, target_year):
         target_year,
         basis.reference_year,
         factor,
+        MappingProxyType(calendars),
     )
 
 
@@ -353,11 +445,16 @@ def cash_to_reference(values, *, basis, native_year, unit, period, entity_count)
 
 def earnings_shock_to_native(value, *, basis, target_year, unit):
     """A declared scalar earnings increment; no period broadcasting or model call."""
-    if not isinstance(basis, PriceBasis) or unit not in {
-        "USD/year",
-        "USD/month",
-        "USD/hour",
-    }:
+    if (
+        not isinstance(basis, PriceBasis)
+        or not isinstance(unit, str)
+        or unit
+        not in {
+            "USD/year",
+            "USD/month",
+            "USD/hour",
+        }
+    ):
         raise ContractError(
             "Shock requires an approved earnings-flow unit and price basis"
         )
