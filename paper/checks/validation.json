@@ -1,0 +1,24 @@
+{
+  "supplementary_files_verified": 1,
+  "files_verified": 90,
+  "part_changes": 80,
+  "baseline_replications": 8,
+  "household_curve_files_verified": 1,
+  "policy_date_files_verified": 6,
+  "code_hashes": [
+    [
+      "e791e670d5407372c89fb549580813d6d82254fa590dd8049f85963ab09d4e73",
+      "ced7b6efa97310f825083505e95e5e945195ba1ef3c41beb1e0d77e206fe8b12"
+    ]
+  ],
+  "manuscript_sha256": "f51e282bac68930a84cd3edd1f69567afebf771f4fc13613c0975f944dab72e1",
+  "pdf_sha256": "0b7903561b3bc2e13be1e7eb3348d553047df613b3f423a815ad78eae7a82493",
+  "pdf_pages": 38,
+  "metric_records": 17805,
+  "template_matches": true,
+  "figures_verified": 6,
+  "branded_pdf_sha256": "92e89f6856aa04ad78c4ec28f2db7f241e2be76eb45449bfce8de6c2e63bc0da",
+  "branded_pdf_pages": 26,
+  "private_client_context_absent": true,
+  "status": "PASS"
+}

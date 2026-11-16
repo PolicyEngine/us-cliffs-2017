@@ -1,0 +1,9 @@
+{
+  "scientific_methods": "APPROVE",
+  "review_type": "Independent AI-assisted simulated referee exercise; not journal peer review",
+  "journal_peer_review": false,
+  "numerical_result_sha256": "12464cf7a9b59c3286ddbecfe37be2b97222bae5098b803dedc8e88faab2e198",
+  "independent_legacy_comparisons": 60,
+  "independent_provenance_identity_checks": 215,
+  "scope": "Integrated health revaluations, household union intervals and paired contrast; no all-worker/job-entry/historical-incidence claim"
+}

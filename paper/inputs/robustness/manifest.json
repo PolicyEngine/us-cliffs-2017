@@ -1,0 +1,15 @@
+{
+  "description": "Actual saved-counterfactual measurement extension; no new tax-benefit policy scenario",
+  "source_result": "results/ijm_saved_robustness.json",
+  "files": [
+    {
+      "path": "ijm_saved_robustness.json",
+      "sha256": "12464cf7a9b59c3286ddbecfe37be2b97222bae5098b803dedc8e88faab2e198",
+      "bytes": 358728
+    }
+  ],
+  "script_sha256": "cf0bcd43a12ee23a9f63d654b4fc1094a4da4387ab045dc659a66f3461a0cb10",
+  "draws": 5000,
+  "seed": 0,
+  "data_sha256": "6496cc4393d4d3c6574f76eca231de5898c803b9067645591fd5c4d3e65aee84"
+}

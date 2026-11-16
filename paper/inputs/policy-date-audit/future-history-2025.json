@@ -1,0 +1,1120 @@
+{
+  "count": 139,
+  "cutoff": "2025-12-31",
+  "rows": [
+    {
+      "earliest_raw_start": "2018-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 505,
+      "leaves_after_dec2025": 492,
+      "parameter": "gov.aca.lcbp.state_rating_area_cost"
+    },
+    {
+      "earliest_raw_start": "2018-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 505,
+      "leaves_after_dec2025": 4,
+      "parameter": "gov.aca.state_rating_area_cost"
+    },
+    {
+      "earliest_raw_start": "2027-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2027-01-01",
+      "leaves": 4,
+      "leaves_after_dec2025": 4,
+      "parameter": "gov.contrib.states.mi.surtax.rate.joint"
+    },
+    {
+      "earliest_raw_start": "2027-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2027-01-01",
+      "leaves": 4,
+      "leaves_after_dec2025": 4,
+      "parameter": "gov.contrib.states.mi.surtax.rate.single"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.ssa.ssi.income.exclusions.child_support_share"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.ssa.ssi.state_supplement.minimum_payment"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ca.hbex.premium_subsidy.fpl_floor"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ca.hbex.premium_subsidy.fpl_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.co.doi.premium_assistance.amount.additional_member"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.co.doi.premium_assistance.amount.first_member"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ct.dss.covered_connecticut.fpl_limit"
+    },
+    {
+      "earliest_raw_start": "2026-03-02",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-02",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ga.decal.caps.activity_requirements.weekly_hours"
+    },
+    {
+      "earliest_raw_start": "2026-03-02",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-02",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ga.decal.caps.age_threshold.child"
+    },
+    {
+      "earliest_raw_start": "2026-03-02",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-02",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ga.decal.caps.age_threshold.disabled_child"
+    },
+    {
+      "earliest_raw_start": "2026-03-02",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-02",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ga.decal.caps.income.countable_income.sources"
+    },
+    {
+      "earliest_raw_start": "2026-03-02",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-02",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ga.decal.caps.income.smi_rate.initial_eligibility"
+    },
+    {
+      "earliest_raw_start": "2026-03-02",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-02",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ga.decal.caps.income.smi_rate.ongoing_eligibility"
+    },
+    {
+      "earliest_raw_start": "2018-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2027-01-01",
+      "leaves": 26,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.hi.tax.income.rates.head_of_household"
+    },
+    {
+      "earliest_raw_start": "2018-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2027-01-01",
+      "leaves": 26,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.hi.tax.income.rates.joint"
+    },
+    {
+      "earliest_raw_start": "2018-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2027-01-01",
+      "leaves": 26,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.hi.tax.income.rates.separate"
+    },
+    {
+      "earliest_raw_start": "2018-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2027-01-01",
+      "leaves": 26,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.hi.tax.income.rates.single"
+    },
+    {
+      "earliest_raw_start": "2018-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2027-01-01",
+      "leaves": 26,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.hi.tax.income.rates.surviving_spouse"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ia.hhs.ssa.excluded_unearned_sources"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ia.hhs.ssa.ihhrc_cost_limit"
+    },
+    {
+      "earliest_raw_start": "2026-04-05",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-04-05",
+      "leaves": 22,
+      "leaves_after_dec2025": 22,
+      "parameter": "gov.states.in.fssa.ccdf.copay.fee_factor"
+    },
+    {
+      "earliest_raw_start": "2026-05-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-05-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ks.dcf.ccap.family_share.max_family_size"
+    },
+    {
+      "earliest_raw_start": "2026-05-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-05-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ks.dcf.ccap.family_share.smi_income_limit_rate"
+    },
+    {
+      "earliest_raw_start": "0000-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 10,
+      "leaves_after_dec2025": 5,
+      "parameter": "gov.states.ma.hic.connector_care.enrollee_premium"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ma.hic.connector_care.fpl_floor"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ma.hic.connector_care.fpl_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.md.mhbe.premium_assistance.fpl_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 5,
+      "leaves_after_dec2025": 5,
+      "parameter": "gov.states.mt.dphhs.ssp.amount.couple"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 5,
+      "leaves_after_dec2025": 5,
+      "parameter": "gov.states.mt.dphhs.ssp.amount.individual"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nc.ncdhhs.sa.minimum_adult_age"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nc.ncdhhs.sa.rate.basic"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nc.ncdhhs.sa.rate.enhanced"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nd.dhs.ccap.age_group.infant_max_months"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nd.dhs.ccap.age_group.preschool_min_months"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nd.dhs.ccap.age_group.toddler_max_months"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 4,
+      "leaves_after_dec2025": 4,
+      "parameter": "gov.states.nd.dhs.ccap.rates.infant_toddler_bonus"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nh.dhhs.ssp.disabled_minimum_age"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nh.dhhs.ssp.immigration.exempt_statuses"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nh.dhhs.ssp.immigration.permanent_resident_qualifying_quarters"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nh.dhhs.ssp.immigration.waiting_period"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nh.dhhs.ssp.resource_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nj.dobi.njhps.fpl_floor"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nj.dobi.njhps.fpl_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 7,
+      "leaves_after_dec2025": 7,
+      "parameter": "gov.states.nj.njdhs.ssp.amount.couple"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 7,
+      "leaves_after_dec2025": 7,
+      "parameter": "gov.states.nj.njdhs.ssp.amount.individual"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nm.hca.premium_assistance.benchmark_gross_up.fpl_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nm.hca.premium_assistance.benchmark_gross_up.rate"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nm.hca.premium_assistance.fpl_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nm.hca.premium_assistance.mih.rate"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nm.hca.premium_assistance.target_contribution_percentage.final"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nm.hca.premium_assistance.target_contribution_percentage.initial"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.nm.hca.premium_assistance.target_contribution_percentage.threshold"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 16,
+      "leaves_after_dec2025": 16,
+      "parameter": "gov.states.nv.dwss.oss.payment.couple"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 16,
+      "leaves_after_dec2025": 16,
+      "parameter": "gov.states.nv.dwss.oss.payment.individual"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ny.otda.ssp.amount.couple.LIVING_ALONE"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ny.otda.ssp.amount.couple.LIVING_WITH_OTHERS"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 8,
+      "leaves_after_dec2025": 8,
+      "parameter": "gov.states.ny.otda.ssp.amount.individual"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ny.otda.ssp.amount.individual.LIVING_WITH_OTHERS"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ny.otda.ssp.downstate_counties"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ny.otda.ssp.family_care_downstate_premium"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ny.otda.ssp.residential_care_downstate_premium"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ok.dhs.ssp.blind_earned_exclusion"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ok.dhs.ssp.child_allocation"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ok.dhs.ssp.excluded_unearned_sources"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ok.dhs.ssp.ineligible_spouse_standard"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ok.dhs.ssp.maximum_payment"
+    },
+    {
+      "earliest_raw_start": "2026-03-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-01",
+      "leaves": 10,
+      "leaves_after_dec2025": 10,
+      "parameter": "gov.states.or.delc.erdc.copay.size_2"
+    },
+    {
+      "earliest_raw_start": "2026-03-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-01",
+      "leaves": 12,
+      "leaves_after_dec2025": 12,
+      "parameter": "gov.states.or.delc.erdc.copay.size_3"
+    },
+    {
+      "earliest_raw_start": "2026-03-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-01",
+      "leaves": 12,
+      "leaves_after_dec2025": 12,
+      "parameter": "gov.states.or.delc.erdc.copay.size_4"
+    },
+    {
+      "earliest_raw_start": "2026-03-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-01",
+      "leaves": 12,
+      "leaves_after_dec2025": 12,
+      "parameter": "gov.states.or.delc.erdc.copay.size_5"
+    },
+    {
+      "earliest_raw_start": "2026-03-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-01",
+      "leaves": 12,
+      "leaves_after_dec2025": 12,
+      "parameter": "gov.states.or.delc.erdc.copay.size_6"
+    },
+    {
+      "earliest_raw_start": "2026-03-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-01",
+      "leaves": 12,
+      "leaves_after_dec2025": 12,
+      "parameter": "gov.states.or.delc.erdc.copay.size_7"
+    },
+    {
+      "earliest_raw_start": "2026-03-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-01",
+      "leaves": 12,
+      "leaves_after_dec2025": 12,
+      "parameter": "gov.states.or.delc.erdc.copay.size_8"
+    },
+    {
+      "earliest_raw_start": "2026-03-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.or.delc.erdc.income.countable_income.earned_sources"
+    },
+    {
+      "earliest_raw_start": "2026-03-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.or.delc.erdc.income.fpl_rate.initial"
+    },
+    {
+      "earliest_raw_start": "2026-03-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.or.delc.erdc.income.fpl_rate.ongoing"
+    },
+    {
+      "earliest_raw_start": "2026-03-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.or.delc.erdc.income.smi_rate.ongoing"
+    },
+    {
+      "earliest_raw_start": "2026-03-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-03-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.or.delc.erdc.max_group_size"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.or.odhs.ssp.nursing_facility_payment_standard"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.or.odhs.ssp.room_and_board"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 6,
+      "leaves_after_dec2025": 6,
+      "parameter": "gov.states.pa.dhs.ssp.amount.couple"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 6,
+      "leaves_after_dec2025": 6,
+      "parameter": "gov.states.pa.dhs.ssp.amount.individual"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.pa.dhs.ssp.care_age_threshold"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 5,
+      "leaves_after_dec2025": 5,
+      "parameter": "gov.states.ri.dhs.ssp.amount.couple"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ri.dhs.ssp.amount.couple.INDEPENDENT"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 5,
+      "leaves_after_dec2025": 5,
+      "parameter": "gov.states.ri.dhs.ssp.amount.individual"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ri.dhs.ssp.amount.individual.INDEPENDENT"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ri.tax.income.high_earner_tax.rate"
+    },
+    {
+      "earliest_raw_start": "2027-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2027-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ri.tax.income.high_earner_tax.threshold"
+    },
+    {
+      "earliest_raw_start": "2026-08-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-08-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.sd.dss.cca.eligibility.child_age_limit"
+    },
+    {
+      "earliest_raw_start": "2026-08-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-08-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.sd.dss.cca.eligibility.special_needs_age_limit"
+    },
+    {
+      "earliest_raw_start": "2026-08-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-08-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.sd.dss.cca.eligibility.special_needs_student_age_limit"
+    },
+    {
+      "earliest_raw_start": "2026-08-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-08-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.sd.dss.cca.income.child_earned_income_exclusion_age"
+    },
+    {
+      "earliest_raw_start": "2026-08-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-08-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.sd.dss.cca.income.earned_income_disregard"
+    },
+    {
+      "earliest_raw_start": "2026-08-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-08-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.sd.dss.cca.income.fpl_limit"
+    },
+    {
+      "earliest_raw_start": "2026-08-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-08-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.sd.dss.cca.income.smi_limit"
+    },
+    {
+      "earliest_raw_start": "2026-08-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-08-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.sd.dss.cca.work_requirement.monthly_hours"
+    },
+    {
+      "earliest_raw_start": "2026-08-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-08-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.sd.dss.cca.work_requirement.weekly_to_monthly_factor"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.sd.dss.ssp.assisted_living_daily_rate"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.sd.dss.ssp.joint_entry_resource_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.sd.dss.ssp.resource_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ut.dws.ssp.amount.couple.another_household"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ut.dws.ssp.amount.couple.own_household"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.ut.dws.ssp.amount.individual"
+    },
+    {
+      "earliest_raw_start": "2017-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 7,
+      "leaves_after_dec2025": 6,
+      "parameter": "gov.states.vt.dcf.aabd.amount.couple"
+    },
+    {
+      "earliest_raw_start": "2017-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 7,
+      "leaves_after_dec2025": 6,
+      "parameter": "gov.states.vt.dcf.aabd.amount.individual"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.vt.dcf.aabd.amount.individual.HOUSEHOLD_OF_ANOTHER"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.vt.dcf.aabd.ep.employment_expense"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 4,
+      "leaves_after_dec2025": 4,
+      "parameter": "gov.states.vt.dcf.aabd.ep.rate"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.vt.dvha.premium_assistance.fpl_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wa.wahbe.cascade_care_savings.amount.with_federal_subsidy"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wa.wahbe.cascade_care_savings.amount.without_federal_subsidy"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wa.wahbe.cascade_care_savings.fpl_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.additional_child"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.area_i_counties"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.care_other_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.care_young_age"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.care_young_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.earned_flat"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.earned_fraction"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.eligible_immigration_statuses"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.first_child"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 24,
+      "leaves_after_dec2025": 24,
+      "parameter": "gov.states.wi.dhs.ssp.cts.gross.area_1"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 24,
+      "leaves_after_dec2025": 24,
+      "parameter": "gov.states.wi.dhs.ssp.cts.gross.area_2"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.gross_additional"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 24,
+      "leaves_after_dec2025": 24,
+      "parameter": "gov.states.wi.dhs.ssp.cts.gross_pregnant.area_1"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 24,
+      "leaves_after_dec2025": 24,
+      "parameter": "gov.states.wi.dhs.ssp.cts.gross_pregnant.area_2"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.minor_age_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 24,
+      "leaves_after_dec2025": 24,
+      "parameter": "gov.states.wi.dhs.ssp.cts.net.area_1"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 24,
+      "leaves_after_dec2025": 24,
+      "parameter": "gov.states.wi.dhs.ssp.cts.net.area_2"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.pregnancy_allowance"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.resource_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.student_age_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.student_hours_limit"
+    },
+    {
+      "earliest_raw_start": "2026-01-01",
+      "first_read": "2025-01-01",
+      "latest_raw_start": "2026-01-01",
+      "leaves": 1,
+      "leaves_after_dec2025": 1,
+      "parameter": "gov.states.wi.dhs.ssp.cts.work_expense"
+    }
+  ],
+  "scope": "Raw parameter metadata from the completed bounded trace. Formula access alone does not establish a binding rule or wrong value.",
+  "target": 2025
+}

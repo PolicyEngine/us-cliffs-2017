@@ -1,0 +1,8 @@
+{
+  "historical_dependency_graph_exact": true,
+  "historical_packages": 83,
+  "new_packages": 83,
+  "missing": [],
+  "extra": [],
+  "original_environment_modified": false
+}

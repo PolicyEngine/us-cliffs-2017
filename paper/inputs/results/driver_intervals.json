@@ -1,0 +1,1404 @@
+{
+ "note": "Counts of adults facing a cliff, in total and by the benefit whose loss lowers net income most, with 95% percentile intervals from resampling Microcosm's source households, and the source households that carry each count. Sampling error only.",
+ "commit": "79a52f4e24f943dd60e7d388f5f6d1a1fb7d613f",
+ "script_sha256": "43dc64c9f69b526fce07b19e1e25d1ba52718a4a23fbfba13d820dd415eeb957",
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "stored_input_renames": {
+  "would_claim_wic": "takes_up_wic_if_eligible"
+ },
+ "draws": 5000,
+ "seed": 0,
+ "source_households_in_dataset": 47277,
+ "runs": {
+  "2017_plain": {
+   "as_modeled": {
+    "people_on_cliff": 690879.1637878892,
+    "standard_error": 115094.79546404736,
+    "interval_95": [
+     479396.9365763685,
+     925318.1799785716
+    ],
+    "sample_people_on_cliff": 374,
+    "source_households": 213,
+    "source_households_for_half": 14,
+    "kish_effective_source_households": 35.55937754990169,
+    "committed_standard_error": 122804.91830011898,
+    "by_largest_loss": {
+     "reduced_price_school_meals": {
+      "people_on_cliff": 235938.27279543417,
+      "standard_error": 66768.09073764463,
+      "interval_95": [
+       117397.35662737556,
+       378492.58429482474
+      ],
+      "sample_people_on_cliff": 161,
+      "source_households": 88,
+      "source_households_for_half": 5,
+      "kish_effective_source_households": 12.21563900206002,
+      "share": 0.34150439781951647,
+      "share_interval_95": [
+       0.19350177341329677,
+       0.5047082528605408
+      ]
+     },
+     "tanf": {
+      "people_on_cliff": 108260.51568174583,
+      "standard_error": 45453.351197713666,
+      "interval_95": [
+       31970.131983072104,
+       205727.9227432938
+      ],
+      "sample_people_on_cliff": 31,
+      "source_households": 17,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 5.740805016180638,
+      "share": 0.15669963917884708,
+      "share_interval_95": [
+       0.048588333171597886,
+       0.2863352586013127
+      ]
+     },
+     "wic": {
+      "people_on_cliff": 79453.17254893715,
+      "standard_error": 54425.59950280254,
+      "interval_95": [
+       983.4675212396075,
+       207372.9892301384
+      ],
+      "sample_people_on_cliff": 31,
+      "source_households": 15,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 2.138142179216072,
+      "share": 0.11500299432004657,
+      "share_interval_95": [
+       0.001628449269440461,
+       0.27037078870289355
+      ]
+     },
+     "snap": {
+      "people_on_cliff": 65022.27665239366,
+      "standard_error": 33554.03301479942,
+      "interval_95": [
+       9953.589392402495,
+       136494.1418143194
+      ],
+      "sample_people_on_cliff": 59,
+      "source_households": 32,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 3.796498047460478,
+      "share": 0.09411526654805373,
+      "share_interval_95": [
+       0.014582439098243857,
+       0.1986059274301071
+      ]
+     },
+     "free_school_meals": {
+      "people_on_cliff": 64858.63847523852,
+      "standard_error": 25340.419586410262,
+      "interval_95": [
+       20466.30557442745,
+       120515.4404913169
+      ],
+      "sample_people_on_cliff": 59,
+      "source_households": 38,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 6.298857867584784,
+      "share": 0.09387841155845185,
+      "share_interval_95": [
+       0.03203361497195002,
+       0.1770732291062771
+      ]
+     },
+     "household_tax_before_refundable_credits": {
+      "people_on_cliff": 57943.23323957308,
+      "standard_error": 32882.8620114559,
+      "interval_95": [
+       4379.312059035152,
+       129718.12273615415
+      ],
+      "sample_people_on_cliff": 15,
+      "source_households": 9,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 3.148834969430956,
+      "share": 0.08386883883121792,
+      "share_interval_95": [
+       0.006125934636013098,
+       0.18321103634833064
+      ]
+     },
+     "household_state_benefits": {
+      "people_on_cliff": 49621.17566100048,
+      "standard_error": 25430.267586944545,
+      "interval_95": [
+       8028.101486491971,
+       104947.51201741127
+      ],
+      "sample_people_on_cliff": 7,
+      "source_households": 6,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 3.8013769426026376,
+      "share": 0.07182323373155738,
+      "share_interval_95": [
+       0.012037388375699358,
+       0.1558385063443423
+      ]
+     },
+     "household_refundable_tax_credits": {
+      "people_on_cliff": 29781.80539516546,
+      "standard_error": 19477.59272303008,
+      "interval_95": [
+       13.289127103652572,
+       74609.79560379832
+      ],
+      "sample_people_on_cliff": 9,
+      "source_households": 8,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 2.3558113791688062,
+      "share": 0.04310711186002556,
+      "share_interval_95": [
+       2.0425972852071855e-05,
+       0.10862508697103078
+      ]
+     },
+     "ssi": {
+      "people_on_cliff": 0.071102574467659,
+      "standard_error": 0.07038034801372295,
+      "interval_95": [
+       0.0,
+       0.213307723402977
+      ],
+      "sample_people_on_cliff": 1,
+      "source_households": 1,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0,
+      "share": 1.0291607880866503e-07,
+      "share_interval_95": [
+       0.0,
+       3.644294051676458e-07
+      ]
+     },
+     "housing_assistance": {
+      "people_on_cliff": 0.002235826337710023,
+      "standard_error": 0.0022743771915413125,
+      "interval_95": [
+       0.0,
+       0.006707479013130069
+      ],
+      "sample_people_on_cliff": 1,
+      "source_households": 1,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0,
+      "share": 3.2362046142072636e-09,
+      "share_interval_95": [
+       0.0,
+       1.1969386888964357e-08
+      ]
+     }
+    }
+   }
+  },
+  "2017_health": {
+   "as_modeled": {
+    "people_on_cliff": 2747272.405006389,
+    "standard_error": 224002.57647500362,
+    "interval_95": [
+     2318931.642843388,
+     3184741.6786075626
+    ],
+    "sample_people_on_cliff": 1511,
+    "source_households": 978,
+    "source_households_for_half": 57,
+    "kish_effective_source_households": 147.07209265436518,
+    "committed_standard_error": 224156.64759270282,
+    "by_largest_loss": {
+     "medicaid_cost": {
+      "people_on_cliff": 1836331.008533719,
+      "standard_error": 185852.31880221164,
+      "interval_95": [
+       1479587.6558348539,
+       2203486.2250911547
+      ],
+      "sample_people_on_cliff": 1008,
+      "source_households": 680,
+      "source_households_for_half": 37,
+      "kish_effective_source_households": 95.76233076700777,
+      "share": 0.6684197042809988,
+      "share_interval_95": [
+       0.591941502038173,
+       0.7403218062373279
+      ]
+     },
+     "reduced_price_school_meals": {
+      "people_on_cliff": 247419.91515622826,
+      "standard_error": 67488.69304833465,
+      "interval_95": [
+       126521.42109308904,
+       390008.299325509
+      ],
+      "sample_people_on_cliff": 168,
+      "source_households": 92,
+      "source_households_for_half": 5,
+      "kish_effective_source_households": 13.15049110111705,
+      "share": 0.09006020469806773,
+      "share_interval_95": [
+       0.04734705078468453,
+       0.13878605636646468
+      ]
+     },
+     "msp_cost": {
+      "people_on_cliff": 145989.96692116332,
+      "standard_error": 58637.338598050905,
+      "interval_95": [
+       49774.97278938113,
+       275141.93225042254
+      ],
+      "sample_people_on_cliff": 46,
+      "source_households": 39,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 6.165739741569789,
+      "share": 0.053139967720392034,
+      "share_interval_95": [
+       0.018570590772518044,
+       0.0987884955417876
+      ]
+     },
+     "assigned_aca_ptc": {
+      "people_on_cliff": 114851.38552654698,
+      "standard_error": 44559.510111694166,
+      "interval_95": [
+       39443.064119143535,
+       211063.18059097993
+      ],
+      "sample_people_on_cliff": 48,
+      "source_households": 27,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 6.870003580245082,
+      "share": 0.041805605194902354,
+      "share_interval_95": [
+       0.014763336438813548,
+       0.07646001613776966
+      ]
+     },
+     "tanf": {
+      "people_on_cliff": 113199.48980283958,
+      "standard_error": 45540.377256082524,
+      "interval_95": [
+       35231.53915591599,
+       211720.70586187253
+      ],
+      "sample_people_on_cliff": 32,
+      "source_households": 18,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 6.202449363755749,
+      "share": 0.041204319453926275,
+      "share_interval_95": [
+       0.013338176790845325,
+       0.07644200041370038
+      ]
+     },
+     "snap": {
+      "people_on_cliff": 65020.70276993539,
+      "standard_error": 33554.031115831516,
+      "interval_95": [
+       9952.48353930686,
+       136494.10252964604
+      ],
+      "sample_people_on_cliff": 56,
+      "source_households": 31,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 3.796314267500625,
+      "share": 0.023667366458254138,
+      "share_interval_95": [
+       0.003579425655388181,
+       0.04973682135987068
+      ]
+     },
+     "free_school_meals": {
+      "people_on_cliff": 64858.64269424422,
+      "standard_error": 25340.41957042689,
+      "interval_95": [
+       20466.312756967418,
+       120515.44174678832
+      ],
+      "sample_people_on_cliff": 62,
+      "source_households": 40,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 6.298858687056652,
+      "share": 0.023608377012796947,
+      "share_interval_95": [
+       0.0077316530678385635,
+       0.04388618286387424
+      ]
+     },
+     "household_tax_before_refundable_credits": {
+      "people_on_cliff": 57943.23509589431,
+      "standard_error": 32882.86201249679,
+      "interval_95": [
+       4379.313868948358,
+       129718.12278256218
+      ],
+      "sample_people_on_cliff": 16,
+      "source_households": 10,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 3.148835171188735,
+      "share": 0.02109118665855764,
+      "share_interval_95": [
+       0.001521599789030354,
+       0.04726159090441802
+      ]
+     },
+     "chip": {
+      "people_on_cliff": 36866.02597387647,
+      "standard_error": 20648.511410293635,
+      "interval_95": [
+       1483.7780216451617,
+       84054.73589901104
+      ],
+      "sample_people_on_cliff": 35,
+      "source_households": 18,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 3.2077143139422177,
+      "share": 0.013419137434895444,
+      "share_interval_95": [
+       0.0005811985880188259,
+       0.031074078012555295
+      ]
+     },
+     "household_state_benefits": {
+      "people_on_cliff": 35159.46733421652,
+      "standard_error": 20960.11360812142,
+      "interval_95": [
+       0.010378974548075348,
+       82140.7806353651
+      ],
+      "sample_people_on_cliff": 7,
+      "source_households": 6,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 2.818567049810547,
+      "share": 0.012797954534885211,
+      "share_interval_95": [
+       3.730625270678864e-09,
+       0.03017886059875068
+      ]
+     },
+     "wic": {
+      "people_on_cliff": 11128.737760780205,
+      "standard_error": 11298.010886914455,
+      "interval_95": [
+       0.006486557249445468,
+       33386.195422900244
+      ],
+      "sample_people_on_cliff": 11,
+      "source_households": 6,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0000048205586711,
+      "share": 0.004050831559513416,
+      "share_interval_95": [
+       2.369209649938434e-09,
+       0.013956498086743164
+      ]
+     },
+     "household_refundable_tax_credits": {
+      "people_on_cliff": 10371.891236930038,
+      "standard_error": 10425.055183547676,
+      "interval_95": [
+       0.0306151106080506,
+       31103.2290052973
+      ],
+      "sample_people_on_cliff": 13,
+      "source_households": 10,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0026729256477795,
+      "share": 0.0037753413960804213,
+      "share_interval_95": [
+       1.1394716149478407e-08,
+       0.012568255187284029
+      ]
+     },
+     "chip_premium": {
+      "people_on_cliff": 8131.005859375,
+      "standard_error": 8190.106587650694,
+      "interval_95": [
+       0.0,
+       24393.017578125
+      ],
+      "sample_people_on_cliff": 2,
+      "source_households": 1,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0,
+      "share": 0.0029596649551598036,
+      "share_interval_95": [
+       0.0,
+       0.009999034349469086
+      ]
+     },
+     "marketplace_net_premium": {
+      "people_on_cliff": 0.8570022395579144,
+      "standard_error": 0.7947626766648258,
+      "interval_95": [
+       0.0011997363762930036,
+       2.530347818043083
+      ],
+      "sample_people_on_cliff": 5,
+      "source_households": 4,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.093799298056274,
+      "share": 3.119465830895358e-07,
+      "share_interval_95": [
+       4.1884546864993556e-10,
+       9.916325960869581e-07
+      ]
+     },
+     "ssi": {
+      "people_on_cliff": 0.071102574467659,
+      "standard_error": 0.07038034801372295,
+      "interval_95": [
+       0.0,
+       0.213307723402977
+      ],
+      "sample_people_on_cliff": 1,
+      "source_households": 1,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0,
+      "share": 2.5881151915655643e-08,
+      "share_interval_95": [
+       0.0,
+       8.606784803138792e-08
+      ]
+     },
+     "housing_assistance": {
+      "people_on_cliff": 0.002235826337710023,
+      "standard_error": 0.0022743771915413125,
+      "interval_95": [
+       0.0,
+       0.006707479013130069
+      ],
+      "sample_people_on_cliff": 1,
+      "source_households": 1,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0,
+      "share": 8.138349635935804e-10,
+      "share_interval_95": [
+       0.0,
+       2.7515335119334826e-09
+      ]
+     }
+    }
+   },
+   "credit_counted_once": {
+    "people_on_cliff": 2678606.3755043014,
+    "standard_error": 221317.4966229344,
+    "interval_95": [
+     2254982.0585146113,
+     3111928.4057795773
+    ],
+    "sample_people_on_cliff": 1465,
+    "source_households": 952,
+    "source_households_for_half": 56,
+    "kish_effective_source_households": 143.29916184393878,
+    "committed_standard_error": 220816.93384545404,
+    "by_largest_loss": {
+     "medicaid_cost": {
+      "people_on_cliff": 1829556.010450433,
+      "standard_error": 185259.15735952085,
+      "interval_95": [
+       1475150.097440762,
+       2196636.6099307463
+      ],
+      "sample_people_on_cliff": 1005,
+      "source_households": 679,
+      "source_households_for_half": 37,
+      "kish_effective_source_households": 95.7060374793493,
+      "share": 0.6830253325690612,
+      "share_interval_95": [
+       0.606431217049294,
+       0.7549999673732528
+      ]
+     },
+     "reduced_price_school_meals": {
+      "people_on_cliff": 237663.63716438256,
+      "standard_error": 66809.35823278573,
+      "interval_95": [
+       118867.1012970433,
+       379155.1828222478
+      ],
+      "sample_people_on_cliff": 161,
+      "source_households": 88,
+      "source_households_for_half": 5,
+      "kish_effective_source_households": 12.38686021652195,
+      "share": 0.08872660027161983,
+      "share_interval_95": [
+       0.04623059286615392,
+       0.13843193746743132
+      ]
+     },
+     "msp_cost": {
+      "people_on_cliff": 145989.96692116332,
+      "standard_error": 58637.338598050905,
+      "interval_95": [
+       49774.97278938113,
+       275141.93225042254
+      ],
+      "sample_people_on_cliff": 46,
+      "source_households": 39,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 6.165739741569789,
+      "share": 0.05450220990147452,
+      "share_interval_95": [
+       0.019062698837043993,
+       0.10168805753127244
+      ]
+     },
+     "tanf": {
+      "people_on_cliff": 108260.51568174583,
+      "standard_error": 45453.351197713666,
+      "interval_95": [
+       31970.131983072104,
+       205727.9227432938
+      ],
+      "sample_people_on_cliff": 31,
+      "source_households": 17,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 5.740805016180638,
+      "share": 0.04041673187661387,
+      "share_interval_95": [
+       0.011986960154688904,
+       0.07677444878805942
+      ]
+     },
+     "snap": {
+      "people_on_cliff": 65020.70276993539,
+      "standard_error": 33554.031115831516,
+      "interval_95": [
+       9952.48353930686,
+       136494.10252964604
+      ],
+      "sample_people_on_cliff": 56,
+      "source_households": 31,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 3.796314267500625,
+      "share": 0.02427407900038838,
+      "share_interval_95": [
+       0.003674732862980371,
+       0.05124382907664663
+      ]
+     },
+     "free_school_meals": {
+      "people_on_cliff": 64858.63965472189,
+      "standard_error": 25340.419566872133,
+      "interval_95": [
+       20466.30675391082,
+       120515.44167080027
+      ],
+      "sample_people_on_cliff": 60,
+      "source_households": 39,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 6.298858096679872,
+      "share": 0.02421357622674625,
+      "share_interval_95": [
+       0.00794008770595545,
+       0.044916940825819776
+      ]
+     },
+     "assigned_aca_ptc": {
+      "people_on_cliff": 59777.50215417624,
+      "standard_error": 31447.722529363622,
+      "interval_95": [
+       7951.828856234211,
+       127484.20155102691
+      ],
+      "sample_people_on_cliff": 28,
+      "source_households": 17,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 3.6935530286956273,
+      "share": 0.0223166429755555,
+      "share_interval_95": [
+       0.003025431431406859,
+       0.048365566839366644
+      ]
+     },
+     "household_tax_before_refundable_credits": {
+      "people_on_cliff": 57943.23323957308,
+      "standard_error": 32882.8620114559,
+      "interval_95": [
+       4379.312059035152,
+       129718.12273615415
+      ],
+      "sample_people_on_cliff": 15,
+      "source_households": 9,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 3.148834969430956,
+      "share": 0.021631858181724854,
+      "share_interval_95": [
+       0.001580076464333415,
+       0.04839959429802705
+      ]
+     },
+     "chip": {
+      "people_on_cliff": 44745.01816137647,
+      "standard_error": 22147.902160620677,
+      "interval_95": [
+       8374.038378304884,
+       94221.11178015367
+      ],
+      "sample_people_on_cliff": 37,
+      "source_households": 19,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 4.121472223350481,
+      "share": 0.01670458883789983,
+      "share_interval_95": [
+       0.003190542725076543,
+       0.03544024617223831
+      ]
+     },
+     "household_state_benefits": {
+      "people_on_cliff": 35159.45788756298,
+      "standard_error": 20960.113677845326,
+      "interval_95": [
+       0.003297719231341034,
+       82140.76644954644
+      ],
+      "sample_people_on_cliff": 6,
+      "source_households": 5,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 2.8185655352248746,
+      "share": 0.013126026357995025,
+      "share_interval_95": [
+       1.188413882317422e-09,
+       0.031157387170191515
+      ]
+     },
+     "wic": {
+      "people_on_cliff": 11128.73700207076,
+      "standard_error": 11298.010888429517,
+      "interval_95": [
+       0.005727847805246711,
+       33386.193905481356
+      ],
+      "sample_people_on_cliff": 9,
+      "source_households": 5,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0000046842066308,
+      "share": 0.004154674275340494,
+      "share_interval_95": [
+       2.0658778744882995e-09,
+       0.014448732387661648
+      ]
+     },
+     "household_refundable_tax_credits": {
+      "people_on_cliff": 10371.875219384208,
+      "standard_error": 10425.05517257179,
+      "interval_95": [
+       0.015737274661660194,
+       31103.19737924122
+      ],
+      "sample_people_on_cliff": 7,
+      "source_households": 6,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.002669828750081,
+      "share": 0.0038721162296313488,
+      "share_interval_95": [
+       5.806604131972896e-09,
+       0.01299448398539979
+      ]
+     },
+     "chip_premium": {
+      "people_on_cliff": 8131.005859375,
+      "standard_error": 8190.106587650694,
+      "interval_95": [
+       0.0,
+       24393.017578125
+      ],
+      "sample_people_on_cliff": 2,
+      "source_households": 1,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0,
+      "share": 0.0030355359166365664,
+      "share_interval_95": [
+       0.0,
+       0.010298098094460606
+      ]
+     },
+     "ssi": {
+      "people_on_cliff": 0.071102574467659,
+      "standard_error": 0.07038034801372295,
+      "interval_95": [
+       0.0,
+       0.213307723402977
+      ],
+      "sample_people_on_cliff": 1,
+      "source_households": 1,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0,
+      "share": 2.6544614810853837e-08,
+      "share_interval_95": [
+       0.0,
+       8.812605540539974e-08
+      ]
+     },
+     "housing_assistance": {
+      "people_on_cliff": 0.002235826337710023,
+      "standard_error": 0.0022743771915413125,
+      "interval_95": [
+       0.0,
+       0.006707479013130069
+      ],
+      "sample_people_on_cliff": 1,
+      "source_households": 1,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0,
+      "share": 8.346976092331161e-10,
+      "share_interval_95": [
+       0.0,
+       2.8439392165906442e-09
+      ]
+     }
+    }
+   }
+  },
+  "2025_plain": {
+   "as_modeled": {
+    "people_on_cliff": 683004.0759690469,
+    "standard_error": 104893.83706909312,
+    "interval_95": [
+     490776.38749273424,
+     897692.7927059623
+    ],
+    "sample_people_on_cliff": 479,
+    "source_households": 273,
+    "source_households_for_half": 16,
+    "kish_effective_source_households": 41.579595615892906,
+    "committed_standard_error": 107888.84721349357,
+    "by_largest_loss": {
+     "snap": {
+      "people_on_cliff": 189196.79347766173,
+      "standard_error": 53338.69774144613,
+      "interval_95": [
+       93301.9382518625,
+       301489.4329461744
+      ],
+      "sample_people_on_cliff": 132,
+      "source_households": 73,
+      "source_households_for_half": 5,
+      "kish_effective_source_households": 12.289699438647752,
+      "share": 0.2770068292919469,
+      "share_interval_95": [
+       0.15053670040734143,
+       0.4116785021295582
+      ]
+     },
+     "tanf": {
+      "people_on_cliff": 110447.92489461508,
+      "standard_error": 46498.0090259525,
+      "interval_95": [
+       32620.54209991725,
+       214711.77611567805
+      ],
+      "sample_people_on_cliff": 19,
+      "source_households": 12,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 5.772063607746716,
+      "share": 0.16170902748700502,
+      "share_interval_95": [
+       0.053568123884977746,
+       0.2919963818710602
+      ]
+     },
+     "free_school_meals": {
+      "people_on_cliff": 105965.94874701218,
+      "standard_error": 52641.12041029692,
+      "interval_95": [
+       23934.190583176613,
+       226174.542365475
+      ],
+      "sample_people_on_cliff": 106,
+      "source_households": 59,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 4.117230859714649,
+      "share": 0.15514687609538433,
+      "share_interval_95": [
+       0.03952350804626155,
+       0.3000621691537712
+      ]
+     },
+     "reduced_price_school_meals": {
+      "people_on_cliff": 79446.56340525183,
+      "standard_error": 29165.22133361212,
+      "interval_95": [
+       29766.99920700724,
+       142443.51380023165
+      ],
+      "sample_people_on_cliff": 107,
+      "source_households": 55,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 7.506861394740817,
+      "share": 0.11631931082187608,
+      "share_interval_95": [
+       0.04468695898854185,
+       0.21014124301784437
+      ]
+     },
+     "household_refundable_tax_credits": {
+      "people_on_cliff": 65398.88437977678,
+      "standard_error": 27146.471941371707,
+      "interval_95": [
+       20078.207179172914,
+       126437.6643045414
+      ],
+      "sample_people_on_cliff": 46,
+      "source_households": 31,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 5.704032085559453,
+      "share": 0.09575182152022851,
+      "share_interval_95": [
+       0.030146300209576125,
+       0.1825098179276174
+      ]
+     },
+     "wic": {
+      "people_on_cliff": 54381.21271956165,
+      "standard_error": 25226.8404613995,
+      "interval_95": [
+       10220.801977250561,
+       109607.69757443189
+      ],
+      "sample_people_on_cliff": 35,
+      "source_households": 20,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 4.444629657865759,
+      "share": 0.07962062692291481,
+      "share_interval_95": [
+       0.016474369185886302,
+       0.16120447608702426
+      ]
+     },
+     "household_tax_before_refundable_credits": {
+      "people_on_cliff": 47941.676538145985,
+      "standard_error": 29081.42511545824,
+      "interval_95": [
+       3.3186040877160847,
+       116916.96342192122
+      ],
+      "sample_people_on_cliff": 22,
+      "source_households": 15,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 2.7749673181093866,
+      "share": 0.07019237252739126,
+      "share_interval_95": [
+       5.10076614388627e-06,
+       0.16100648751483398
+      ]
+     },
+     "ssi": {
+      "people_on_cliff": 15180.451904296875,
+      "standard_error": 12444.314815336778,
+      "interval_95": [
+       0.0,
+       42433.59912109375
+      ],
+      "sample_people_on_cliff": 2,
+      "source_households": 2,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.4828447532799651,
+      "share": 0.022226004848885907,
+      "share_interval_95": [
+       0.0,
+       0.06565413173040385
+      ]
+     },
+     "household_state_benefits": {
+      "people_on_cliff": 15044.619902724866,
+      "standard_error": 14832.199176645825,
+      "interval_95": [
+       0.009303805930539966,
+       45133.82731929976
+      ],
+      "sample_people_on_cliff": 10,
+      "source_households": 8,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.000002827582931,
+      "share": 0.022027130484367233,
+      "share_interval_95": [
+       1.3745521514269151e-08,
+       0.07302937452231079
+      ]
+     }
+    }
+   }
+  },
+  "2025_health": {
+   "as_modeled": {
+    "people_on_cliff": 3101512.7189553226,
+    "standard_error": 244334.0253944252,
+    "interval_95": [
+     2641685.9293637313,
+     3593560.8446306377
+    ],
+    "sample_people_on_cliff": 1250,
+    "source_households": 836,
+    "source_households_for_half": 62,
+    "kish_effective_source_households": 160.700061211357,
+    "committed_standard_error": 242379.4377887982,
+    "by_largest_loss": {
+     "medicaid_cost": {
+      "people_on_cliff": 2235455.4799384205,
+      "standard_error": 210851.33416540155,
+      "interval_95": [
+       1822893.260446179,
+       2667719.0239006076
+      ],
+      "sample_people_on_cliff": 729,
+      "source_households": 535,
+      "source_households_for_half": 43,
+      "kish_effective_source_households": 110.02699111138224,
+      "share": 0.7207629574678595,
+      "share_interval_95": [
+       0.6514534658057984,
+       0.7833228699428038
+      ]
+     },
+     "snap": {
+      "people_on_cliff": 182103.18996859627,
+      "standard_error": 53168.27941775677,
+      "interval_95": [
+       86689.74395385977,
+       294649.49488124816
+      ],
+      "sample_people_on_cliff": 121,
+      "source_households": 67,
+      "source_households_for_half": 5,
+      "kish_effective_source_households": 11.48820340411441,
+      "share": 0.05871431345602664,
+      "share_interval_95": [
+       0.02828182241537312,
+       0.09396402827888627
+      ]
+     },
+     "msp_cost": {
+      "people_on_cliff": 135288.34172690578,
+      "standard_error": 50526.19646350237,
+      "interval_95": [
+       50661.93003378044,
+       245620.4216219655
+      ],
+      "sample_people_on_cliff": 42,
+      "source_households": 30,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 7.320260568582312,
+      "share": 0.04362011508128676,
+      "share_interval_95": [
+       0.01653277578914472,
+       0.07754190127655047
+      ]
+     },
+     "tanf": {
+      "people_on_cliff": 115664.18563680258,
+      "standard_error": 46658.48130808318,
+      "interval_95": [
+       37861.634576189725,
+       220189.0411482193
+      ],
+      "sample_people_on_cliff": 20,
+      "source_households": 13,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 6.249684661878902,
+      "share": 0.037292829698845,
+      "share_interval_95": [
+       0.012189828890212829,
+       0.06923092599339753
+      ]
+     },
+     "free_school_meals": {
+      "people_on_cliff": 105978.39400086447,
+      "standard_error": 52641.173858017,
+      "interval_95": [
+       23953.864975181983,
+       226175.13045070265
+      ],
+      "sample_people_on_cliff": 104,
+      "source_households": 59,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 4.118197779901649,
+      "share": 0.034169904689786666,
+      "share_interval_95": [
+       0.008024648280670262,
+       0.07050090370148832
+      ]
+     },
+     "household_refundable_tax_credits": {
+      "people_on_cliff": 84245.84593801259,
+      "standard_error": 32718.69297019876,
+      "interval_95": [
+       28980.29573149832,
+       154191.2079960889
+      ],
+      "sample_people_on_cliff": 52,
+      "source_households": 34,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 6.8142793298742275,
+      "share": 0.027162824586574312,
+      "share_interval_95": [
+       0.009485807153809105,
+       0.049720277254347
+      ]
+     },
+     "reduced_price_school_meals": {
+      "people_on_cliff": 79446.56498792442,
+      "standard_error": 29165.221331814937,
+      "interval_95": [
+       29766.999246574058,
+       142443.51380023165
+      ],
+      "sample_people_on_cliff": 108,
+      "source_households": 56,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 7.506861693832491,
+      "share": 0.02561542453215677,
+      "share_interval_95": [
+       0.009688747445798708,
+       0.046141815567921664
+      ]
+     },
+     "chip": {
+      "people_on_cliff": 50162.80332337611,
+      "standard_error": 22264.807007425443,
+      "interval_95": [
+       11735.800914186586,
+       97834.64653413216
+      ],
+      "sample_people_on_cliff": 26,
+      "source_households": 17,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 5.158188943953483,
+      "share": 0.01617365713730568,
+      "share_interval_95": [
+       0.004085477175170872,
+       0.031697936712098404
+      ]
+     },
+     "household_tax_before_refundable_credits": {
+      "people_on_cliff": 47941.676538145985,
+      "standard_error": 29081.42511545824,
+      "interval_95": [
+       3.3186040877160847,
+       116916.96342192122
+      ],
+      "sample_people_on_cliff": 22,
+      "source_households": 15,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 2.7749673181093866,
+      "share": 0.015457514085028191,
+      "share_interval_95": [
+       1.0807887866618782e-06,
+       0.037062220635929094
+      ]
+     },
+     "chip_premium": {
+      "people_on_cliff": 22013.16466319561,
+      "standard_error": 21920.983434008227,
+      "interval_95": [
+       0.0,
+       66038.41917014122
+      ],
+      "sample_people_on_cliff": 4,
+      "source_households": 2,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0000976571920865,
+      "share": 0.007097557436620884,
+      "share_interval_95": [
+       0.0,
+       0.023189721121416325
+      ]
+     },
+     "wic": {
+      "people_on_cliff": 16095.759984452976,
+      "standard_error": 11541.921214111011,
+      "interval_95": [
+       0.009211112512275577,
+       41104.48056212007
+      ],
+      "sample_people_on_cliff": 12,
+      "source_households": 5,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.9792645024872095,
+      "share": 0.005189648227486387,
+      "share_interval_95": [
+       2.9459415086547365e-09,
+       0.013926215893932354
+      ]
+     },
+     "household_state_benefits": {
+      "people_on_cliff": 15044.616936125327,
+      "standard_error": 14832.199078937694,
+      "interval_95": [
+       0.007505254354327917,
+       45133.82414400912
+      ],
+      "sample_people_on_cliff": 9,
+      "source_households": 7,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.000002433208416,
+      "share": 0.004850735205494427,
+      "share_interval_95": [
+       2.421429580581864e-09,
+       0.015825206433564186
+      ]
+     },
+     "ssi": {
+      "people_on_cliff": 12072.6953125,
+      "standard_error": 12024.454014853343,
+      "interval_95": [
+       0.0,
+       36218.0859375
+      ],
+      "sample_people_on_cliff": 1,
+      "source_households": 1,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0,
+      "share": 0.0038925183955287553,
+      "share_interval_95": [
+       0.0,
+       0.012703164853226761
+      ]
+     }
+    }
+   },
+   "credit_counted_once": {
+    "people_on_cliff": 3079306.7486544377,
+    "standard_error": 243321.27134637372,
+    "interval_95": [
+     2621551.332095444,
+     3575098.4400618924
+    ],
+    "sample_people_on_cliff": 1245,
+    "source_households": 833,
+    "source_households_for_half": 61,
+    "kish_effective_source_households": 159.2463248691831,
+    "committed_standard_error": 241342.14936999252,
+    "by_largest_loss": {
+     "medicaid_cost": {
+      "people_on_cliff": 2235455.4799384205,
+      "standard_error": 210851.33416540155,
+      "interval_95": [
+       1822893.260446179,
+       2667719.0239006076
+      ],
+      "sample_people_on_cliff": 729,
+      "source_households": 535,
+      "source_households_for_half": 43,
+      "kish_effective_source_households": 110.02699111138224,
+      "share": 0.7259606341314472,
+      "share_interval_95": [
+       0.656316653567534,
+       0.7891065775708597
+      ]
+     },
+     "snap": {
+      "people_on_cliff": 182103.18996859627,
+      "standard_error": 53168.27941775677,
+      "interval_95": [
+       86689.74395385977,
+       294649.49488124816
+      ],
+      "sample_people_on_cliff": 121,
+      "source_households": 67,
+      "source_households_for_half": 5,
+      "kish_effective_source_households": 11.48820340411441,
+      "share": 0.05913772314114849,
+      "share_interval_95": [
+       0.028463440027215608,
+       0.09456023505122114
+      ]
+     },
+     "msp_cost": {
+      "people_on_cliff": 135288.34172690578,
+      "standard_error": 50526.19646350237,
+      "interval_95": [
+       50661.93003378044,
+       245620.4216219655
+      ],
+      "sample_people_on_cliff": 42,
+      "source_households": 30,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 7.320260568582312,
+      "share": 0.04393467516220092,
+      "share_interval_95": [
+       0.01667962388008855,
+       0.07796044711154593
+      ]
+     },
+     "tanf": {
+      "people_on_cliff": 110447.92489461508,
+      "standard_error": 46498.0090259525,
+      "interval_95": [
+       32620.54209991725,
+       214711.77611567805
+      ],
+      "sample_people_on_cliff": 19,
+      "source_households": 12,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 5.772063607746716,
+      "share": 0.035867789054428376,
+      "share_interval_95": [
+       0.010737239344308282,
+       0.06789592121343327
+      ]
+     },
+     "free_school_meals": {
+      "people_on_cliff": 105965.8017090325,
+      "standard_error": 52641.1226978178,
+      "interval_95": [
+       23933.80427453586,
+       226174.50083611105
+      ],
+      "sample_people_on_cliff": 102,
+      "source_households": 58,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 4.117219433637579,
+      "share": 0.03441222663358767,
+      "share_interval_95": [
+       0.008087863118647705,
+       0.07102752599225895
+      ]
+     },
+     "reduced_price_school_meals": {
+      "people_on_cliff": 79446.56498792442,
+      "standard_error": 29165.221331814937,
+      "interval_95": [
+       29766.999246574058,
+       142443.51380023165
+      ],
+      "sample_people_on_cliff": 108,
+      "source_households": 56,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 7.506861693832491,
+      "share": 0.025800146420177243,
+      "share_interval_95": [
+       0.009712074238994041,
+       0.046315128658968925
+      ]
+     },
+     "household_refundable_tax_credits": {
+      "people_on_cliff": 67268.68308583146,
+      "standard_error": 27219.591055761877,
+      "interval_95": [
+       21697.802141505796,
+       128209.25933288179
+      ],
+      "sample_people_on_cliff": 48,
+      "source_households": 32,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 6.006851323312202,
+      "share": 0.021845398518749653,
+      "share_interval_95": [
+       0.007164877355075367,
+       0.04166811358984799
+      ]
+     },
+     "chip": {
+      "people_on_cliff": 50162.84890869178,
+      "standard_error": 22264.806222948457,
+      "interval_95": [
+       11735.84649950226,
+       97834.73542549773
+      ],
+      "sample_people_on_cliff": 28,
+      "source_households": 18,
+      "source_households_for_half": 3,
+      "kish_effective_source_households": 5.158198318917063,
+      "share": 0.016290305904279073,
+      "share_interval_95": [
+       0.004123481267383465,
+       0.031894358550676745
+      ]
+     },
+     "household_tax_before_refundable_credits": {
+      "people_on_cliff": 47941.676538145985,
+      "standard_error": 29081.42511545824,
+      "interval_95": [
+       3.3186040877160847,
+       116916.96342192122
+      ],
+      "sample_people_on_cliff": 22,
+      "source_households": 15,
+      "source_households_for_half": 2,
+      "kish_effective_source_households": 2.7749673181093866,
+      "share": 0.015568983687349441,
+      "share_interval_95": [
+       1.092046879297972e-06,
+       0.037382664932371384
+      ]
+     },
+     "chip_premium": {
+      "people_on_cliff": 22013.16466319561,
+      "standard_error": 21920.983434008227,
+      "interval_95": [
+       0.0,
+       66038.41917014122
+      ],
+      "sample_people_on_cliff": 4,
+      "source_households": 2,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0000976571920865,
+      "share": 0.00714874043413008,
+      "share_interval_95": [
+       0.0,
+       0.023414119564071148
+      ]
+     },
+     "wic": {
+      "people_on_cliff": 16095.759984452976,
+      "standard_error": 11541.921214111011,
+      "interval_95": [
+       0.009211112512275577,
+       41104.48056212007
+      ],
+      "sample_people_on_cliff": 12,
+      "source_households": 5,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.9792645024872095,
+      "share": 0.0052270726167460676,
+      "share_interval_95": [
+       2.968700994870277e-09,
+       0.014006374426853381
+      ]
+     },
+     "household_state_benefits": {
+      "people_on_cliff": 15044.616936125327,
+      "standard_error": 14832.199078937694,
+      "interval_95": [
+       0.007505254354327917,
+       45133.82414400912
+      ],
+      "sample_people_on_cliff": 9,
+      "source_households": 7,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.000002433208416,
+      "share": 0.004885715573058566,
+      "share_interval_95": [
+       2.4477917508047533e-09,
+       0.015917737300583632
+      ]
+     },
+     "ssi": {
+      "people_on_cliff": 12072.6953125,
+      "standard_error": 12024.454014853343,
+      "interval_95": [
+       0.0,
+       36218.0859375
+      ],
+      "sample_people_on_cliff": 1,
+      "source_households": 1,
+      "source_households_for_half": 1,
+      "kish_effective_source_households": 1.0,
+      "share": 0.003920588722697209,
+      "share_interval_95": [
+       0.0,
+       0.012789831048297472
+      ]
+     }
+    }
+   }
+  }
+ }
+}

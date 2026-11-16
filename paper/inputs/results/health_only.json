@@ -1,0 +1,73 @@
+{
+ "note": "Adults facing a cliff with and without health coverage counted (the premium tax credit counted once): how the two counts overlap, and, for the adults only in the count with health coverage, the change in the rest of their household's net income and in its health parts after the $1,000 raise.",
+ "commit": "13e155314ec9d96baa5e9dcd147ba534dc681fe7",
+ "script_sha256": "e2bd3d3b5808b5b16e789eb0273efdadbd02330a5c541da14719545f805cb957",
+ "years": {
+  "2017": {
+   "people_on_cliff_with_health_coverage": 2678606.3755043014,
+   "people_on_cliff_without_health_coverage": 690879.1637878892,
+   "in_both": {
+    "people": 690879.1637878892,
+    "sample_people": 374
+   },
+   "only_with_health_coverage": {
+    "people": 1987727.2117164123,
+    "sample_people": 1091,
+    "share_of_count_with_health_coverage": 0.7420751439607034,
+    "change_in_rest_of_net_income": {
+     "smallest": 44.9072265625,
+     "largest": 1934.120361328125,
+     "weighted_median": 724.5,
+     "sample_people_where_it_falls": 0,
+     "sample_people_where_it_rises": 1091
+    },
+    "change_in_health_parts": {
+     "smallest": -89621.0859375,
+     "largest": -138.33251953125,
+     "weighted_median": -7777.4638671875,
+     "sample_people_where_it_falls": 1091,
+     "sample_people_where_it_rises": 0
+    }
+   },
+   "only_without_health_coverage": {
+    "people": 0.0,
+    "sample_people": 0
+   }
+  },
+  "2025": {
+   "people_on_cliff_with_health_coverage": 3079306.7486544377,
+   "people_on_cliff_without_health_coverage": 683004.0759690469,
+   "in_both": {
+    "people": 683004.0317605129,
+    "sample_people": 477
+   },
+   "only_with_health_coverage": {
+    "people": 2396302.716893925,
+    "sample_people": 768,
+    "share_of_count_with_health_coverage": 0.7781955201251176,
+    "change_in_rest_of_net_income": {
+     "smallest": 13.4208984375,
+     "largest": 1582.7249755859375,
+     "weighted_median": 767.1201171875,
+     "sample_people_where_it_falls": 0,
+     "sample_people_where_it_rises": 768
+    },
+    "change_in_health_parts": {
+     "smallest": -73564.5546875,
+     "largest": -93.3037109375,
+     "weighted_median": -11617.021484375,
+     "sample_people_where_it_falls": 768,
+     "sample_people_where_it_rises": 0
+    }
+   },
+   "only_without_health_coverage": {
+    "people": 0.04420853406190872,
+    "sample_people": 2
+   }
+  }
+ },
+ "stored_input_renames": {
+  "would_claim_wic": "takes_up_wic_if_eligible"
+ },
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909"
+}

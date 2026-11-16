@@ -1,0 +1,142 @@
+{
+  "status": "passed",
+  "checks": 460,
+  "artifact_sha256": "c7a48d7a4efc6d25b882fbb8cecac2b14c5edbdb7d876da611951b6083f66363",
+  "script_sha256": "fe9b7957150af22d42b453dbd165850994caf70ee230edcdb295da9af57ead0d",
+  "test_command": "uv run --no-sync pytest -q tests/test_paper_household_curves.py",
+  "tests": "14 passed in77.52s;3 inherited zero-unemployment divide warnings, all stored values finite",
+  "actual_run_seconds": 244.5719720419729,
+  "cases": {
+    "single_2025": {
+      "grid_points": 801,
+      "fresh_scalar_points": 15,
+      "scope": "main",
+      "checks": {
+        "maximum_native_rounding_residual": 0.00537109375,
+        "once_only_ptc_identity": true,
+        "fixed_national_medicaid_values": true,
+        "cash_plus_health_identity": true,
+        "repeat_axis_maximum_error": 0.0,
+        "fresh_scalar_axis_maximum_error": 0.0,
+        "zero_change_repeat_maximum_error": 0.0,
+        "independent_system_maximum_error": 0.0
+      },
+      "events": [
+        {
+          "bracket": [
+            21600.0,
+            21700.0
+          ],
+          "integer_transition": [
+            21600,
+            21601
+          ],
+          "d1000": -2149.8125,
+          "d5000": 169.54638671875,
+          "first_sampled_recovery": [
+            26300.0,
+            26400.0
+          ]
+        }
+      ]
+    },
+    "aca_2017": {
+      "grid_points": 801,
+      "fresh_scalar_points": 16,
+      "scope": "historical-hybrid-appendix",
+      "checks": {
+        "maximum_native_rounding_residual": 0.00390625,
+        "once_only_ptc_identity": true,
+        "fixed_national_medicaid_values": true,
+        "cash_plus_health_identity": true,
+        "repeat_axis_maximum_error": 0.0,
+        "fresh_scalar_axis_maximum_error": 0.0,
+        "zero_change_repeat_maximum_error": 0.0,
+        "independent_system_maximum_error": 0.0
+      },
+      "events": [
+        {
+          "bracket": [
+            47500.0,
+            47600.0
+          ],
+          "integer_transition": [
+            47519,
+            47520
+          ],
+          "d1000": -1657.26904296875,
+          "d5000": 814.06884765625,
+          "first_sampled_recovery": [
+            51100.0,
+            51200.0
+          ]
+        }
+      ]
+    },
+    "parent_2025": {
+      "grid_points": 901,
+      "fresh_scalar_points": 41,
+      "scope": "main",
+      "checks": {
+        "maximum_native_rounding_residual": 0.00927734375,
+        "once_only_ptc_identity": true,
+        "fixed_national_medicaid_values": true,
+        "cash_plus_health_identity": true,
+        "repeat_axis_maximum_error": 0.0,
+        "fresh_scalar_axis_maximum_error": 0.0,
+        "zero_change_repeat_maximum_error": 0.0,
+        "independent_system_maximum_error": 0.0
+      },
+      "events": [
+        {
+          "bracket": [
+            36700.0,
+            36800.0
+          ],
+          "integer_transition": [
+            36780,
+            36781
+          ],
+          "d1000": -1548.625,
+          "d5000": -549.00048828125,
+          "first_sampled_recovery": [
+            42900.0,
+            43000.0
+          ]
+        },
+        {
+          "bracket": [
+            49300.0,
+            49400.0
+          ],
+          "integer_transition": [
+            49303,
+            49304
+          ],
+          "d1000": -1703.16015625,
+          "d5000": 77.82177734375,
+          "first_sampled_recovery": [
+            54100.0,
+            54200.0
+          ]
+        },
+        {
+          "bracket": [
+            57500.0,
+            57600.0
+          ],
+          "integer_transition": [
+            57564,
+            57565
+          ],
+          "d1000": -1564.435546875,
+          "d5000": 912.765625,
+          "first_sampled_recovery": [
+            61000.0,
+            61100.0
+          ]
+        }
+      ]
+    }
+  }
+}

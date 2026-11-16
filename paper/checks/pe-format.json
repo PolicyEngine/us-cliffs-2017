@@ -1,0 +1,9 @@
+{
+  "article_body_identical": true,
+  "canonical_source_sha256": "f51e282bac68930a84cd3edd1f69567afebf771f4fc13613c0975f944dab72e1",
+  "branded_source_sha256": "76aa2f98be3bab19aa07313bb40ebff03f15035ebfe8c7f3db6ff4acbb74b6a9",
+  "branded_pdf_sha256": "92e89f6856aa04ad78c4ec28f2db7f241e2be76eb45449bfce8de6c2e63bc0da",
+  "journal_pdf_sha256": "0b7903561b3bc2e13be1e7eb3348d553047df613b3f423a815ad78eae7a82493",
+  "renderer": "pe-doc 1.0.0",
+  "pe_doc_check": "PASS"
+}

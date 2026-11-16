@@ -1,0 +1,1328 @@
+{
+  "metadata": {
+    "title": "2017 state wage input audit, Jan 1reference",
+    "as_of": "2017-01-01",
+    "retrieved_date": "2026-11-11",
+    "retrieved_timezone": "America/New_York",
+    "currency": "USD",
+    "unit": "hour",
+    "scenario": "general non-tipped adult FLSA-covered hypothetical job; no newly offered employer healthcoverage",
+    "federal_floor": 7.25,
+    "date_convention": "Freeze reference hourly wage at Jan 1,2017 for a clearly labeled annualized scenario; this is not a month-by-month2017 wage path. MEdate conflict flagged.",
+    "amount_semantics": "source-verified general headline rate under stated coverage category; may require employer/region selection. Never fill null reference_hourly implicitly.",
+    "verified_semantics": "amount supported by opened government source for stated generalcategory, not verification of all local/industry exceptions; ME unresolvedfalse.",
+    "national_run_ready": false,
+    "unresolved": [
+      "MEJan1vsJan7effective-date convention",
+      "NYwork region/employer size/industry",
+      "ORregion and PortlandUGB mapping",
+      "employer size/coverage convention inCA,MN,MT,OH,AR,IL,NE,MI,VT,WV",
+      "localminimumwages excluded; cannotcallflatstatebenchmark locallycompliant",
+      "Jan1snapshot differsfrom2017monthlypath, especiallyDC,OR,MD andNYDec31"
+    ],
+    "sources": {
+      "dol_history": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "dol_dated_jan2017": "https://www.dol.gov/agencies/whd/state/minimum-wage/tipped/2017",
+      "contemporaneous_dol_republication": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf"
+    },
+    "raw_primary_snapshot_sha256": "d1fb2b0bd3834faebfcaf4784f3dce9e7c1991138261053df792cc28b289fa6c"
+  },
+  "states": {
+    "AL": {
+      "state": "AL",
+      "name": "Alabama",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "...",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State law absent or below federal floor; amount is effective FLSA-covered hypothetical-job floor, not a claim about FLSA-exempt employment."
+      ],
+      "variants": []
+    },
+    "AK": {
+      "state": "AK",
+      "name": "Alaska",
+      "amount": 9.8,
+      "reference_hourly": 9.8,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "9.80",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "AZ": {
+      "state": "AZ",
+      "name": "Arizona",
+      "amount": 10.0,
+      "reference_hourly": 10.0,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "10.00",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "AR": {
+      "state": "AR",
+      "name": "Arkansas",
+      "amount": 8.5,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "8.50[c]",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State coverage depends on employer size (generally4+ employees); choose covered-employer benchmark explicitly, or audit federal-only fallback7.25 for exempt smaller employers. Illinois excludes family members from count; WestVirginia uses employees at one location."
+      ],
+      "variants": [
+        {
+          "hourly": 8.5,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "state-covered employer, generally4+ employees",
+          "source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf"
+        },
+        {
+          "hourly": 7.25,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "smaller employer exemptfromstate law",
+          "flsa_covered": true,
+          "source_url": "https://www.dol.gov/agencies/whd/state/minimum-wage/tipped/2017"
+        }
+      ],
+      "requires_scenario_selection": true
+    },
+    "CA": {
+      "state": "CA",
+      "name": "California",
+      "amount": 10.5,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://www.dir.ca.gov/iwc/MinimumWageHistory.htm",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "10.00",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "Amount is general rate for employers with26+ employees; employers with25 or fewer owe10.00. DOLhistory 10.00 is small-employer rate."
+      ],
+      "variants": [
+        {
+          "hourly": 10.5,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "26or more employees",
+          "source_url": "https://www.dir.ca.gov/iwc/MinimumWageHistory.htm"
+        },
+        {
+          "hourly": 10.0,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "25or fewer employees",
+          "source_url": "https://www.dir.ca.gov/iwc/MinimumWageHistory.htm"
+        }
+      ],
+      "requires_scenario_selection": true
+    },
+    "CO": {
+      "state": "CO",
+      "name": "Colorado",
+      "amount": 9.3,
+      "reference_hourly": 9.3,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "9.30",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "CT": {
+      "state": "CT",
+      "name": "Connecticut",
+      "amount": 10.1,
+      "reference_hourly": 10.1,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "10.10",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "DE": {
+      "state": "DE",
+      "name": "Delaware",
+      "amount": 8.25,
+      "reference_hourly": 8.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "8.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "FL": {
+      "state": "FL",
+      "name": "Florida",
+      "amount": 8.1,
+      "reference_hourly": 8.1,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "8.10",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "GA": {
+      "state": "GA",
+      "name": "Georgia",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "5.15(d)",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State law absent or below federal floor; amount is effective FLSA-covered hypothetical-job floor, not a claim about FLSA-exempt employment."
+      ],
+      "variants": []
+    },
+    "HI": {
+      "state": "HI",
+      "name": "Hawaii",
+      "amount": 9.25,
+      "reference_hourly": 9.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "9.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "ID": {
+      "state": "ID",
+      "name": "Idaho",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "IL": {
+      "state": "IL",
+      "name": "Illinois",
+      "amount": 8.25,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "8.25[c]",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State coverage depends on employer size (generally4+ employees); choose covered-employer benchmark explicitly, or audit federal-only fallback7.25 for exempt smaller employers. Illinois excludes family members from count; WestVirginia uses employees at one location."
+      ],
+      "variants": [
+        {
+          "hourly": 8.25,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "state-covered employer, generally4+ employees",
+          "source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf"
+        },
+        {
+          "hourly": 7.25,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "smaller employer exemptfromstate law",
+          "flsa_covered": true,
+          "source_url": "https://www.dol.gov/agencies/whd/state/minimum-wage/tipped/2017"
+        }
+      ],
+      "requires_scenario_selection": true
+    },
+    "IN": {
+      "state": "IN",
+      "name": "Indiana",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25(e)",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State employer-size exclusions/lower state categories do not lower the assumed FLSA-covered7.25 job floor."
+      ],
+      "variants": []
+    },
+    "IA": {
+      "state": "IA",
+      "name": "Iowa",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "KS": {
+      "state": "KS",
+      "name": "Kansas",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "KY": {
+      "state": "KY",
+      "name": "Kentucky",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "LA": {
+      "state": "LA",
+      "name": "Louisiana",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "...",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State law absent or below federal floor; amount is effective FLSA-covered hypothetical-job floor, not a claim about FLSA-exempt employment."
+      ],
+      "variants": []
+    },
+    "ME": {
+      "state": "ME",
+      "name": "Maine",
+      "amount": 7.5,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://www.maine.gov/labor/Templates/news_template.shtml?id=727132",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": false,
+      "verification_level": "historical agency implementation-date evidence; codified-date conflict unresolved",
+      "raw_dol_2017": "9.00",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "StrictJan 1 reference is7.50; contemporaneous agency material and DOLdatedtable make9.00 effectiveJan 7. Current codified text saysJan 1, so legal-date conflict needs explicit decision/confirmation before a national Jan 1run."
+      ],
+      "variants": [
+        {
+          "hourly": 7.5,
+          "region": "statewide",
+          "starts": null,
+          "ends": "2017-01-06",
+          "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history"
+        },
+        {
+          "hourly": 9.0,
+          "region": "statewide",
+          "starts": "2017-01-07",
+          "ends": "2017-12-31",
+          "source_url": "https://www.maine.gov/labor/Templates/news_template.shtml?id=727132"
+        }
+      ],
+      "requires_scenario_selection": true
+    },
+    "MD": {
+      "state": "MD",
+      "name": "Maryland",
+      "amount": 8.75,
+      "reference_hourly": 8.75,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "8.75",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "MA": {
+      "state": "MA",
+      "name": "Massachusetts",
+      "amount": 11.0,
+      "reference_hourly": 11.0,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "11.00",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "MI": {
+      "state": "MI",
+      "name": "Michigan",
+      "amount": 8.9,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "8.90(e)",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State coverage depends on employer size (generally2+ employees); choose covered-employer benchmark explicitly, or audit federal-only fallback7.25 for exempt smaller employers. Illinois excludes family members from count; WestVirginia uses employees at one location."
+      ],
+      "variants": [
+        {
+          "hourly": 8.9,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "state-covered employer, generally2+ employees",
+          "source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf"
+        },
+        {
+          "hourly": 7.25,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "smaller employer exemptfromstate law",
+          "flsa_covered": true,
+          "source_url": "https://www.dol.gov/agencies/whd/state/minimum-wage/tipped/2017"
+        }
+      ],
+      "requires_scenario_selection": true
+    },
+    "MN": {
+      "state": "MN",
+      "name": "Minnesota",
+      "amount": 9.5,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://www.house.mn.gov/hinfo/leginfo/0814nlrelease.pdf",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.75-9.50(g)",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "General large-employer rate 9.50; small-employer rate 7.75. Contemporary Hawaii table footnote7 says7.25 for small employers, which is contradicted by official state2014law schedule and DOLJan2017table; do not use that footnote."
+      ],
+      "variants": [
+        {
+          "hourly": 9.5,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_gross_annual_sales": "at least500000",
+          "source_url": "https://www.house.mn.gov/hinfo/leginfo/0814nlrelease.pdf"
+        },
+        {
+          "hourly": 7.75,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_gross_annual_sales": "less than500000",
+          "source_url": "https://www.house.mn.gov/hinfo/leginfo/0814nlrelease.pdf"
+        }
+      ],
+      "requires_scenario_selection": true
+    },
+    "MS": {
+      "state": "MS",
+      "name": "Mississippi",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "...",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State law absent or below federal floor; amount is effective FLSA-covered hypothetical-job floor, not a claim about FLSA-exempt employment."
+      ],
+      "variants": []
+    },
+    "MO": {
+      "state": "MO",
+      "name": "Missouri",
+      "amount": 7.7,
+      "reference_hourly": 7.7,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.70",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "MT": {
+      "state": "MT",
+      "name": "Montana",
+      "amount": 8.15,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://erd.dli.mt.gov/labor-standards/wage-and-hour-payment-act/minimum-wage-history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "8.15(g)",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "Businesses with annual sales110000 or less may owe4.00 under state law; this audit imposes7.25 for FLSA-covered jobs."
+      ],
+      "variants": [
+        {
+          "hourly": 8.15,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_gross_annual_sales": "over110000",
+          "source_url": "https://erd.dli.mt.gov/labor-standards/wage-and-hour-payment-act/minimum-wage-history"
+        },
+        {
+          "hourly": 7.25,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_gross_annual_sales": "110000or less",
+          "flsa_covered": true,
+          "source_url": "https://www.dol.gov/agencies/whd/state/minimum-wage/tipped/2017"
+        }
+      ],
+      "requires_scenario_selection": true
+    },
+    "NE": {
+      "state": "NE",
+      "name": "Nebraska",
+      "amount": 9.0,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "9.00[c]",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State coverage depends on employer size (generally4+ employees); choose covered-employer benchmark explicitly, or audit federal-only fallback7.25 for exempt smaller employers. Illinois excludes family members from count; WestVirginia uses employees at one location."
+      ],
+      "variants": [
+        {
+          "hourly": 9.0,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "state-covered employer, generally4+ employees",
+          "source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf"
+        },
+        {
+          "hourly": 7.25,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "smaller employer exemptfromstate law",
+          "flsa_covered": true,
+          "source_url": "https://www.dol.gov/agencies/whd/state/minimum-wage/tipped/2017"
+        }
+      ],
+      "requires_scenario_selection": true
+    },
+    "NV": {
+      "state": "NV",
+      "name": "Nevada",
+      "amount": 8.25,
+      "reference_hourly": 8.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://www.business.nv.gov/news-media/press-releases/2017/labor/nevada-s-minimum-wage-and-daily-overtime-rates-will-not-increase-in-2017/",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25-8.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "Hypothetical job supplies no employer health coverage, so8.25 applies. Lower7.25 requires qualifying employer health benefits; it cannot be combined with a no-new-health-coverage scenario."
+      ],
+      "variants": [
+        {
+          "hourly": 8.25,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_health_offer": false,
+          "source_url": "https://www.business.nv.gov/news-media/press-releases/2017/labor/nevada-s-minimum-wage-and-daily-overtime-rates-will-not-increase-in-2017/"
+        },
+        {
+          "hourly": 7.25,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_health_offer": true,
+          "source_url": "https://www.business.nv.gov/news-media/press-releases/2017/labor/nevada-s-minimum-wage-and-daily-overtime-rates-will-not-increase-in-2017/"
+        }
+      ],
+      "requires_scenario_selection": false
+    },
+    "NH": {
+      "state": "NH",
+      "name": "New Hampshire",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "NJ": {
+      "state": "NJ",
+      "name": "New Jersey",
+      "amount": 8.44,
+      "reference_hourly": 8.44,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "8.44",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "NM": {
+      "state": "NM",
+      "name": "New Mexico",
+      "amount": 7.5,
+      "reference_hourly": 7.5,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.50",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "NY": {
+      "state": "NY",
+      "name": "New York",
+      "amount": 9.7,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://dol.ny.gov/history-minimum-wage-new-york-state",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "9.70",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "Amount is rest-of-state general rate, not a statewide rate compliant in every region. Employer size and work location determine actual rate. Fast-food rates shown as additional industry variants."
+      ],
+      "variants": [
+        {
+          "hourly": 11.0,
+          "region": "New York City",
+          "starts": "2017-01-01",
+          "ends": "2017-12-30",
+          "employer_size": "11or more employees",
+          "source_url": "https://dol.ny.gov/history-minimum-wage-new-york-state"
+        },
+        {
+          "hourly": 10.5,
+          "region": "New York City",
+          "starts": "2017-01-01",
+          "ends": "2017-12-30",
+          "employer_size": "10or fewer employees",
+          "source_url": "https://dol.ny.gov/history-minimum-wage-new-york-state"
+        },
+        {
+          "hourly": 10.0,
+          "region": "Nassau, Suffolk, Westchester counties",
+          "starts": "2017-01-01",
+          "ends": "2017-12-30",
+          "source_url": "https://dol.ny.gov/history-minimum-wage-new-york-state"
+        },
+        {
+          "hourly": 9.7,
+          "region": "rest of state",
+          "starts": "2017-01-01",
+          "ends": "2017-12-30",
+          "source_url": "https://dol.ny.gov/history-minimum-wage-new-york-state"
+        },
+        {
+          "hourly": 12.0,
+          "region": "New York City",
+          "starts": "2017-01-01",
+          "ends": "2017-12-30",
+          "industry": "fast food",
+          "source_url": "https://dol.ny.gov/history-minimum-wage-new-york-state"
+        },
+        {
+          "hourly": 10.75,
+          "region": "outside New York City",
+          "starts": "2017-01-01",
+          "ends": "2017-12-30",
+          "industry": "fast food",
+          "source_url": "https://dol.ny.gov/history-minimum-wage-new-york-state"
+        }
+      ],
+      "requires_scenario_selection": true
+    },
+    "NC": {
+      "state": "NC",
+      "name": "North Carolina",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "ND": {
+      "state": "ND",
+      "name": "North Dakota",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "OH": {
+      "state": "OH",
+      "name": "Ohio",
+      "amount": 8.15,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://www.legislature.ohio.gov/download?format=pdf&key=6102",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "8.15",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "General rate applies to employers with annual gross receipts299000 or more; lower employer category7.25."
+      ],
+      "variants": [
+        {
+          "hourly": 8.15,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_gross_annual_sales": "299000or more",
+          "source_url": "https://www.legislature.ohio.gov/download?format=pdf&key=6102"
+        },
+        {
+          "hourly": 7.25,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_gross_annual_sales": "less than299000",
+          "source_url": "https://www.legislature.ohio.gov/download?format=pdf&key=6102"
+        }
+      ],
+      "requires_scenario_selection": true
+    },
+    "OK": {
+      "state": "OK",
+      "name": "Oklahoma",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "2.00-7.25(g)",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State law absent or below federal floor; amount is effective FLSA-covered hypothetical-job floor, not a claim about FLSA-exempt employment.",
+        "State employer-size exclusions/lower state categories do not lower the assumed FLSA-covered7.25 job floor."
+      ],
+      "variants": []
+    },
+    "OR": {
+      "state": "OR",
+      "name": "Oregon",
+      "amount": 9.75,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://www.oregon.gov/boli/workers/Pages/minimum-wage-schedule.aspx",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "9.75",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "Amount is standard region rate; nonurban counties9.50. Portland Metro shares9.75 onJan 1 but changes separately onJuly 1. CountyFIPS alone does not resolve every Portland urban-growth-boundary case.",
+        "For the frozen Jan1 reference, Portland Metro and standard rates are equal9.75. County classification suffices to distinguish18 nonurban counties9.50 from all others9.75, if the analyst assumes work county equals residence county. The finer UGB boundary matters only for the actual July1 path."
+      ],
+      "variants": [
+        {
+          "hourly": 9.75,
+          "region": "standard",
+          "starts": "2017-01-01",
+          "ends": "2017-06-30",
+          "source_url": "https://www.oregon.gov/boli/workers/Pages/minimum-wage-schedule.aspx"
+        },
+        {
+          "hourly": 9.75,
+          "region": "Portland Metro urban growth boundary",
+          "starts": "2017-01-01",
+          "ends": "2017-06-30",
+          "source_url": "https://www.oregon.gov/boli/workers/Pages/minimum-wage-schedule.aspx"
+        },
+        {
+          "hourly": 9.5,
+          "region": "nonurban counties",
+          "starts": "2017-01-01",
+          "ends": "2017-06-30",
+          "source_url": "https://www.oregon.gov/boli/workers/Pages/minimum-wage-schedule.aspx"
+        },
+        {
+          "hourly": 10.25,
+          "region": "standard",
+          "starts": "2017-07-01",
+          "ends": "2018-06-30",
+          "source_url": "https://www.oregon.gov/boli/workers/Pages/minimum-wage-schedule.aspx"
+        },
+        {
+          "hourly": 11.25,
+          "region": "Portland Metro urban growth boundary",
+          "starts": "2017-07-01",
+          "ends": "2018-06-30",
+          "source_url": "https://www.oregon.gov/boli/workers/Pages/minimum-wage-schedule.aspx"
+        },
+        {
+          "hourly": 10.0,
+          "region": "nonurban counties",
+          "starts": "2017-07-01",
+          "ends": "2018-06-30",
+          "source_url": "https://www.oregon.gov/boli/workers/Pages/minimum-wage-schedule.aspx"
+        }
+      ],
+      "requires_scenario_selection": true,
+      "nonurban_counties": [
+        "Baker",
+        "Coos",
+        "Crook",
+        "Curry",
+        "Douglas",
+        "Gilliam",
+        "Grant",
+        "Harney",
+        "Jefferson",
+        "Klamath",
+        "Lake",
+        "Malheur",
+        "Morrow",
+        "Sherman",
+        "Umatilla",
+        "Union",
+        "Wallowa",
+        "Wheeler"
+      ],
+      "county_definition_source_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html",
+      "county_definition_locator": "ORS653.026, enacted2016c.12section2; dated rates inORS653.025"
+    },
+    "PA": {
+      "state": "PA",
+      "name": "Pennsylvania",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "RI": {
+      "state": "RI",
+      "name": "Rhode Island",
+      "amount": 9.6,
+      "reference_hourly": 9.6,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "9.60",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "SC": {
+      "state": "SC",
+      "name": "South Carolina",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "...",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State law absent or below federal floor; amount is effective FLSA-covered hypothetical-job floor, not a claim about FLSA-exempt employment."
+      ],
+      "variants": []
+    },
+    "SD": {
+      "state": "SD",
+      "name": "South Dakota",
+      "amount": 8.65,
+      "reference_hourly": 8.65,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "8.65",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "TN": {
+      "state": "TN",
+      "name": "Tennessee",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "...",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State law absent or below federal floor; amount is effective FLSA-covered hypothetical-job floor, not a claim about FLSA-exempt employment."
+      ],
+      "variants": []
+    },
+    "TX": {
+      "state": "TX",
+      "name": "Texas",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "UT": {
+      "state": "UT",
+      "name": "Utah",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "VT": {
+      "state": "VT",
+      "name": "Vermont",
+      "amount": 10.0,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "10.00(e)",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State coverage depends on employer size (generally2+ employees); choose covered-employer benchmark explicitly, or audit federal-only fallback7.25 for exempt smaller employers. Illinois excludes family members from count; WestVirginia uses employees at one location."
+      ],
+      "variants": [
+        {
+          "hourly": 10.0,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "state-covered employer, generally2+ employees",
+          "source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf"
+        },
+        {
+          "hourly": 7.25,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "smaller employer exemptfromstate law",
+          "flsa_covered": true,
+          "source_url": "https://www.dol.gov/agencies/whd/state/minimum-wage/tipped/2017"
+        }
+      ],
+      "requires_scenario_selection": true
+    },
+    "VA": {
+      "state": "VA",
+      "name": "Virginia",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25[c]",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State employer-size exclusions/lower state categories do not lower the assumed FLSA-covered7.25 job floor."
+      ],
+      "variants": []
+    },
+    "WA": {
+      "state": "WA",
+      "name": "Washington",
+      "amount": 11.0,
+      "reference_hourly": 11.0,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "11.00",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "WV": {
+      "state": "WV",
+      "name": "West Virginia",
+      "amount": 8.75,
+      "reference_hourly": null,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "8.75",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State coverage depends on employer size (generally6+ employees); choose covered-employer benchmark explicitly, or audit federal-only fallback7.25 for exempt smaller employers. Illinois excludes family members from count; WestVirginia uses employees at one location."
+      ],
+      "variants": [
+        {
+          "hourly": 8.75,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "state-covered employer, generally6+ employees",
+          "source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf"
+        },
+        {
+          "hourly": 7.25,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": null,
+          "employer_size": "smaller employer exemptfromstate law",
+          "flsa_covered": true,
+          "source_url": "https://www.dol.gov/agencies/whd/state/minimum-wage/tipped/2017"
+        }
+      ],
+      "requires_scenario_selection": true
+    },
+    "WI": {
+      "state": "WI",
+      "name": "Wisconsin",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "7.25",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+      ],
+      "variants": []
+    },
+    "WY": {
+      "state": "WY",
+      "name": "Wyoming",
+      "amount": 7.25,
+      "reference_hourly": 7.25,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "5.15",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "State law absent or below federal floor; amount is effective FLSA-covered hypothetical-job floor, not a claim about FLSA-exempt employment."
+      ],
+      "variants": []
+    },
+    "DC": {
+      "state": "DC",
+      "name": "District of Columbia",
+      "amount": 11.5,
+      "reference_hourly": 11.5,
+      "as_of": "2017-01-01",
+      "unit": "USD/hour",
+      "source_url": "https://does.dc.gov/sites/default/files/dc/sites/does/page_content/attachments/DC%20Minimum%20Wage%20Increase%20-%20DC%20Register%20Public%20Notice_1.pdf",
+      "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
+      "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
+      "verified": true,
+      "verification_level": "primary-table-value corroborated by contemporaneous government republication",
+      "raw_dol_2017": "17.00",
+      "notes": [
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "DOLbeta historical2017 cell17.00 is rejected. DCagency notice confirms11.50 beforeJuly 1 and12.50 startingJuly 1."
+      ],
+      "variants": [
+        {
+          "hourly": 11.5,
+          "region": "statewide",
+          "starts": "2017-01-01",
+          "ends": "2017-06-30",
+          "source_url": "https://does.dc.gov/sites/default/files/dc/sites/does/page_content/attachments/DC%20Minimum%20Wage%20Increase%20-%20DC%20Register%20Public%20Notice_1.pdf"
+        },
+        {
+          "hourly": 12.5,
+          "region": "statewide",
+          "starts": "2017-07-01",
+          "ends": "2018-06-30",
+          "source_url": "https://does.dc.gov/sites/default/files/dc/sites/does/page_content/attachments/DC%20Minimum%20Wage%20Increase%20-%20DC%20Register%20Public%20Notice_1.pdf"
+        }
+      ],
+      "requires_scenario_selection": false
+    }
+  }
+}

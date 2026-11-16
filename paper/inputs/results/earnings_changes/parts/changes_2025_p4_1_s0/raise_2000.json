@@ -1,0 +1,76 @@
+{
+ "year": 2025,
+ "aca_before_2018": false,
+ "leave_out_csfp": true,
+ "parts": 4,
+ "part": 1,
+ "seed": 0,
+ "health_benefits_in_net_income": true,
+ "health_parts": [
+  "d_medicaid_cost",
+  "d_msp_cost",
+  "d_chip",
+  "d_assigned_aca_ptc",
+  "d_assigned_ca_premium_subsidy",
+  "d_basic_health_program",
+  "d_co_omnisalud",
+  "d_assigned_co_premium_assistance",
+  "d_ct_covered_connecticut",
+  "d_ma_connector_care",
+  "d_md_premium_assistance",
+  "d_nj_njhps",
+  "d_assigned_nm_premium_assistance",
+  "d_or_healthier_oregon_cost",
+  "d_vt_premium_assistance",
+  "d_wa_cascade_care_savings",
+  "d_chip_premium",
+  "d_marketplace_net_premium"
+ ],
+ "person_variables": [
+  "aca_magi_fraction",
+  "assigned_aca_ptc"
+ ],
+ "workers": 48424419.80818404,
+ "people_total": 87643324.05287707,
+ "versions": {
+  "policyengine-us": "2.116.0",
+  "policyengine-core": "3.34.10"
+ },
+ "dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+ "code": {
+  "commit": "e86177b26373921325129eda682ce2777da18765",
+  "cliffs2017_sha256": "e791e670d5407372c89fb549580813d6d82254fa590dd8049f85963ab09d4e73",
+  "script_sha256": "ced7b6efa97310f825083505e95e5e945195ba1ef3c41beb1e0d77e206fe8b12"
+ },
+ "stored_input_renames": {
+  "would_claim_wic": "takes_up_wic_if_eligible"
+ },
+ "key": "raise_2000",
+ "change": {
+  "label": "+2,000",
+  "amount": 2000.0,
+  "share": 0.0,
+  "adults_reached": 56498381.41547878,
+  "workers_reached": 41938708.192174345,
+  "sample_adults_reached": 25594,
+  "without_health": {
+   "people_on_cliff": 135823.51694162775,
+   "workers_on_cliff": 112318.04886084289,
+   "households_with_person_on_cliff": 79846.92307572474,
+   "people_in_those_households": 376747.1637066206,
+   "sample_people_on_cliff": 129
+  },
+  "with_health": {
+   "people_on_cliff": 1078437.8317805566,
+   "workers_on_cliff": 921757.1272418627,
+   "households_with_person_on_cliff": 870852.16950803,
+   "people_in_those_households": 2870679.978455764,
+   "sample_people_on_cliff": 501
+  }
+ },
+ "reproduces_committed_part": null,
+ "reproduces": null,
+ "problems": [],
+ "per_person_file": "results/parts/per_person/changes_2025_p4_1_s0_raise_2000.csv.gz",
+ "seconds": 485.1
+}

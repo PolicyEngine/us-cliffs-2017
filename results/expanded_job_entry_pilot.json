@@ -1,0 +1,101 @@
+{
+  "status": "pilot_only_not_a_population_estimate",
+  "year": 2017,
+  "sample_households": 9,
+  "sample_people": 33,
+  "sample_candidates": 10,
+  "zero_change_max_resource_difference": 0.0,
+  "selection": "age 18-64; all three earnings zero; no full-time student or reported disability",
+  "candidate_limitations": "No direct full-time-job availability flag; early retirement is not observed. Reported disability exclusion is an explicit sensitivity choice.",
+  "job": "40 hours/week, 52 weeks; verified 2017 state basic wage; no new employer insurance",
+  "other_changes": "set unemployment compensation and weeks unemployed to zero; preserve other incomes and childcare costs",
+  "health": "same government-cost coverage valuation as historical experiment; ACA premium tax credit once",
+  "hourly_wages": {
+    "CO": 9.3,
+    "NC": 7.25,
+    "WA": 11.0
+  },
+  "wage_sources": {
+    "DOL": "https://www.dol.gov/agencies/whd/state/minimum-wage/history",
+    "DOL_beta": "https://beta.dol.gov/policy-regulations/pay-benefits/wages-hours/state-laws/minimum-wage/history",
+    "WA": "https://www.lni.wa.gov/workers-rights/wages/minimum-wage/history-of-washington-states-minimum-wage",
+    "CO": "https://leg.colorado.gov/sites/default/files/documents/2019A/bills/fn/2019a_hb1210_00.pdf",
+    "NC": "https://www.labor.nc.gov/communications/labor-ledger/2021-november-december-edition/open"
+  },
+  "counterfactuals": [
+    {
+      "rank": 1,
+      "sample_adults_tested": 9,
+      "max_earnings_identity_error": 0.0,
+      "max_untouched_household_resource_change": 0.0,
+      "wic_draw_changed": false,
+      "fresh_simulation_max_difference": 0.0,
+      "sample_min_resource_change": -15740.2265625,
+      "sample_max_resource_change": 16034.234375
+    },
+    {
+      "rank": 2,
+      "sample_adults_tested": 1,
+      "max_earnings_identity_error": 0.0,
+      "max_untouched_household_resource_change": 0.0,
+      "wic_draw_changed": false,
+      "fresh_simulation_max_difference": null,
+      "sample_min_resource_change": -10021.609375,
+      "sample_max_resource_change": -10021.609375
+    }
+  ],
+  "retention_checks": {
+    "keeps_less_than_0.6": {
+      "sample_adults": 3,
+      "sample_households": 2,
+      "sample_members": 10,
+      "microseries_mapping_verified": true
+    },
+    "keeps_less_than_0.5": {
+      "sample_adults": 2,
+      "sample_households": 1,
+      "sample_members": 6,
+      "microseries_mapping_verified": true
+    },
+    "keeps_less_than_0.2": {
+      "sample_adults": 2,
+      "sample_households": 1,
+      "sample_members": 6,
+      "microseries_mapping_verified": true
+    },
+    "keeps_less_than_0": {
+      "sample_adults": 2,
+      "sample_households": 1,
+      "sample_members": 6,
+      "microseries_mapping_verified": true
+    }
+  },
+  "provenance": {
+    "experiment": "frozen-historical-2017",
+    "versions": {
+      "policyengine-us": "2.116.0",
+      "policyengine-core": "3.34.10",
+      "microdf-python": "1.5.12",
+      "spm-calculator": "1.1.0",
+      "numpy": "2.5.4",
+      "pandas": "3.1.1",
+      "tables": "3.11.1",
+      "huggingface-hub": "2.4.0"
+    },
+    "policyengine_wrapper_installed": null,
+    "policyengine_wrapper_attempted": "6.17.2",
+    "managed_bundle": false,
+    "managed_loader_limitation": "policyengine 6.17.2 rejects the historical model 2.116.0 during country import, before allow_unmanaged can select a custom dataset",
+    "source_dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+    "population": "2024 microdata scaled to 2017 size, incomes and prices",
+    "policy": "2017 federal rules, model's 2018 Medicaid/CHIP limits, later state rules",
+    "aggregation": "MicroSeries methods; household weights mapped internally"
+  },
+  "strata": {
+    "CO": 3,
+    "NC": 3,
+    "WA": 3
+  },
+  "seconds": 75.97,
+  "script_sha256": "ef9f30a895400f9d8ae03c9fd21eb5932c0389d771aa2ad0aa63735754210e8c"
+}

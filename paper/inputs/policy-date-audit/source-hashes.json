@@ -1,0 +1,155 @@
+{
+  "completed_run_receipts": {
+    "compact_original_summary": {
+      "bytes": 256,
+      "sha256": "c0fdd5991e991b1a46e3e8560ce35f99b3b2c670728b10ccbfd1980e4c20c47a"
+    },
+    "complete_metadata_trace_omitted_from_package": {
+      "bytes": 2935502,
+      "sha256": "ffe0f6024919ab368b404d8a30196a4e41af359270c54755e6a9dfad074b0a47"
+    },
+    "executed_probe_before_portable_adaptation": {
+      "bytes": 4410,
+      "sha256": "678dc5fbc494229f3e63ec6d58eb408707213a13e200f02f9f9f9298476826c6"
+    }
+  },
+  "installed_core": {
+    "distribution": "policyengine-core",
+    "source_tree": {
+      "algorithm": "SHA256 of sorted UTF-8 relative-path + NUL + lowercase SHA256(file bytes) + LF, for every .py/.yaml/.yml file",
+      "files": 191,
+      "sha256": "766e62bbe2877095705f8db624b257b23b17ac82adaa51a6e77b2e826e76ee5c"
+    },
+    "version": "3.34.10"
+  },
+  "installed_model": {
+    "distribution": "policyengine-us",
+    "files": {
+      "parameters/gov/states/ca/hbex/premium_subsidy/in_effect.yaml": {
+        "bytes": 2316,
+        "sha256": "611a17aee5b844ac4f0cacca4b5e62744ffc3b5d9741e493103ad8e0001d8f0e"
+      },
+      "parameters/gov/states/co/doi/premium_assistance/in_effect.yaml": {
+        "bytes": 2570,
+        "sha256": "26b73dce401a0dcfade19f0cbb0cfb71f1bcd1829dd6e128e0d04fbe72d6cad4"
+      },
+      "parameters/gov/states/ga/decal/caps/income/smi_rate/initial_eligibility.yaml": {
+        "bytes": 665,
+        "sha256": "6a4eb7ecc6b86644c96f2808f26cac296a2436d9ed6f7ce0164ddb716b377e2f"
+      },
+      "parameters/gov/states/ri/tax/income/high_earner_tax/rate.yaml": {
+        "bytes": 501,
+        "sha256": "f53386ec37655ab97c578a3fb206616f7ecc7e641253eda4479c25f804009dfd"
+      },
+      "parameters/gov/states/ri/tax/income/high_earner_tax/threshold.yaml": {
+        "bytes": 663,
+        "sha256": "671c2c4e65faf190311c5908081fe1af1db6a3740e4340a4587ed9711debe7db"
+      },
+      "system.py": {
+        "bytes": 25342,
+        "sha256": "b7dc56247501e35dbdf84380d66fbab6d16579e39719dc9b6eed17fc109eccbf"
+      },
+      "tools/parameters.py": {
+        "bytes": 1229,
+        "sha256": "d39bb9f4d0a76d749dcf240afbb747a875bd0bf0d20a838be5b7ea2d5c0cbd53"
+      },
+      "variables/gov/states/ca/hbex/premium_subsidy/ca_premium_subsidy.py": {
+        "bytes": 2257,
+        "sha256": "ed4b8935008c326c1d44c8ea4e07d84b93dc6cd90d02cf59327f18ba770ca20e"
+      },
+      "variables/gov/states/ca/hbex/premium_subsidy/ca_premium_subsidy_eligible.py": {
+        "bytes": 4042,
+        "sha256": "14b705be9ec5a1235b18bbeb38b7fe382d2764fbb33340938211ded1adeddbc3"
+      },
+      "variables/gov/states/co/doi/premium_assistance/co_premium_assistance.py": {
+        "bytes": 3920,
+        "sha256": "84445a48ee7be011fc3a0470755a529423c058f84956bbff79eed94a22d55fd4"
+      },
+      "variables/gov/states/co/doi/premium_assistance/co_premium_assistance_eligible.py": {
+        "bytes": 2278,
+        "sha256": "5d81e2b7deea91954a621173e4d376f4a4daa1957673d3eb1d3036a9dfcdfbb8"
+      },
+      "variables/gov/states/ga/decal/caps/eligibility/ga_caps_eligible.py": {
+        "bytes": 761,
+        "sha256": "b0822236df428de33a2e80290b953371236cb58e41cc71d8170a9399172fe15f"
+      },
+      "variables/gov/states/ga/decal/caps/eligibility/ga_caps_income_eligible.py": {
+        "bytes": 997,
+        "sha256": "558c419ae381d90cf73f402dddb3858a9dc3124d493578e29a7f521dcc003c40"
+      },
+      "variables/gov/states/ga/decal/caps/ga_caps.py": {
+        "bytes": 2196,
+        "sha256": "08fa8a851e797e12d44374dbfa117ee4de1069400df49dc00b0d56e0dd48873e"
+      },
+      "variables/gov/states/ri/tax/income/ri_high_earner_tax.py": {
+        "bytes": 724,
+        "sha256": "31702ded1266ddd99b298ac59d4837b0deb54c82d50167e8d3589bceef2f5fc4"
+      },
+      "variables/gov/usda/snap/eligibility/work_requirements/has_snap_abawd_household_child.py": {
+        "bytes": 2409,
+        "sha256": "6f335587a30a782a3d4275b9cc5f45fbb8377831e1eaf19569f2796c51d49495"
+      },
+      "variables/gov/usda/snap/eligibility/work_requirements/is_snap_abawd_exempt.py": {
+        "bytes": 4906,
+        "sha256": "a3ab5e9cd77c943da2cdffd05d9d47c40224d3006d636970020459d36f996eb5"
+      }
+    },
+    "paths_relative_to": "policyengine_us",
+    "source_tree": {
+      "algorithm": "SHA256 of sorted UTF-8 relative-path + NUL + lowercase SHA256(file bytes) + LF, for every .py/.yaml/.yml file",
+      "files": 21417,
+      "sha256": "6c18e5ae73de8dcf4511fcefb49c2a438309f91fc3ae2de92b79d980d0c5b789"
+    },
+    "version": "2.116.0"
+  },
+  "portable_adapter": {
+    "bytes": 6229,
+    "changes": "Repository discovery and output argument replace machine-specific paths; exact model versions and public input hashes are checked; portable adapter model run not repeated.",
+    "file": "probe_2025.py",
+    "sha256": "41ac42d9f4647913f0cbcd07347d5d611ba947c0aad27a36dd375fb147eef501"
+  },
+  "repository": "https://github.com/PolicyEngine/us-cliffs-2017",
+  "repository_files": {
+    "cliffs2017/benefits.py": {
+      "bytes": 2465,
+      "sha256": "232a405c553292dbd680099a0e3e8a9e33f39815358b2b20420ff3183f23b6c1"
+    },
+    "cliffs2017/medicaid.py": {
+      "bytes": 14190,
+      "sha256": "3230a56856bbcee4b5c1ef4633e280a31281fbd7d52fe997772526a03520198d"
+    },
+    "cliffs2017/simulation.py": {
+      "bytes": 2764,
+      "sha256": "9f3e1c25ae395fef48bf1b1e2a1425e1f2edf2d01c4ed708866c21c9495658de"
+    },
+    "cliffs2017/wic_take_up.py": {
+      "bytes": 4869,
+      "sha256": "5a668bf5498b08c38e1e40604f5703aae9268ead521ba96eeb37751609d3e642"
+    },
+    "pyproject.toml": {
+      "bytes": 657,
+      "sha256": "5aab55d9450a8d8fb4f5b609997bcb4054d64528af3348605e744cff64a77fe7"
+    },
+    "requirements-expanded.txt": {
+      "bytes": 1798,
+      "sha256": "aac0e864c7b0f1dc639d13b3559d66adb2e1569b59d34d6ea3214d820c0a0a90"
+    },
+    "results/medicaid/totals_2025_p4_s0.json": {
+      "bytes": 23605,
+      "sha256": "a4ffd77bec582f1f3ab11032b1fab419878c37fbdf89a10314a65dbfa65b787d"
+    },
+    "results/parameters_read_2017.csv": {
+      "bytes": 785196,
+      "sha256": "2742f2e9b170ed6c445cdb9b97d7f97c20e59630cba35cf6410960d25824853b"
+    },
+    "scripts/audit_parameters.py": {
+      "bytes": 9870,
+      "sha256": "7ee084859237d8b989fdbcc02d91ffde676999ac6d65903ef08c81c3d2594560"
+    },
+    "scripts/summarize_parameters.py": {
+      "bytes": 2619,
+      "sha256": "368b2f19f77248fe5190f1a7bc25a29890be0f5d98ffdda0400d9ed0082fa9b6"
+    }
+  },
+  "source_commit": "5bd133e41376cc5c04c7ea276ca5b708226ceefe"
+}

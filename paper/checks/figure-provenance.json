@@ -1,0 +1,28 @@
+{
+  "renderer": "Matplotlib",
+  "source": "Model-calculated hypothetical points and verified aggregate snapshots",
+  "files": {
+    "health-valuation-exposure.png": "40169a527f4f53941f5596f7e505befcf2fb715df68445a18590be59683d0aa7",
+    "health-valuation-exposure.svg": "de1d2f01b0f671000c29697ad0cb928369500e64e6d9ffc374c84d2d3cea8f50",
+    "household-aca-hybrid-2017.png": "9c100fda97c87057f0391a9d3c750f41996390f8aaded4e386a9ddf2e9004378",
+    "household-aca-hybrid-2017.svg": "0d4f0cd5c90e0d79236faa8c2455e25223f80567633621fcea4d83a199ac2d2e",
+    "household-endpoints-2025.png": "c1924b028ebc6bca294a6cd8d9a05c93ed76ca23d5db8f901c9852bdb466934a",
+    "household-endpoints-2025.svg": "ca7dfdfe7f4accef4c5b1f0cfb0e897ec85efe499463da2f88313df31930053b",
+    "household-parent-2025.png": "59780ff1d75f3bc2afed903c94ae99f5e3b232bfcd055540241f1daa842b5f30",
+    "household-parent-2025.svg": "9c57c85e322d7a18d27b77e5d45b0f1737b251d47d9a63f36c4f1b03fe5ad981",
+    "household-single-2025.png": "3b4ba93564c62cfe64acae5542d4acaad3401f02f7a96e3caa0bc36dd2a6e820",
+    "household-single-2025.svg": "4466ae724eb1627906d61ab494d7a1402ca074c75f38de72a60683096b3368ea",
+    "increment-exposure.png": "4ac8fdc26db75638cba88fb08254be16cce90d69dcbf352419bf7d0aaa9c46bd",
+    "increment-exposure.svg": "8ec446b41889f02a82022bbec111547de35d43f19c0fadeefebd30460de3bfba"
+  },
+  "figure_source_sha256": "723c51ecfc0f7474b09c6614c150dd58a57f5b1e385875637c34b5506c92af07",
+  "household_source_sha256": "c7a48d7a4efc6d25b882fbb8cecac2b14c5edbdb7d876da611951b6083f66363",
+  "input_sources": {
+    "household-curves/paper_household_curves.json": "c7a48d7a4efc6d25b882fbb8cecac2b14c5edbdb7d876da611951b6083f66363",
+    "results/earnings_changes.json": "418e905e6c1f95f1dead65ba2e0b2aab1b71ce9696ec9b52a05d7eff141d7551",
+    "robustness/ijm_saved_robustness.json": "12464cf7a9b59c3286ddbecfe37be2b97222bae5098b803dedc8e88faab2e198"
+  },
+  "primary_year": 2025,
+  "historical_hybrid": "Appendix only",
+  "curve_points": "All axis and merged scalar points were evaluated; straight connections are visual guides, not additional model runs"
+}
