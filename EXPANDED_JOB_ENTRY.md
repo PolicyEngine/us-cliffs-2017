@@ -264,6 +264,15 @@ The plans (`results/job_entry/plan/`) count in-scope sample candidates by rank:
 part 0 has ranks 1–5, part 1 ranks 1–5, part 2 ranks 1–8 and part 3 ranks 1–4,
 22 containers in all.
 
+The `resolved` run tested 12,772 sample candidates in 49 jurisdictions, every
+in-scope candidate once, and deferred 838 in Maryland and New York. All 22
+records validate against their rows and plans, and every check passed: zero
+change and untouched households exactly $0, entrants' earnings within $0.0009
+of the rate times 2,080, no other earnings or WIC draw changed, the parts summed
+to net income within $0.25 and the resource measure matched its decomposition
+within $0.05. Containers took 5.5 to 11 minutes, with a peak of 6.3 GiB. The
+records and rows stay out of git; they are the input to the union step.
+
 ```sh
 MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --check-only
 MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --smoke
