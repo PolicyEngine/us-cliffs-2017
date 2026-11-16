@@ -1,0 +1,10 @@
+Source: Maine Department of Labor news release, "Free Labor Posters Including the New Maine 2017 Minimum Wage Poster", 6 January 2017
+URL: https://www.maine.gov/labor/Templates/news_template.shtml?id=727132
+Accessed: 2026-11-16 (HTTP GET with curl; HTML tags stripped; excerpt)
+Used for: corroboration that the 2017 minimum-wage poster ($9 per hour) had to be displayed as of 7 January 2017.
+
+Free Labor Posters Including the New Maine 2017 Minimum Wage Poster
+January 6, 2017
+Minimum Wage for overtime-eligible employees: $9 per hour. These employees can be paid by several different methods, including by salary. See the guidance here http://www.maine.gov/labor/labor_laws/overtime.html regarding different pay methods allowed under state and federal law. Employers have the right to allow or deny overtime, but if overtime is worked, it must be paid at 1.5 times the regular rate of pay. Compensatory or ?comp? time cannot be used by private-sector employers, although private-sector employers can allow employees to flex their time within the work week (but not the pay period if the pay period is longer than a seven day cycle).
+Posters: Employers are required to display certain posters in the workplace where workers can see them. The new 2017 Maine Minimum Wage poster, along with the federal minimum wage poster, must be displayed as of January 7, 2017. Employers must display these posters regardless of whether they employ any overtime-eligible employees.
+The latest Employer Update from the Maine Department of Labor provides additional information on the new Minimum Wage, Marijuana Legalization and the Workplace, Training help through Maine-at-Work and more: https://content.govdelivery.com/accounts/MEDOL/bulletins/1767eb5 .

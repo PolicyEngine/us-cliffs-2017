@@ -1,0 +1,11 @@
+Source: Maryland General Assembly, Senate Bill 280 (2019 Session), first reader, introduced 28 January 2019
+URL: https://mgaleg.maryland.gov/2019RS/bills/sb/sb0280f.pdf
+Accessed: 2026-11-16 (HTTP GET with curl; text extracted with pdftotext -layout)
+Used for: corroboration that § 3-413(c) as codified before the 2019 amendment still read $8.75 from 1 July 2016 and $9.25 from 1 July 2017. Bracketed matter is existing law the bill would delete; capitals are matter it would add.
+
+20           (c)    (1)    The State minimum wage rate is:
+21                  [(1)   for the 6–month period beginning January 1, 2015, $8.00 per hour;
+22                  (2)    for the 12–month period beginning July 1, 2015, $8.25 per hour;
+23                  (3)    for the 12–month period beginning July 1, 2016, $8.75 per hour;]
+24                  [(4)] (I)     for the 12–month period beginning July 1, 2017, $9.25 per hour;
+25   [and]

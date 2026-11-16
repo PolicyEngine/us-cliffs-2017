@@ -1,0 +1,18 @@
+Source: Maryland Department of Legislative Services, Fiscal and Policy Note, House Bill 317 (2017 Session), First Reader
+URL: https://mgaleg.maryland.gov/2017RS/fnotes/bil_0007/hb0317.pdf
+Accessed: 2026-11-16 (HTTP GET with curl; text extracted with pdftotext -layout)
+Used for: corroboration, written during the 2017 session, that the State rate was $8.75 and was scheduled under Chapter 262 of 2014 to reach $9.25 on 1 July 2017.
+
+HB 317
+Department of Legislative Services
+Maryland General Assembly
+2017 Session
+
+Maryland Wage and Hour Law
+The Maryland Wage and Hour Law is the State complement to the federal Fair Labor
+Standards Act (FLSA) of 1938. State law sets minimum wage standards to provide a
+maintenance level consistent with the needs of the population. State law specifies that an
+employee must be paid the greater of the federal minimum wage (which is currently $7.25
+per hour) or $8.75 per hour. Under Chapter 262 of 2014, the State minimum wage is
+scheduled to increase on an incremental basis over the next two years to $9.25 per hour as
+of July 1, 2017, and $10.10 per hour as of July 1, 2018.

@@ -67,15 +67,11 @@ NO_HEALTH_OFFER = frozenset({"NV"})
 # ("Corrections and choices", "Readiness" item 5) and metadata.unresolved list
 # them. Each needs dated rates covering every day of 2017.
 WITHIN_YEAR = frozenset({"DC", "MD", "ME", "NY", "OR"})
-# wages.json marks Maine unverified because the codified statute says 1 January
-# while the contemporaneous Maine DOL release, its 2017 poster packet and DOL's
-# dated table say 7 January. The brief names Maine as a mid-year change to
-# weight by time, so its dated path (7 January) is used; the statute's date
-# would give $9.00, $0.0247 an hour or $51 a year more.
-ACCEPTED_UNVERIFIED = {
-    "ME": "dated path with the 7 January effective date (Maine DOL release, 2017 "
-    "poster packet, DOL dated table); the codified 1 January date gives $9.00"
-}
+# Unverified entries accepted anyway, with the reason; none at present. Maine was
+# accepted here until wages.json resolved its date: the codified text says $9.00
+# "starting January 1, 2017", but the initiated act (IB 2015, c. 2) took effect
+# 7 January 2017, so wages.json now marks Maine's dated path verified.
+ACCEPTED_UNVERIFIED: dict[str, str] = {}
 TIER_KEYS = ("employer_size", "employer_gross_annual_sales", "employer_health_offer", "industry")
 
 

@@ -105,19 +105,21 @@ table also checks that each jurisdiction's selected 1 January rate equals its
 recorded `amount` and `reference_hourly`, and stops on any contradiction, gap or
 overlap.
 
-Maine is marked unverified in wages.json: its codified statute dates the $9.00
-rate from 1 January 2017, while the Maine DOL release, its 2017 poster packet and
-DOL's dated table make it effective 7 January. The time-weighted rate follows the
-dated path, with six days at $7.50. Using the statute's date instead would pay
-$9.00, or $51.29 more a year.
+Maine's $9.00 rate took effect on 7 January 2017. The codified text of 26 MRSA
+§664(1) says "starting January 1, 2017", but the initiated act that enacted it
+(IB 2015, c. 2) is printed in the Laws of Maine as effective 7 January 2017, and
+the Maine DOL's 15 December 2016 release gives the same date, 30 days after the
+Governor certified the referendum. The time-weighted rate therefore has six days
+at $7.50. The codified date would have paid $9.00, or $51.29 more a year.
 
-**Two jurisdictions are unresolved and receive no rate.** wages.json records only
-Maryland's 1 January rate, $8.75, and evidence.md notes that Maryland's rate
-changed within 2017; the later rate is absent. New York's rest-of-state rate,
-$9.70, is recorded through 30 December 2017; the rate from 31 December is absent.
-Each needs a sourced rate added to wages.json before its candidates run. Until
-then the national run tests every other jurisdiction and counts Maryland and New
-York candidates as deferred.
+Maryland and New York were unresolved in the first national run, because
+wages.json lacked one dated rate for each. On 16 November 2026 wages.json gained
+Maryland's $9.25 from 1 July 2017 (2014 Laws of Maryland, ch. 262, enacting Lab.
+& Empl. §3-413(c)) and New York's rest-of-state $10.40 from 31 December 2017 (NY
+DOL minimum-wage history). evidence.md gives each source and access date, and
+`research/minimum-wages-2017/sources/` holds the relevant text. The first run
+tested the other 49 jurisdictions and counted Maryland and New York candidates as
+deferred; the `states:MD,NY` scope tests them (see National run).
 
 | Jurisdiction | Hourly rate | Gross pay | Convention |
 |---|---:|---:|---|
@@ -141,7 +143,7 @@ York candidates as deferred.
 | Kentucky | $7.25 | $15,080.00 | statewide |
 | Louisiana | $7.25 | $15,080.00 | federal floor; no state rate |
 | Maine | $8.9753 | $18,668.71 | by day: $7.50 for 6 days, $9.00 for 359 |
-| Maryland | unresolved | unresolved | 1 July 2017 rate absent from wages.json |
+| Maryland | $9.0021 | $18,724.27 | by day: $8.75 for 181 days, $9.25 for 184 |
 | Massachusetts | $11.00 | $22,880.00 | statewide |
 | Michigan | $8.90 | $18,512.00 | large-employer rate |
 | Minnesota | $9.50 | $19,760.00 | large-employer rate |
@@ -153,7 +155,7 @@ York candidates as deferred.
 | New Hampshire | $7.25 | $15,080.00 | statewide |
 | New Jersey | $8.44 | $17,555.20 | statewide |
 | New Mexico | $7.50 | $15,600.00 | statewide |
-| New York | unresolved | unresolved | 31 December 2017 rate absent from wages.json |
+| New York | $9.7019 | $20,179.99 | rest of state, by day: $9.70 for 364 days, $10.40 for 1 |
 | North Carolina | $7.25 | $15,080.00 | statewide |
 | North Dakota | $7.25 | $15,080.00 | statewide |
 | Ohio | $8.15 | $16,952.00 | large-employer rate |

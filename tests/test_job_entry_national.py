@@ -47,11 +47,22 @@ LARGE_EMPLOYER = {
     "OH": 8.15, "VT": 10.00, "WV": 8.75,
 }
 # Days in 2017: 1 Jan-30 Jun is 181, 1 Jul-31 Dec is 184; Maine's 7 January start
-# leaves 6 days at $7.50 and 359 at $9.00.
+# leaves 6 days at $7.50 and 359 at $9.00; New York's rest-of-state rate changes on
+# 31 December, leaving 364 days at $9.70 and 1 at $10.40.
 WITHIN_YEAR = {
     "DC": (Fraction("11.50") * 181 + Fraction("12.50") * 184) / 365,
-    "OR": (Fraction("9.75") * 181 + Fraction("10.25") * 184) / 365,
+    "MD": (Fraction("8.75") * 181 + Fraction("9.25") * 184) / 365,
     "ME": (Fraction("7.50") * 6 + Fraction("9.00") * 359) / 365,
+    "NY": (Fraction("9.70") * 364 + Fraction("10.40") * 1) / 365,
+    "OR": (Fraction("9.75") * 181 + Fraction("10.25") * 184) / 365,
+}
+# Each dated path as (from, to, hourly, days), from the sourced effective dates:
+# Maryland 1 July 2017 (Ch. 262 of 2014), Maine 7 January 2017 (IB 2015, c. 2),
+# New York 31 December 2017 (NY DOL history).
+PATHS = {
+    "MD": [("2017-01-01", "2017-06-30", 8.75, 181), ("2017-07-01", "2017-12-31", 9.25, 184)],
+    "ME": [("2017-01-01", "2017-01-06", 7.50, 6), ("2017-01-07", "2017-12-31", 9.00, 359)],
+    "NY": [("2017-01-01", "2017-12-30", 9.70, 364), ("2017-12-31", "2017-12-31", 10.40, 1)],
 }
 
 
@@ -65,13 +76,25 @@ def wages():
     return copy.deepcopy(load_wages()[0]["states"])
 
 
-def test_every_jurisdiction_has_a_rate_or_a_reason(table):
-    assert set(table["unresolved"]) == {"MD", "NY"}
-    assert "later rate is absent" in table["unresolved"]["MD"]
-    assert "2017-12-31" in table["unresolved"]["NY"]
-    assert len(table["rates"]) + len(table["unresolved"]) == 51
+def test_every_jurisdiction_has_a_rate(table):
+    assert table["unresolved"] == {}
+    assert len(table["rates"]) == 51
+    assert require_complete(table) == table["rates"]
+
+
+def test_a_missing_later_rate_leaves_the_state_unresolved():
+    data = copy.deepcopy(load_wages()[0])
+    data["states"]["MD"]["variants"] = []
+    data["states"]["NY"]["variants"] = [
+        v for v in data["states"]["NY"]["variants"] if v.get("starts") != "2017-12-31"
+    ]
+    stripped = national_wage_table(data, "stripped")
+    assert set(stripped["unresolved"]) == {"MD", "NY"}
+    assert "later rate is absent" in stripped["unresolved"]["MD"]
+    assert "2017-12-31" in stripped["unresolved"]["NY"]
+    assert len(stripped["rates"]) == 49
     with pytest.raises(UnresolvedWage, match="MD"):
-        require_complete(table)
+        require_complete(stripped)
 
 
 def test_flat_and_large_employer_rates(table):
@@ -89,9 +112,21 @@ def test_within_year_rates_are_weighted_by_day(table):
         assert sum(piece["days"] for piece in row["path"]) == 365
         assert row["gross_pay"] == float(exact * 2080)
     assert table["rows"]["OR"]["rule"].startswith("standard region (standard)")
-    assert table["rows"]["ME"]["accepted_unverified"]
-    # The codified 1 January date would give $9.00 instead.
+    assert table["rows"]["NY"]["rule"].startswith("standard region (rest of state)")
+    assert table["rows"]["MD"]["rule"].startswith("statewide")
+    for code, path in PATHS.items():
+        got = [(p["from"], p["to"], p["hourly"], p["days"]) for p in table["rows"][code]["path"]]
+        assert got == path, code
+        assert table["rows"][code]["accepted_unverified"] is None, code
+    assert table["rows"]["MD"]["hourly"] == pytest.approx(9.00205, abs=5e-6)
+    assert table["rows"]["NY"]["hourly"] == pytest.approx(9.70192, abs=5e-6)
+    # The codified "starting January 1, 2017" text would give Maine $9.00 instead.
     assert 9.00 * 2080 - table["rows"]["ME"]["gross_pay"] == pytest.approx(51.29, abs=0.01)
+
+
+def test_maine_needs_its_verified_flag(wages):
+    with pytest.raises(UnresolvedWage, match="unverified"):
+        jurisdiction_rate("ME", dict(wages["ME"], verified=False))
 
 
 def test_gross_pay_and_pilot_agreement(table):

@@ -11,9 +11,11 @@
     "date_convention": "Freeze reference hourly wage at Jan 1,2017 for a clearly labeled annualized scenario; this is not a month-by-month2017 wage path. MEdate conflict flagged.",
     "amount_semantics": "source-verified general headline rate under stated coverage category; may require employer/region selection. Never fill null reference_hourly implicitly.",
     "verified_semantics": "amount supported by opened government source for stated generalcategory, not verification of all local/industry exceptions; ME unresolvedfalse.",
+    "updates": [
+      "2026-11-16: added Maryland's 1 July 2017 rate (9.25) and New York's rest-of-state 31 December 2017 rate (10.40) as dated variants, and resolved Maine's effective date as 7 January 2017 from the session law (ME now verified). Sources and access dates in evidence.md; excerpts in sources/."
+    ],
     "national_run_ready": false,
     "unresolved": [
-      "MEJan1vsJan7effective-date convention",
       "NYwork region/employer size/industry",
       "ORregion and PortlandUGB mapping",
       "employer size/coverage convention inCA,MN,MT,OH,AR,IL,NE,MI,VT,WV",
@@ -425,12 +427,13 @@
       "source_url": "https://www.maine.gov/labor/Templates/news_template.shtml?id=727132",
       "corroborating_source_url": "https://files.hawaii.gov/dbedt/economic/databook/db2016/section12.pdf",
       "locator": "2014\u20132019 table, 2017 column; Hawaii Table12.43, PDF pages57\u201358",
-      "verified": false,
-      "verification_level": "historical agency implementation-date evidence; codified-date conflict unresolved",
+      "verified": true,
+      "verification_level": "session law effective date (Laws of Maine, IB 2015, c. 2) and contemporaneous Maine DOL releases",
       "raw_dol_2017": "9.00",
       "notes": [
         "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
-        "StrictJan 1 reference is7.50; contemporaneous agency material and DOLdatedtable make9.00 effectiveJan 7. Current codified text saysJan 1, so legal-date conflict needs explicit decision/confirmation before a national Jan 1run."
+        "StrictJan 1 reference is7.50; contemporaneous agency material and DOLdatedtable make9.00 effectiveJan 7. Current codified text saysJan 1, so legal-date conflict needs explicit decision/confirmation before a national Jan 1run.",
+        "Resolved 2026-11-16: the initiated act that enacted the 9.00 rate, IB 2015, c. 2 (I.B. 4, L.D. 1661), is printed in the Laws of Maine with 'Effective January 7, 2017.' Its amended text of 26 MRSA §664(1) says 'Starting January 1, 2017', but the act could not operate before it took effect. The Maine DOL release of 15 December 2016 gives 'Effective date: Jan. 7, 2017 (30 days after the Governor has certified the election results).' Both accessed 2026-11-16. The 2017 path is 7.50 for 6 days and 9.00 for 359 days."
       ],
       "variants": [
         {
@@ -445,7 +448,14 @@
           "region": "statewide",
           "starts": "2017-01-07",
           "ends": "2017-12-31",
-          "source_url": "https://www.maine.gov/labor/Templates/news_template.shtml?id=727132"
+          "source_url": "https://www.maine.gov/labor/Templates/news_template.shtml?id=727132",
+          "effective_date_source_urls": [
+            "http://lldc.mainelegislature.org/Open/Laws/2015/2015_IB_c002.pdf",
+            "https://www.maine.gov/labor/Templates/news_template.shtml?id=723943"
+          ],
+          "locator": "IB 2015, c. 2, Laws of Maine page 947: 'Effective January 7, 2017.'; Maine DOL release 15 December 2016: 'Effective date: Jan. 7, 2017'",
+          "accessed": "2026-11-16",
+          "source_text": "sources/me-2015-initiated-bill-chapter-2.txt"
         }
       ],
       "requires_scenario_selection": true
@@ -464,9 +474,35 @@
       "verification_level": "primary-table-value corroborated by contemporaneous government republication",
       "raw_dol_2017": "8.75",
       "notes": [
-        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions."
+        "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
+        "Added 2026-11-16: Md. Code, Lab. & Empl. §3-413(c) as enacted by 2014 Laws of Maryland ch. 262 (HB 295) sets 8.75 for the 12-month period beginning 1 July 2016 and 9.25 for the 12-month period beginning 1 July 2017 (accessed 2026-11-16). Corroborated by the DLS 2017 fiscal note on HB 317 and by the existing-law text in 2019 SB 280. The 2017 path is 8.75 for 181 days and 9.25 for 184 days."
       ],
-      "variants": []
+      "variants": [
+        {
+          "hourly": 8.75,
+          "region": "statewide",
+          "starts": "2016-07-01",
+          "ends": "2017-06-30",
+          "source_url": "https://mgaleg.maryland.gov/2014RS/Chapters_noln/CH_262_hb0295e.pdf",
+          "locator": "Ch. 262 of 2014, page 5, §3-413(c)(3): for the 12-month period beginning July 1, 2016, $8.75 per hour",
+          "accessed": "2026-11-16",
+          "source_text": "sources/md-2014-chapter-262-hb295.txt"
+        },
+        {
+          "hourly": 9.25,
+          "region": "statewide",
+          "starts": "2017-07-01",
+          "ends": "2018-06-30",
+          "source_url": "https://mgaleg.maryland.gov/2014RS/Chapters_noln/CH_262_hb0295e.pdf",
+          "locator": "Ch. 262 of 2014, page 5, §3-413(c)(4): for the 12-month period beginning July 1, 2017, $9.25 per hour",
+          "accessed": "2026-11-16",
+          "source_text": "sources/md-2014-chapter-262-hb295.txt",
+          "corroborating_source_urls": [
+            "https://mgaleg.maryland.gov/2017RS/fnotes/bil_0007/hb0317.pdf",
+            "https://mgaleg.maryland.gov/2019RS/bills/sb/sb0280f.pdf"
+          ]
+        }
+      ]
     },
     "MA": {
       "state": "MA",
@@ -780,7 +816,8 @@
       "raw_dol_2017": "9.70",
       "notes": [
         "General adult non-tipped state-law rate, with federal 7.25 floor for FLSA-covered employment; excludes local/industry/youth/training exceptions.",
-        "Amount is rest-of-state general rate, not a statewide rate compliant in every region. Employer size and work location determine actual rate. Fast-food rates shown as additional industry variants."
+        "Amount is rest-of-state general rate, not a statewide rate compliant in every region. Employer size and work location determine actual rate. Fast-food rates shown as additional industry variants.",
+        "Added 2026-11-16: the rest-of-state rate rose to 10.40 on 31 December 2017 (NY DOL history page, accessed 2026-11-16), so the 2017 rest-of-state path is 9.70 for 364 days and 10.40 for 1 day. The other regions' and fast-food 31 December 2017 rates are not recorded; the job uses the rest-of-state rate."
       ],
       "variants": [
         {
@@ -812,6 +849,16 @@
           "starts": "2017-01-01",
           "ends": "2017-12-30",
           "source_url": "https://dol.ny.gov/history-minimum-wage-new-york-state"
+        },
+        {
+          "hourly": 10.4,
+          "region": "rest of state",
+          "starts": "2017-12-31",
+          "ends": "2018-12-30",
+          "source_url": "https://dol.ny.gov/history-minimum-wage-new-york-state",
+          "locator": "Basic Minimum Hourly Rates, Remainder of state: $10.40 per hour on and after December 31, 2017",
+          "accessed": "2026-11-16",
+          "source_text": "sources/ny-dol-minimum-wage-history.txt"
         },
         {
           "hourly": 12.0,
