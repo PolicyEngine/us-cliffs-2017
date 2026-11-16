@@ -245,10 +245,14 @@ memory, wage rates and code hashes. Only a complete, validated pair is published
 to the volume or installed locally, never over an existing file; a relaunch
 skips every rank already written.
 
-Under the wage scope `resolved`, Maryland and New York candidates are counted as
-deferred by state. Once wages.json carries their rates, `--scope states:MD,NY`
-tests only them, with the same per-rank files under its own scope name. A
-complete job-entry union needs both scopes, and every candidate in exactly one.
+Under the wage scope `resolved`, Maryland and New York candidates were counted as
+deferred by state, because wages.json then lacked their rates. With the rates
+added, `--scope states:MD,NY` tests only them, with the same per-rank files under
+its own scope name. A complete job-entry union needs both scopes, and every
+candidate in exactly one. Now that wages.json resolves all 51 jurisdictions, a
+fresh `resolved` run would cover Maryland and New York too, so the union reads
+the existing `resolved` records with the `states-MD-NY` records rather than
+rerunning `resolved`.
 
 The smoke run (`results/job_entry/parts/smoke_job_entry_2017_p4_0_s0_h150_seed17/`)
 tested rank 1 in a fixed 150-household subsample of part 0, seed 17: one
@@ -275,19 +279,33 @@ to net income within $0.25 and the resource measure matched its decomposition
 within $0.05. Containers took 5.5 to 11 minutes, with a peak of 6.3 GiB. The
 records and rows stay out of git; they are the input to the union step.
 
+The `states:MD,NY` run (commit aa3309b) tested the 838 deferred candidates,
+265 in Maryland and 573 in New York, in 15 containers: part 0 ranks 1–4, part 1
+ranks 1–3, part 2 ranks 1–4 and part 3 ranks 1–4. In each part its plan counts
+exactly the candidates the `resolved` plan deferred, and its rows share no
+person with that part's `resolved` rows; together the two scopes cover every
+candidate of each part once. All 15 records validate against their rows and
+plans, and every check passed: zero change and untouched households exactly $0,
+entrants' earnings within $0.0008 of the rate times 2,080 ($9.0021 in Maryland,
+$9.7019 in New York), no other earnings or WIC draw changed, the parts summed to
+net income within $0.10 and the resource measure matched its decomposition within
+$0.02. Containers took 5.5 to 10 minutes, with a peak of 6.3 GiB. These records
+carry the new wages.json hash; the other 49 jurisdictions' rates are identical
+to those the `resolved` records used.
+
 ```sh
 MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --check-only
 MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --smoke
-MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --plan-only
-MODAL_PROFILE=policyengine modal run --detach scripts/modal_job_entry.py
+MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --plan-only [--scope states:MD,NY]
+MODAL_PROFILE=policyengine modal run --detach scripts/modal_job_entry.py [--scope states:MD,NY]
 MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --fetch
 ```
 
 ## Remaining work
 
-Add sourced Maryland and New York rates to wages.json and run their scope; write
-the job-entry union step over the per-rank rows, checking that every candidate
-appears exactly once across ranks and scopes; review the observable availability
+Write the job-entry union step over the per-rank rows of both scopes, checking
+that every candidate appears exactly once across ranks and scopes; review the
+observable availability
 restrictions; compare job-entry resource components with the main raise
 experiment; and validate the main strict-cliff group and the additional
 high-loss group under the same union. Uncertainty must resample source
