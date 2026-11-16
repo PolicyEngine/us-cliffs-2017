@@ -797,18 +797,35 @@ def bootstrap_parts(records: list[dict], npz_list: list[bytes], draws: int = DRA
 # Combine
 
 
+def add_in_order(values) -> float:
+    """Plain left-to-right float addition over the parts in part order.
+
+    The raise union added numpy scalars, which Python's sum() adds one by one.
+    Since Python 3.12, sum() of exact floats (here, values read back from JSON)
+    compensates rounding instead, which can move a total by one unit in the last
+    place; this keeps the raise union's arithmetic so its totals reproduce exactly.
+    """
+    total = 0.0
+    for value in values:
+        total = total + float(value)
+    return total
+
+
 def add_part_metrics(records: list[dict]) -> dict:
+    records = sorted(records, key=lambda r: r["part"])
     keys = {label: set(fields) for label, fields in records[0]["metrics"].items()}
     for record in records[1:]:
         if {label: set(fields) for label, fields in record["metrics"].items()} != keys:
             raise ValueError("parts have inconsistent metric keys")
-    return {label: {f: sum(r["metrics"][label][f] for r in records) for f in sorted(fields)}
+    return {label: {f: add_in_order(r["metrics"][label][f] for r in records) for f in sorted(fields)}
             for label, fields in sorted(keys.items())}
 
 
 def add_nested(records: list[dict], key: str) -> dict:
+    records = sorted(records, key=lambda r: r["part"])
     first = records[0][key]
-    return {name: {f: sum(r[key][name][f] for r in records) for f in fields} for name, fields in first.items()}
+    return {name: {f: add_in_order(r[key][name][f] for r in records) for f in fields}
+            for name, fields in first.items()}
 
 
 def with_interval(boot: dict, label: str, fields=FIELDS) -> dict:
@@ -943,7 +960,8 @@ def combine(digest: str, draws: int, seed: int, out: Path) -> dict:
         },
         "scope": "Finite grid of raises and one job offer per eligible adult; no claim about other raise sizes, "
                  "untested adults, additional childcare costs or new employer coverage.",
-        "coverage": {k: coverage[k] for k in ("scopes_included", "scopes_excluded", "jurisdictions_covered",
+        "coverage": {k: coverage[k] for k in ("scopes_selected", "scopes_included", "scopes_excluded",
+                                              "jurisdictions_covered",
                                               "jurisdictions_deferred", "sample_candidates_tested",
                                               "sample_candidates_deferred", "wages_json_sha256_by_scope")},
         "headline": headline(totals, boot, sample),

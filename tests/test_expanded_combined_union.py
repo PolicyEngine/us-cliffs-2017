@@ -34,6 +34,8 @@ from scripts.expanded_combined_union import (
     STRICT,
     THRESHOLDS,
     PartCounter,
+    add_in_order,
+    add_part_metrics,
     bootstrap_parts,
     check_count_invariants,
     check_set_invariants,
@@ -572,3 +574,24 @@ def test_part_pairs_install_once_and_never_overwrite(tmp_path):
         ci.validate_part_pair(json.dumps(failing).encode(), npz)
     with pytest.raises(ValueError, match="SHA-256"):
         ci.validate_part_pair(data, npz + b"0")
+
+
+def test_parts_add_left_to_right_as_the_raise_union_did():
+    """Python 3.12+ sum() compensates exact floats; the raise union added numpy scalars plainly."""
+    values = [6045189.590398442 / 4 + d for d in (0.1, 0.2, 0.3, 0.4)]
+    plain = ((values[0] + values[1]) + values[2]) + values[3]
+    assert add_in_order(values) == plain == sum(np.float64(v) for v in values)
+    committed = json.loads((Path(__file__).resolve().parents[1] / ci.RAISE_UNION_JSON).read_text())
+    records = [{"part": p["part"], "metrics": p["metrics"]} for p in reversed(committed["parts"])]
+    assert add_part_metrics(records) == {k: dict(sorted(v.items())) for k, v in sorted(committed["metrics"].items())}
+
+
+def test_scope_selection_leaves_unselected_scopes_deferred(tmp_path):
+    resolved = [{"AA": 2, "BB": 1}, {"AA": 1}, {"BB": 2}, {"AA": 1, "BB": 1}]
+    md = [{"MD": 1}, {}, {"MD": 2}, {"MD": 1}]
+    write_scope(tmp_path, "resolved", resolved, md)
+    write_scope(tmp_path, "states-MD", md, resolved)
+    coverage, _ = ci.job_coverage(tmp_path, ["resolved"])
+    assert coverage["scopes_excluded"] == {"states-MD": "states-MD: not selected for this run"}
+    assert coverage["jurisdictions_deferred"] == {"MD": 4}
+    assert ci.job_coverage(tmp_path)[0]["jurisdictions_deferred"] == {}

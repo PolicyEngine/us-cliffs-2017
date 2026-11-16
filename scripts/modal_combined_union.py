@@ -17,7 +17,7 @@ validated pairs from the volume and returns only intervals.
 
 usage (paths to checkouts that hold the git-ignored inputs):
   modal run scripts/modal_combined_union.py --job-root PATH --raise-rows-root PATH [--dry-run]
-      [--parts 0,1,2,3] [--draws 5000] [--seed 0]
+      [--parts 0,1,2,3] [--draws 5000] [--seed 0] [--scopes resolved]   # default: every complete scope
   then: python scripts/expanded_combined_union.py combine --digest DIGEST
 """
 
@@ -167,7 +167,7 @@ def _fetch_pair(json_rel: str, part: int, digest: str, log) -> None:
 
 @app.local_entrypoint()
 def main(job_root: str = "", raise_rows_root: str = "", parts: str = "0,1,2,3", draws: int = 5000,
-         seed: int = 0, dry_run: bool = False):
+         seed: int = 0, scopes: str = "", dry_run: bool = False):
     inputs = _inputs()
     from scripts.job_entry_outputs import install_bytes
 
@@ -183,7 +183,8 @@ def main(job_root: str = "", raise_rows_root: str = "", parts: str = "0,1,2,3", 
             handle.write(line + "\n")
 
     code = inputs.code_record(ROOT)
-    manifest, files = inputs.build_manifest(ROOT, Path(job_root), Path(raise_rows_root), code)
+    selected = [s.strip() for s in scopes.split(",") if s.strip()] or None
+    manifest, files = inputs.build_manifest(ROOT, Path(job_root), Path(raise_rows_root), code, selected)
     digest = manifest["digest"]
     coverage = manifest["coverage"]
     log(f"manifest {inputs.tag(digest)}: commit {code['commit'][:7]}, {len(manifest['inputs'])} inputs, "

@@ -211,8 +211,12 @@ def complete_scope(job_root: Path, tag: str) -> dict:
     return {"parts": parts, "rates": rates, "wages_json_sha256": wages.pop()}
 
 
-def job_coverage(job_root: Path) -> tuple[dict, dict]:
-    """Coverage and, per part, the included job entries and file bytes."""
+def job_coverage(job_root: Path, scopes: list[str] | None = None) -> tuple[dict, dict]:
+    """Coverage and, per part, the included job entries and file bytes.
+
+    ``scopes`` limits the union to the named wage scopes (every complete one by default);
+    a scope left out is listed as not selected and its jurisdictions stay deferred.
+    """
     included, excluded = {}, {}
     universe: dict[int, dict] = {}
     for tag in job_scopes(job_root):
@@ -222,6 +226,9 @@ def job_coverage(job_root: Path) -> tuple[dict, dict]:
                 total = _by_state_total(json.loads(plan_path.read_bytes())["plan"])
                 if universe.setdefault(part, total) != total:
                     raise ValueError(f"part {part}: plans disagree on the candidates by state")
+        if scopes is not None and tag not in scopes:
+            excluded[tag] = f"{tag}: not selected for this run"
+            continue
         try:
             included[tag] = complete_scope(job_root, tag)
         except IncompleteScope as error:
@@ -249,6 +256,7 @@ def job_coverage(job_root: Path) -> tuple[dict, dict]:
             if tested != universe[part].get(state, 0):
                 raise ValueError(f"{state} part {part}: {tested} tested of {universe[part].get(state, 0)}")
     coverage = {
+        "scopes_selected": None if scopes is None else sorted(scopes),
         "scopes_included": sorted(included),
         "scopes_excluded": excluded,
         "jurisdictions_covered": sorted(covered),
@@ -280,11 +288,12 @@ def manifest_digest(manifest: dict) -> str:
     return sha256(json.dumps(keyed, sort_keys=True).encode())
 
 
-def build_manifest(root: Path, job_root: Path, rows_root: Path, code: dict) -> tuple[dict, dict]:
+def build_manifest(root: Path, job_root: Path, rows_root: Path, code: dict,
+                   scopes: list[str] | None = None) -> tuple[dict, dict]:
     """The manifest of every input, and each part's file bytes keyed by manifest name."""
     raise_json = (Path(root) / RAISE_UNION_JSON).read_bytes()
     recorded = json.loads(raise_json)["inputs"]
-    coverage, job = job_coverage(job_root)
+    coverage, job = job_coverage(job_root, scopes)
     inputs = [{"kind": "raise_union_json", "source": "worktree", "part": None,
                "name": RAISE_UNION_JSON, "sha256": sha256(raise_json)}]
     files = {}
