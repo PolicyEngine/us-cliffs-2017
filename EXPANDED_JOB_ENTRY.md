@@ -71,6 +71,112 @@ The pilot does not ingest that table automatically. National work requires a
 complete rate-by-state audit and explicit choices for within-year changes,
 employer-size tiers and local rates. No missing rate receives a guessed default.
 
+## National wage conventions
+
+`scripts/job_entry_wages.py` reads the audited rates in
+`research/minimum-wages-2017/wages.json` (sources and corrections in
+`research/minimum-wages-2017/evidence.md`) and applies five conventions:
+
+1. **Within-year changes.** The statewide general rate is weighted by calendar
+   day over 2017, which spreads the 2,080 hours evenly through the year. This
+   applies to every jurisdiction that evidence.md lists as changing after
+   1 January: the District of Columbia, Maine, Maryland, New York and Oregon.
+   Each needs dated rates that cover every day of 2017 exactly once.
+2. **Employer-size tiers.** Where a state's rate depends on employer size or
+   receipts, the job pays the large-employer rate: California (26 or more
+   employees), Minnesota (sales of at least $500,000), Ohio (receipts of at least
+   $299,000), Montana (sales over $110,000), and Arkansas, Illinois, Michigan,
+   Nebraska, Vermont and West Virginia (employers covered by state law rather
+   than exempt small employers). The code selects each by the label in
+   wages.json and checks that it is the highest tier.
+3. **Region tiers.** Where a state's rate depends on region, the job pays the
+   standard statewide rate: Oregon's standard rate, and New York's rest-of-state
+   rate, below its New York City and Long Island/Westchester tiers. No work
+   location is assigned.
+4. **No local ordinances.** wages.json records none, and the job pays none.
+5. **Federal floor.** Each dated rate is at least $7.25, the floor for this
+   FLSA-covered job. Where a state has no minimum wage, or a lower one, the job
+   pays $7.25.
+
+Nevada tiers by whether the employer offers qualifying health benefits. The job
+offers no new employer coverage, so it pays Nevada's higher rate, $8.25, as
+wages.json records. Gross pay is the effective hourly rate times 2,080. The
+table also checks that each jurisdiction's selected 1 January rate equals its
+recorded `amount` and `reference_hourly`, and stops on any contradiction, gap or
+overlap.
+
+Maine is marked unverified in wages.json: its codified statute dates the $9.00
+rate from 1 January 2017, while the Maine DOL release, its 2017 poster packet and
+DOL's dated table make it effective 7 January. The time-weighted rate follows the
+dated path, with six days at $7.50. Using the statute's date instead would pay
+$9.00, or $51.29 more a year.
+
+**Two jurisdictions are unresolved and receive no rate.** wages.json records only
+Maryland's 1 January rate, $8.75, and evidence.md notes that Maryland's rate
+changed within 2017; the later rate is absent. New York's rest-of-state rate,
+$9.70, is recorded through 30 December 2017; the rate from 31 December is absent.
+Each needs a sourced rate added to wages.json before its candidates run. Until
+then the national run tests every other jurisdiction and counts Maryland and New
+York candidates as deferred.
+
+| Jurisdiction | Hourly rate | Gross pay | Convention |
+|---|---:|---:|---|
+| Alabama | $7.25 | $15,080.00 | federal floor; no state rate |
+| Alaska | $9.80 | $20,384.00 | statewide |
+| Arizona | $10.00 | $20,800.00 | statewide |
+| Arkansas | $8.50 | $17,680.00 | large-employer rate |
+| California | $10.50 | $21,840.00 | large-employer rate |
+| Colorado | $9.30 | $19,344.00 | statewide |
+| Connecticut | $10.10 | $21,008.00 | statewide |
+| Delaware | $8.25 | $17,160.00 | statewide |
+| District of Columbia | $12.0041 | $24,968.55 | by day: $11.50 for 181 days, $12.50 for 184 |
+| Florida | $8.10 | $16,848.00 | statewide |
+| Georgia | $7.25 | $15,080.00 | federal floor; state rate $5.15 |
+| Hawaii | $9.25 | $19,240.00 | statewide |
+| Idaho | $7.25 | $15,080.00 | statewide |
+| Illinois | $8.25 | $17,160.00 | large-employer rate |
+| Indiana | $7.25 | $15,080.00 | statewide |
+| Iowa | $7.25 | $15,080.00 | statewide |
+| Kansas | $7.25 | $15,080.00 | statewide |
+| Kentucky | $7.25 | $15,080.00 | statewide |
+| Louisiana | $7.25 | $15,080.00 | federal floor; no state rate |
+| Maine | $8.9753 | $18,668.71 | by day: $7.50 for 6 days, $9.00 for 359 |
+| Maryland | unresolved | unresolved | 1 July 2017 rate absent from wages.json |
+| Massachusetts | $11.00 | $22,880.00 | statewide |
+| Michigan | $8.90 | $18,512.00 | large-employer rate |
+| Minnesota | $9.50 | $19,760.00 | large-employer rate |
+| Mississippi | $7.25 | $15,080.00 | federal floor; no state rate |
+| Missouri | $7.70 | $16,016.00 | statewide |
+| Montana | $8.15 | $16,952.00 | large-employer rate |
+| Nebraska | $9.00 | $18,720.00 | large-employer rate |
+| Nevada | $8.25 | $17,160.00 | employer offers no health coverage |
+| New Hampshire | $7.25 | $15,080.00 | statewide |
+| New Jersey | $8.44 | $17,555.20 | statewide |
+| New Mexico | $7.50 | $15,600.00 | statewide |
+| New York | unresolved | unresolved | 31 December 2017 rate absent from wages.json |
+| North Carolina | $7.25 | $15,080.00 | statewide |
+| North Dakota | $7.25 | $15,080.00 | statewide |
+| Ohio | $8.15 | $16,952.00 | large-employer rate |
+| Oklahoma | $7.25 | $15,080.00 | federal floor; DOL lists a $2.00–7.25 state range |
+| Oregon | $10.0021 | $20,804.27 | standard region, by day: $9.75 for 181 days, $10.25 for 184 |
+| Pennsylvania | $7.25 | $15,080.00 | statewide |
+| Rhode Island | $9.60 | $19,968.00 | statewide |
+| South Carolina | $7.25 | $15,080.00 | federal floor; no state rate |
+| South Dakota | $8.65 | $17,992.00 | statewide |
+| Tennessee | $7.25 | $15,080.00 | federal floor; no state rate |
+| Texas | $7.25 | $15,080.00 | statewide |
+| Utah | $7.25 | $15,080.00 | statewide |
+| Vermont | $10.00 | $20,800.00 | large-employer rate |
+| Virginia | $7.25 | $15,080.00 | statewide |
+| Washington | $11.00 | $22,880.00 | statewide |
+| West Virginia | $8.75 | $18,200.00 | large-employer rate |
+| Wisconsin | $7.25 | $15,080.00 | statewide |
+| Wyoming | $7.25 | $15,080.00 | federal floor; state rate $5.15 |
+
+Colorado, North Carolina and Washington keep the pilot's rates. The table holds
+time-weighted rates unrounded; `tests/test_job_entry_national.py` checks each
+against its exact day-weighted fraction.
+
 ## Validation
 
 The pilot selects three candidate-containing households in each state, with a
@@ -101,12 +207,79 @@ The sample's strict-cliff flag covers two adults in one household with six
 members. These selected-sample record counts provide a feasibility check, not
 a national estimate or an estimate for any of the three states.
 
+## National run
+
+`scripts/modal_job_entry.py` runs the test on Modal, one candidate rank of one
+household part per container (2 CPUs, 32 GiB). The parts are the frozen
+experiment's four disjoint household parts (`--parts 4`, seed 0, full weight),
+the same partition the raise union reads; the full-sample Medicaid totals make
+each household's result independent of its part. Each container runs
+`scripts/expanded_job_entry_national.py`, which reuses the pilot's eligibility,
+rank, job inputs, branch and resource measure, and stops on any failed check:
+
+1. a zero-change branch leaves every household's net income, resources and every
+   part of net income exactly unchanged;
+2. the job branch leaves every household without a tested adult exactly unchanged;
+3. each entrant's earnings equal the table's rate times 2,080 (within $0.02 for
+   float32), at 40 hours and 52 weeks, and nobody else's earnings change;
+4. every month's stored WIC take-up draw is unchanged;
+5. the parts of net income add up to its change, and the pilot's resource measure
+   agrees with its decomposition, both within $1;
+6. the count of tested adults matches the part's plan for that rank.
+
+The smoke run adds the pilot's fresh-simulation check.
+
+For each tested adult the person rows hold `person_index` (the position in the
+part's person table, as in the raise union), `person_id`, `household_id`,
+`state_code`, `rank`, `hourly_wage`, `gross_pay`, `d_net_single_ptc` (the
+pilot's measure: health coverage at government cost, premium tax credit counted
+once), `d_net_without_health` (every part of net income except health benefits
+and costs, as in the raise experiment), `d_net`, and the signed change in every
+part of net income. Rows are record-level and git-ignored
+(`results/job_entry/per_person/`). Each JSON record under
+`results/job_entry/parts/` names its rows by a unique run id, hashes them, and
+records the checks, sample counts, MicroSeries-weighted counts, timing, peak
+memory, wage rates and code hashes. Only a complete, validated pair is published
+to the volume or installed locally, never over an existing file; a relaunch
+skips every rank already written.
+
+Under the wage scope `resolved`, Maryland and New York candidates are counted as
+deferred by state. Once wages.json carries their rates, `--scope states:MD,NY`
+tests only them, with the same per-rank files under its own scope name. A
+complete job-entry union needs both scopes, and every candidate in exactly one.
+
+The smoke run (`results/job_entry/parts/smoke_job_entry_2017_p4_0_s0_h150_seed17/`)
+tested rank 1 in a fixed 150-household subsample of part 0, seed 17: one
+candidate household from each of the 51 jurisdictions, then random candidate and
+non-candidate households. It tested 113 adults in 49 jurisdictions and deferred
+Maryland and New York. Every check passed: the zero-change branch and the 37
+untouched households changed by exactly $0; entrants' earnings were within
+$0.0009 of the table's rate times 2,080, and nobody else's changed; no WIC draw
+changed; the parts summed to net income within $0.03 and the resource measure
+matched its decomposition within $0.02; the fresh simulation matched exactly. It
+took 208 seconds with a peak of 3.7 GiB. These counts check the code path; the
+selected subsample supports no population inference.
+
+The plans (`results/job_entry/plan/`) count in-scope sample candidates by rank:
+part 0 has ranks 1–5, part 1 ranks 1–5, part 2 ranks 1–8 and part 3 ranks 1–4,
+22 containers in all.
+
+```sh
+MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --check-only
+MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --smoke
+MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --plan-only
+MODAL_PROFILE=policyengine modal run --detach scripts/modal_job_entry.py
+MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --fetch
+```
+
 ## Remaining work
 
-Complete the national wage audit; review the observable availability restrictions;
-compare job-entry resource components with the main raise experiment; validate
-the main strict-cliff group and the additional high-loss group under the same
-union; then run the approved full sample through the shared resource queue.
-Uncertainty must resample source households together with their duplicate
-records. A full-sample job-entry union and its overlap with the raise union are
-not produced by this pilot.
+Add sourced Maryland and New York rates to wages.json and run their scope; write
+the job-entry union step over the per-rank rows, checking that every candidate
+appears exactly once across ranks and scopes; review the observable availability
+restrictions; compare job-entry resource components with the main raise
+experiment; and validate the main strict-cliff group and the additional
+high-loss group under the same union. Uncertainty must resample source
+households together with their duplicate records. The national run produces
+per-person changes only: no job-entry union, population total or overlap with
+the raise union exists yet.
