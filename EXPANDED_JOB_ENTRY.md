@@ -340,9 +340,10 @@ $0.02. Containers took 5.5 to 10 minutes, with a peak of 6.3 GiB. These records
 carry the new wages.json hash; the other 49 jurisdictions' rates are identical
 to those the `resolved` records used.
 
-After the runner guards, a fresh run (commit 9ea19fd) tested all 51
-jurisdictions in the one scope `resolved`, on a new volume with an empty local
-root, so nothing resumed. Its plans count 13,610 sample candidates, each rank's
+After the runner guards, a fresh run (commit 9ea19fd, Modal app
+`ap-otKqU1mKASKtnNBXm3EUU3`) tested all 51 jurisdictions in the one scope
+`resolved`, on the new volume `us-cliffs-2017-job-entry-harden-20261117` with an
+empty local root, so nothing resumed. Its plans count 13,610 sample candidates, each rank's
 count exactly the earlier `resolved` plus `states-MD-NY` counts, in 22
 containers. All 22 pairs pass strict validation against the plans with no
 jurisdiction deferred, and every identity check passed. Its rows equal the
@@ -350,7 +351,7 @@ earlier runs' rows exactly: the same 13,610 people in the same ranks, every
 column's text identical (gross pay, all three measures and every component),
 so no retention flag changes at any threshold. The records' integer counts and
 identity maxima match too; only the MicroSeries-weighted record totals differ in
-summation order, by at most 2 parts in 10^16, because one scope replaced two.
+summation order, by about 2 parts in 10^16, because one scope replaced two.
 
 ```sh
 MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --check-only
