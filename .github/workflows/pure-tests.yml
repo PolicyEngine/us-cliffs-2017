@@ -1,0 +1,52 @@
+name: Pure preparation tests
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pure-preparation-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  pure-tests:
+    name: Synthetic currency tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      NUMEXPR_NUM_THREADS: "1"
+      VECLIB_MAXIMUM_THREADS: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTEST_DISABLE_PLUGIN_AUTOLOAD: "1"
+      UV_PYTHON_DOWNLOADS: never
+    steps:
+      - name: Check out the pull request
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up CPython
+        id: python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13.13"
+          architecture: x64
+          check-latest: false
+      - name: Set up uv
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.8"
+          enable-cache: false
+      - name: Install only the pinned pure-test dependencies
+        env:
+          PURE_TEST_PYTHON: ${{ steps.python.outputs.python-path }}
+        run: |
+          uv venv --python "$PURE_TEST_PYTHON" .venv
+          uv pip install --python .venv/bin/python --only-binary :all: --require-hashes -r ci/pure-test-requirements.txt
+      - name: Run the existing synthetic tests with model imports blocked
+        run: uv run --offline --no-sync python -I -B scripts/run_native_currency_tests.py

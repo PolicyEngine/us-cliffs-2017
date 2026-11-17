@@ -1,0 +1,1 @@
+Add exact input-currency conversion, recorded age-led birth-fact dispositions, bounded numeric validation and synthetic tests, with a proposed protocol for historical-law comparisons on one recent reference population. Population estimation requires a qualified model/data pair and native-year adapter.
