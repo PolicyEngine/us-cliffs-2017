@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "status": "ACTUAL61POINT_PROFILE_AND_LATER201POINT_MODEL_ILLUSTRATION_PASS__LEGAL_BOUNDARY_HOLD",
+  "classification": "Hypothetical parent with declared cash TANF nonparticipation; genuine released-API outputs; no population estimate.",
+  "year": 2025,
+  "API_calls": 1,
+  "rows": 61,
+  "config_file": "examples/household_snap_nonparticipation_2025.json",
+  "config_sha256": "38cd1ae58f09d4a770dc94fd2073c30691e078b5b724ff11aca4cf935612d934",
+  "data_file": "results/household_snap_nonparticipation_2025.csv",
+  "data_sha256": "10abcb9f058c23a71be67c67fce5f2d76549c246f9ca4868c6b11ad59c31522e",
+  "immutable_driver": "scripts/calculate_household_curves_2025.py",
+  "driver_sha256": "feb7ae33b137029b480b1e6afa65275f9c866f3e96532f26d1fac327867152b8",
+  "versions": {
+    "policyengine": "6.19.0",
+    "policyengine-us": "2.2.1",
+    "policyengine-core": "3.33.3",
+    "spm-calculator": "1.0.0"
+  },
+  "resource_label": "Annual household resources excluding health benefits; includes noncash SNAP/WIC and other benefits. This is not cash income.",
+  "request_difference": "Only spm_unit[0].takes_up_tanf_if_eligible changes fromTrue toFalse; no eligibility or final-award override. All other request facts are identical to the earlier parent configuration.",
+  "input_facts": "Age 40 parent and age 4 dependent in Harris County, Texas, throughout 2025; separate unmarried marital units; $30/hour over 52 weeks with 61 paired earnings/hours points. The configuration supplies rent, assets, utilities, coverage and claiming assumptions.",
+  "native": {
+    "classification": "ONE_FRESH_PROFILE_PASS__SNAP_SOURCE_BOUNDARY_HOLD__ZOOM_UNRUN",
+    "api_calls": 1,
+    "axis_rows": 61,
+    "native_real_seconds": 14.89,
+    "user_seconds": 10.98,
+    "system_seconds": 2.13,
+    "max_RSS_bytes": 1605943296,
+    "peak_footprint_bytes": 1570981736,
+    "identities": {
+      "market_income": 0.0,
+      "benefits": 0.0,
+      "tax_before_refundable_credits": 0.0,
+      "refundable_tax_credits": 0.0,
+      "net_tax": 0.0,
+      "net_resources": 0.003173828125
+    },
+    "SPM": {
+      "years": [
+        "2025"
+      ],
+      "geography": "national",
+      "scenario": "ce_trend",
+      "hash": "3d86d5c4c0423480e6b69b75d222ffa4a7a2639e4094df5ba2504af01be17173",
+      "versions": {
+        "policyengine": "6.19.0",
+        "policyengine-us": "2.2.1",
+        "policyengine-core": "3.33.3",
+        "spm-calculator": "1.0.0"
+      }
+    },
+    "TANF_all_zero": true,
+    "selected_observations": [
+      {
+        "employment_income": "0.0",
+        "household_net_income": "7174.060546875",
+        "snap": "6462.0",
+        "wic": "712.060546875",
+        "tanf": "0.0",
+        "household_benefits": "7174.060546875"
+      },
+      {
+        "employment_income": "33000.0",
+        "household_net_income": "36096.9921875",
+        "snap": "861.0",
+        "wic": "712.060546875",
+        "tanf": "0.0",
+        "household_benefits": "1573.060546875"
+      },
+      {
+        "employment_income": "34000.0",
+        "household_net_income": "36058.69140625",
+        "snap": "159.0",
+        "wic": "712.060546875",
+        "tanf": "0.0",
+        "household_benefits": "871.060546875"
+      },
+      {
+        "employment_income": "35000.0",
+        "household_net_income": "36563.390625",
+        "snap": "0.0",
+        "wic": "712.060546875",
+        "tanf": "0.0",
+        "household_benefits": "712.060546875"
+      },
+      {
+        "employment_income": "60000.0",
+        "household_net_income": "53585.0",
+        "snap": "0.0",
+        "wic": "0.0",
+        "tanf": "0.0",
+        "household_benefits": "0.0"
+      }
+    ],
+    "negative_coarse_steps": [
+      {
+        "earnings": [
+          "33000.0",
+          "34000.0"
+        ],
+        "resources_change": -38.30078125,
+        "SNAP_change": -702.0
+      }
+    ],
+    "no_exact_legal_boundary_or_cliff_magnitude_claim": true
+  },
+  "source_documents": [
+    {
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/snap-fy26maximumAllotments-deductions.pdf",
+      "sha256": "c037d4d6da50c1f3de9f6871b2c8864ab220714fbcd8d4b0da633798b99a0732",
+      "native_filename": "fy26-allotments.pdf"
+    },
+    {
+      "source_url": "https://www.fna.usda.gov/sites/default/files/resource-files/2026-05-21-SUA-Table-FY26.xlsx",
+      "sha256": "b5f5ca7b7ae372e20b037631f9ab113897e684271daf2bc9dfbcc4d962a8ea9b",
+      "native_filename": "fy26-sua.xlsx"
+    },
+    {
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/media/file/FY2025-Maximum-Allotments-Deductions.pdf",
+      "sha256": "9e0d5854853672defdc5526046bc6c026b4ef1bdd6a91fc95ffeefce0bbdb06a",
+      "native_filename": "fy25-maximum-deductions.pdf"
+    },
+    {
+      "source_url": "https://fhb.hhs.texas.gov/sites/default/files/documents/mepd-and-twh-Bulletin-24-12.pdf",
+      "sha256": "d6840276e2201aea908496151040f878c1eed291febbd4e53932d39357ff6826",
+      "native_filename": "texas-24-12.pdf"
+    }
+  ],
+  "source_boundary_questions": {
+    "FY2025_raw_model_monthly": 2810.5,
+    "FY2025_raw_model_annual": 33726,
+    "Texas_bulletin_monthly": 2811,
+    "Texas_bulletin_annual_if_comparing_exact_monthly_income": 33732,
+    "difference_annual": 6,
+    "FY2026_raw_model_annual": 34897.5,
+    "legal_boundary_claim": null,
+    "reason_for_zoom_hold": "The original legally qualified zoom remained held because Texas publishes $2,811/month against the model's $2,810.50. A later amendment permitted the separately recorded model-illustration zoom; the exact legal boundary remains unresolved."
+  },
+  "calendar_slices": [
+    {
+      "months": "Jan\u2013Sep",
+      "count": 9,
+      "FY": 2025
+    },
+    {
+      "months": "Oct\u2013Dec",
+      "count": 3,
+      "FY": 2026
+    }
+  ],
+  "scope_limits": [
+    "Calendar 2025 combines January\u2013September FY2025 and October\u2013December FY2026 SNAP limits.",
+    "We infer the fiscal-year attribution from annual totals, dated rules and calendar arithmetic: the FY2025 months lose SNAP at the jump while three FY2026 months retain it. No monthly API amounts were calculated.",
+    "Texas publishes $2,811/month for the FY2025 categorical limit against the model's $2,810.50; exact legal rounding and source priority remain unresolved.",
+    "The coarse full-range data show SNAP reaching zero between $34,000 and $35,000 but do not locate the later change at $1 resolution.",
+    "No other program, complete 2025 law, historical 2017 comparison or population result gains qualification.",
+    "Native structural selection defaults to 2024 while calculation periods request 2025."
+  ],
+  "full_API_receipt_sha256": "f6ab6942d7a8952f7e0df90c1081624a2e4d910b92c39c71644254dfd2c719b0",
+  "raw_log_sha256": "64c146ee86026d734ae6a6427f93497198a99ec7de04d317c6ed269968f39efa",
+  "private_execution_receipts_not_committed": true,
+  "native_scope": "Historical receipt summary for the initial 61-point profile, before the separately recorded 201-point model-illustration zoom. Its original classification and all numeric fields remain unchanged.",
+  "as_of_profile_run": {
+    "original_status": "ACTUAL61POINT_PROFILE_PASS__SNAP_BOUNDARY_SOURCE_HOLD",
+    "original_scope_limits": [
+      "The coarse33000\u201334000 interval is an observed model response, not a precise or legally qualified cliff location/magnitude.",
+      "Texas FY2025 published2811/month differs from the model unrounded2810.50; exact gross-income rounding and chart-versus-ratio source choice remain unresolved.",
+      "FY2026 official federal tables and TexasSUA445 are documented; a dated TexasFY2026BBCEchart was not admitted in this bounded unit.",
+      "The optional zoom admission condition was not met; no zoom ran.",
+      "No other program, whole2025law, historical2017comparison or population result is qualified.",
+      "No figure/PDF/PNG chart has been rendered. Native structural selection still defaults2024 while calculation periods are2025."
+    ],
+    "original_reason_for_zoom_hold": "Published state chart differs from model unrounded ratio; exact Texas gross-income rounding/adoption/source-priority issue requires a separate contract. No legal cutoff or observed jump magnitude will be invented.",
+    "original_published_commit": "c56e50132a78d4e02f108c9cfd9d04084eb7aef0",
+    "scope": "These statements describe the original 61-point stage only, before the later model-illustration amendment."
+  },
+  "subsequent_model_illustration": {
+    "summary_updated_utc": "2026-11-15T10:40:19.849085+00:00",
+    "status": "201-point model-illustration zoom and figure completed; exact legal boundary remains unqualified.",
+    "API_calls": 1,
+    "rows": 201,
+    "zoom_CSV_file": "results/snap_model_boundary_zoom_2025.csv",
+    "zoom_CSV_sha256": "d3fd6dce9bacbebb787f478b58745e02d9a3afb3789fb30d1aa690db7536359e",
+    "full_private_receipt_sha256": "d740bc960ca57899cf71ff41f7782580f1598a848c50275c0bd40733d22c4e72",
+    "raw_log_sha256": "d9eb7fb1eaa96e35c6180bca11bc559d56bb72f08d4a3f7cd128eeb8f29bc924",
+    "scope": "The later model-only amendment permitted an observed-boundary illustration, not statutory-cutoff qualification."
+  },
+  "current_reproduction_config_sha256": "16d4601ffd7cd410f8ab9ce7879b690557c0262dc3aea8a40d96ee6330839498",
+  "config_sha256_scope": "Original executed config bytes at c56e5013; later edits change assumption prose only. Current reproduction config hash appears separately."
+}

@@ -1,0 +1,130 @@
+{
+  "classification": "CONSTRUCTED_ILLUSTRATION_NOT_REAL_POLICY_RESULTS",
+  "caption": "Constructed illustration. The hypothetical benefit and refundable tax credit give identical net income, with a $5,000 drop immediately above $30,000 of annual earnings. The continuous benefit taper changes slope at $30,000 and $40,000 without a downward jump. Filled circles mark included endpoints; open circles mark excluded branch limits. For notch terminology, see Kleven and Waseem (2013), Quarterly Journal of Economics 128(2), 669-723: https://doi.org/10.1093/qje/qjt004.",
+  "data_source": "Explicitly chosen hypothetical functions; no external data",
+  "terminology_reference": {
+    "authors": [
+      "Henrik Kleven",
+      "Mazen Waseem"
+    ],
+    "year": 2013,
+    "journal": "Quarterly Journal of Economics",
+    "volume": 128,
+    "issue": 2,
+    "pages": "669-723",
+    "doi": "10.1093/qje/qjt004",
+    "url": "https://doi.org/10.1093/qje/qjt004",
+    "author_pdf": "https://www.henrikkleven.com/uploads/3/7/3/1/37310663/kleven-waseem_qje2013.pdf",
+    "scope": "Tax and transfer notch terminology; no behavioral claim"
+  },
+  "chosen_parameters": {
+    "benefit_or_refundable_credit_usd": 5000.0,
+    "earnings_cutoff_usd": 30000.0,
+    "tax_rate": 0.2,
+    "continuous_benefit_withdrawal_rate": 0.5
+  },
+  "functions_annual_usd": {
+    "net_income": "N(y)=y-T(y)+B(y)",
+    "A": "T(y)=0.2*y; B(y)=5000 if y<=30000 else 0",
+    "B": "T(y)=0.2*y-(5000 if y<=30000 else 0); B(y)=0",
+    "C": "T(y)=0.2*y; B(y)=max(5000-0.5*max(y-30000,0),0)"
+  },
+  "invariants": {
+    "status": "PASS_CONSTRUCTED_MATH_ONLY",
+    "grid_points": 6005,
+    "grid_domain_annual_earnings_usd": [
+      0,
+      60000
+    ],
+    "max_a_b_difference_usd": 0.0,
+    "floating_comparison_tolerance_usd": 1e-09,
+    "a_b_left_limit_usd": 29000.0,
+    "a_b_value_at_threshold_usd": 29000.0,
+    "a_b_right_limit_usd": 24000.0,
+    "a_b_downward_jump_usd": 5000.0,
+    "c_continuous_kinks_earnings_usd": [
+      30000.0,
+      40000.0
+    ],
+    "c_net_income_at_kinks_usd": [
+      29000.0,
+      32000.0
+    ],
+    "c_segment_slopes": [
+      0.8,
+      0.3,
+      0.8
+    ],
+    "c_monotone_on_grid": true,
+    "threshold_membership": "upper branch includes y=30000; lower excludes it",
+    "real_policy_household_chart_qualification": false
+  },
+  "environment": {
+    "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]",
+    "platform": "macOS-27.2.1-arm64-arm-64bit-Mach-O",
+    "resolved_packages": {
+      "kiwisolver": "1.5.1",
+      "packaging": "26.3",
+      "numpy": "2.5.4",
+      "pillow": "13.0.0",
+      "contourpy": "1.4.0",
+      "matplotlib": "3.11.2",
+      "cycler": "0.12.1",
+      "fonttools": "4.68.0",
+      "tzdata": "2026.6",
+      "python-dateutil": "4.0.0",
+      "pyparsing": "3.3.3"
+    }
+  },
+  "requirements_lock": {
+    "path": "figures/constructed_cliffs.requirements.txt",
+    "sha256": "832ba06225a155aeed388ae5a8f575e566796384bd354c9289fd714dedfdfa90"
+  },
+  "reproduce": [
+    "uv venv --no-project --python 3.14 .venv-constructed",
+    "uv pip install --python .venv-constructed/bin/python --require-hashes --only-binary :all: -r figures/constructed_cliffs.requirements.txt",
+    "uv run --no-project --python .venv-constructed/bin/python python scripts/plot_constructed_cliffs.py"
+  ],
+  "actual_argv": [
+    "python",
+    "scripts/plot_constructed_cliffs.py"
+  ],
+  "script": {
+    "path": "scripts/plot_constructed_cliffs.py",
+    "sha256": "13ef6afae50b197ec6dbd107f7a69b987f43e4bc31f7f45784c473944a088ff4"
+  },
+  "figure": {
+    "matplotlib": "3.11.2",
+    "font_family": "DejaVu Sans",
+    "font_file": "DejaVuSans.ttf",
+    "font_file_sha256": "3fdf69cabf06049ea70a00b5919340e2ce1e6d02b0cc3c4b44fb6801bd1e0d22",
+    "figure_size_inches": [
+      6.8,
+      4.2
+    ],
+    "png_dpi": 300,
+    "outputs": [
+      {
+        "path": "figures/constructed_cliffs.png",
+        "sha256": "dbbab639b6b0dcd16cc7654f388d2e9e96bec4a55780d3ebaa11385e9db4a099",
+        "bytes": 201591
+      },
+      {
+        "path": "figures/constructed_cliffs.pdf",
+        "sha256": "65a76c3abb6b53db4f1ce662d478f0ff6c5ddfddaa446e75b02cfba81336c1fc",
+        "bytes": 32613
+      },
+      {
+        "path": "figures/constructed_cliffs.svg",
+        "sha256": "637ecc43f91ea7b92d84d69c4d2aef289297160b34da8e9954a1a24d3818407a",
+        "bytes": 46633
+      }
+    ]
+  },
+  "limits": [
+    "These exposition choices represent no actual legislation or PolicyEngine estimate.",
+    "No health, SPM, population or counterfactual result follows from this figure.",
+    "This figure does not qualify or replace real-policy hypothetical-household charts."
+  ],
+  "loaded_model_or_h5_modules": []
+}

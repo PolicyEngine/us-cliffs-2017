@@ -1,0 +1,36 @@
+{
+  "classification": "ILLUSTRATIVE_MODEL_OUTPUTS__LEGAL_QUALIFICATION_HOLD",
+  "base_csv_sha256": "10abcb9f058c23a71be67c67fce5f2d76549c246f9ca4868c6b11ad59c31522e",
+  "zoom_csv_sha256": "d3fd6dce9bacbebb787f478b58745e02d9a3afb3789fb30d1aa690db7536359e",
+  "base_rows": 61,
+  "zoom_rows": 201,
+  "combined_distinct_rows": 262,
+  "observed_before": {
+    "employment_income": 33726.0,
+    "household_net_income": 36314.83984375,
+    "snap": 597.0,
+    "tanf": 0.0
+  },
+  "observed_after": {
+    "employment_income": 33727.0,
+    "household_net_income": 35901.5,
+    "snap": 183.0,
+    "tanf": 0.0
+  },
+  "observed_resource_change": -413.33984375,
+  "observed_SNAP_change": -414.0,
+  "gap_breaks_function_line": true,
+  "analytic_limits_or_open_endpoints": false,
+  "interpolated_output_rows": 0,
+  "nominal_currency_year": 2025,
+  "fiscal_year_attribution": "INFERRED from observed annual totals, dated fiscal-year rules and calendar arithmetic; monthly amounts not calculated.",
+  "font": "DejaVu Sans",
+  "figure_inches": [
+    6.8,
+    5.4
+  ],
+  "dpi": 300,
+  "matplotlib": "3.11.2",
+  "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "caption_sha256": "a70c6d1d39532eb94fa8bba58519bc514bb8c72a20a688948a8bc48e6e7e6f40"
+}
