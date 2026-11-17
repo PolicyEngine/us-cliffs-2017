@@ -486,7 +486,8 @@ def test_model_expansion_reads_the_2017_adult_limits_from_the_tax_benefit_system
     from types import SimpleNamespace
 
     states = [c for c in system.parameters.gov.hhs.medicaid.eligibility.categories.adult.income_limit.children]
-    out = bd.model_expansion(SimpleNamespace(tax_benefit_system=system), states)
+    # The run passes the households' states as numpy strings, as state_code_str returns them.
+    out = bd.model_expansion(SimpleNamespace(tax_benefit_system=system), set(np.array(states).astype(str)))
     json.dumps(out, allow_nan=False)
     assert all(e["limit_2017"] == e["limit_2018"] for e in out.values())
     covered = [s for s in out if s in STATES_51]

@@ -268,7 +268,8 @@ def model_expansion(simulation, states, year: int = YEAR) -> dict:
     for step in EXPANSION_PARAMETER.split("."):
         node = getattr(node, step)
     out = {}
-    for state in sorted(states):
+    # Plain str keys: a numpy string has __array__, which the parameter node reads as fancy indexing.
+    for state in sorted({str(s) for s in states}):
         value = float(at.gov.hhs.medicaid.eligibility.categories.adult.income_limit[state])
         child = node.children[state]
         out[state] = {
@@ -653,7 +654,7 @@ def summarize_counts(counter, raise_frames: dict, raise_drivers: dict, job, job_
 
     ``state`` is each household's state; ``expansion`` maps a state to its Medicaid entry
     (model_expansion)."""
-    category = np.array([expansion[s]["category"] for s in state], dtype=object)
+    category = np.array([expansion[str(s)]["category"] for s in state], dtype=object)
     sets = count_breakdowns(counter, raise_frames, raise_drivers, job, job_drivers, candidate, rank, age, category,
                             names, health_drivers)
     checks = check_count_invariants(counter.metrics, names)
@@ -677,7 +678,7 @@ def summarize_counts(counter, raise_frames: dict, raise_drivers: dict, job, job_
         "sample_adults": counter.sample_adults,
         "driver_names": names,
         "health_drivers": sorted(health_drivers),
-        "medicaid_expansion_by_state": {s: expansion[s] for s in sorted(set(state))},
+        "medicaid_expansion_by_state": {str(s): expansion[str(s)] for s in sorted(set(state))},
         "raise_ambiguity": raise_ambiguity(raise_frames, raise_drivers, counter.people),
         "job": {"sample_candidates_tested": int(len(job)), "weighted_candidates_tested_by_runner": weighted_tested,
                 "sample_candidates_by_rank": {str(int(k)): int(n)
