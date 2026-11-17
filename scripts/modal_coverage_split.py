@@ -20,7 +20,8 @@ written here or on the volume.
 
 usage:
   MODAL_PROFILE=policyengine modal run scripts/modal_coverage_split.py --stage smoke
-  MODAL_PROFILE=policyengine modal run scripts/modal_coverage_split.py --stage job [--parts 0,1,2,3]
+  MODAL_PROFILE=policyengine modal run [--detach] scripts/modal_coverage_split.py --stage job [--parts 0,1,2,3]
+  MODAL_PROFILE=policyengine modal run scripts/modal_coverage_split.py --stage fetch   # after --detach
   MODAL_PROFILE=policyengine modal run scripts/modal_coverage_split.py --stage raise
   python scripts/coverage_split.py classify
   MODAL_PROFILE=policyengine modal run scripts/modal_coverage_split.py --stage aggregate
@@ -201,6 +202,28 @@ def main(stage: str = "job", parts: str = "0,1,2,3", smoke_households: int = 150
         with logfile.open("a") as handle:
             handle.write(line + "\n")
 
+    if stage == "fetch":
+        # Install every complete scenario and aggregate record the volume holds (after --detach).
+        for folder in ("scenarios", "aggregate"):
+            try:
+                entries = list(volume.iterdir(f"/{out.BASE}/{folder}", recursive=True))
+            except (FileNotFoundError, modal.exception.NotFoundError):
+                continue
+            for entry in entries:
+                path = entry.path.lstrip("/")
+                if entry.type != modal.volume.FileEntryType.FILE or not path.endswith(".json"):
+                    continue
+                data = _read(path)
+                if folder == "aggregate":
+                    log(f"{path}: {install_bytes(ROOT, path, data)}")
+                    continue
+                record = json.loads(data)
+                files = [_read(record["rows"][kind]["file"]) for kind in ("tested", "persons")]
+                if any(f is None for f in files):
+                    log(f"{path}: skipped, rows missing")
+                    continue
+                log(f"{path}: {out.install_scenario(ROOT, path, data, *files)}")
+        return
     code = out.code_record(ROOT)
     log(f"stage {stage}, commit {code['commit'][:7]}, app {APP}")
     if stage == "aggregate":
