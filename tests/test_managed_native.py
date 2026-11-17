@@ -104,7 +104,9 @@ def fake_factory(prepared, *, observer=None, arrays=None, schema=None):
         dataset=SimpleNamespace(
             data_format="time_period_arrays",
             time_period="2017",
-            load_dataset=lambda: prepared.arrays,
+            load_dataset=lambda: m.role_transport_arrays(
+                prepared.arrays, m.role_transport_from_entities(system.group_entities)
+            ),
         ),
         calc=lambda *a, **kw: sentinel,
         default_input_period="2017",
@@ -130,6 +132,7 @@ def fake_factory(prepared, *, observer=None, arrays=None, schema=None):
         "system_constructor": system_constructor,
         "spm": {"FAKE_PROVIDER": "synthetic_only"},
         "read_packet": lambda path: (S, prepared.arrays if arrays is None else arrays),
+        "role_transport": m.role_transport_from_entities(system.group_entities),
     }
     kwargs["context_receipts"] = {
         name: S
@@ -258,7 +261,7 @@ def test_file_readback_and_postconstructor_changes_refuse():
     assert not calls
     calls, sim, _, kwargs = fake_factory(prepared)
     sim.dataset.load_dataset = dict
-    with pytest.raises(m.NativeEngineError, match="projected"):
+    with pytest.raises(m.NativeEngineError, match="Role transport|projected"):
         m.construct_managed_native(prepared, **kwargs)
 
 
@@ -359,6 +362,7 @@ def test_actual_role_capacity_refuses_before_managed_construction():
     system = kwargs["system_constructor"]()
     for entity in system.group_entities:
         entity.flattened_roles[0].max = 1
+    kwargs["role_transport"] = m.role_transport_from_entities(system.group_entities)
     with pytest.raises(m.NativeEngineError, match="capacity exceeded"):
         m.construct_managed_native(prepared, **kwargs)
     assert not any(name == "managed" for name, args in calls)

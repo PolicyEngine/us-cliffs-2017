@@ -211,6 +211,7 @@ def make_native_runtime(
                 system_constructor=final_system,
                 spm=spm,
                 read_packet=inputs.read_packet,
+                role_transport=written.receipt["role_transport"],
                 context_receipts={
                     name: context[name]
                     for name in (

@@ -9,7 +9,14 @@ import pytest
 
 from cliffs2017.commissioned import REQUIRED_BINDINGS
 from cliffs2017.government_transfer_account import GOVERNMENT_VARIABLE, AccountSpec
-from cliffs2017.managed_native import ENTITIES, InputSpec, PacketPlan, RuntimeBinding
+from cliffs2017.managed_native import (
+    ENTITIES,
+    InputSpec,
+    PacketPlan,
+    RuntimeBinding,
+    role_transport_arrays,
+    role_transport_from_entities,
+)
 from cliffs2017.native_materializer import IRMAA_INPUT, WrittenDataset
 from cliffs2017.native_runtime import (
     BridgeError,
@@ -107,7 +114,9 @@ def specimen():
             self.dataset = SimpleNamespace(
                 data_format="time_period_arrays",
                 time_period="2017",
-                load_dataset=lambda: arrays,
+                load_dataset=lambda: role_transport_arrays(
+                    arrays, role_transport_from_entities(system.group_entities)
+                ),
             )
             self.default_input_period = self.default_calculation_period = "2017"
             self.populations = {"tax_unit": SimpleNamespace(count=1)}
@@ -191,6 +200,7 @@ def specimen():
         {
             "status": "SYNTHETIC_SERIALIZER_DOUBLE_NOT_A_DATASET",
             "path": "/synthetic/native.h5",
+            "role_transport": role_transport_from_entities(System().group_entities),
             "sha256": SHA,
         },
     )

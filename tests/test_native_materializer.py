@@ -9,7 +9,7 @@ from types import SimpleNamespace
 import pytest
 
 from cliffs2017.government_transfer_account import CASH_VARIABLE, GOVERNMENT_VARIABLE
-from cliffs2017.managed_native import ENTITIES, InputSpec
+from cliffs2017.managed_native import ENTITIES, InputSpec, role_transport_from_entities
 from cliffs2017.native_currency import (
     Disposition,
     FieldSpec,
@@ -50,7 +50,8 @@ def specimen():
         field(f"{entity}_id", entity, Kind.ID, "id", "eternity", ids)
         pop = SimpleNamespace(ids=ids, count=len(ids))
         if entity != "person":
-            role = SimpleNamespace(key="member")
+            role = SimpleNamespace(key="member", max=None)
+            pop.entity = SimpleNamespace(key=entity, flattened_roles=[role])
             pop._members_role = (role, role)
             pop.members_role = (role, role)
             pop.members_entity_id = (0, 0)
@@ -385,11 +386,23 @@ class MemoryDataset:
         return result
 
 
+def synthetic_role_transport():
+    return role_transport_from_entities(
+        [
+            SimpleNamespace(
+                key=entity, flattened_roles=[SimpleNamespace(key="member", max=None)]
+            )
+            for entity in ENTITIES - {"person"}
+        ]
+    )
+
+
 def write(plan, **kwargs):
     return write_native_dataset(
         plan,
         Path("/synthetic-only/native.h5"),
         serializer_source_sha256=SHA,
+        role_transport=synthetic_role_transport(),
         dataset_type=MemoryDataset,
         files=MemoryFiles(),
         mode="synthetic_test",
@@ -429,6 +442,7 @@ def test_serializer_failure_preserves_claim_and_never_emits_input_vectors(defect
             plan,
             Path("/synthetic-only/native.h5"),
             serializer_source_sha256=SHA,
+            role_transport=synthetic_role_transport(),
             dataset_type=broken,
             files=files,
             mode="synthetic_test",
@@ -444,6 +458,7 @@ def test_existing_artifact_and_relative_path_refuse_without_overwriting():
     files = MemoryFiles()
     options = {
         "serializer_source_sha256": SHA,
+        "role_transport": synthetic_role_transport(),
         "dataset_type": MemoryDataset,
         "files": files,
         "mode": "synthetic_test",
@@ -462,6 +477,7 @@ def test_synthetic_dataset_cannot_claim_native_serializer_identity():
             plan_from(specimen()),
             "/synthetic-only/native.h5",
             serializer_source_sha256=SHA,
+            role_transport=synthetic_role_transport(),
             dataset_type=MemoryDataset,
             files=MemoryFiles(),
         )

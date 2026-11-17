@@ -266,8 +266,9 @@ def test_complete_192_field_toy_annual_packet_writer_and_constructor_chain():
         ids = (21, 34) if entity == "person" else (100 + index,)
         population = SimpleNamespace(ids=ids, count=len(ids))
         if entity != "person":
-            roles = (SimpleNamespace(key="member"), SimpleNamespace(key="member"))
-            population._members_role = population.members_role = roles
+            role = SimpleNamespace(key="member", max=None)
+            population.entity = SimpleNamespace(key=entity, flattened_roles=[role])
+            population._members_role = population.members_role = (role, role)
             population.members_entity_id = (0, 0)
         populations[entity] = population
     for row in declaration["fields"]:
@@ -367,10 +368,20 @@ def test_complete_192_field_toy_annual_packet_writer_and_constructor_chain():
     assert plan.arrays["takes_up_wic_if_eligible"]["2017-01"] == (False, False)
     assert plan.arrays["takes_up_wic_if_eligible"]["2017-02"] == (True, True)
     assert plan.arrays["block_geoid"]["2017"] == ("",)
+    from cliffs2017.managed_native import role_transport_from_entities
+
+    transport = role_transport_from_entities(
+        [
+            population.entity
+            for entity, population in populations.items()
+            if entity != "person"
+        ]
+    )
     written = write_native_dataset(
         plan,
         Path("/synthetic-only/native.h5"),
         serializer_source_sha256=stamp,
+        role_transport=transport,
         dataset_type=MemoryDataset,
         files=MemoryFiles(),
         mode="synthetic_test",
@@ -429,9 +440,10 @@ def test_complete_192_field_toy_annual_packet_writer_and_constructor_chain():
         managed_constructor=constructor,
         system_constructor=lambda **kw: native_system,
         spm={"SYNTHETIC": "only"},
+        role_transport=transport,
         read_packet=lambda path: (
             written.receipt["sha256"],
-            written.dataset.load_dataset(),
+            written.logical_arrays(),
         ),
         context_receipts=contexts,
         observe_context=lambda sim: {

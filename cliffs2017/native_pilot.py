@@ -352,6 +352,7 @@ def assemble_and_run(config, output, events):
         plan,
         output / "private" / "native_inputs.h5",
         serializer_source_sha256=audit.serializer_source_sha256,
+        role_transport=audit.role_transport,
         observe_serializer=audit.observe_serializer,
     )
     ledger = document("ledger")
@@ -392,7 +393,7 @@ def assemble_and_run(config, output, events):
     def read_packet(path):
         if Path(path) != Path(written.receipt["path"]):
             raise PilotError("Native packet path differs")
-        return _sha(path), written.dataset.load_dataset()
+        return _sha(path), written.logical_arrays()
 
     runtime = make_native_runtime(
         prepared_inputs=lambda: NativeInputs(plan, written, read_packet),

@@ -76,6 +76,7 @@ with TemporaryDirectory(prefix="cliffs-pure-tests-") as cache:
             "tests/test_resource_accounts_fake.py",
             "tests/test_managed_native.py",
             "tests/test_native_materializer.py",
+            "tests/test_native_role_transport.py",
             "tests/test_native_witness.py",
             "tests/test_wage_benchmark.py",
             "tests/test_health_valuation.py",

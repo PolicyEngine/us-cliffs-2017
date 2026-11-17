@@ -5,6 +5,8 @@ The owner supplies authenticated runtime/source receipts and the maintained publ
 managed constructor. Neither this module nor a fake test certifies those receipts.
 """
 
+import hashlib
+import json
 import math
 import re
 from collections import Counter
@@ -43,6 +45,111 @@ def _freeze(value):
     if isinstance(value, (list, tuple)):
         return tuple(_freeze(item) for item in value)
     return value
+
+
+ROLE_TRANSPORT_FORMAT = "core-flattened-role-ordinal-v1"
+
+
+def _role_transport(value):
+    """Validate an ordered, reversible map; no role value has a fallback."""
+    if (
+        not isinstance(value, Mapping)
+        or set(value) != {"format", "entities"}
+        or value["format"] != ROLE_TRANSPORT_FORMAT
+        or not isinstance(value["entities"], Mapping)
+        or set(value["entities"]) != ENTITIES - {"person"}
+    ):
+        raise NativeEngineError("Explicit ordered Core role transport is required")
+    result = {}
+    for entity, rows in value["entities"].items():
+        if not isinstance(rows, (list, tuple)) or not rows:
+            raise NativeEngineError("Every group needs actual flattened role metadata")
+        ordered = []
+        for row in rows:
+            if (
+                not isinstance(row, Mapping)
+                or set(row) != {"key", "max"}
+                or not isinstance(row["key"], str)
+                or not row["key"]
+                or not (
+                    row["max"] is None or type(row["max"]) is int and row["max"] >= 0
+                )
+            ):
+                raise NativeEngineError("Invalid flattened role metadata")
+            ordered.append({"key": row["key"], "max": row["max"]})
+        if len({row["key"] for row in ordered}) != len(ordered):
+            raise NativeEngineError("Flattened role keys must be unique")
+        result[entity] = ordered
+    return {"format": ROLE_TRANSPORT_FORMAT, "entities": result}
+
+
+def role_transport_from_entities(group_entities):
+    """Bind actual Core flattened-role order and capacity, never set order."""
+    entities = list(group_entities)
+    keys = [entity.key for entity in entities]
+    if len(set(keys)) != len(keys):
+        raise NativeEngineError("Group entity metadata repeats")
+    return _role_transport(
+        {
+            "format": ROLE_TRANSPORT_FORMAT,
+            "entities": {
+                entity.key: [
+                    {"key": role.key, "max": role.max}
+                    for role in entity.flattened_roles
+                ]
+                for entity in entities
+            },
+        }
+    )
+
+
+def role_transport_digest(transport):
+    """Hash validated role metadata, whose unbounded capacity is JSON null.
+
+    Capacity metadata is separate from input facts; missing input facts remain
+    invalid under the materializer's strict input_digest contract.
+    """
+    data = json.dumps(
+        _role_transport(transport),
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    ).encode("utf-8")
+    return hashlib.sha256(data).hexdigest()
+
+
+def role_transport_arrays(arrays, transport, *, decode=False):
+    """Translate only structural roles, leaving logical facts/specs unchanged.
+
+    Core 3.36 join_with_persons documents integer indices into flattened_roles.
+    Reject negative, boolean, fractional, text and out-of-range physical values;
+    never use Core's unrecognized-role/default-first-role behavior as a decoder.
+    """
+    transport = _role_transport(transport)
+    result = dict(_freeze(arrays))
+    for entity, metadata in transport["entities"].items():
+        name = f"person_{entity}_role"
+        periods = result.get(name)
+        if not isinstance(periods, Mapping) or set(periods) != {"eternity"}:
+            raise NativeEngineError("Role transport needs explicit eternity vectors")
+        vector = periods["eternity"]
+        if not isinstance(vector, tuple):
+            raise NativeEngineError("Role transport needs one-dimensional vectors")
+        keys = tuple(row["key"] for row in metadata)
+        ordinals = {key: index for index, key in enumerate(keys)}
+        if decode:
+            if any(
+                type(value) is not int or not 0 <= value < len(keys) for value in vector
+            ):
+                raise NativeEngineError("Unrecognized physical role ordinal")
+            converted = tuple(keys[value] for value in vector)
+        else:
+            if any(type(value) is not str or value not in ordinals for value in vector):
+                raise NativeEngineError("Unrecognized logical role key")
+            converted = tuple(ordinals[value] for value in vector)
+        result[name] = {"eternity": converted}
+    return _freeze(result)
 
 
 @dataclass(frozen=True)
@@ -317,6 +424,7 @@ def construct_managed_native(
     system_constructor,
     spm,
     read_packet,
+    role_transport,
     context_receipts,
     observe_context,
 ):
@@ -366,6 +474,10 @@ def construct_managed_native(
     if not isinstance(spm, Mapping) or not spm:
         raise NativeEngineError("Explicit source-backed SPM selection required")
     system = system_constructor(start_instant="2017-01-01", spm=dict(spm))
+    # An ordinal cannot change meaning between reference capture and native ingress.
+    role_transport = _role_transport(role_transport)
+    if role_transport != role_transport_from_entities(system.group_entities):
+        raise NativeEngineError("Actual native flattened role order/capacity differs")
     structural = {
         f"person_{entity}_{part}"
         for entity in ENTITIES - {"person"}
@@ -413,7 +525,10 @@ def construct_managed_native(
         or str(sim.default_calculation_period) != "2017"
     ):
         raise NativeEngineError("Constructor changed the explicit native2017 clock")
-    if _freeze(sim.dataset.load_dataset()) != plan.arrays:
+    if (
+        role_transport_arrays(sim.dataset.load_dataset(), role_transport, decode=True)
+        != plan.arrays
+    ):
         raise NativeEngineError(
             "Constructor projected, migrated or changed explicit inputs"
         )
@@ -438,6 +553,7 @@ def construct_managed_native(
         "parent_source_sha256": plan.source_sha256,
         "projection_receipt_sha256": plan.projection_receipt_sha256,
         "input_contract_sha256": plan.contract_sha256,
+        "role_transport": role_transport,
         "native_price_factor": (
             plan.native_price_factor.numerator,
             plan.native_price_factor.denominator,

@@ -11,13 +11,20 @@ import inspect
 import json
 import math
 import re
+from collections import Counter
 from collections.abc import Mapping
 from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path
 
 from cliffs2017.government_transfer_account import CASH_VARIABLE, GOVERNMENT_VARIABLE
-from cliffs2017.managed_native import ENTITIES, PacketPlan, prepare_packet
+from cliffs2017.managed_native import (
+    ENTITIES,
+    PacketPlan,
+    prepare_packet,
+    role_transport_arrays,
+    role_transport_digest,
+)
 from cliffs2017.native_currency import MONEY_UNITS, Disposition, InputContract
 from cliffs2017.native_periods import build_period_packet
 from cliffs2017.reference_benchmark_prices import FORBIDDEN_STORED_PRICE_INPUTS
@@ -131,9 +138,28 @@ def topology_inputs(sim):
         ):
             raise MaterializationError("Invalid source membership indices")
         values[f"person_{entity}_id"] = tuple(ids[index] for index in indices)
-        values[f"person_{entity}_role"] = tuple(
-            role.key for role in population.members_role
-        )
+        # Core's supported ordinal ingress stores actual flattened Role objects.
+        # A raw 0, bytes, string or foreign same-key object is not a valid role.
+        actual = tuple(population.entity.flattened_roles)
+        if population.entity.key != entity or not actual:
+            raise MaterializationError("Actual group role metadata is missing")
+        known = {id(role): role for role in actual}
+        observed = tuple(population._members_role)
+        if len(observed) != len(indices) or any(
+            id(role) not in known for role in observed
+        ):
+            raise MaterializationError("Unrecognized loaded group role object")
+        keys = tuple(role.key for role in observed)
+        capacity = {role.key: role.max for role in actual}
+        if len(capacity) != len(actual) or any(
+            type(key) is not str or not key for key in capacity
+        ):
+            raise MaterializationError("Invalid actual group role metadata")
+        for (member, key), count in Counter(zip(indices, keys)).items():
+            maximum = capacity[key]
+            if maximum is not None and (type(maximum) is not int or count > maximum):
+                raise MaterializationError("Observed group role capacity exceeded")
+        values[f"person_{entity}_role"] = keys
     return values, counts
 
 
@@ -530,13 +556,18 @@ class PrivateFiles:
 class WrittenDataset:
     """An authoritative Core descriptor plus receipt, not a certified source.
 
-    The Dataset object retains time_period=2017 before Core construction. The
-    current managed facade accepts only paths and cannot yet use this descriptor;
-    do not discard it and infer the clock from a first field instead.
+    The Dataset object retains time_period=2017. The managed facade uses its
+    explicit pre-construction native_input_period capability. Role vectors use
+    Core's documented ordinal ingress and are decoded to logical keys for audit.
     """
 
     dataset: object
     receipt: Mapping
+
+    def logical_arrays(self):
+        return role_transport_arrays(
+            self.dataset.load_dataset(), self.receipt["role_transport"], decode=True
+        )
 
 
 def _readback_types(decoded, plan):
@@ -552,7 +583,11 @@ def _readback_types(decoded, plan):
             dtype = getattr(vector, "dtype", None)
             kind = getattr(dtype, "kind", None)
             size = getattr(dtype, "itemsize", None)
-            expected = plan.specs[name].dtype
+            expected = (
+                "int64"
+                if name in {f"person_{entity}_role" for entity in ENTITIES - {"person"}}
+                else plan.specs[name].dtype
+            )
             valid = (
                 expected == "int64"
                 and kind == "i"
@@ -581,6 +616,7 @@ def write_native_dataset(
     path,
     *,
     serializer_source_sha256,
+    role_transport,
     dataset_type=None,
     files=None,
     observe_serializer=None,
@@ -631,9 +667,12 @@ def write_native_dataset(
             or observe_serializer(dataset_type) != serializer_source_sha256
         ):
             raise MaterializationError("Actual loaded serializer witness is missing")
+    encoded = role_transport_arrays(plan.arrays, role_transport)
+    # Semantic roles stay str/category in PacketPlan. Only their physical columns
+    # are integer ordinals; Core's literal string join must never see H5 bytes.
     data = {
         name: {period: list(values) for period, values in periods.items()}
-        for name, periods in plan.arrays.items()
+        for name, periods in encoded.items()
     }
     token = files.claim(path)
     # Core.save_dataset owns file/group/key creation; set its documented attributes.
@@ -660,7 +699,7 @@ def write_native_dataset(
         dataset.save_dataset(data)
         raw_decoded = dataset.load_dataset()
         observed_types = _readback_types(raw_decoded, plan)
-        decoded = _plain(raw_decoded)
+        decoded = role_transport_arrays(raw_decoded, role_transport, decode=True)
         if input_digest(decoded) != input_digest(plan.arrays):
             raise MaterializationError(
                 "Core serialization changed explicit inputs/periods"
@@ -694,6 +733,8 @@ def write_native_dataset(
         "serializer_source_sha256": serializer_source_sha256,
         "decoded_input_sha256": input_digest(decoded),
         "observed_transport_types": observed_types,
+        "role_transport": role_transport,
+        "role_transport_sha256": role_transport_digest(role_transport),
         "fields": {
             name: {
                 "entity": spec.entity,
@@ -705,7 +746,7 @@ def write_native_dataset(
         },
         "entity_counts": dict(plan.entity_counts),
         "descriptor_time_period": dataset.time_period,
-        "constructor_clock_qualification": "NOT_RUN; managed facade needs an explicit pre-construction local period capability",
+        "constructor_clock_qualification": "NOT_RUN_BY_WRITER; requires actual explicit native_input_period construction",
         "certification": "not_attested",
     }
     return WrittenDataset(dataset, receipt)

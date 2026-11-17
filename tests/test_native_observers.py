@@ -90,7 +90,9 @@ def specimen(*, amount=8.0):
         arrays[entity + "_id"] = {"2017": ids}
         pop = SimpleNamespace(ids=np.array(ids, dtype=np.int64), count=len(ids))
         if entity != "person":
-            pop._members_role = pop.members_role = (SimpleNamespace(key="member"),) * 2
+            role = SimpleNamespace(key="member", max=None)
+            pop.entity = SimpleNamespace(key=entity, flattened_roles=[role])
+            pop._members_role = pop.members_role = (role,) * 2
             pop.members_entity_id = np.array([0, 0], dtype=np.int64)
             specs[f"person_{entity}_id"] = InputSpec("person", "year", "int64", "id")
             arrays[f"person_{entity}_id"] = {"2017": ids * 2}
@@ -334,7 +336,9 @@ def test_reference_observer_records_actual_default2024_without_resetting_clock()
     base.tax_benefit_system = SimpleNamespace(
         variables=variables,
         group_entities=[
-            SimpleNamespace(key=entity, flattened_roles=[SimpleNamespace(key="member")])
+            SimpleNamespace(
+                key=entity, flattened_roles=[SimpleNamespace(key="member", max=None)]
+            )
             for entity in ENTITIES - {"person"}
         ],
     )

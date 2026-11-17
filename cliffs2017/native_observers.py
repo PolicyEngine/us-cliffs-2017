@@ -15,7 +15,7 @@ from pathlib import Path
 import sys
 
 from .commissioned import CANDIDATE, PERSON_FLAG
-from .managed_native import ENTITIES, RuntimeBinding
+from .managed_native import ENTITIES, RuntimeBinding, role_transport_from_entities
 from .native_materializer import input_digest, topology_inputs
 
 
@@ -328,9 +328,12 @@ class NativeObservers:
                     or str(table[name].dtype) != rule.source_dtype
                 ):
                     raise ObservationError("The named prepared source ingress differs")
+        self.role_transport = role_transport_from_entities(
+            sim.tax_benefit_system.group_entities
+        )
         self.role_keys = {
-            entity.key: {role.key for role in entity.flattened_roles}
-            for entity in sim.tax_benefit_system.group_entities
+            entity: {row["key"] for row in rows}
+            for entity, rows in self.role_transport["entities"].items()
         }
         self._reference_receipt = {
             "entity_counts": counts,
