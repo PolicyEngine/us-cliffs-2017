@@ -16,7 +16,7 @@ the job branch or the fresh-simulation route:
    tax before credits equals the 2017 single schedule on pay less the $6,350
    standard deduction and $4,050 exemption, the EITC stays $0 (a childless
    credit ends at $15,010, below every state's full-time pay), and market income
-   rises by exactly the pay;
+   rises by exactly the pay (adults taking the standard deduction, not blind);
 3. resources: each row's measures equal the change in the model's top-level
    household variables: ``d_net`` the change in household net income,
    ``d_net_single_ptc`` that plus the change in marketplace net premiums, and
@@ -119,7 +119,7 @@ def unreviewed_inputs(columns) -> list[str]:
     return sorted(c for c in columns if WORK_PATTERN.search(c) and c not in JOB_INPUTS and c not in REVIEWED_UNCHANGED)
 
 
-def fixture_sample(dataset, seed: int = SAMPLE_SEED, alone: int = 8, others: int = 30, non_candidates: int = 10):
+def fixture_sample(dataset, seed: int = SAMPLE_SEED, alone: int = 40, others: int = 30, non_candidates: int = 10):
     """Households chosen from stored inputs: candidates living alone in states without a
     wage income tax, other candidate households, and households with no candidate."""
     from cliffs2017.deflate import _keep_households
@@ -214,8 +214,11 @@ def run(rank: int = 1, scope: str = "resolved") -> dict:
     fips = np.asarray(sim.calc("state_fips", period=YEAR, map_to="person"))
     agi_base = tax_unit_to_person(sim, "adjusted_gross_income")
     market_base = np.asarray(sim.calc("household_market_income", period=YEAR, map_to="person"), dtype=np.float64)
+    itemizes = np.asarray(branch.calc("tax_unit_itemizes", period=YEAR, map_to="person"), dtype=bool)
+    blind = np.asarray(sim.calc("is_blind", period=YEAR), dtype=bool)
+    # Living alone with no AGI before the job, taking the standard deduction after it.
     simple = sel & (household_size == 1) & np.isin(fips, list(NO_WAGE_TAX_FIPS.values())) \
-        & (agi_base == 0) & (market_base == 0)
+        & (agi_base == 0) & ~itemizes & ~blind
     simple_pay = np.asarray(c["hourly"], dtype=np.float64)[simple] * HOURS_PER_YEAR
     if simple_pay.size and simple_pay.min() <= CHILDLESS_EITC_ENDS:
         raise ValueError("the EITC oracle assumes pay above the childless phase-out end")
