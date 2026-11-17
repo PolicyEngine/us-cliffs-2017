@@ -290,6 +290,14 @@ def test_published_price_file_does_not_authorize_2026_money():
         build_period_packet(**args)
 
 
+def test_hypothetical_2026_index_does_not_authorize_money():
+    args = options(year=2026, money=True)
+    # Supplying an index must not authorize an unsupported monetary year.
+    args["basis"] = PriceBasis({2025: 100, 2026: 101})
+    with pytest.raises(ContractError, match="2026 money"):
+        build_period_packet(**args)
+
+
 @given(
     st.integers(min_value=-(10**6), max_value=10**6),
     st.integers(min_value=1, max_value=1000),
