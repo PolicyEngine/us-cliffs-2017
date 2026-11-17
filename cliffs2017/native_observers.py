@@ -11,6 +11,7 @@ import importlib.metadata as metadata
 import inspect
 import json
 import math
+import re
 from pathlib import Path
 import sys
 
@@ -21,6 +22,31 @@ from .native_materializer import input_digest, topology_inputs
 
 class ObservationError(ValueError):
     """Current source, supplied facts or the exact pilot shock differs."""
+
+
+_PERIOD_METADATA = re.compile(
+    r"(?:ETERNITY|eternity|[0-9]{4}(?:-[0-9]{2}(?:-[0-9]{2})?)?"
+    r"|(?:year|month|day):[0-9]{4}(?:-[0-9]{2}(?:-[0-9]{2})?)?(?::[0-9]{1,6})?)"
+)
+
+
+def _period_key(value):
+    """Core3.36 spells its eternal Period ETERNITY; packets use eternity."""
+    return (
+        "eternity"
+        if type(value) is str and value in {"ETERNITY", "eternity"}
+        else value
+    )
+
+
+def input_period_refusal_metadata(error):
+    """Return only the bounded metadata attached by the supplied-input check."""
+    if not isinstance(error, ObservationError):
+        return None
+    value = getattr(error, "_input_period_metadata", None)
+    if value is None:
+        return None
+    return {**value, "available_periods": list(value["available_periods"])}
 
 
 TAKEUP_INPUTS = frozenset(
@@ -283,11 +309,31 @@ class NativeObservers:
     def _raw(self, sim, name, period):
         self._methods(sim)
         read_name = name + "_reported" if name in SOCIAL_SECURITY_SOURCES else name
-        found = [p for p in sim._get_set_input_periods(read_name) if str(p) == period]
+        periods = tuple(sim._get_set_input_periods(read_name))
+        found = [p for p in periods if _period_key(str(p)) == _period_key(period)]
         if len(found) != 1:
-            raise ObservationError(
+            error = ObservationError(
                 "A required surviving supplied input is missing: " + name
             )
+            # Names are authenticated contract symbols, never values/member IDs.
+            # Core periods are metadata; do not copy an exception message.
+            labels = tuple(str(p) for p in periods)
+            if (
+                (name in self.specs or name in {PERSON_FLAG, CANDIDATE})
+                and type(period) is str
+                and _PERIOD_METADATA.fullmatch(period)
+                and all(_PERIOD_METADATA.fullmatch(label) for label in labels)
+            ):
+                error._input_period_metadata = {
+                    "variable": name,
+                    "read_variable": read_name,
+                    "requested_period": period,
+                    "available_periods": labels[:32],
+                    "available_period_count": len(labels),
+                    "available_periods_truncated": len(labels) > 32,
+                    "matching_period_count": len(found),
+                }
+            raise error
         return sim._get_recorded_input_array(read_name, found[0])
 
     def observe_reference(self, sim):

@@ -469,6 +469,11 @@ def main(argv=None):
             ],
             "qualification": "not_qualified",
         }
+        from cliffs2017.native_observers import input_period_refusal_metadata
+
+        metadata = input_period_refusal_metadata(error)
+        if metadata is not None:
+            result["input_period_metadata"] = metadata
         code = 130 if isinstance(error, KeyboardInterrupt) else 1
     _json(output / "pilot-result.json", result)
     return code
