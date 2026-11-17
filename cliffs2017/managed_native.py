@@ -97,14 +97,16 @@ class PacketPlan:
     lookback_declarations: Mapping
 
 
-def _value(value, dtype):
+def _value(value, dtype, unit=None):
     if dtype == "bool":
         if type(value) is not bool:
             raise NativeEngineError("Boolean encoding requires actual booleans")
         return value
     if dtype == "str":
-        if not isinstance(value, str) or not value:
-            raise NativeEngineError("Category encoding requires nonempty strings")
+        if not isinstance(value, str) or (not value and unit != "code"):
+            raise NativeEngineError(
+                "Only explicit code fields may contain empty strings"
+            )
         return value
     if dtype == "int64":
         if type(value) is not int or not -(2**63) <= value < 2**63:
@@ -123,6 +125,15 @@ def _value(value, dtype):
     if abs(Fraction(encoded) - exact) > max(Fraction(1, 10**9), abs(exact) / 10**12):
         raise NativeEngineError("Numeric encoding exceeds declared transport tolerance")
     return encoded
+
+
+def _structural_values(arrays, specs, name):
+    period = specs[name].period
+    if period not in {"year", "eternity"}:
+        raise NativeEngineError(
+            "Structural IDs require an explicit annual or eternal period"
+        )
+    return arrays[name]["2017" if period == "year" else "eternity"]
 
 
 def prepare_packet(
@@ -236,24 +247,37 @@ def prepare_packet(
                 or len(values) != packet.entity_counts[spec.entity]
             ):
                 raise NativeEngineError("Wrong input vector/entity length")
-            encoded[name][period] = tuple(_value(value, spec.dtype) for value in values)
+            encoded[name][period] = tuple(
+                _value(value, spec.dtype, spec.unit) for value in values
+            )
     for entity in ENTITIES:
         name = f"{entity}_id"
-        if specs.get(name) != InputSpec(entity, "eternity", "int64", "id"):
-            raise NativeEngineError("Every entity needs exact eternal int64 IDs")
-        ids = encoded[name]["eternity"]
+        spec = specs.get(name)
+        if (
+            not isinstance(spec, InputSpec)
+            or spec.period not in {"year", "eternity"}
+            or spec != InputSpec(entity, spec.period, "int64", "id")
+        ):
+            raise NativeEngineError(
+                "Every entity needs exact annual or eternal int64 IDs"
+            )
+        ids = _structural_values(encoded, specs, name)
         if len(set(ids)) != len(ids):
             raise NativeEngineError("Duplicate entity IDs")
         if entity == "person":
             continue
         membership, role = f"person_{entity}_id", f"person_{entity}_role"
-        if specs.get(membership) != InputSpec(
-            "person", "eternity", "int64", "id"
-        ) or specs.get(role) != InputSpec("person", "eternity", "str", "category"):
+        member_spec = specs.get(membership)
+        if (
+            not isinstance(member_spec, InputSpec)
+            or member_spec.period not in {"year", "eternity"}
+            or member_spec != InputSpec("person", member_spec.period, "int64", "id")
+            or specs.get(role) != InputSpec("person", "eternity", "str", "category")
+        ):
             raise NativeEngineError(
-                "Explicit eternal membership and role declarations required"
+                "Explicit annual/eternal membership and eternal role declarations required"
             )
-        if set(encoded[membership]["eternity"]) != set(ids):
+        if set(_structural_values(encoded, specs, membership)) != set(ids):
             raise NativeEngineError("Dangling membership")
         if entity not in role_keys or not set(encoded[role]["eternity"]).issubset(
             role_keys[entity]
@@ -262,8 +286,8 @@ def prepare_packet(
         if entity != "household":
             nested = {}
             for group_id, household_id in zip(
-                encoded[membership]["eternity"],
-                encoded["person_household_id"]["eternity"],
+                _structural_values(encoded, specs, membership),
+                _structural_values(encoded, specs, "person_household_id"),
             ):
                 if group_id in nested and nested[group_id] != household_id:
                     raise NativeEngineError("A group spans multiple households")
@@ -345,7 +369,7 @@ def construct_managed_native(
     structural = {
         f"person_{entity}_{part}"
         for entity in ENTITIES - {"person"}
-        for part in ("id", "role")
+        for part in ("role",)
     }
     for name, spec in plan.specs.items():
         if name in structural:
@@ -359,7 +383,7 @@ def construct_managed_native(
             raise NativeEngineError("Unknown input or actual variable schema mismatch")
     for entity in system.group_entities:
         roles = plan.arrays[f"person_{entity.key}_role"]["eternity"]
-        members = plan.arrays[f"person_{entity.key}_id"]["eternity"]
+        members = _structural_values(plan.arrays, plan.specs, f"person_{entity.key}_id")
         accepted = {role.key: role.max for role in entity.flattened_roles}
         role_counts = Counter(zip(members, roles))
         for (member, role), count in role_counts.items():
