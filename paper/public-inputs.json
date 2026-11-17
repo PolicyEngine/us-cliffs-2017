@@ -1,0 +1,29 @@
+{
+  "access_checked": "2026-11-12",
+  "inputs": [
+    {
+      "repository": "policyengine/populace-us",
+      "repository_type": "dataset",
+      "filename": "populace_us_2024.h5",
+      "release": "populace-us-2024-spm-20260909",
+      "resolved_revision": "9a814a3b3b53c0ecd6e1737b6ec862c31300ef6f",
+      "sha256": "6496cc4393d4d3c6574f76eca231de5898c803b9067645591fd5c4d3e65aee84",
+      "bytes": 826917837,
+      "private": false,
+      "gated": false,
+      "metadata_url": "https://huggingface.co/api/datasets/policyengine/populace-us/revision/populace-us-2024-spm-20260909"
+    },
+    {
+      "repository": "policyengine/policyengine-us-data",
+      "repository_type": "model",
+      "filename": "enhanced_cps_2024.h5",
+      "resolved_revision": "da98b4faccf44492e91d80c0112a34ef6c3da0bd",
+      "sha256": "099e976f0a3672be74865ee70c90e8728319ddee967ba0b1c6877082aaa99eda",
+      "bytes": 99336804,
+      "private": false,
+      "gated": false,
+      "metadata_url": "https://huggingface.co/api/models/policyengine/policyengine-us-data/revision/da98b4faccf44492e91d80c0112a34ef6c3da0bd"
+    }
+  ],
+  "scope": "Public finished simulation inputs. This package does not reconstruct Microcosm from every upstream raw survey or administrative source. Expected hashes are public LFS identifiers; local checks record byte verification separately."
+}

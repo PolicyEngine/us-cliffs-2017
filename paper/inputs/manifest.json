@@ -1,0 +1,458 @@
+{
+  "source_repository": "https://github.com/PolicyEngine/us-cliffs-2017",
+  "source_commit": "ff0672e5f7f0728208599d988e9bd3cc2e195391",
+  "source_date": "2026-11-11",
+  "description": "Byte-for-byte committed aggregates of completed simulations; no record-level data",
+  "files": [
+    {
+      "path": "results/earnings_changes.json",
+      "sha256": "418e905e6c1f95f1dead65ba2e0b2aab1b71ce9696ec9b52a05d7eff141d7551",
+      "bytes": 146001
+    },
+    {
+      "path": "results/health_only.json",
+      "sha256": "cfddbd692fc6db8f6ae0f763ef89854f65b74cd36b599c57d494bc9e05624a56",
+      "bytes": 2507
+    },
+    {
+      "path": "results/take_up_bounds.json",
+      "sha256": "bcd32a48663f4e46f3a5e20024d5efeb3999a85220540fcd2223f860053066d3",
+      "bytes": 14972
+    },
+    {
+      "path": "results/driver_intervals.json",
+      "sha256": "6e5765630606c52a866ad6687247b6d116ded4848794476f9ca8e8e9f1eaa56d",
+      "bytes": 41053
+    },
+    {
+      "path": "results/counted_once/once_2017.json",
+      "sha256": "fa2839fca503f7559eba8098c975aff2178458a8297022f6c4c07651b7559d7e",
+      "bytes": 2966
+    },
+    {
+      "path": "results/counted_once/once_2025.json",
+      "sha256": "6b12fb3294bff5524048c14ca2b66535f703e0f5a83bb9741852edeab54e6831",
+      "bytes": 2884
+    },
+    {
+      "path": "april2025/precision_summary.json",
+      "sha256": "2c332f1540b0c362ce2488967027340bb7438d04cbf134729dc702fc34178949",
+      "bytes": 2314
+    },
+    {
+      "path": "METHODOLOGY.md",
+      "sha256": "32fcdef6a22d06b2fc7b4c65ff3445b4b22c419f9595bb5bf52431818ac05173",
+      "bytes": 34527
+    },
+    {
+      "path": "CORRECTION.md",
+      "sha256": "f92caca459afee5c4b6c1bc8104f4db2121e792b7c0c8f04c7b3a52076b5981f",
+      "bytes": 6526
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "5aab55d9450a8d8fb4f5b609997bcb4054d64528af3348605e744cff64a77fe7",
+      "bytes": 657
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_0_s0/cut_1000.json",
+      "sha256": "98aa7c3564b879e19601171597b51caff41c6ecf5b3fc848105442723a28e7af",
+      "bytes": 2171
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_0_s0/cut_10pct.json",
+      "sha256": "238535c08a91fe5ec900d3da76e329f36c6385daffac13d990f631030c415a77",
+      "bytes": 2167
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_0_s0/cut_1pct.json",
+      "sha256": "b78bfd899768ab5cbfc3a2ce15e371cef77803d64aec400b775ed11bfee42dae",
+      "bytes": 2167
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_0_s0/cut_2000.json",
+      "sha256": "6b632a5590cd6ee160da4670f04dc38cb3e87aeafd116bbb57525f84864a94d4",
+      "bytes": 2169
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_0_s0/cut_5000.json",
+      "sha256": "d04dbae490cbb3e753c6fbba15f04c13a048fe1dee54d3d7eb8123a64d952dc2",
+      "bytes": 2170
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_0_s0/raise_1000.json",
+      "sha256": "99193486352f491be72eca84c23146b5eef865f7b76c7883b590c54121651275",
+      "bytes": 2268
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_0_s0/raise_10pct.json",
+      "sha256": "2a023ea633b7a583047c2c3f1a179f138140c665c4ddad492d5e6578f7083b99",
+      "bytes": 2171
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_0_s0/raise_1pct.json",
+      "sha256": "328945355d6977040bda65355f2cedd7702ca6b8aed276eeac14df1ba1cc5cf8",
+      "bytes": 2173
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_0_s0/raise_2000.json",
+      "sha256": "8bf52962402d0af2fede0fb4f542a4113121650f02677fe8fcc01420152ca2ea",
+      "bytes": 2175
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_0_s0/raise_5000.json",
+      "sha256": "9265eadf616de3e609757dbb5f4b2088d1169c7aa1c7e0537d073ebf10ab9a0d",
+      "bytes": 2177
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_1_s0/cut_1000.json",
+      "sha256": "234bce78307b99425101b9ea486d722c62b798292764edf5afdaf7362a9f6f2c",
+      "bytes": 2172
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_1_s0/cut_10pct.json",
+      "sha256": "9dabca83af8b43b6428451c91f62dfdf8d0ce16a0000ddb1d97cba3e39f259cb",
+      "bytes": 2169
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_1_s0/cut_1pct.json",
+      "sha256": "46d56c5bf2605fa8676aec9ee86dd68abc344d5ad324e71c86f9d16a75cf493f",
+      "bytes": 2168
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_1_s0/cut_2000.json",
+      "sha256": "0de5764a39799555a128737c8aa84446ff5df26b52f258054040bd1a4652c33e",
+      "bytes": 2172
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_1_s0/cut_5000.json",
+      "sha256": "fb6a9196b0f591bd38970ffbad661ae339894bd7429f24c9ff691080eb0a4784",
+      "bytes": 2178
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_1_s0/raise_1000.json",
+      "sha256": "6509807896a71acefe1dc2d83bc31f5bfd20d7ff79529a113eb73745ffbe1c3e",
+      "bytes": 2269
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_1_s0/raise_10pct.json",
+      "sha256": "117d753f24b210bda55971d0aadb273041e8edc192b747e228c59299679ab794",
+      "bytes": 2170
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_1_s0/raise_1pct.json",
+      "sha256": "7ed5107d988145dfe90bff0e47ac7c96da205a78024da44c25f55d9102c81cac",
+      "bytes": 2173
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_1_s0/raise_2000.json",
+      "sha256": "024a0ac2ccdce7ef0f18511d5522530a45212d2fc4d400331089a73a0a580e4e",
+      "bytes": 2176
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_1_s0/raise_5000.json",
+      "sha256": "ad9112e58d2981c79245913658ac3ac75c2d9e1da3f05dbc03e5e7501a3876ef",
+      "bytes": 2176
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_2_s0/cut_1000.json",
+      "sha256": "d3bccccb18731e1566909a783113c143e09e2741b6005cf4cc472b3bfd511ca6",
+      "bytes": 2172
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_2_s0/cut_10pct.json",
+      "sha256": "6a3fc8cdd421109622687882801e6b7d390ea7db9ec4d40d023d607894dd829e",
+      "bytes": 2166
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_2_s0/cut_1pct.json",
+      "sha256": "578fc83dda932bb301c7d695fb92f8376106b7929302a3a511fedfc19cde73e3",
+      "bytes": 2165
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_2_s0/cut_2000.json",
+      "sha256": "596e6a8a881b510532ccd9702e705102f19b5e31916c525332cfc400bf086ed4",
+      "bytes": 2170
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_2_s0/cut_5000.json",
+      "sha256": "edf0b86ca4cba6f52f80987cf167f3ea9ef450803126e921feec5f5fad1c0fb3",
+      "bytes": 2169
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_2_s0/raise_1000.json",
+      "sha256": "3bb687870644a2bec9034b303a66a5c8119e0ec1c354eee17a1b3ecf83c80f13",
+      "bytes": 2268
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_2_s0/raise_10pct.json",
+      "sha256": "a224c3b721483402ef5d5d80c74404b57b2c902ac21ee247fec9c612045644e0",
+      "bytes": 2173
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_2_s0/raise_1pct.json",
+      "sha256": "82943788cfd3cf9cfd76cb6313a21c567aa74b0e60074cffab0972f6693af447",
+      "bytes": 2169
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_2_s0/raise_2000.json",
+      "sha256": "b1406937042a8c24281829b697c8fe8331441fa6671adc82695665598254cf84",
+      "bytes": 2173
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_2_s0/raise_5000.json",
+      "sha256": "04d0c8b1294a0df8d9ed37a5df180f94f29b2b8a95c9d4b7d4b82f1174ae9623",
+      "bytes": 2176
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_3_s0/cut_1000.json",
+      "sha256": "b7c47d720f96547f63039debd3e719ad3c4d1e795f8711f5dce22fc2403b0dfd",
+      "bytes": 2173
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_3_s0/cut_10pct.json",
+      "sha256": "0306caec947e59517d6675ec01a83c0256906181ce51bf2696e11f49d3dd898e",
+      "bytes": 2171
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_3_s0/cut_1pct.json",
+      "sha256": "26b8397203f78cd1e144bcabeb308e0e82783db317ca26ee78b3d600c7ea43b1",
+      "bytes": 2166
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_3_s0/cut_2000.json",
+      "sha256": "ce96e50833e025c758599886bd4520faa22a051a4cb2cc33f5b75c260cfe2be6",
+      "bytes": 2168
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_3_s0/cut_5000.json",
+      "sha256": "98c5fcc2ae51c1446df16feff51b3bccb9a634db95f54948c5048f8eaf379a6f",
+      "bytes": 2171
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_3_s0/raise_1000.json",
+      "sha256": "ff17ec105c152a93a618916e53c2b9183262512c5350575c7618cf962dd56fd2",
+      "bytes": 2271
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_3_s0/raise_10pct.json",
+      "sha256": "83e36a9bcd99e9fd29c8d6d4cda2695b21f32fe0704c586b87f6f55f6a5a219a",
+      "bytes": 2168
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_3_s0/raise_1pct.json",
+      "sha256": "70275dd8f4c8a8c10c00f0b86708b04aa75da0f7a403aeeb49892991f54b01c7",
+      "bytes": 2172
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_3_s0/raise_2000.json",
+      "sha256": "1518bacd16906c8b81c3f1a590b1548269211f8de73d048a9eb48455570419bf",
+      "bytes": 2175
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2017_p4_3_s0/raise_5000.json",
+      "sha256": "926a7edd2becbf460ed63a4695cd76b040a8fde6bd64cfe5d0ad738f05939d3d",
+      "bytes": 2175
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_0_s0/cut_1000.json",
+      "sha256": "21a1a1f04ad53c82157ee831d51b9f9cd1c111ac160e11bf4a503973368a250f",
+      "bytes": 2176
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_0_s0/cut_10pct.json",
+      "sha256": "50b104fd9af8f53e85cbd09801c7957e4c2e23699fa547250cd5e53828bf6e85",
+      "bytes": 2165
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_0_s0/cut_1pct.json",
+      "sha256": "49da59718c1ab0755376b80bab37f9f32dbb9e73402c32ed321b4ee9521da170",
+      "bytes": 2167
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_0_s0/cut_2000.json",
+      "sha256": "d5b53ffe9aec62cbe8d82a6b327f22a31c193d1fe5d96cef29739d74a0fef9dd",
+      "bytes": 2171
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_0_s0/cut_5000.json",
+      "sha256": "6f048f960910a099c05dbd8cdd82d0a72e49f2ed25d2027e583bca8e10096638",
+      "bytes": 2172
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_0_s0/raise_1000.json",
+      "sha256": "5eeee7ba14337fb43cb9265594be31d49a6db654fe314b646b3d4c62ee2d72c6",
+      "bytes": 2269
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_0_s0/raise_10pct.json",
+      "sha256": "702285dfcf532deb484b9dacb58e94e6ce27e047d436e1bb0a61a94a56e43799",
+      "bytes": 2176
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_0_s0/raise_1pct.json",
+      "sha256": "a74df6536cbd98a6767089ef3ee8805b2feb1206d14324ffad0c4cbd1b38e606",
+      "bytes": 2168
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_0_s0/raise_2000.json",
+      "sha256": "aac4572c0515843cd86578db4492c3983bb38202bb8443ab153371ce50ce6624",
+      "bytes": 2175
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_0_s0/raise_5000.json",
+      "sha256": "91049f8f49f90a1e10dbdc22f320ff6c1a12278d7526bd86c5708f0a7f1d1eb3",
+      "bytes": 2177
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_1_s0/cut_1000.json",
+      "sha256": "56cc24cde4da87a808de2e9469750a4d6187408061288cec446fb5827a460211",
+      "bytes": 2170
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_1_s0/cut_10pct.json",
+      "sha256": "6a31ef90ab1e2ac7687a1dcc56aecad911fb75612c859cbfa615193ed7028d56",
+      "bytes": 2168
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_1_s0/cut_1pct.json",
+      "sha256": "d448ba8d1996e2bc032881377472d940601b49f1b46a515657ef92efb4d923bd",
+      "bytes": 2170
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_1_s0/cut_2000.json",
+      "sha256": "b9fa81599711ec4ed9d1d571b87ca3b65cc1fd788ce64bde267657604d5a0759",
+      "bytes": 2174
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_1_s0/cut_5000.json",
+      "sha256": "735506d848bd2131039c53ff91ef1bcc92f80fcf720eae53e67e8d015d9d41e6",
+      "bytes": 2168
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_1_s0/raise_1000.json",
+      "sha256": "d00f2798ec4644c5b4d2fd786eacfd432bcc070d957a23ae70724aa9628badcf",
+      "bytes": 2269
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_1_s0/raise_10pct.json",
+      "sha256": "e1d5b21ef7cb2d230f46463bd1cd24f2c4b322c7451a7a4376a8b0abc4d7df0d",
+      "bytes": 2171
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_1_s0/raise_1pct.json",
+      "sha256": "b5e4012a6552560d6dc29311ba4e54a0a04483fdbbf5bba831e963872afb1f5a",
+      "bytes": 2172
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_1_s0/raise_2000.json",
+      "sha256": "d116f2af207521da074e62fe2bae1ba1d8be21a04a1c2685afb88c8efd83e76b",
+      "bytes": 2174
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_1_s0/raise_5000.json",
+      "sha256": "bbe73c375fcbf769e8bcc6c3bf2bd77d18e5e9cd5b4dc5c0e59a828c74f4d2dd",
+      "bytes": 2175
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_2_s0/cut_1000.json",
+      "sha256": "9ffaa138a3dcf6aae79de7c46915040f4e550737ee203226776a09c43ae0fa4e",
+      "bytes": 2171
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_2_s0/cut_10pct.json",
+      "sha256": "1acaf9700765a16e6ee7d873bc0ad158c35ad676c65786ec16942fde8db470c2",
+      "bytes": 2161
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_2_s0/cut_1pct.json",
+      "sha256": "0d0f5d26270d586d57ffda414eb23d67b15f234555092f5522b8a0bfe08cab1a",
+      "bytes": 2165
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_2_s0/cut_2000.json",
+      "sha256": "e30d621e4cf762af575a536cf1274e699a5e81d73ac1778d662be955d35a2b26",
+      "bytes": 2173
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_2_s0/cut_5000.json",
+      "sha256": "c3dd4f81bf6de31784c44a161e547371704efeb0e1953c9caec55a70f5e0daae",
+      "bytes": 2172
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_2_s0/raise_1000.json",
+      "sha256": "dad958f3f76472145c8452c155e8aad12c866a21087e2546b90d648079bce857",
+      "bytes": 2266
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_2_s0/raise_10pct.json",
+      "sha256": "13d338ac315bb741b13546fab7268c53a512bba24a6fd43cb29ea7ec978a30ca",
+      "bytes": 2172
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_2_s0/raise_1pct.json",
+      "sha256": "3e4b105d21581e00ce4007faab9220e052134e1f90c26dab5193328eafc3c6cd",
+      "bytes": 2166
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_2_s0/raise_2000.json",
+      "sha256": "854092199bd2802cb261170f46c689777b24bb22a9b51598e3408b00d10efdb6",
+      "bytes": 2176
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_2_s0/raise_5000.json",
+      "sha256": "14134b3e22be737ad9f94757433e7e2c5f3f5554e4707a01a99cb5e1bfbf385f",
+      "bytes": 2175
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_3_s0/cut_1000.json",
+      "sha256": "2ff70bccfa7711989ac71e49e680344b43e9aa6bfbe46703a3ae50dcb3b35614",
+      "bytes": 2175
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_3_s0/cut_10pct.json",
+      "sha256": "a600fce0ab68c728da1c1bbebdb7906e7758b0837c9fe7c1cd1cfcae6b104d0e",
+      "bytes": 2169
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_3_s0/cut_1pct.json",
+      "sha256": "1631bbfb20a57efde36ff1d95e97ce4c65f54442027df696d063b9d6f9deb3bc",
+      "bytes": 2167
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_3_s0/cut_2000.json",
+      "sha256": "40021d52d995ff2165db1a679bea7c5fbcf068cac3ce5294cd92bd805a08b45e",
+      "bytes": 2170
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_3_s0/cut_5000.json",
+      "sha256": "4c991a34d4d48320d0d3f509ab52a85c7e8c9dbb5fdef70fb36637801435a26c",
+      "bytes": 2174
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_3_s0/raise_1000.json",
+      "sha256": "2b1cc12bcf7bc3a90e916a7ac46bf04296788cc90e80f7636fa7190e9a24fd45",
+      "bytes": 2268
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_3_s0/raise_10pct.json",
+      "sha256": "8fdba41ab1c0235a37461e5769779352eec2666c82b0e5ac75dffdd06be0a347",
+      "bytes": 2174
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_3_s0/raise_1pct.json",
+      "sha256": "ccb9542890bd0a2933f5b870498f05bd5dacf9af58d19740542c4e43781c0e01",
+      "bytes": 2172
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_3_s0/raise_2000.json",
+      "sha256": "afdbb5ba53d918341e56028a91ce40738adb9675405e19503d4901769b7e62fd",
+      "bytes": 2176
+    },
+    {
+      "path": "results/earnings_changes/parts/changes_2025_p4_3_s0/raise_5000.json",
+      "sha256": "dcc46205a7244af04e27b6bd10f6a8d230c996088ff64cacd9ea7b1fbec56f27",
+      "bytes": 2173
+    }
+  ]
+}

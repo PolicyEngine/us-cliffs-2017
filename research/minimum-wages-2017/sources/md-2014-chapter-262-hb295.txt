@@ -1,0 +1,46 @@
+Source: 2014 Laws of Maryland, Chapter 262 (House Bill 295), "Maryland Minimum Wage Act of 2014", as enacted; approved by the Governor 5 May 2014
+URL: https://mgaleg.maryland.gov/2014RS/Chapters_noln/CH_262_hb0295e.pdf
+Accessed: 2026-11-16 (HTTP GET with curl; text extracted with pdftotext)
+Used for: Maryland State minimum wage, Md. Code, Lab. & Empl. § 3-413(c): $8.75 for the 12-month period beginning 1 July 2016 (so on 1 January 2017) and $9.25 for the 12-month period beginning 1 July 2017.
+
+Reading note: the chapter marks committee amendments with strike-through and italics, and
+plain-text extraction keeps struck words beside enacted ones (for example "$10.10 $8.75" and
+the struck CPI-indexing paragraph (IV)). The rendered page 5 was checked. Enacted text of
+§ 3-413(c)(1), page 5, with struck matter removed:
+
+  (C) THE STATE MINIMUM WAGE RATE IS:
+    (1) FOR THE 6-MONTH PERIOD BEGINNING JANUARY 1, 2015, $8.00 PER HOUR;
+    (2) FOR THE 12-MONTH PERIOD BEGINNING JULY 1, 2015, $8.25 PER HOUR;
+    (3) FOR THE 12-MONTH PERIOD BEGINNING JULY 1, 2016, $8.75 PER HOUR;
+    (4) FOR THE 12-MONTH PERIOD BEGINNING JULY 1, 2017, $9.25 PER HOUR; AND
+    (5) BEGINNING JULY 1, 2018, $10.10 PER HOUR.
+
+The CPI-indexing provisions printed after (5) are struck in the enacted chapter.
+
+Raw extraction of the same passage (pdftotext -layout, page 5; struck and enacted words interleaved):
+
+                   (ii)  a training wage under regulations that the Commissioner
+adopts that include the conditions and limitations authorized under the federal Fair
+Labor Standards Amendments of 1989.
+
+      (C)   (1)   THE STATE MINIMUM WAGE RATE IS:
+
+               (I) (1)    FOR    THE     12–MONTH     6–MONTH              PERIOD
+BEGINNING JULY 1, 2014 JANUARY 1, 2015, $8.20 $8.00 PER HOUR;
+
+                (II) (2)   FOR THE 12–MONTH PERIOD BEGINNING JULY 1,
+2015 JANUARY 1, 2016 JULY 1, 2015, $9.15 $8.25 PER HOUR; AND
+
+               (III) (3)  FOR THE 12–MONTH PERIOD FOR THE 12–MONTH
+PERIOD BEGINNING JULY 1, 2016 JANUARY 1, 2017 JULY 1, 2016, $10.10 $8.75
+PER HOUR HOUR;
+
+            (4)   FOR THE 12–MONTH PERIOD BEGINNING JULY 1, 2017, $9.25
+PER HOUR; AND
+
+            (5)   BEGINNING JULY 1, 2018, $10.10 PER HOUR; AND
+
+Effective-date and approval lines (page 13; the enacted effective date is July 1, 2014, the earlier dates are struck):
+       SECTION 2. 3. AND BE IT FURTHER ENACTED, That this Act shall take
+effect June 1, 2014 January 1, 2015 July 1, 2014.
+Approved by the Governor, May 5, 2014.

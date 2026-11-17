@@ -18,3 +18,19 @@ per_person/
 
 # Local run queue (scripts/runner.zsh)
 .runner
+
+# Rendered journal pages are local visual-QA intermediates.
+paper/checks/ijm-render/
+paper/checks/pe-render/
+
+# Rendered manuscripts are build outputs: rebuild them with paper/build_*.py.
+paper/manuscript.pdf
+paper/policyengine/manuscript.pdf
+paper/submission/manuscript.pdf
+paper/submission/manuscript.docx
+
+# Combined-union part results and per-source-household totals (record-level).
+results/combined_union/
+
+# Coverage split scenario rows, classified flags and aggregate part records (record-level).
+results/coverage_split/

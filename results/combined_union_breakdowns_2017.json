@@ -1,0 +1,5039 @@
+{
+ "ages_62_64": {
+  "candidates_aged_62_64": {
+   "adults": {
+    "estimate": 3165417.934559747,
+    "interval_95": [
+     2730943.495622616,
+     3620683.546829611
+    ],
+    "standard_error": 228640.74831058524
+   },
+   "household_members": {
+    "estimate": 7603953.860563412,
+    "interval_95": [
+     6555252.616794906,
+     8676192.630047647
+    ],
+    "standard_error": 551093.7808870893
+   },
+   "households": {
+    "estimate": 3004592.389189125,
+    "interval_95": [
+     2594395.2752266717,
+     3436575.998462797
+    ],
+    "standard_error": 214758.96067609722
+   },
+   "sample": {
+    "sample_households": 1497
+   },
+   "share_of_candidates": {
+    "adults": {
+     "estimate": 0.13772558100850077,
+     "interval_95": [
+      0.12000011259661723,
+      0.1558155068809642
+     ]
+    }
+   }
+  },
+  "combined": {
+   "all_candidates": {
+    "below_half": {
+     "adults": {
+      "estimate": 26537298.13116818,
+      "interval_95": [
+       25169004.01067446,
+       27965786.76683962
+      ],
+      "standard_error": 713293.6515775666
+     },
+     "household_members": {
+      "estimate": 68392233.08557504,
+      "interval_95": [
+       64919097.7022834,
+       72086000.744398
+      ],
+      "standard_error": 1837836.4545176635
+     },
+     "households": {
+      "estimate": 20306476.469965447,
+      "interval_95": [
+       19290824.876396764,
+       21325218.063628323
+      ],
+      "standard_error": 516477.0678061238
+     },
+     "sample": {
+      "sample_households": 10035
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 11939458.623356294,
+      "interval_95": [
+       10999900.630192492,
+       12923767.08304903
+      ],
+      "standard_error": 492829.5988944148
+     },
+     "household_members": {
+      "estimate": 31909535.352546178,
+      "interval_95": [
+       29398318.13858242,
+       34562202.56952301
+      ],
+      "standard_error": 1327212.1109097372
+     },
+     "households": {
+      "estimate": 9534451.137743503,
+      "interval_95": [
+       8819028.557911975,
+       10282238.63183667
+      ],
+      "standard_error": 374612.0715422187
+     },
+     "sample": {
+      "sample_households": 4126
+     }
+    }
+   },
+   "excluding_ages_62_64": {
+    "below_half": {
+     "adults": {
+      "estimate": 26105710.15473543,
+      "interval_95": [
+       24754652.114727885,
+       27519715.585963283
+      ],
+      "standard_error": 708777.9122829122
+     },
+     "household_members": {
+      "estimate": 67568602.09206074,
+      "interval_95": [
+       64113536.30775698,
+       71263068.42442907
+      ],
+      "standard_error": 1831285.770223343
+     },
+     "households": {
+      "estimate": 19993036.946603518,
+      "interval_95": [
+       18979069.115117315,
+       21001429.444415707
+      ],
+      "standard_error": 513714.6565645786
+     },
+     "sample": {
+      "sample_households": 9900
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 11698290.43958813,
+      "interval_95": [
+       10759667.747830568,
+       12669898.057451406
+      ],
+      "standard_error": 489231.1398966616
+     },
+     "household_members": {
+      "estimate": 31395198.682696275,
+      "interval_95": [
+       28900570.193967488,
+       34018406.88153895
+      ],
+      "standard_error": 1319942.781036154
+     },
+     "households": {
+      "estimate": 9347208.747145414,
+      "interval_95": [
+       8638993.945555566,
+       10080559.628655823
+      ],
+      "standard_error": 371562.14730544586
+     },
+     "sample": {
+      "sample_households": 4071
+     }
+    }
+   },
+   "fall": {
+    "below_half": {
+     "adults": {
+      "estimate": 431587.97643275023,
+      "interval_95": [
+       296872.878148008,
+       579165.3684681085
+      ],
+      "standard_error": 72663.90112209051
+     },
+     "household_members": {
+      "estimate": 823630.9935143025,
+      "interval_95": [
+       521977.4463750705,
+       1159435.805066335
+      ],
+      "standard_error": 164931.21407790043
+     },
+     "households": {
+      "estimate": 313439.5233619271,
+      "interval_95": [
+       199402.23892759025,
+       438061.06607720174
+      ],
+      "standard_error": 62119.92822852681
+     },
+     "sample": {
+      "sample_households": 135
+     },
+     "share_of_group": {
+      "adults": {
+       "estimate": 0.016263448309601955,
+       "interval_95": [
+        0.011235899229335272,
+        0.021764041392692696
+       ]
+      },
+      "household_members": {
+       "estimate": 0.012042756265667523,
+       "interval_95": [
+        0.0076984541260605825,
+        0.01690630119915909
+       ]
+      }
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 241168.18376816195,
+      "interval_95": [
+       136939.690417196,
+       360094.4751015618
+      ],
+      "standard_error": 57042.61831545176
+     },
+     "household_members": {
+      "estimate": 514336.66984989936,
+      "interval_95": [
+       271873.83704410924,
+       805159.1608993572
+      ],
+      "standard_error": 138556.36351859118
+     },
+     "households": {
+      "estimate": 187242.390598087,
+      "interval_95": [
+       99453.92332641929,
+       290624.0552890066
+      ],
+      "standard_error": 49475.03615218168
+     },
+     "sample": {
+      "sample_households": 55
+     },
+     "share_of_group": {
+      "adults": {
+       "estimate": 0.0201992562122023,
+       "interval_95": [
+        0.01148137315550929,
+        0.03007390773899945
+       ]
+      },
+      "household_members": {
+       "estimate": 0.01611858850864961,
+       "interval_95": [
+        0.008473032851985354,
+        0.025345235847651432
+       ]
+      }
+     }
+    }
+   }
+  },
+  "job": {
+   "all_candidates": {
+    "below_half": {
+     "adults": {
+      "estimate": 5423303.803745715,
+      "interval_95": [
+       4886354.786593046,
+       5989861.796431248
+      ],
+      "standard_error": 282132.6096387874
+     },
+     "household_members": {
+      "estimate": 20845703.686226103,
+      "interval_95": [
+       18806095.36475819,
+       23103650.687833175
+      ],
+      "standard_error": 1095767.2269692984
+     },
+     "households": {
+      "estimate": 5009003.684112808,
+      "interval_95": [
+       4525257.435086941,
+       5527530.779303867
+      ],
+      "standard_error": 253091.278971515
+     },
+     "sample": {
+      "sample_households": 2813
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 2680254.5096761426,
+      "interval_95": [
+       2296877.608665603,
+       3079567.4751951876
+      ],
+      "standard_error": 200283.5072081469
+     },
+     "household_members": {
+      "estimate": 10775584.957855053,
+      "interval_95": [
+       9260908.07782382,
+       12440210.43179114
+      ],
+      "standard_error": 813190.8471791403
+     },
+     "households": {
+      "estimate": 2494780.9182830467,
+      "interval_95": [
+       2151529.643011269,
+       2862405.1672963314
+      ],
+      "standard_error": 180305.7573880552
+     },
+     "sample": {
+      "sample_households": 1124
+     }
+    }
+   },
+   "excluding_ages_62_64": {
+    "below_half": {
+     "adults": {
+      "estimate": 4991715.827312965,
+      "interval_95": [
+       4482630.770940184,
+       5556869.8484931635
+      ],
+      "standard_error": 272275.6773679941
+     },
+     "household_members": {
+      "estimate": 19777023.70448294,
+      "interval_95": [
+       17781044.20848203,
+       22016484.9429114
+      ],
+      "standard_error": 1080004.8611768587
+     },
+     "households": {
+      "estimate": 4604144.798815005,
+      "interval_95": [
+       4160007.8145219223,
+       5115008.150902983
+      ],
+      "standard_error": 244226.72238543828
+     },
+     "sample": {
+      "sample_households": 2638
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 2439086.325907981,
+      "interval_95": [
+       2074866.0868654372,
+       2829700.3181832763
+      ],
+      "standard_error": 190015.00935194682
+     },
+     "household_members": {
+      "estimate": 10188853.447865184,
+      "interval_95": [
+       8711587.170739237,
+       11811282.008455902
+      ],
+      "standard_error": 798345.3371851353
+     },
+     "households": {
+      "estimate": 2277059.943756021,
+      "interval_95": [
+       1950491.4562323648,
+       2629246.0417230856
+      ],
+      "standard_error": 171538.3897857948
+     },
+     "sample": {
+      "sample_households": 1055
+     }
+    }
+   },
+   "fall": {
+    "below_half": {
+     "adults": {
+      "estimate": 431587.97643275023,
+      "interval_95": [
+       296872.878148008,
+       579165.3684681085
+      ],
+      "standard_error": 72663.90112209051
+     },
+     "household_members": {
+      "estimate": 1068679.9817431658,
+      "interval_95": [
+       732116.7438846854,
+       1449324.4398650217
+      ],
+      "standard_error": 184772.41488948723
+     },
+     "households": {
+      "estimate": 404858.8852978015,
+      "interval_95": [
+       276067.3514619102,
+       543598.4192617686
+      ],
+      "standard_error": 68804.93987626476
+     },
+     "sample": {
+      "sample_households": 175
+     },
+     "share_of_group": {
+      "adults": {
+       "estimate": 0.0795802691589332,
+       "interval_95": [
+        0.05542735593165214,
+        0.10553327847950233
+       ]
+      },
+      "household_members": {
+       "estimate": 0.05126619843729723,
+       "interval_95": [
+        0.035547921497516066,
+        0.0693582606461769
+       ]
+      }
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 241168.18376816195,
+      "interval_95": [
+       136939.690417196,
+       360094.4751015618
+      ],
+      "standard_error": 57042.61831545176
+     },
+     "household_members": {
+      "estimate": 586731.5099898686,
+      "interval_95": [
+       326776.1339253511,
+       890664.0596968252
+      ],
+      "standard_error": 143792.49049154407
+     },
+     "households": {
+      "estimate": 217720.97452702548,
+      "interval_95": [
+       122399.08053671585,
+       326641.331713859
+      ],
+      "standard_error": 52345.82705095651
+     },
+     "sample": {
+      "sample_households": 69
+     },
+     "share_of_group": {
+      "adults": {
+       "estimate": 0.08997958324386982,
+       "interval_95": [
+        0.05256479967155001,
+        0.13171541851751095
+       ]
+      },
+      "household_members": {
+       "estimate": 0.054450084360585946,
+       "interval_95": [
+        0.030906312886101975,
+        0.08272819127365814
+       ]
+      }
+     }
+    }
+   }
+  }
+ },
+ "aggregation": "MicroSeries.sum and MicroSeries.groupby(source household).sum on analysis flags in each part's frozen simulation, with map_to='person' for residents; stored weight columns are not read.",
+ "candidate_pool": {
+  "age_18_61": {
+   "adults": {
+    "estimate": 19818096.902559504,
+    "interval_95": [
+     18739542.172613475,
+     20977272.085825
+    ],
+    "standard_error": 573923.750499962
+   },
+   "household_members": {
+    "estimate": 67714402.69552094,
+    "interval_95": [
+     64005534.434081785,
+     71611116.29957059
+    ],
+    "standard_error": 1928916.1421921484
+   },
+   "households": {
+    "estimate": 17532326.234337017,
+    "interval_95": [
+     16587740.70550615,
+     18506594.551779613
+    ],
+    "standard_error": 485824.73890008905
+   },
+   "sample": {
+    "sample_households": 10427
+   },
+   "share_of_candidates": {
+    "adults": {
+     "estimate": 0.8622744189914991,
+     "interval_95": [
+      0.8441844931190355,
+      0.879999887403383
+     ]
+    }
+   }
+  },
+  "age_62_64": {
+   "adults": {
+    "estimate": 3165417.934559747,
+    "interval_95": [
+     2730943.495622616,
+     3620683.546829611
+    ],
+    "standard_error": 228640.74831058524
+   },
+   "household_members": {
+    "estimate": 7603953.860563412,
+    "interval_95": [
+     6555252.616794906,
+     8676192.630047647
+    ],
+    "standard_error": 551093.7808870893
+   },
+   "households": {
+    "estimate": 3004592.389189125,
+    "interval_95": [
+     2594395.2752266717,
+     3436575.998462797
+    ],
+    "standard_error": 214758.96067609722
+   },
+   "sample": {
+    "sample_households": 1497
+   },
+   "share_of_candidates": {
+    "adults": {
+     "estimate": 0.13772558100850077,
+     "interval_95": [
+      0.12000011259661723,
+      0.1558155068809642
+     ]
+    }
+   }
+  },
+  "candidates": {
+   "adults": {
+    "estimate": 22983514.83711925,
+    "interval_95": [
+     21819706.012185108,
+     24245494.593938768
+    ],
+    "standard_error": 622556.4897936126
+   },
+   "household_members": {
+    "estimate": 74428685.28169303,
+    "interval_95": [
+     70620760.8866933,
+     78483691.04337268
+    ],
+    "standard_error": 1996453.3458148665
+   },
+   "households": {
+    "estimate": 20256513.86369925,
+    "interval_95": [
+     19229711.809719894,
+     21325462.993530497
+    ],
+    "standard_error": 527074.6091296608
+   },
+   "sample": {
+    "sample_households": 11728
+   }
+  },
+  "expansion_expanded": {
+   "adults": {
+    "estimate": 13364049.196824735,
+    "interval_95": [
+     12482060.652016615,
+     14302071.430171262
+    ],
+    "standard_error": 468597.81300410064
+   },
+   "household_members": {
+    "estimate": 43216499.59480764,
+    "interval_95": [
+     40317387.59958833,
+     46211958.834899604
+    ],
+    "standard_error": 1506761.6186903003
+   },
+   "households": {
+    "estimate": 11682697.141475836,
+    "interval_95": [
+     10917362.057346374,
+     12459996.843035856
+    ],
+    "standard_error": 394413.10803605494
+   },
+   "sample": {
+    "sample_households": 7425
+   },
+   "share_of_candidates": {
+    "adults": {
+     "estimate": 0.5814623782103722,
+     "interval_95": [
+      0.5546581583139443,
+      0.6079480588462505
+     ]
+    }
+   }
+  },
+  "expansion_not_expanded": {
+   "adults": {
+    "estimate": 9330330.449721003,
+    "interval_95": [
+     8556026.227948392,
+     10174437.854284562
+    ],
+    "standard_error": 412242.72832774813
+   },
+   "household_members": {
+    "estimate": 30407125.328649126,
+    "interval_95": [
+     27916807.7730102,
+     33048234.110079136
+    ],
+    "standard_error": 1317123.120607198
+   },
+   "households": {
+    "estimate": 8319712.005566443,
+    "interval_95": [
+     7655554.175380527,
+     9024735.051200276
+    ],
+    "standard_error": 350048.1730911509
+   },
+   "sample": {
+    "sample_households": 4094
+   },
+   "share_of_candidates": {
+    "adults": {
+     "estimate": 0.4059575097996832,
+     "interval_95": [
+      0.37944230451763306,
+      0.43318388248643097
+     ]
+    }
+   }
+  },
+  "expansion_not_expanded_partial": {
+   "adults": {
+    "estimate": 289135.19057351263,
+    "interval_95": [
+     159340.07224323397,
+     433369.200172418
+    ],
+    "standard_error": 70167.36059406017
+   },
+   "household_members": {
+    "estimate": 805060.3582362593,
+    "interval_95": [
+     429881.5471582697,
+     1242904.3998065
+    ],
+    "standard_error": 207252.47174414524
+   },
+   "households": {
+    "estimate": 254104.71665697353,
+    "interval_95": [
+     142331.1038588023,
+     380164.13809502486
+    ],
+    "standard_error": 60713.1022842567
+   },
+   "sample": {
+    "sample_households": 209
+   },
+   "share_of_candidates": {
+    "adults": {
+     "estimate": 0.012580111989944562,
+     "interval_95": [
+      0.0070011744413949065,
+      0.01879972880919842
+     ]
+    }
+   }
+  },
+  "rank_1_2": {
+   "adults": {
+    "estimate": 22728764.008340433,
+    "interval_95": [
+     21590720.02227851,
+     23964767.692855854
+    ],
+    "standard_error": 609956.2960667604
+   },
+   "household_members": {
+    "estimate": 74428685.28169303,
+    "interval_95": [
+     70620760.8866933,
+     78483691.04337268
+    ],
+    "standard_error": 1996453.3458148665
+   },
+   "households": {
+    "estimate": 20256513.86369925,
+    "interval_95": [
+     19229711.809719894,
+     21325462.993530497
+    ],
+    "standard_error": 527074.6091296608
+   },
+   "sample": {
+    "sample_households": 11728
+   },
+   "share_of_candidates": {
+    "adults": {
+     "estimate": 0.9889159325462533,
+     "interval_95": [
+      0.9828188275964181,
+      0.9941211467413883
+     ]
+    }
+   }
+  },
+  "rank_3_plus": {
+   "adults": {
+    "estimate": 254750.8287788143,
+    "interval_95": [
+     134549.21958650005,
+     399497.9766855422
+    ],
+    "standard_error": 67168.34322257209
+   },
+   "household_members": {
+    "estimate": 1182932.3209743374,
+    "interval_95": [
+     641325.5320428425,
+     1842851.7816107904
+    ],
+    "standard_error": 303139.93892109854
+   },
+   "households": {
+    "estimate": 202885.68478107682,
+    "interval_95": [
+     116241.6658552946,
+     302031.63101681037
+    ],
+    "standard_error": 47699.90866607593
+   },
+   "sample": {
+    "sample_households": 195
+   },
+   "share_of_candidates": {
+    "adults": {
+     "estimate": 0.011084067453746543,
+     "interval_95": [
+      0.0058788532586113405,
+      0.01718117240358202
+     ]
+    }
+   }
+  },
+  "sample_candidates": 13610,
+  "sample_candidates_by_rank": {
+   "1": 11728,
+   "2": 1634,
+   "3": 195,
+   "4": 42,
+   "5": 8,
+   "6": 1,
+   "7": 1,
+   "8": 1
+  }
+ },
+ "code": {
+  "code_sha256": {
+   "cliffs2017/": "e791e670d5407372c89fb549580813d6d82254fa590dd8049f85963ab09d4e73",
+   "scripts/combined_union_breakdowns.py": "7b93c6216f179c2e93b7e1792dc489385e0323a922b10ca465b1de397dd833e0",
+   "scripts/combined_union_inputs.py": "0b835f7015f419d3b35706fa6be39a5853770a2588fb1912974d549eee56a039",
+   "scripts/driver_intervals.py": "43dc64c9f69b526fce07b19e1e25d1ba52718a4a23fbfba13d820dd415eeb957",
+   "scripts/expanded_combined_union.py": "e25a889950d4317dba6cd9e46a4f47b143022d68f6cf35453e2bb4b1ca7d2f29",
+   "scripts/expanded_historical.py": "ccecaada83cb9eb1b295f4f24e5a61677aa06bbc19a870a6ab0f8c4cab707dac",
+   "scripts/expanded_job_entry.py": "ef9f30a895400f9d8ae03c9fd21eb5932c0389d771aa2ad0aa63735754210e8c",
+   "scripts/expanded_raise_union.py": "06ca2cbe6eae66cf7e8e16799cbdd700f68d863a8878ee2dff398477d8840475",
+   "scripts/job_entry_outputs.py": "f593bfa364fb2ad8f3ec5105ed22ed303bc32f7edf61274285bc4475cace223a",
+   "scripts/modal-requirements.txt": "bb2b87b97cac020dfe5b1ac0b2260eedc924e598d8070e502006f7c8c071d85a",
+   "scripts/modal_combined_union.py": "a655c1ff694ba29c1e054e2f1ff4f877839cc13f0bb155b1d518001dde5996dd",
+   "scripts/modal_combined_union_breakdowns.py": "02c72f2aaef5bab47bdaee0a1537d8182b00ceafa9889f5e0abf32825f378156"
+  },
+  "combine_head": "5229975c38e4b0f69f605f246a06be1cde3b5a63",
+  "launch_commit": "5229975c38e4b0f69f605f246a06be1cde3b5a63",
+  "raise_experiment_code": {
+   "cliffs2017_sha256": "e791e670d5407372c89fb549580813d6d82254fa590dd8049f85963ab09d4e73",
+   "commits": [
+    "0e4313e36bc3ceee402750ae64be47b079394665",
+    "276c280d24def919578ea0d8ae0e95e7ff1e1ea9",
+    "e86177b26373921325129eda682ce2777da18765"
+   ],
+   "script_sha256": "ced7b6efa97310f825083505e95e5e945195ba1ef3c41beb1e0d77e206fe8b12"
+  }
+ },
+ "conventions": {
+  "candidate_rank": "Candidates are ranked within their household by person ID (expanded_job_rank); the raise test instead takes the household's two highest earners by market income.",
+  "fall": "Households (and their residents) in the full group but not the narrower one; adults flagged in the full group but not the narrower one. Narrowing the job test can move a household from strict to additional, so the additional group is not bounded by its full count.",
+  "groups": "strict: households below 0% retention on any test in the set; additional: below 50% and not below 0% on any test; below_half: below 50%. Residents counted once.",
+  "health": "with_health: government-valued health coverage, ACA premium tax credit counted once (d_net_single_ptc); without_health: every part of net income except health benefits and costs (d_net_without_health).",
+  "job_test": "A candidate (aged 18-64; no wages or self-employment income; not a full-time student; not reporting disability) takes a full-time job (40 hours x 52 weeks) at the state's 2017 minimum wage, one candidate at a time.",
+  "largest_loss": "The part of net income whose change lowers household resources most for the flagged adult's own test (cliffs2017.decompose.primary_driver), with the premium tax credit counted once (the marketplace premium left out, as driver_intervals.largest_loss does). A raise worker flagged by several raises takes the smallest such raise. EITC is not separable: it is inside household_refundable_tax_credits.",
+  "units": "adults: flagged adults (or candidates); households; household_members: residents of those households."
+ },
+ "coverage": {
+  "jurisdictions_covered": [
+   "AK",
+   "AL",
+   "AR",
+   "AZ",
+   "CA",
+   "CO",
+   "CT",
+   "DC",
+   "DE",
+   "FL",
+   "GA",
+   "HI",
+   "IA",
+   "ID",
+   "IL",
+   "IN",
+   "KS",
+   "KY",
+   "LA",
+   "MA",
+   "MD",
+   "ME",
+   "MI",
+   "MN",
+   "MO",
+   "MS",
+   "MT",
+   "NC",
+   "ND",
+   "NE",
+   "NH",
+   "NJ",
+   "NM",
+   "NV",
+   "NY",
+   "OH",
+   "OK",
+   "OR",
+   "PA",
+   "RI",
+   "SC",
+   "SD",
+   "TN",
+   "TX",
+   "UT",
+   "VA",
+   "VT",
+   "WA",
+   "WI",
+   "WV",
+   "WY"
+  ],
+  "jurisdictions_deferred": {},
+  "sample_candidates_tested": 13610,
+  "scopes_included": [
+   "resolved",
+   "states-MD-NY"
+  ],
+  "wages_json_sha256_by_scope": {
+   "resolved": "6142cdbd3af1736413c1c73ff9d5102d7563e4c8366efa67aae7ec8067850955",
+   "states-MD-NY": "88edd6d54d4e987071df497213da2f45922ae06fb9304afdf0da4c49c796b6e5"
+  }
+ },
+ "external_benchmark": {
+  "candidate_pool_adults": {
+   "estimate": 22983514.83711925,
+   "interval_95": [
+    21819706.012185108,
+    24245494.593938768
+   ]
+  },
+  "definitional_gaps": [
+   "Census counts people who did not work at all in the year by their own main reason; the job test's candidates have no wages or self-employment income in the model's 2017 data and are not flagged as full-time students or as having a disability (is_full_time_student, is_disabled). A person with a disability who names another main reason stays in the Census rows after removing 'ill or disabled', and a person who names illness without a disability flag is a candidate.",
+   "Census combines going to school with other reasons, so only bounds match the candidate pool: removing 'ill or disabled' alone keeps every student (upper comparator); removing 'school or other' too also drops non-students who gave other reasons (lower comparator).",
+   "Both keep retirees aged 18-64 who report no disability: the 2017 table counts 7.5 million adults aged 18-64 who did not work and named retirement, 5.7 million of them aged 55-64. The table has no 62-64 row.",
+   "Census weights CPS ASEC respondents; the model counts the calibrated Microcosm households of the 2017 run, whose own calibration need not match these tables."
+  ],
+  "not_used": "Brookings' 'Meet the out-of-work' (2017) covers 130 cities and counties, not the nation.",
+  "sources": [
+   {
+    "aged_55_64_thousands": {
+     "could_not_find_work": 267,
+     "home_or_family": 1840,
+     "ill_or_disabled": 5311,
+     "retired": 5655,
+     "school_or_other": 282,
+     "total": 13355
+    },
+    "comparators": {
+     "did_not_work_18_64": 45914000.0,
+     "excluding_ill_or_disabled": 33008000.0,
+     "excluding_ill_or_disabled_and_school_or_other": 22039000.0
+    },
+    "data_year": 2017,
+    "did_not_work_last_year_thousands": {
+     "could_not_find_work": 1701,
+     "home_or_family": 12828,
+     "ill_or_disabled": 12906,
+     "retired": 7511,
+     "school_or_other": 10969,
+     "total": 45914
+    },
+    "file_sha256": "fe302bd9ebba4c6995c725505cbd3fb44fad76859ea07a169195b96cf9d2c730",
+    "id": "census_cps_asec_pov24_2017",
+    "pool_over_comparator": {
+     "did_not_work_18_64": {
+      "estimate": 0.5005774891562323,
+      "pool_interval_over_comparator": [
+       0.47522990835442586,
+       0.5280632180585174
+      ]
+     },
+     "excluding_ill_or_disabled": {
+      "estimate": 0.6963013462530069,
+      "pool_interval_over_comparator": [
+       0.6610429596517544,
+       0.7345338885706122
+      ]
+     },
+     "excluding_ill_or_disabled_and_school_or_other": {
+      "estimate": 1.0428565196750874,
+      "pool_interval_over_comparator": [
+       0.9900497305769367,
+       1.1001177273895715
+      ]
+     }
+    },
+    "publisher": "U.S. Census Bureau",
+    "row": "18 to 64 years",
+    "survey": "Current Population Survey, 2018 Annual Social and Economic Supplement",
+    "table": "CPS Poverty Table POV-24: Reason for Not Working or Reason for Spending Time Out of the Labor Force -- Poverty Status of People Who Did Not Work or Who Spent Time Out of the Labor Force: 2017 (all income levels, all races, both sexes)",
+    "url": "https://www2.census.gov/programs-surveys/cps/tables/pov-24/2018/pov24_001_1.xls"
+   },
+   {
+    "aged_55_64_thousands": {
+     "could_not_find_work": 235,
+     "home_or_family": 2072,
+     "ill_or_disabled": 5088,
+     "retired": 5683,
+     "school_or_other": 222,
+     "total": 13300
+    },
+    "comparators": {
+     "did_not_work_18_64": 44940000.0,
+     "excluding_ill_or_disabled": 32749000.0,
+     "excluding_ill_or_disabled_and_school_or_other": 21871000.0
+    },
+    "data_year": 2018,
+    "did_not_work_last_year_thousands": {
+     "could_not_find_work": 1683,
+     "home_or_family": 12888,
+     "ill_or_disabled": 12191,
+     "retired": 7301,
+     "school_or_other": 10878,
+     "total": 44940
+    },
+    "file_sha256": "f99c78fdd902382ecc59b516c24b55650c177832aa9f821e94099bb006f93c5f",
+    "id": "census_cps_asec_pov24_2018",
+    "pool_over_comparator": {
+     "did_not_work_18_64": {
+      "estimate": 0.5114266763933968,
+      "pool_interval_over_comparator": [
+       0.4855297287980665,
+       0.5395081129047344
+      ]
+     },
+     "excluding_ill_or_disabled": {
+      "estimate": 0.7018081418400334,
+      "pool_interval_over_comparator": [
+       0.6662709094074661,
+       0.7403430515111535
+      ]
+     },
+     "excluding_ill_or_disabled_and_school_or_other": {
+      "estimate": 1.0508671225421449,
+      "pool_interval_over_comparator": [
+       0.9976547031313203,
+       1.1085681767609514
+      ]
+     }
+    },
+    "publisher": "U.S. Census Bureau",
+    "row": "18 to 64 years",
+    "survey": "Current Population Survey, 2019 Annual Social and Economic Supplement",
+    "table": "CPS Poverty Table POV-24 (same table): 2018 (all income levels, all races, both sexes)",
+    "url": "https://www2.census.gov/programs-surveys/cps/tables/pov-24/2019/pov24_001_1.xls"
+   }
+  ]
+ },
+ "invariants_every_part": {
+  "expansion_split_adds_to_each_group": true,
+  "fall_equals_full_minus_narrower": true,
+  "largest_losses_add_to_each_group": true,
+  "narrower_job_test_never_raises_strict_or_below_half": true,
+  "pool_equals_job_runner_weighted_candidates": true,
+  "pool_splits_add_to_the_pool": true,
+  "strict_plus_additional_equals_below_half": true
+ },
+ "invariants_national": {
+  "expansion_split_adds_to_each_group": true,
+  "fall_equals_full_minus_narrower": true,
+  "largest_losses_add_to_each_group": true,
+  "narrower_job_test_never_raises_strict_or_below_half": true,
+  "pool_splits_add_to_the_pool": true,
+  "strict_plus_additional_equals_below_half": true
+ },
+ "largest_loss": {
+  "groups": {
+   "combined_additional": {
+    "by_family": {
+     "health_coverage": {
+      "adults": {
+       "estimate": 1637832.9512205727,
+       "interval_95": [
+        1355266.3426275232,
+        1924629.8331923033
+       ],
+       "standard_error": 147420.7147598649
+      },
+      "sample": {
+       "sample_adults": 1004
+      },
+      "share": {
+       "estimate": 0.12322974887524547,
+       "interval_95": [
+        0.10304263419835442,
+        0.14354447220412073
+       ]
+      }
+     },
+     "other": {
+      "adults": {
+       "estimate": 11653056.352454558,
+       "interval_95": [
+        10802641.796424687,
+        12495892.341509726
+       ],
+       "standard_error": 435830.056567115
+      },
+      "sample": {
+       "sample_adults": 6339
+      },
+      "share": {
+       "estimate": 0.8767702511247545,
+       "interval_95": [
+        0.8564555277958791,
+        0.8969573658016456
+       ]
+      }
+     }
+    },
+    "by_largest_loss": {
+     "assigned_aca_ptc": {
+      "adults": {
+       "estimate": 173353.25135543657,
+       "interval_95": [
+        86697.1153526461,
+        279596.4667660899
+       ],
+       "standard_error": 49734.365795742415
+      },
+      "label": "ACA premium tax credit",
+      "sample": {
+       "sample_adults": 68,
+       "source_households": 57
+      },
+      "share": {
+       "estimate": 0.013043013706201118,
+       "interval_95": [
+        0.006513552895145473,
+        0.020954513703139357
+       ]
+      }
+     },
+     "chip": {
+      "adults": {
+       "estimate": 153822.11739000122,
+       "interval_95": [
+        72402.68400496818,
+        251241.00629658537
+       ],
+       "standard_error": 45644.25119029984
+      },
+      "label": "CHIP",
+      "sample": {
+       "sample_adults": 85,
+       "source_households": 66
+      },
+      "share": {
+       "estimate": 0.011573500754947006,
+       "interval_95": [
+        0.0054842922812440185,
+        0.0188438239802332
+       ]
+      }
+     },
+     "chip_premium": {
+      "adults": {
+       "estimate": 1.5057948072208092,
+       "interval_95": [
+        0.0013598395744338632,
+        4.474623490590602
+       ],
+       "standard_error": 1.446333326164667
+      },
+      "label": "CHIP premium",
+      "sample": {
+       "sample_adults": 5,
+       "source_households": 4
+      },
+      "share": {
+       "estimate": 1.1329526360620836e-07,
+       "interval_95": [
+        1.0146332937713561e-10,
+        3.4601093000387883e-07
+       ]
+      }
+     },
+     "free_school_meals": {
+      "adults": {
+       "estimate": 139744.97074328776,
+       "interval_95": [
+        57776.716115080955,
+        245903.07918876232
+       ],
+       "standard_error": 48691.94869194537
+      },
+      "label": "Free school meals",
+      "sample": {
+       "sample_adults": 117,
+       "source_households": 82
+      },
+      "share": {
+       "estimate": 0.010514343137644384,
+       "interval_95": [
+        0.004367451440321001,
+        0.018420315773308365
+       ]
+      }
+     },
+     "household_refundable_tax_credits": {
+      "adults": {
+       "estimate": 1842388.0631855885,
+       "interval_95": [
+        1515719.2520070006,
+        2198088.602149584
+       ],
+       "standard_error": 173227.8756565549
+      },
+      "label": "Refundable tax credits (EITC, refundable CTC and state credits together)",
+      "sample": {
+       "sample_adults": 1040,
+       "source_households": 756
+      },
+      "share": {
+       "estimate": 0.1386203752879155,
+       "interval_95": [
+        0.11570137034594899,
+        0.1627049880389365
+       ]
+      }
+     },
+     "household_state_benefits": {
+      "adults": {
+       "estimate": 161138.0608312414,
+       "interval_95": [
+        74070.91377513025,
+        266289.42152251623
+       ],
+       "standard_error": 48293.41685155045
+      },
+      "label": "State benefits",
+      "sample": {
+       "sample_adults": 62,
+       "source_households": 52
+      },
+      "share": {
+       "estimate": 0.012123948755384207,
+       "interval_95": [
+        0.005613977162472693,
+        0.019850567926665764
+       ]
+      }
+     },
+     "household_tax_before_refundable_credits": {
+      "adults": {
+       "estimate": 5399940.038489703,
+       "interval_95": [
+        4829482.007567774,
+        5997068.858995097
+       ],
+       "standard_error": 300814.50339787314
+      },
+      "label": "Taxes before refundable credits (income and employee payroll)",
+      "sample": {
+       "sample_adults": 3528,
+       "source_households": 2517
+      },
+      "share": {
+       "estimate": 0.40628884306458996,
+       "interval_95": [
+        0.3742754666668688,
+        0.4403030123282248
+       ]
+      }
+     },
+     "housing_assistance": {
+      "adults": {
+       "estimate": 297176.81420595257,
+       "interval_95": [
+        179569.500500733,
+        431985.6377266068
+       ],
+       "standard_error": 64665.40679534343
+      },
+      "label": "Housing assistance",
+      "sample": {
+       "sample_adults": 140,
+       "source_households": 110
+      },
+      "share": {
+       "estimate": 0.022359437913893294,
+       "interval_95": [
+        0.013638498950926068,
+        0.03226109397769104
+       ]
+      }
+     },
+     "medicaid_cost": {
+      "adults": {
+       "estimate": 1156651.1172291317,
+       "interval_95": [
+        920999.78461731,
+        1409815.6020897415
+       ],
+       "standard_error": 125415.73719127719
+      },
+      "label": "Medicaid",
+      "sample": {
+       "sample_adults": 764,
+       "source_households": 664
+      },
+      "share": {
+       "estimate": 0.0870258634167768,
+       "interval_95": [
+        0.06990378171914906,
+        0.10508034881099934
+       ]
+      }
+     },
+     "msp_cost": {
+      "adults": {
+       "estimate": 154004.95945119602,
+       "interval_95": [
+        78142.65443263557,
+        239458.4832247614
+       ],
+       "standard_error": 40838.33848483038
+      },
+      "label": "Medicare Savings Programs",
+      "sample": {
+       "sample_adults": 82,
+       "source_households": 76
+      },
+      "share": {
+       "estimate": 0.011587257702056951,
+       "interval_95": [
+        0.005891698457323457,
+        0.01799623415641786
+       ]
+      }
+     },
+     "reduced_price_school_meals": {
+      "adults": {
+       "estimate": 238340.07099636074,
+       "interval_95": [
+        140485.75965133807,
+        345825.2203992034
+       ],
+       "standard_error": 52819.15441835919
+      },
+      "label": "Reduced-price school meals",
+      "sample": {
+       "sample_adults": 292,
+       "source_households": 194
+      },
+      "share": {
+       "estimate": 0.017932590178932277,
+       "interval_95": [
+        0.010631456900910056,
+        0.02601983990375493
+       ]
+      }
+     },
+     "snap": {
+      "adults": {
+       "estimate": 2191791.5475641256,
+       "interval_95": [
+        1831476.5076252813,
+        2565083.272188217
+       ],
+       "standard_error": 188230.6121274841
+      },
+      "label": "SNAP",
+      "sample": {
+       "sample_adults": 808,
+       "source_households": 600
+      },
+      "share": {
+       "estimate": 0.16490932227974106,
+       "interval_95": [
+        0.13964358817025965,
+        0.19029044689153174
+       ]
+      }
+     },
+     "ssi": {
+      "adults": {
+       "estimate": 933888.3758061202,
+       "interval_95": [
+        718449.7660505775,
+        1161679.664152436
+       ],
+       "standard_error": 112977.0417810091
+      },
+      "label": "SSI",
+      "sample": {
+       "sample_adults": 206,
+       "source_households": 193
+      },
+      "share": {
+       "estimate": 0.0702653038836074,
+       "interval_95": [
+        0.05449095137513804,
+        0.08670819486403397
+       ]
+      }
+     },
+     "tanf": {
+      "adults": {
+       "estimate": 377429.1742028962,
+       "interval_95": [
+        204411.0095841892,
+        571577.9611128356
+       ],
+       "standard_error": 92615.30508051997
+      },
+      "label": "TANF",
+      "sample": {
+       "sample_adults": 72,
+       "source_households": 47
+      },
+      "share": {
+       "estimate": 0.028397586164421014,
+       "interval_95": [
+        0.01536915384974111,
+        0.042689953604323955
+       ]
+      }
+     },
+     "total_unemployment_compensation": {
+      "adults": {
+       "estimate": 47441.60276874827,
+       "interval_95": [
+        13447.331842072086,
+        87898.10021415824
+       ],
+       "standard_error": 19318.524431343994
+      },
+      "label": "Unemployment compensation",
+      "sample": {
+       "sample_adults": 51,
+       "source_households": 39
+      },
+      "share": {
+       "estimate": 0.0035694829506728305,
+       "interval_95": [
+        0.0010247783532323447,
+        0.006645298991530277
+       ]
+      }
+     },
+     "wic": {
+      "adults": {
+       "estimate": 23777.63366053367,
+       "interval_95": [
+        659.6118021361842,
+        57598.50104019984
+       ],
+       "standard_error": 15117.60385779127
+      },
+      "label": "WIC",
+      "sample": {
+       "sample_adults": 23,
+       "source_households": 18
+      },
+      "share": {
+       "estimate": 0.0017890175079525185,
+       "interval_95": [
+        4.9983628184355735e-05,
+        0.004294278913643767
+       ]
+      }
+     }
+    },
+    "flagged_adults": {
+     "adults": {
+      "estimate": 13290889.303675132,
+      "interval_95": [
+       12389257.517899519,
+       14214944.247169167
+      ],
+      "standard_error": 464126.1688166251
+     },
+     "sample": {
+      "sample_adults": 7343
+     }
+    }
+   },
+   "combined_strict": {
+    "by_family": {
+     "health_coverage": {
+      "adults": {
+       "estimate": 11004931.655518314,
+       "interval_95": [
+        10107995.401555628,
+        11951292.88688623
+       ],
+       "standard_error": 473194.5435601244
+      },
+      "sample": {
+       "sample_adults": 4681
+      },
+      "share": {
+       "estimate": 0.9217278607582899,
+       "interval_95": [
+        0.9016731849433836,
+        0.9405727697492793
+       ]
+      }
+     },
+     "other": {
+      "adults": {
+       "estimate": 934526.9678379793,
+       "interval_95": [
+        698959.5810357308,
+        1181101.8347094094
+       ],
+       "standard_error": 121837.21259946977
+      },
+      "sample": {
+       "sample_adults": 526
+      },
+      "share": {
+       "estimate": 0.07827213924171003,
+       "interval_95": [
+        0.0594272302507208,
+        0.0983268150566163
+       ]
+      }
+     }
+    },
+    "by_largest_loss": {
+     "assigned_aca_ptc": {
+      "adults": {
+       "estimate": 264367.7643644344,
+       "interval_95": [
+        127955.8269381614,
+        436845.38119409344
+       ],
+       "standard_error": 79326.66472290407
+      },
+      "label": "ACA premium tax credit",
+      "sample": {
+       "sample_adults": 79,
+       "source_households": 55
+      },
+      "share": {
+       "estimate": 0.022142357765474473,
+       "interval_95": [
+        0.010651534395188834,
+        0.036368954069261515
+       ]
+      }
+     },
+     "chip": {
+      "adults": {
+       "estimate": 259101.80065256928,
+       "interval_95": [
+        128752.4379796453,
+        418791.5062041421
+       ],
+       "standard_error": 74016.04484789667
+      },
+      "label": "CHIP",
+      "sample": {
+       "sample_adults": 113,
+       "source_households": 68
+      },
+      "share": {
+       "estimate": 0.021701302280633335,
+       "interval_95": [
+        0.010785870671972456,
+        0.03499082969661359
+       ]
+      }
+     },
+     "chip_premium": {
+      "adults": {
+       "estimate": 8131.005859375,
+       "interval_95": [
+        0.0,
+        24393.017578125
+       ],
+       "standard_error": 8022.998922704764
+      },
+      "label": "CHIP premium",
+      "sample": {
+       "sample_adults": 2,
+       "source_households": 1
+      },
+      "share": {
+       "estimate": 0.000681019643844563,
+       "interval_95": [
+        0.0,
+        0.0021336261910666113
+       ]
+      }
+     },
+     "free_school_meals": {
+      "adults": {
+       "estimate": 104956.61909681663,
+       "interval_95": [
+        45809.06712824133,
+        178169.22723385258
+       ],
+       "standard_error": 34281.542253084204
+      },
+      "label": "Free school meals",
+      "sample": {
+       "sample_adults": 88,
+       "source_households": 70
+      },
+      "share": {
+       "estimate": 0.008790735192255504,
+       "interval_95": [
+        0.003848851254166432,
+        0.014815213574661987
+       ]
+      }
+     },
+     "household_refundable_tax_credits": {
+      "adults": {
+       "estimate": 10373.300941270543,
+       "interval_95": [
+        0.581151045637671,
+        31116.451987752596
+       ],
+       "standard_error": 10789.538109543239
+      },
+      "label": "Refundable tax credits (EITC, refundable CTC and state credits together)",
+      "sample": {
+       "sample_adults": 8,
+       "source_households": 7
+      },
+      "share": {
+       "estimate": 0.0008688250672419945,
+       "interval_95": [
+        4.8401810090850866e-08,
+        0.00278498265633126
+       ]
+      }
+     },
+     "household_state_benefits": {
+      "adults": {
+       "estimate": 52821.96766144651,
+       "interval_95": [
+        14042.41487803464,
+        102739.79805536567
+       ],
+       "standard_error": 23171.597466996198
+      },
+      "label": "State benefits",
+      "sample": {
+       "sample_adults": 22,
+       "source_households": 16
+      },
+      "share": {
+       "estimate": 0.004424150987726926,
+       "interval_95": [
+        0.0011621221382046,
+        0.008690275127309488
+       ]
+      }
+     },
+     "household_tax_before_refundable_credits": {
+      "adults": {
+       "estimate": 37826.29960938665,
+       "interval_95": [
+        4.814748382821563,
+        95711.2368518667
+       ],
+       "standard_error": 25824.259391125706
+      },
+      "label": "Taxes before refundable credits (income and employee payroll)",
+      "sample": {
+       "sample_adults": 13,
+       "source_households": 9
+      },
+      "share": {
+       "estimate": 0.00316817544267793,
+       "interval_95": [
+        4.041129590519894e-07,
+        0.008129190677568546
+       ]
+      }
+     },
+     "housing_assistance": {
+      "adults": {
+       "estimate": 9915.206337388838,
+       "interval_95": [
+        0.0,
+        29745.616776340175
+       ],
+       "standard_error": 9889.800241428018
+      },
+      "label": "Housing assistance",
+      "sample": {
+       "sample_adults": 2,
+       "source_households": 2
+      },
+      "share": {
+       "estimate": 0.0008304569453419304,
+       "interval_95": [
+        0.0,
+        0.0026152837834114815
+       ]
+      }
+     },
+     "medicaid_cost": {
+      "adults": {
+       "estimate": 10150591.734373908,
+       "interval_95": [
+        9285857.341466894,
+        11062945.431047354
+       ],
+       "standard_error": 452593.591584837
+      },
+      "label": "Medicaid",
+      "sample": {
+       "sample_adults": 4402,
+       "source_households": 3081
+      },
+      "share": {
+       "estimate": 0.8501718590922577,
+       "interval_95": [
+        0.8200763437727789,
+        0.87857533259293
+       ]
+      }
+     },
+     "msp_cost": {
+      "adults": {
+       "estimate": 322739.3502680276,
+       "interval_95": [
+        169217.09079682693,
+        502517.8097797647
+       ],
+       "standard_error": 85830.55996373479
+      },
+      "label": "Medicare Savings Programs",
+      "sample": {
+       "sample_adults": 85,
+       "source_households": 77
+      },
+      "share": {
+       "estimate": 0.027031321976079898,
+       "interval_95": [
+        0.014314695881213866,
+        0.041783592017685646
+       ]
+      }
+     },
+     "reduced_price_school_meals": {
+      "adults": {
+       "estimate": 349708.5463409425,
+       "interval_95": [
+        202147.99170304777,
+        518937.8156980929
+       ],
+       "standard_error": 81504.18674317935
+      },
+      "label": "Reduced-price school meals",
+      "sample": {
+       "sample_adults": 225,
+       "source_households": 144
+      },
+      "share": {
+       "estimate": 0.02929015103388634,
+       "interval_95": [
+        0.017130578151562322,
+        0.04292489559866839
+       ]
+      }
+     },
+     "snap": {
+      "adults": {
+       "estimate": 136622.8388468661,
+       "interval_95": [
+        58908.16675958131,
+        234112.23417020502
+       ],
+       "standard_error": 45212.79871546209
+      },
+      "label": "SNAP",
+      "sample": {
+       "sample_adults": 93,
+       "source_households": 59
+      },
+      "share": {
+       "estimate": 0.011442967655133106,
+       "interval_95": [
+        0.005061705217151758,
+        0.01944107942139808
+       ]
+      }
+     },
+     "ssi": {
+      "adults": {
+       "estimate": 30929.783909088932,
+       "interval_95": [
+        0.0,
+        81358.40961505286
+       ],
+       "standard_error": 22723.371263623376
+      },
+      "label": "SSI",
+      "sample": {
+       "sample_adults": 3,
+       "source_households": 3
+      },
+      "share": {
+       "estimate": 0.0025905516225487183,
+       "interval_95": [
+        0.0,
+        0.006940491649140601
+       ]
+      }
+     },
+     "tanf": {
+      "adults": {
+       "estimate": 164432.64499667147,
+       "interval_95": [
+        71974.4234079165,
+        278798.3931103118
+       ],
+       "standard_error": 53475.01905000913
+      },
+      "label": "TANF",
+      "sample": {
+       "sample_adults": 40,
+       "source_households": 26
+      },
+      "share": {
+       "estimate": 0.013772202759261115,
+       "interval_95": [
+        0.006071261165542524,
+        0.023342966174520433
+       ]
+      }
+     },
+     "total_unemployment_compensation": {
+      "adults": {
+       "estimate": 24940.89074473898,
+       "interval_95": [
+        0.15018722877430263,
+        62131.16270034475
+       ],
+       "standard_error": 15784.65256765018
+      },
+      "label": "Unemployment compensation",
+      "sample": {
+       "sample_adults": 18,
+       "source_households": 14
+      },
+      "share": {
+       "estimate": 0.002088946536985264,
+       "interval_95": [
+        1.2459353152672364e-08,
+        0.005184960030962048
+       ]
+      }
+     },
+     "wic": {
+      "adults": {
+       "estimate": 11998.86935336201,
+       "interval_95": [
+        0.24327009160188032,
+        35125.423351081576
+       ],
+       "standard_error": 11073.721282628881
+      },
+      "label": "WIC",
+      "sample": {
+       "sample_adults": 14,
+       "source_households": 11
+      },
+      "share": {
+       "estimate": 0.0010049759986511862,
+       "interval_95": [
+        2.051844664138044e-08,
+        0.0029988394216373493
+       ]
+      }
+     }
+    },
+    "flagged_adults": {
+     "adults": {
+      "estimate": 11939458.623356294,
+      "interval_95": [
+       10999900.630192492,
+       12923767.08304903
+      ],
+      "standard_error": 492829.5988944148
+     },
+     "sample": {
+      "sample_adults": 5207
+     }
+    }
+   },
+   "job_additional": {
+    "by_family": {
+     "health_coverage": {
+      "adults": {
+       "estimate": 1399716.646642943,
+       "interval_95": [
+        1143643.6089111236,
+        1677208.2603366626
+       ],
+       "standard_error": 136933.71931930116
+      },
+      "sample": {
+       "sample_adults": 984
+      },
+      "share": {
+       "estimate": 0.5329944024989965,
+       "interval_95": [
+        0.4660444449118025,
+        0.5993915041499038
+       ]
+      }
+     },
+     "other": {
+      "adults": {
+       "estimate": 1226420.9639590336,
+       "interval_95": [
+        1000584.8105575966,
+        1463943.0114409667
+       ],
+       "standard_error": 120297.37211460913
+      },
+      "sample": {
+       "sample_adults": 795
+      },
+      "share": {
+       "estimate": 0.46700559750100346,
+       "interval_95": [
+        0.4006084958500964,
+        0.5339555550881971
+       ]
+      }
+     }
+    },
+    "by_largest_loss": {
+     "assigned_aca_ptc": {
+      "adults": {
+       "estimate": 75647.87178717129,
+       "interval_95": [
+        26694.009228172996,
+        137974.10864639576
+       ],
+       "standard_error": 28851.53868900305
+      },
+      "label": "ACA premium tax credit",
+      "sample": {
+       "sample_adults": 44,
+       "source_households": 39
+      },
+      "share": {
+       "estimate": 0.02880575316456128,
+       "interval_95": [
+        0.010187500905335769,
+        0.052626356323853485
+       ]
+      }
+     },
+     "chip": {
+      "adults": {
+       "estimate": 48563.63530014703,
+       "interval_95": [
+        11339.524018459597,
+        92756.09038891057
+       ],
+       "standard_error": 20989.8658434166
+      },
+      "label": "CHIP",
+      "sample": {
+       "sample_adults": 37,
+       "source_households": 33
+      },
+      "share": {
+       "estimate": 0.01849241833485452,
+       "interval_95": [
+        0.004522499209301232,
+        0.03559322043835602
+       ]
+      }
+     },
+     "free_school_meals": {
+      "adults": {
+       "estimate": 0.0016477780882269144,
+       "interval_95": [
+        0.0,
+        0.004943334264680743
+       ],
+       "standard_error": 0.0016120600203670147
+      },
+      "label": "Free school meals",
+      "sample": {
+       "sample_adults": 1,
+       "source_households": 1
+      },
+      "share": {
+       "estimate": 6.274530632266458e-10,
+       "interval_95": [
+        0.0,
+        2.0318541824669617e-09
+       ]
+      }
+     },
+     "household_refundable_tax_credits": {
+      "adults": {
+       "estimate": 89278.16958973755,
+       "interval_95": [
+        41634.54775335197,
+        144483.1604611323
+       ],
+       "standard_error": 26323.9892118433
+      },
+      "label": "Refundable tax credits (EITC, refundable CTC and state credits together)",
+      "sample": {
+       "sample_adults": 72,
+       "source_households": 64
+      },
+      "share": {
+       "estimate": 0.03399599824065303,
+       "interval_95": [
+        0.016089366316115027,
+        0.055111606118016625
+       ]
+      }
+     },
+     "household_state_benefits": {
+      "adults": {
+       "estimate": 29640.770729452837,
+       "interval_95": [
+        0.0,
+        76754.92231828067
+       ],
+       "standard_error": 21247.263615547712
+      },
+      "label": "State benefits",
+      "sample": {
+       "sample_adults": 5,
+       "source_households": 3
+      },
+      "share": {
+       "estimate": 0.01128683074709799,
+       "interval_95": [
+        0.0,
+        0.02932184758724222
+       ]
+      }
+     },
+     "household_tax_before_refundable_credits": {
+      "adults": {
+       "estimate": 810883.79105641,
+       "interval_95": [
+        618604.6282882565,
+        1015795.5262742715
+       ],
+       "standard_error": 100688.96991736027
+      },
+      "label": "Taxes before refundable credits (income and employee payroll)",
+      "sample": {
+       "sample_adults": 558,
+       "source_households": 452
+      },
+      "share": {
+       "estimate": 0.3087742956739175,
+       "interval_95": [
+        0.24666879121405186,
+        0.371642834936338
+       ]
+      }
+     },
+     "housing_assistance": {
+      "adults": {
+       "estimate": 52986.78069118172,
+       "interval_95": [
+        16335.403683579805,
+        100894.57568756212
+       ],
+       "standard_error": 21832.45849784632
+      },
+      "label": "Housing assistance",
+      "sample": {
+       "sample_adults": 16,
+       "source_households": 14
+      },
+      "share": {
+       "estimate": 0.020176696178170122,
+       "interval_95": [
+        0.006241954925105687,
+        0.038253518189661315
+       ]
+      }
+     },
+     "medicaid_cost": {
+      "adults": {
+       "estimate": 1275505.1395556247,
+       "interval_95": [
+        1029486.259897334,
+        1539967.13849935
+       ],
+       "standard_error": 131930.80238394727
+      },
+      "label": "Medicaid",
+      "sample": {
+       "sample_adults": 903,
+       "source_households": 789
+      },
+      "share": {
+       "estimate": 0.48569623099958076,
+       "interval_95": [
+        0.4159372692668074,
+        0.5532821495141391
+       ]
+      }
+     },
+     "reduced_price_school_meals": {
+      "adults": {
+       "estimate": 0.13493653503246605,
+       "interval_95": [
+        0.0,
+        0.40024839574471116
+       ],
+       "standard_error": 0.1315498506286436
+      },
+      "label": "Reduced-price school meals",
+      "sample": {
+       "sample_adults": 3,
+       "source_households": 3
+      },
+      "share": {
+       "estimate": 5.138212654497386e-08,
+       "interval_95": [
+        0.0,
+        1.637942677836152e-07
+       ]
+      }
+     },
+     "snap": {
+      "adults": {
+       "estimate": 83175.22917181997,
+       "interval_95": [
+        38812.29407422099,
+        138616.2688327848
+       ],
+       "standard_error": 25697.2127983387
+      },
+      "label": "SNAP",
+      "sample": {
+       "sample_adults": 64,
+       "source_households": 57
+      },
+      "share": {
+       "estimate": 0.03167207568865903,
+       "interval_95": [
+        0.014699672284852916,
+        0.05299325417805662
+       ]
+      }
+     },
+     "ssi": {
+      "adults": {
+       "estimate": 0.0058707306161522865,
+       "interval_95": [
+        0.0,
+        0.01761219184845686
+       ],
+       "standard_error": 0.005732104610724673
+      },
+      "label": "SSI",
+      "sample": {
+       "sample_adults": 1,
+       "source_households": 1
+      },
+      "share": {
+       "estimate": 2.235499995297873e-09,
+       "interval_95": [
+        0.0,
+        7.20179462587137e-09
+       ]
+      }
+     },
+     "tanf": {
+      "adults": {
+       "estimate": 108588.02172546147,
+       "interval_95": [
+        37361.205871318685,
+        196099.77229646427
+       ],
+       "standard_error": 41084.514258311305
+      },
+      "label": "TANF",
+      "sample": {
+       "sample_adults": 22,
+       "source_households": 13
+      },
+      "share": {
+       "estimate": 0.04134894580050981,
+       "interval_95": [
+        0.014550676314261206,
+        0.0731868959603205
+       ]
+      }
+     },
+     "total_unemployment_compensation": {
+      "adults": {
+       "estimate": 51868.05853992628,
+       "interval_95": [
+        17168.03740813358,
+        93319.11247502174
+       ],
+       "standard_error": 19822.846033202077
+      },
+      "label": "Unemployment compensation",
+      "sample": {
+       "sample_adults": 53,
+       "source_households": 41
+      },
+      "share": {
+       "estimate": 0.019750700926916324,
+       "interval_95": [
+        0.006547169784032894,
+        0.03587207956171001
+       ]
+      }
+     }
+    },
+    "flagged_adults": {
+     "adults": {
+      "estimate": 2626137.6106019765,
+      "interval_95": [
+       2282588.437712352,
+       2996876.0665477873
+      ],
+      "standard_error": 183879.55292582337
+     },
+     "sample": {
+      "sample_adults": 1779
+     }
+    }
+   },
+   "job_strict": {
+    "by_family": {
+     "health_coverage": {
+      "adults": {
+       "estimate": 2639307.7591403825,
+       "interval_95": [
+        2263202.714473859,
+        3038581.6758308895
+       ],
+       "standard_error": 198501.74466280575
+      },
+      "sample": {
+       "sample_adults": 1172
+      },
+      "share": {
+       "estimate": 0.984722812558309,
+       "interval_95": [
+        0.9693090535776276,
+        0.9964659156770532
+       ]
+      }
+     },
+     "other": {
+      "adults": {
+       "estimate": 40946.75053576031,
+       "interval_95": [
+        9026.056645980862,
+        81743.30963130233
+       ],
+       "standard_error": 18606.669790173335
+      },
+      "sample": {
+       "sample_adults": 23
+      },
+      "share": {
+       "estimate": 0.015277187441691101,
+       "interval_95": [
+        0.0035340843229468943,
+        0.030690946422372415
+       ]
+      }
+     }
+    },
+    "by_largest_loss": {
+     "assigned_aca_ptc": {
+      "adults": {
+       "estimate": 19417.878055613488,
+       "interval_95": [
+        2.1782844066619873,
+        52428.57669896792
+       ],
+       "standard_error": 14543.150730439269
+      },
+      "label": "ACA premium tax credit",
+      "sample": {
+       "sample_adults": 5,
+       "source_households": 5
+      },
+      "share": {
+       "estimate": 0.007244788875650382,
+       "interval_95": [
+        8.242469538748142e-07,
+        0.01964779978380856
+       ]
+      }
+     },
+     "chip": {
+      "adults": {
+       "estimate": 19591.37269687513,
+       "interval_95": [
+        1.3655600100755692,
+        47508.6239362088
+       ],
+       "standard_error": 12503.958359177554
+      },
+      "label": "CHIP",
+      "sample": {
+       "sample_adults": 11,
+       "source_households": 8
+      },
+      "share": {
+       "estimate": 0.0073095195348602815,
+       "interval_95": [
+        5.05981495881618e-07,
+        0.017816753308098954
+       ]
+      }
+     },
+     "household_refundable_tax_credits": {
+      "adults": {
+       "estimate": 1.4198776483535767,
+       "interval_95": [
+        0.0,
+        4.25963294506073
+       ],
+       "standard_error": 1.4148927650137233
+      },
+      "label": "Refundable tax credits (EITC, refundable CTC and state credits together)",
+      "sample": {
+       "sample_adults": 1,
+       "source_households": 1
+      },
+      "share": {
+       "estimate": 5.297547838190716e-07,
+       "interval_95": [
+        0.0,
+        1.7217459891911237e-06
+       ]
+      }
+     },
+     "household_state_benefits": {
+      "adults": {
+       "estimate": 11270.140625,
+       "interval_95": [
+        0.0,
+        31038.1669921875
+       ],
+       "standard_error": 8828.338182642494
+      },
+      "label": "State benefits",
+      "sample": {
+       "sample_adults": 2,
+       "source_households": 2
+      },
+      "share": {
+       "estimate": 0.0042048770310106785,
+       "interval_95": [
+        0.0,
+        0.011948563690634505
+       ]
+      }
+     },
+     "medicaid_cost": {
+      "adults": {
+       "estimate": 2600298.508387894,
+       "interval_95": [
+        2221289.5268851253,
+        2999008.595519915
+       ],
+       "standard_error": 197547.21428464339
+      },
+      "label": "Medicaid",
+      "sample": {
+       "sample_adults": 1156,
+       "source_households": 957
+      },
+      "share": {
+       "estimate": 0.9701685041477983,
+       "interval_95": [
+        0.9485341531731234,
+        0.9881212205772457
+       ]
+      }
+     },
+     "snap": {
+      "adults": {
+       "estimate": 4734.2939453125,
+       "interval_95": [
+        0.0,
+        14202.8818359375
+       ],
+       "standard_error": 4653.056085271813
+      },
+      "label": "SNAP",
+      "sample": {
+       "sample_adults": 1,
+       "source_households": 1
+      },
+      "share": {
+       "estimate": 0.0017663598468805669,
+       "interval_95": [
+        0.0,
+        0.005622617313752573
+       ]
+      }
+     },
+     "tanf": {
+      "adults": {
+       "estimate": 0.005343060474842787,
+       "interval_95": [
+        0.0,
+        0.01602918142452836
+       ],
+       "standard_error": 0.005293549227598354
+      },
+      "label": "TANF",
+      "sample": {
+       "sample_adults": 1,
+       "source_households": 1
+      },
+      "share": {
+       "estimate": 1.9934899672973197e-09,
+       "interval_95": [
+        0.0,
+        6.573095839160768e-09
+       ]
+      }
+     },
+     "total_unemployment_compensation": {
+      "adults": {
+       "estimate": 24940.89074473898,
+       "interval_95": [
+        0.15018722877430263,
+        62131.16270034475
+       ],
+       "standard_error": 15784.65256765018
+      },
+      "label": "Unemployment compensation",
+      "sample": {
+       "sample_adults": 18,
+       "source_households": 14
+      },
+      "share": {
+       "estimate": 0.00930541881552607,
+       "interval_95": [
+        5.6642030628877555e-08,
+        0.0233131909209426
+       ]
+      }
+     }
+    },
+    "flagged_adults": {
+     "adults": {
+      "estimate": 2680254.5096761426,
+      "interval_95": [
+       2296877.608665603,
+       3079567.4751951876
+      ],
+      "standard_error": 200283.5072081469
+     },
+     "sample": {
+      "sample_adults": 1195
+     }
+    }
+   }
+  },
+  "raise_workers_flagged_by_several_raises": {
+   "below_half": {
+    "flagged_by_more_than_one_raise": 7031,
+    "largest_loss_differs": 1236
+   },
+   "strict": {
+    "flagged_by_more_than_one_raise": 1714,
+    "largest_loss_differs": 82
+   }
+  }
+ },
+ "manifest_digest": "3c880af61269a29b285fe66ca146d26fbf4c3ffa20c1be56bbcd5e504713ce49",
+ "medicaid_expansion": {
+  "candidate_pool": {
+   "expanded": {
+    "adults": {
+     "estimate": 13364049.196824735,
+     "interval_95": [
+      12482060.652016615,
+      14302071.430171262
+     ],
+     "standard_error": 468597.81300410064
+    },
+    "household_members": {
+     "estimate": 43216499.59480764,
+     "interval_95": [
+      40317387.59958833,
+      46211958.834899604
+     ],
+     "standard_error": 1506761.6186903003
+    },
+    "households": {
+     "estimate": 11682697.141475836,
+     "interval_95": [
+      10917362.057346374,
+      12459996.843035856
+     ],
+     "standard_error": 394413.10803605494
+    },
+    "sample": {
+     "sample_households": 7425
+    },
+    "share_of_candidates": {
+     "adults": {
+      "estimate": 0.5814623782103722,
+      "interval_95": [
+       0.5546581583139443,
+       0.6079480588462505
+      ]
+     }
+    }
+   },
+   "not_expanded": {
+    "adults": {
+     "estimate": 9330330.449721003,
+     "interval_95": [
+      8556026.227948392,
+      10174437.854284562
+     ],
+     "standard_error": 412242.72832774813
+    },
+    "household_members": {
+     "estimate": 30407125.328649126,
+     "interval_95": [
+      27916807.7730102,
+      33048234.110079136
+     ],
+     "standard_error": 1317123.120607198
+    },
+    "households": {
+     "estimate": 8319712.005566443,
+     "interval_95": [
+      7655554.175380527,
+      9024735.051200276
+     ],
+     "standard_error": 350048.1730911509
+    },
+    "sample": {
+     "sample_households": 4094
+    },
+    "share_of_candidates": {
+     "adults": {
+      "estimate": 0.4059575097996832,
+      "interval_95": [
+       0.37944230451763306,
+       0.43318388248643097
+      ]
+     }
+    }
+   },
+   "not_expanded_partial": {
+    "adults": {
+     "estimate": 289135.19057351263,
+     "interval_95": [
+      159340.07224323397,
+      433369.200172418
+     ],
+     "standard_error": 70167.36059406017
+    },
+    "household_members": {
+     "estimate": 805060.3582362593,
+     "interval_95": [
+      429881.5471582697,
+      1242904.3998065
+     ],
+     "standard_error": 207252.47174414524
+    },
+    "households": {
+     "estimate": 254104.71665697353,
+     "interval_95": [
+      142331.1038588023,
+      380164.13809502486
+     ],
+     "standard_error": 60713.1022842567
+    },
+    "sample": {
+     "sample_households": 209
+    },
+    "share_of_candidates": {
+     "adults": {
+      "estimate": 0.012580111989944562,
+      "interval_95": [
+       0.0070011744413949065,
+       0.01879972880919842
+      ]
+     }
+    }
+   }
+  },
+  "combined_strict": {
+   "expanded": {
+    "adults": {
+     "estimate": 8517585.955688145,
+     "interval_95": [
+      7725692.42898178,
+      9350629.055714028
+     ],
+     "standard_error": 414851.0770984902
+    },
+    "household_members": {
+     "estimate": 22182083.47801112,
+     "interval_95": [
+      20113623.91602109,
+      24391600.97034522
+     ],
+     "standard_error": 1091575.4924622013
+    },
+    "households": {
+     "estimate": 6872654.422906246,
+     "interval_95": [
+      6254289.605331799,
+      7512751.733055048
+     ],
+     "standard_error": 320099.33161556994
+    },
+    "sample": {
+     "sample_households": 2980
+    },
+    "share": {
+     "adults": {
+      "estimate": 0.7133980044141878,
+      "interval_95": [
+       0.6772018471523678,
+       0.7489545956044573
+      ]
+     },
+     "household_members": {
+      "estimate": 0.6951553268619166,
+      "interval_95": [
+       0.657831485370706,
+       0.7323839766778201
+      ]
+     }
+    }
+   },
+   "not_expanded": {
+    "adults": {
+     "estimate": 3156814.3060502037,
+     "interval_95": [
+      2675311.1526913717,
+      3655549.8982595173
+     ],
+     "standard_error": 251226.7290425706
+    },
+    "household_members": {
+     "estimate": 9074202.33523499,
+     "interval_95": [
+      7683035.858132575,
+      10517007.534257121
+     ],
+     "standard_error": 723656.0575679253
+    },
+    "households": {
+     "estimate": 2436293.8409350766,
+     "interval_95": [
+      2084503.804813866,
+      2802264.311187652
+     ],
+     "standard_error": 184914.38282765297
+    },
+    "sample": {
+     "sample_households": 1065
+    },
+    "share": {
+     "adults": {
+      "estimate": 0.26440179623176197,
+      "interval_95": [
+       0.2295124932440827,
+       0.2996243823690422
+      ]
+     },
+     "household_members": {
+      "estimate": 0.2843727504954386,
+      "interval_95": [
+       0.24732481336288858,
+       0.32238741135443827
+      ]
+     }
+    }
+   },
+   "not_expanded_partial": {
+    "adults": {
+     "estimate": 265058.3616179435,
+     "interval_95": [
+      143721.90233808864,
+      404197.6028364236
+     ],
+     "standard_error": 66458.17680285621
+    },
+    "household_members": {
+     "estimate": 653249.5393000679,
+     "interval_95": [
+      338976.8686990108,
+      1010661.2816632626
+     ],
+     "standard_error": 169409.74731742893
+    },
+    "households": {
+     "estimate": 225502.8739021807,
+     "interval_95": [
+      126808.56689317395,
+      335798.68549423286
+     ],
+     "standard_error": 52866.40489682636
+    },
+    "sample": {
+     "sample_households": 81
+    },
+    "share": {
+     "adults": {
+      "estimate": 0.022200199354050203,
+      "interval_95": [
+       0.012143992325524645,
+       0.03355811761120537
+      ]
+     },
+     "household_members": {
+      "estimate": 0.0204719226426449,
+      "interval_95": [
+       0.010737455251902858,
+       0.03156915527312143
+      ]
+     }
+    }
+   },
+   "total": {
+    "adults": {
+     "estimate": 11939458.623356294,
+     "interval_95": [
+      10999900.630192492,
+      12923767.08304903
+     ],
+     "standard_error": 492829.5988944148
+    },
+    "household_members": {
+     "estimate": 31909535.352546178,
+     "interval_95": [
+      29398318.13858242,
+      34562202.56952301
+     ],
+     "standard_error": 1327212.1109097372
+    },
+    "households": {
+     "estimate": 9534451.137743503,
+     "interval_95": [
+      8819028.557911975,
+      10282238.63183667
+     ],
+     "standard_error": 374612.0715422187
+    }
+   }
+  },
+  "how_read": "The 2017 run's own tax-benefit system, at 1 January 2017, the instant the Medicaid adult formula (is_adult_for_medicaid_fc) reads for a 2017 period. The parameter's earliest dated values are 1 January 2018; policyengine-us backdates each parameter's earliest value to 2015, so the 2017 run applies the January 2018 limits. A state covers the ACA adult group when its limit is at least 1.38 (138% of poverty); a positive limit below 1.38 (Wisconsin's 1.00) covers adults below it under a waiver without expanding; a null limit stands for the model's -inf, no adult group.",
+  "job_strict": {
+   "expanded": {
+    "adults": {
+     "estimate": 2101975.507837123,
+     "interval_95": [
+      1768104.2309093399,
+      2465134.8504130333
+     ],
+     "standard_error": 180662.15757908946
+    },
+    "household_members": {
+     "estimate": 8101345.798868056,
+     "interval_95": [
+      6796132.487473085,
+      9515410.885024702
+     ],
+     "standard_error": 700631.2275940661
+    },
+    "households": {
+     "estimate": 1941805.8006885448,
+     "interval_95": [
+      1643068.9054237916,
+      2267400.8502993276
+     ],
+     "standard_error": 160564.32943417813
+    },
+    "sample": {
+     "sample_households": 854
+    },
+    "share": {
+     "adults": {
+      "estimate": 0.7842447425230175,
+      "interval_95": [
+       0.7259908777646625,
+       0.8375026277292381
+      ]
+     },
+     "household_members": {
+      "estimate": 0.7518242239798255,
+      "interval_95": [
+       0.6869780719222051,
+       0.8128253104757869
+      ]
+     }
+    }
+   },
+   "not_expanded": {
+    "adults": {
+     "estimate": 520208.7243069953,
+     "interval_95": [
+      372803.073343678,
+      682624.344939831
+     ],
+     "standard_error": 79336.62355768317
+    },
+    "household_members": {
+     "estimate": 2470324.278128245,
+     "interval_95": [
+      1751800.8601380007,
+      3286834.8244378194
+     ],
+     "standard_error": 387024.9672373491
+    },
+    "households": {
+     "estimate": 494904.84006247716,
+     "interval_95": [
+      358081.49165526626,
+      648807.5814349701
+     ],
+     "standard_error": 74073.91488970745
+    },
+    "sample": {
+     "sample_households": 253
+    },
+    "share": {
+     "adults": {
+      "estimate": 0.19408930100815408,
+      "interval_95": [
+       0.14363624784612847,
+       0.25005310919499424
+      ]
+     },
+     "household_members": {
+      "estimate": 0.22925198843404399,
+      "interval_95": [
+       0.1702249191376127,
+       0.2931869457982016
+      ]
+     }
+    }
+   },
+   "not_expanded_partial": {
+    "adults": {
+     "estimate": 58070.277532025124,
+     "interval_95": [
+      10825.43250743206,
+      121700.99118328982
+     ],
+     "standard_error": 28473.81666815776
+    },
+    "household_members": {
+     "estimate": 203914.8808587517,
+     "interval_95": [
+      32481.733677164615,
+      435650.85415364563
+     ],
+     "standard_error": 103278.59544387973
+    },
+    "households": {
+     "estimate": 58070.277532025124,
+     "interval_95": [
+      10825.43250743206,
+      121700.99118328982
+     ],
+     "standard_error": 28473.81666815776
+    },
+    "sample": {
+     "sample_households": 17
+    },
+    "share": {
+     "adults": {
+      "estimate": 0.0216659564688287,
+      "interval_95": [
+       0.0041042783573144994,
+       0.0450302344206902
+      ]
+     },
+     "household_members": {
+      "estimate": 0.01892378758613047,
+      "interval_95": [
+       0.0031840583316261463,
+       0.04051805465650047
+      ]
+     }
+    }
+   },
+   "total": {
+    "adults": {
+     "estimate": 2680254.5096761426,
+     "interval_95": [
+      2296877.608665603,
+      3079567.4751951876
+     ],
+     "standard_error": 200283.5072081469
+    },
+    "household_members": {
+     "estimate": 10775584.957855053,
+     "interval_95": [
+      9260908.07782382,
+      12440210.43179114
+     ],
+     "standard_error": 813190.8471791403
+    },
+    "households": {
+     "estimate": 2494780.9182830467,
+     "interval_95": [
+      2151529.643011269,
+      2862405.1672963314
+     ],
+     "standard_error": 180305.7573880552
+    }
+   }
+  },
+  "jurisdictions": {
+   "expanded": 32,
+   "not_expanded": 18,
+   "not_expanded_partial": 1
+  },
+  "limit_2017_by_state": {
+   "AK": 1.38,
+   "AL": null,
+   "AR": 1.38,
+   "AZ": 1.38,
+   "CA": 1.38,
+   "CO": 1.38,
+   "CT": 1.38,
+   "DC": 2.15,
+   "DE": 1.38,
+   "FL": null,
+   "GA": null,
+   "HI": 1.38,
+   "IA": 1.38,
+   "ID": null,
+   "IL": 1.38,
+   "IN": 1.39,
+   "KS": null,
+   "KY": 1.38,
+   "LA": 1.38,
+   "MA": 1.38,
+   "MD": 1.38,
+   "ME": null,
+   "MI": 1.38,
+   "MN": 1.38,
+   "MO": null,
+   "MS": null,
+   "MT": 1.38,
+   "NC": null,
+   "ND": 1.38,
+   "NE": null,
+   "NH": 1.38,
+   "NJ": 1.38,
+   "NM": 1.38,
+   "NV": 1.38,
+   "NY": 1.38,
+   "OH": 1.38,
+   "OK": null,
+   "OR": 1.38,
+   "PA": 1.38,
+   "RI": 1.38,
+   "SC": null,
+   "SD": null,
+   "TN": null,
+   "TX": null,
+   "UT": null,
+   "VA": null,
+   "VT": 1.38,
+   "WA": 1.38,
+   "WI": 1.0,
+   "WV": 1.38,
+   "WY": null
+  },
+  "limit_2017_equals_limit_2018_in_every_state": true,
+  "parameter": "gov.hhs.medicaid.eligibility.categories.adult.income_limit",
+  "states": {
+   "expanded": [
+    "AK",
+    "AR",
+    "AZ",
+    "CA",
+    "CO",
+    "CT",
+    "DC",
+    "DE",
+    "HI",
+    "IA",
+    "IL",
+    "IN",
+    "KY",
+    "LA",
+    "MA",
+    "MD",
+    "MI",
+    "MN",
+    "MT",
+    "ND",
+    "NH",
+    "NJ",
+    "NM",
+    "NV",
+    "NY",
+    "OH",
+    "OR",
+    "PA",
+    "RI",
+    "VT",
+    "WA",
+    "WV"
+   ],
+   "not_expanded": [
+    "AL",
+    "FL",
+    "GA",
+    "ID",
+    "KS",
+    "ME",
+    "MO",
+    "MS",
+    "NC",
+    "NE",
+    "OK",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VA",
+    "WY"
+   ],
+   "not_expanded_partial": [
+    "WI"
+   ]
+  }
+ },
+ "metrics": {
+  "driver_family|combined|additional|health_coverage": {
+   "adults": 1637832.9512205727
+  },
+  "driver_family|combined|additional|other": {
+   "adults": 11653056.352454558
+  },
+  "driver_family|combined|strict|health_coverage": {
+   "adults": 11004931.655518314
+  },
+  "driver_family|combined|strict|other": {
+   "adults": 934526.9678379793
+  },
+  "driver_family|job|additional|health_coverage": {
+   "adults": 1399716.646642943
+  },
+  "driver_family|job|additional|other": {
+   "adults": 1226420.9639590336
+  },
+  "driver_family|job|strict|health_coverage": {
+   "adults": 2639307.7591403825
+  },
+  "driver_family|job|strict|other": {
+   "adults": 40946.75053576031
+  },
+  "driver_total|combined|additional": {
+   "adults": 13290889.303675132
+  },
+  "driver_total|combined|strict": {
+   "adults": 11939458.623356294
+  },
+  "driver_total|job|additional": {
+   "adults": 2626137.6106019765
+  },
+  "driver_total|job|strict": {
+   "adults": 2680254.5096761426
+  },
+  "driver|combined|additional|acp": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|ak_energy_relief": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|assigned_aca_ptc": {
+   "adults": 173353.25135543657
+  },
+  "driver|combined|additional|assigned_ca_premium_subsidy": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|assigned_co_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|assigned_nm_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|basic_health_program": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|basic_income": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|child_support_received": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|chip": {
+   "adults": 153822.11739000122
+  },
+  "driver|combined|additional|chip_premium": {
+   "adults": 1.5057948072208092
+  },
+  "driver|combined|additional|co_omnisalud": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|ct_covered_connecticut": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|ebb": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|educational_assistance": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|financial_assistance": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|free_school_meals": {
+   "adults": 139744.97074328776
+  },
+  "driver|combined|additional|high_efficiency_electric_home_rebate": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|household_head_start_benefits": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|household_local_benefits": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|household_refundable_tax_credits": {
+   "adults": 1842388.0631855885
+  },
+  "driver|combined|additional|household_state_benefits": {
+   "adults": 161138.0608312414
+  },
+  "driver|combined|additional|household_tax_before_refundable_credits": {
+   "adults": 5399940.038489703
+  },
+  "driver|combined|additional|housing_assistance": {
+   "adults": 297176.81420595257
+  },
+  "driver|combined|additional|ma_connector_care": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|md_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|medicaid_cost": {
+   "adults": 1156651.1172291317
+  },
+  "driver|combined|additional|msp_cost": {
+   "adults": 154004.95945119602
+  },
+  "driver|combined|additional|nj_njhps": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|none": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|ny_drive_clean_rebate": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|or_healthier_oregon_cost": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|reduced_price_school_meals": {
+   "adults": 238340.07099636074
+  },
+  "driver|combined|additional|residential_efficiency_electrification_rebate": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|snap": {
+   "adults": 2191791.5475641256
+  },
+  "driver|combined|additional|social_security": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|ssi": {
+   "adults": 933888.3758061202
+  },
+  "driver|combined|additional|survivor_benefits": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|tanf": {
+   "adults": 377429.1742028962
+  },
+  "driver|combined|additional|total_unemployment_compensation": {
+   "adults": 47441.60276874827
+  },
+  "driver|combined|additional|trump_dividend": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|vt_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|wa_cascade_care_savings": {
+   "adults": 0.0
+  },
+  "driver|combined|additional|wic": {
+   "adults": 23777.63366053367
+  },
+  "driver|combined|additional|workers_compensation": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|acp": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|ak_energy_relief": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|assigned_aca_ptc": {
+   "adults": 264367.7643644344
+  },
+  "driver|combined|strict|assigned_ca_premium_subsidy": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|assigned_co_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|assigned_nm_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|basic_health_program": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|basic_income": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|child_support_received": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|chip": {
+   "adults": 259101.80065256928
+  },
+  "driver|combined|strict|chip_premium": {
+   "adults": 8131.005859375
+  },
+  "driver|combined|strict|co_omnisalud": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|ct_covered_connecticut": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|ebb": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|educational_assistance": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|financial_assistance": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|free_school_meals": {
+   "adults": 104956.61909681663
+  },
+  "driver|combined|strict|high_efficiency_electric_home_rebate": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|household_head_start_benefits": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|household_local_benefits": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|household_refundable_tax_credits": {
+   "adults": 10373.300941270543
+  },
+  "driver|combined|strict|household_state_benefits": {
+   "adults": 52821.96766144651
+  },
+  "driver|combined|strict|household_tax_before_refundable_credits": {
+   "adults": 37826.29960938665
+  },
+  "driver|combined|strict|housing_assistance": {
+   "adults": 9915.206337388838
+  },
+  "driver|combined|strict|ma_connector_care": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|md_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|medicaid_cost": {
+   "adults": 10150591.734373908
+  },
+  "driver|combined|strict|msp_cost": {
+   "adults": 322739.3502680276
+  },
+  "driver|combined|strict|nj_njhps": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|none": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|ny_drive_clean_rebate": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|or_healthier_oregon_cost": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|reduced_price_school_meals": {
+   "adults": 349708.5463409425
+  },
+  "driver|combined|strict|residential_efficiency_electrification_rebate": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|snap": {
+   "adults": 136622.8388468661
+  },
+  "driver|combined|strict|social_security": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|ssi": {
+   "adults": 30929.783909088932
+  },
+  "driver|combined|strict|survivor_benefits": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|tanf": {
+   "adults": 164432.64499667147
+  },
+  "driver|combined|strict|total_unemployment_compensation": {
+   "adults": 24940.89074473898
+  },
+  "driver|combined|strict|trump_dividend": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|vt_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|wa_cascade_care_savings": {
+   "adults": 0.0
+  },
+  "driver|combined|strict|wic": {
+   "adults": 11998.86935336201
+  },
+  "driver|combined|strict|workers_compensation": {
+   "adults": 0.0
+  },
+  "driver|job|additional|acp": {
+   "adults": 0.0
+  },
+  "driver|job|additional|ak_energy_relief": {
+   "adults": 0.0
+  },
+  "driver|job|additional|assigned_aca_ptc": {
+   "adults": 75647.87178717129
+  },
+  "driver|job|additional|assigned_ca_premium_subsidy": {
+   "adults": 0.0
+  },
+  "driver|job|additional|assigned_co_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|additional|assigned_nm_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|additional|basic_health_program": {
+   "adults": 0.0
+  },
+  "driver|job|additional|basic_income": {
+   "adults": 0.0
+  },
+  "driver|job|additional|child_support_received": {
+   "adults": 0.0
+  },
+  "driver|job|additional|chip": {
+   "adults": 48563.63530014703
+  },
+  "driver|job|additional|chip_premium": {
+   "adults": 0.0
+  },
+  "driver|job|additional|co_omnisalud": {
+   "adults": 0.0
+  },
+  "driver|job|additional|ct_covered_connecticut": {
+   "adults": 0.0
+  },
+  "driver|job|additional|ebb": {
+   "adults": 0.0
+  },
+  "driver|job|additional|educational_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|additional|financial_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|additional|free_school_meals": {
+   "adults": 0.0016477780882269144
+  },
+  "driver|job|additional|high_efficiency_electric_home_rebate": {
+   "adults": 0.0
+  },
+  "driver|job|additional|household_head_start_benefits": {
+   "adults": 0.0
+  },
+  "driver|job|additional|household_local_benefits": {
+   "adults": 0.0
+  },
+  "driver|job|additional|household_refundable_tax_credits": {
+   "adults": 89278.16958973755
+  },
+  "driver|job|additional|household_state_benefits": {
+   "adults": 29640.770729452837
+  },
+  "driver|job|additional|household_tax_before_refundable_credits": {
+   "adults": 810883.79105641
+  },
+  "driver|job|additional|housing_assistance": {
+   "adults": 52986.78069118172
+  },
+  "driver|job|additional|ma_connector_care": {
+   "adults": 0.0
+  },
+  "driver|job|additional|md_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|additional|medicaid_cost": {
+   "adults": 1275505.1395556247
+  },
+  "driver|job|additional|msp_cost": {
+   "adults": 0.0
+  },
+  "driver|job|additional|nj_njhps": {
+   "adults": 0.0
+  },
+  "driver|job|additional|none": {
+   "adults": 0.0
+  },
+  "driver|job|additional|ny_drive_clean_rebate": {
+   "adults": 0.0
+  },
+  "driver|job|additional|or_healthier_oregon_cost": {
+   "adults": 0.0
+  },
+  "driver|job|additional|reduced_price_school_meals": {
+   "adults": 0.13493653503246605
+  },
+  "driver|job|additional|residential_efficiency_electrification_rebate": {
+   "adults": 0.0
+  },
+  "driver|job|additional|snap": {
+   "adults": 83175.22917181997
+  },
+  "driver|job|additional|social_security": {
+   "adults": 0.0
+  },
+  "driver|job|additional|ssi": {
+   "adults": 0.0058707306161522865
+  },
+  "driver|job|additional|survivor_benefits": {
+   "adults": 0.0
+  },
+  "driver|job|additional|tanf": {
+   "adults": 108588.02172546147
+  },
+  "driver|job|additional|total_unemployment_compensation": {
+   "adults": 51868.05853992628
+  },
+  "driver|job|additional|trump_dividend": {
+   "adults": 0.0
+  },
+  "driver|job|additional|vt_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|additional|wa_cascade_care_savings": {
+   "adults": 0.0
+  },
+  "driver|job|additional|wic": {
+   "adults": 0.0
+  },
+  "driver|job|additional|workers_compensation": {
+   "adults": 0.0
+  },
+  "driver|job|strict|acp": {
+   "adults": 0.0
+  },
+  "driver|job|strict|ak_energy_relief": {
+   "adults": 0.0
+  },
+  "driver|job|strict|assigned_aca_ptc": {
+   "adults": 19417.878055613488
+  },
+  "driver|job|strict|assigned_ca_premium_subsidy": {
+   "adults": 0.0
+  },
+  "driver|job|strict|assigned_co_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|strict|assigned_nm_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|strict|basic_health_program": {
+   "adults": 0.0
+  },
+  "driver|job|strict|basic_income": {
+   "adults": 0.0
+  },
+  "driver|job|strict|child_support_received": {
+   "adults": 0.0
+  },
+  "driver|job|strict|chip": {
+   "adults": 19591.37269687513
+  },
+  "driver|job|strict|chip_premium": {
+   "adults": 0.0
+  },
+  "driver|job|strict|co_omnisalud": {
+   "adults": 0.0
+  },
+  "driver|job|strict|ct_covered_connecticut": {
+   "adults": 0.0
+  },
+  "driver|job|strict|ebb": {
+   "adults": 0.0
+  },
+  "driver|job|strict|educational_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|strict|financial_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|strict|free_school_meals": {
+   "adults": 0.0
+  },
+  "driver|job|strict|high_efficiency_electric_home_rebate": {
+   "adults": 0.0
+  },
+  "driver|job|strict|household_head_start_benefits": {
+   "adults": 0.0
+  },
+  "driver|job|strict|household_local_benefits": {
+   "adults": 0.0
+  },
+  "driver|job|strict|household_refundable_tax_credits": {
+   "adults": 1.4198776483535767
+  },
+  "driver|job|strict|household_state_benefits": {
+   "adults": 11270.140625
+  },
+  "driver|job|strict|household_tax_before_refundable_credits": {
+   "adults": 0.0
+  },
+  "driver|job|strict|housing_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|strict|ma_connector_care": {
+   "adults": 0.0
+  },
+  "driver|job|strict|md_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|strict|medicaid_cost": {
+   "adults": 2600298.508387894
+  },
+  "driver|job|strict|msp_cost": {
+   "adults": 0.0
+  },
+  "driver|job|strict|nj_njhps": {
+   "adults": 0.0
+  },
+  "driver|job|strict|none": {
+   "adults": 0.0
+  },
+  "driver|job|strict|ny_drive_clean_rebate": {
+   "adults": 0.0
+  },
+  "driver|job|strict|or_healthier_oregon_cost": {
+   "adults": 0.0
+  },
+  "driver|job|strict|reduced_price_school_meals": {
+   "adults": 0.0
+  },
+  "driver|job|strict|residential_efficiency_electrification_rebate": {
+   "adults": 0.0
+  },
+  "driver|job|strict|snap": {
+   "adults": 4734.2939453125
+  },
+  "driver|job|strict|social_security": {
+   "adults": 0.0
+  },
+  "driver|job|strict|ssi": {
+   "adults": 0.0
+  },
+  "driver|job|strict|survivor_benefits": {
+   "adults": 0.0
+  },
+  "driver|job|strict|tanf": {
+   "adults": 0.005343060474842787
+  },
+  "driver|job|strict|total_unemployment_compensation": {
+   "adults": 24940.89074473898
+  },
+  "driver|job|strict|trump_dividend": {
+   "adults": 0.0
+  },
+  "driver|job|strict|vt_premium_assistance": {
+   "adults": 0.0
+  },
+  "driver|job|strict|wa_cascade_care_savings": {
+   "adults": 0.0
+  },
+  "driver|job|strict|wic": {
+   "adults": 0.0
+  },
+  "driver|job|strict|workers_compensation": {
+   "adults": 0.0
+  },
+  "drop|excluding_ages_62_64|combined|below_half": {
+   "adults": 431587.97643275023,
+   "household_members": 823630.9935143025,
+   "households": 313439.5233619271
+  },
+  "drop|excluding_ages_62_64|combined|strict": {
+   "adults": 241168.18376816195,
+   "household_members": 514336.66984989936,
+   "households": 187242.390598087
+  },
+  "drop|excluding_ages_62_64|job|below_half": {
+   "adults": 431587.97643275023,
+   "household_members": 1068679.9817431658,
+   "households": 404858.8852978015
+  },
+  "drop|excluding_ages_62_64|job|strict": {
+   "adults": 241168.18376816195,
+   "household_members": 586731.5099898686,
+   "households": 217720.97452702548
+  },
+  "drop|ranks_1_2|combined_1000|below_half": {
+   "adults": 33561.77834698919,
+   "household_members": 37458.64931023517,
+   "households": 4421.076179621159
+  },
+  "drop|ranks_1_2|combined_1000|strict": {
+   "adults": 25974.766987298033,
+   "household_members": 33150.382524687564,
+   "households": 4735.584212438203
+  },
+  "drop|ranks_1_2|combined|below_half": {
+   "adults": 33561.77834698919,
+   "household_members": 9776.539202813292,
+   "households": 2443.7826005195966
+  },
+  "drop|ranks_1_2|combined|strict": {
+   "adults": 25974.766987298033,
+   "household_members": 33150.382524687564,
+   "households": 4735.584212438203
+  },
+  "drop|ranks_1_2|job|below_half": {
+   "adults": 33561.77834698919,
+   "household_members": 37468.92076695361,
+   "households": 4422.360111710965
+  },
+  "drop|ranks_1_2|job|strict": {
+   "adults": 25974.766987298033,
+   "household_members": 33150.382524687564,
+   "households": 4735.584212438203
+  },
+  "excluding_ages_62_64|with_health|combined|additional": {
+   "adults": 13128966.318305835,
+   "household_members": 36173403.40936447,
+   "households": 10645828.199458104
+  },
+  "excluding_ages_62_64|with_health|combined|below_half": {
+   "adults": 26105710.15473543,
+   "household_members": 67568602.09206074,
+   "households": 19993036.946603518
+  },
+  "excluding_ages_62_64|with_health|combined|strict": {
+   "adults": 11698290.43958813,
+   "household_members": 31395198.682696275,
+   "households": 9347208.747145414
+  },
+  "excluding_ages_62_64|with_health|job|additional": {
+   "adults": 2435719.464124229,
+   "household_members": 9588170.256617751,
+   "households": 2327084.8550589844
+  },
+  "excluding_ages_62_64|with_health|job|below_half": {
+   "adults": 4991715.827312965,
+   "household_members": 19777023.70448294,
+   "households": 4604144.798815005
+  },
+  "excluding_ages_62_64|with_health|job|strict": {
+   "adults": 2439086.325907981,
+   "household_members": 10188853.447865184,
+   "households": 2277059.943756021
+  },
+  "expansion|combined|strict|expanded": {
+   "adults": 8517585.955688145,
+   "household_members": 22182083.47801112,
+   "households": 6872654.422906246
+  },
+  "expansion|combined|strict|not_expanded": {
+   "adults": 3156814.3060502037,
+   "household_members": 9074202.33523499,
+   "households": 2436293.8409350766
+  },
+  "expansion|combined|strict|not_expanded_partial": {
+   "adults": 265058.3616179435,
+   "household_members": 653249.5393000679,
+   "households": 225502.8739021807
+  },
+  "expansion|job|strict|expanded": {
+   "adults": 2101975.507837123,
+   "household_members": 8101345.798868056,
+   "households": 1941805.8006885448
+  },
+  "expansion|job|strict|not_expanded": {
+   "adults": 520208.7243069953,
+   "household_members": 2470324.278128245,
+   "households": 494904.84006247716
+  },
+  "expansion|job|strict|not_expanded_partial": {
+   "adults": 58070.277532025124,
+   "household_members": 203914.8808587517,
+   "households": 58070.277532025124
+  },
+  "full|with_health|combined_1000|additional": {
+   "adults": 12055652.688180752,
+   "household_members": 33587242.547414064,
+   "households": 9892929.50865243
+  },
+  "full|with_health|combined_1000|below_half": {
+   "adults": 18016050.61188171,
+   "household_members": 49557969.67795028,
+   "households": 14109842.89900751
+  },
+  "full|with_health|combined_1000|strict": {
+   "adults": 5006719.787635551,
+   "household_members": 15970727.130536214,
+   "households": 4216913.390355084
+  },
+  "full|with_health|combined|additional": {
+   "adults": 13290889.303675132,
+   "household_members": 36482697.733028874,
+   "households": 10772025.332221944
+  },
+  "full|with_health|combined|below_half": {
+   "adults": 26537298.13116818,
+   "household_members": 68392233.08557504,
+   "households": 20306476.469965447
+  },
+  "full|with_health|combined|strict": {
+   "adults": 11939458.623356294,
+   "household_members": 31909535.352546178,
+   "households": 9534451.137743503
+  },
+  "full|with_health|job|additional": {
+   "adults": 2626137.6106019765,
+   "household_members": 10070118.72837105,
+   "households": 2514222.76582976
+  },
+  "full|with_health|job|below_half": {
+   "adults": 5423303.803745715,
+   "household_members": 20845703.686226103,
+   "households": 5009003.684112808
+  },
+  "full|with_health|job|strict": {
+   "adults": 2680254.5096761426,
+   "household_members": 10775584.957855053,
+   "households": 2494780.9182830467
+  },
+  "full|without_health|combined_1000|additional": {
+   "adults": 11523053.194242446,
+   "household_members": 31913914.03698828,
+   "households": 9271587.162207399
+  },
+  "full|without_health|combined_1000|below_half": {
+   "adults": 12205792.675442126,
+   "household_members": 33802153.96268003,
+   "households": 9756965.244043805
+  },
+  "full|without_health|combined_1000|strict": {
+   "adults": 642087.8465122199,
+   "household_members": 1888239.9256917369,
+   "households": 485378.0818364071
+  },
+  "full|without_health|combined|additional": {
+   "adults": 14301462.670872571,
+   "household_members": 39039974.83402171,
+   "households": 11442120.692881534
+  },
+  "full|without_health|combined|below_half": {
+   "adults": 15448102.40268038,
+   "household_members": 42162835.04404034,
+   "households": 12230637.002774326
+  },
+  "full|without_health|combined|strict": {
+   "adults": 1045609.5071051556,
+   "household_members": 3122860.2100186273,
+   "households": 788516.3098927937
+  },
+  "full|without_health|job|additional": {
+   "adults": 1779969.3585190938,
+   "household_members": 7515841.11276935,
+   "households": 1725318.6449352955
+  },
+  "full|without_health|job|below_half": {
+   "adults": 1824468.9588041063,
+   "household_members": 7692491.310937335,
+   "households": 1760349.6522296036
+  },
+  "full|without_health|job|strict": {
+   "adults": 35031.00729430816,
+   "household_members": 176650.19816798414,
+   "households": 35031.00729430816
+  },
+  "pool|age_18_61": {
+   "adults": 19818096.902559504,
+   "household_members": 67714402.69552094,
+   "households": 17532326.234337017
+  },
+  "pool|age_62_64": {
+   "adults": 3165417.934559747,
+   "household_members": 7603953.860563412,
+   "households": 3004592.389189125
+  },
+  "pool|candidates": {
+   "adults": 22983514.83711925,
+   "household_members": 74428685.28169303,
+   "households": 20256513.86369925
+  },
+  "pool|expansion_expanded": {
+   "adults": 13364049.196824735,
+   "household_members": 43216499.59480764,
+   "households": 11682697.141475836
+  },
+  "pool|expansion_not_expanded": {
+   "adults": 9330330.449721003,
+   "household_members": 30407125.328649126,
+   "households": 8319712.005566443
+  },
+  "pool|expansion_not_expanded_partial": {
+   "adults": 289135.19057351263,
+   "household_members": 805060.3582362593,
+   "households": 254104.71665697353
+  },
+  "pool|rank_1_2": {
+   "adults": 22728764.008340433,
+   "household_members": 74428685.28169303,
+   "households": 20256513.86369925
+  },
+  "pool|rank_3_plus": {
+   "adults": 254750.8287788143,
+   "household_members": 1182932.3209743374,
+   "households": 202885.68478107682
+  },
+  "ranks_1_2|with_health|combined_1000|additional": {
+   "adults": 12057535.580113854,
+   "household_members": 33582934.28062852,
+   "households": 9893244.016685247
+  },
+  "ranks_1_2|with_health|combined_1000|below_half": {
+   "adults": 17982488.83353472,
+   "household_members": 49520511.02864004,
+   "households": 14105421.82282789
+  },
+  "ranks_1_2|with_health|combined_1000|strict": {
+   "adults": 4980745.020648253,
+   "household_members": 15937576.748011526,
+   "households": 4212177.806142645
+  },
+  "ranks_1_2|with_health|combined|additional": {
+   "adults": 13294749.489187334,
+   "household_members": 36506071.57635075,
+   "households": 10774317.133833863
+  },
+  "ranks_1_2|with_health|combined|below_half": {
+   "adults": 26503736.352821186,
+   "household_members": 68382456.54637223,
+   "households": 20304032.68736493
+  },
+  "ranks_1_2|with_health|combined|strict": {
+   "adults": 11913483.856368996,
+   "household_members": 31876384.970021486,
+   "households": 9529715.553531064
+  },
+  "ranks_1_2|with_health|job|additional": {
+   "adults": 2628019.217446923,
+   "household_members": 10065800.190128783,
+   "households": 2514535.9899304872
+  },
+  "ranks_1_2|with_health|job|below_half": {
+   "adults": 5389742.025398727,
+   "household_members": 20808234.76545915,
+   "households": 5004581.324001096
+  },
+  "ranks_1_2|with_health|job|strict": {
+   "adults": 2654279.742688845,
+   "household_members": 10742434.575330365,
+   "households": 2490045.3340706085
+  }
+ },
+ "modal": {
+  "app": "us-cliffs-2017-combined-union-breakdowns"
+ },
+ "question": "Breakdowns of the combined raise-and-job union under 2017 federal rules, with health coverage unless a section says otherwise.",
+ "ranks_1_2": {
+  "combined": {
+   "all_ranks": {
+    "additional": {
+     "adults": {
+      "estimate": 13290889.303675132,
+      "interval_95": [
+       12389257.517899519,
+       14214944.247169167
+      ],
+      "standard_error": 464126.1688166251
+     },
+     "household_members": {
+      "estimate": 36482697.733028874,
+      "interval_95": [
+       33980041.339032315,
+       38983722.644002944
+      ],
+      "standard_error": 1288788.2485891716
+     },
+     "households": {
+      "estimate": 10772025.332221944,
+      "interval_95": [
+       10072754.912475629,
+       11486423.822929945
+      ],
+      "standard_error": 362249.0621533784
+     },
+     "sample": {
+      "sample_households": 5909
+     }
+    },
+    "below_half": {
+     "adults": {
+      "estimate": 26537298.13116818,
+      "interval_95": [
+       25169004.01067446,
+       27965786.76683962
+      ],
+      "standard_error": 713293.6515775666
+     },
+     "household_members": {
+      "estimate": 68392233.08557504,
+      "interval_95": [
+       64919097.7022834,
+       72086000.744398
+      ],
+      "standard_error": 1837836.4545176635
+     },
+     "households": {
+      "estimate": 20306476.469965447,
+      "interval_95": [
+       19290824.876396764,
+       21325218.063628323
+      ],
+      "standard_error": 516477.0678061238
+     },
+     "sample": {
+      "sample_households": 10035
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 11939458.623356294,
+      "interval_95": [
+       10999900.630192492,
+       12923767.08304903
+      ],
+      "standard_error": 492829.5988944148
+     },
+     "household_members": {
+      "estimate": 31909535.352546178,
+      "interval_95": [
+       29398318.13858242,
+       34562202.56952301
+      ],
+      "standard_error": 1327212.1109097372
+     },
+     "households": {
+      "estimate": 9534451.137743503,
+      "interval_95": [
+       8819028.557911975,
+       10282238.63183667
+      ],
+      "standard_error": 374612.0715422187
+     },
+     "sample": {
+      "sample_households": 4126
+     }
+    }
+   },
+   "fall": {
+    "below_half": {
+     "adults": {
+      "estimate": 33561.77834698919,
+      "interval_95": [
+       6635.412733083183,
+       69419.3192013721
+      ],
+      "standard_error": 16161.932084646953
+     },
+     "household_members": {
+      "estimate": 9776.539202813292,
+      "interval_95": [
+       0.9940514354646439,
+       29325.18707473358
+      ],
+      "standard_error": 10053.97453625318
+     },
+     "households": {
+      "estimate": 2443.7826005195966,
+      "interval_95": [
+       0.1340684476279421,
+       7330.613243225785
+      ],
+      "standard_error": 2513.4920802710344
+     },
+     "sample": {
+      "sample_households": 18
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 25974.766987298033,
+      "interval_95": [
+       3.9030699050665136,
+       61501.99418203416
+      ],
+      "standard_error": 15753.575720951325
+     },
+     "household_members": {
+      "estimate": 33150.382524687564,
+      "interval_95": [
+       0.02248985110782087,
+       99440.78361316957
+      ],
+      "standard_error": 32571.320874713452
+     },
+     "households": {
+      "estimate": 4735.584212438203,
+      "interval_95": [
+       0.0024649195838719606,
+       14205.457344006514
+      ],
+      "standard_error": 4653.0470870995705
+     },
+     "sample": {
+      "sample_households": 5
+     }
+    }
+   },
+   "ranks_1_2": {
+    "additional": {
+     "adults": {
+      "estimate": 13294749.489187334,
+      "interval_95": [
+       12391524.103074938,
+       14215745.86043807
+      ],
+      "standard_error": 464036.91719834006
+     },
+     "household_members": {
+      "estimate": 36506071.57635075,
+      "interval_95": [
+       34004998.185640566,
+       38998035.54904424
+      ],
+      "standard_error": 1288519.401201287
+     },
+     "households": {
+      "estimate": 10774317.133833863,
+      "interval_95": [
+       10075366.93556792,
+       11487610.81252847
+      ],
+      "standard_error": 362192.3764262829
+     },
+     "sample": {
+      "sample_households": 5896
+     }
+    },
+    "below_half": {
+     "adults": {
+      "estimate": 26503736.352821186,
+      "interval_95": [
+       25132561.574541256,
+       27922801.633529045
+      ],
+      "standard_error": 712084.8324075164
+     },
+     "household_members": {
+      "estimate": 68382456.54637223,
+      "interval_95": [
+       64906832.1996238,
+       72076323.60261308
+      ],
+      "standard_error": 1837832.015991995
+     },
+     "households": {
+      "estimate": 20304032.68736493,
+      "interval_95": [
+       19287314.175175197,
+       21324292.082250904
+      ],
+      "standard_error": 516471.24641296273
+     },
+     "sample": {
+      "sample_households": 10017
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 11913483.856368996,
+      "interval_95": [
+       10974551.969332749,
+       12903430.550006336
+      ],
+      "standard_error": 491347.5406900504
+     },
+     "household_members": {
+      "estimate": 31876384.970021486,
+      "interval_95": [
+       29370023.241102695,
+       34521570.47161405
+      ],
+      "standard_error": 1325629.7181917538
+     },
+     "households": {
+      "estimate": 9529715.553531064,
+      "interval_95": [
+       8811909.328390742,
+       10275779.810701901
+      ],
+      "standard_error": 374438.3396784679
+     },
+     "sample": {
+      "sample_households": 4121
+     }
+    }
+   },
+   "ranks_1_2_share_of_all_ranks": {
+    "additional": {
+     "estimate": 1.0006406829750618,
+     "interval_95": [
+      0.9992119956724875,
+      1.0027416364549069
+     ]
+    },
+    "below_half": {
+     "estimate": 0.9998570519083566,
+     "interval_95": [
+      0.9995527932641324,
+      0.9999999856517695
+     ]
+    },
+    "strict": {
+     "estimate": 0.9989611135932117,
+     "interval_95": [
+      0.996759118185439,
+      0.9999999992723094
+     ]
+    }
+   }
+  },
+  "combined_1000": {
+   "all_ranks": {
+    "additional": {
+     "adults": {
+      "estimate": 12055652.688180752,
+      "interval_95": [
+       11195740.148384906,
+       12927347.555117704
+      ],
+      "standard_error": 448620.20627320925
+     },
+     "household_members": {
+      "estimate": 33587242.547414064,
+      "interval_95": [
+       31176678.899818078,
+       36067537.5202215
+      ],
+      "standard_error": 1259728.1665723885
+     },
+     "households": {
+      "estimate": 9892929.50865243,
+      "interval_95": [
+       9204640.617047835,
+       10592162.542158503
+      ],
+      "standard_error": 355521.9501047016
+     },
+     "sample": {
+      "sample_households": 5381
+     }
+    },
+    "below_half": {
+     "adults": {
+      "estimate": 18016050.61188171,
+      "interval_95": [
+       16920247.602819428,
+       19144702.736616965
+      ],
+      "standard_error": 570774.6131194192
+     },
+     "household_members": {
+      "estimate": 49557969.67795028,
+      "interval_95": [
+       46485928.004202,
+       52765314.4061244
+      ],
+      "standard_error": 1577509.908185607
+     },
+     "households": {
+      "estimate": 14109842.89900751,
+      "interval_95": [
+       13281868.26405634,
+       14938297.710645089
+      ],
+      "standard_error": 425510.53340885
+     },
+     "sample": {
+      "sample_households": 7405
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 5006719.787635551,
+      "interval_95": [
+       4454185.664207003,
+       5591207.551802331
+      ],
+      "standard_error": 292146.2463626813
+     },
+     "household_members": {
+      "estimate": 15970727.130536214,
+      "interval_95": [
+       14179340.413358215,
+       17843897.159495797
+      ],
+      "standard_error": 941572.9498426487
+     },
+     "households": {
+      "estimate": 4216913.390355084,
+      "interval_95": [
+       3771592.5633075335,
+       4694880.185716058
+      ],
+      "standard_error": 236902.49583713585
+     },
+     "sample": {
+      "sample_households": 2024
+     }
+    }
+   },
+   "fall": {
+    "below_half": {
+     "adults": {
+      "estimate": 33561.77834698919,
+      "interval_95": [
+       6635.412733083183,
+       69419.3192013721
+      ],
+      "standard_error": 16161.932084646953
+     },
+     "household_members": {
+      "estimate": 37458.64931023517,
+      "interval_95": [
+       2.5953650909737918,
+       110730.95982113644
+      ],
+      "standard_error": 29422.21415934034
+     },
+     "households": {
+      "estimate": 4421.076179621159,
+      "interval_95": [
+       0.478628831813694,
+       11284.695598035512
+      ],
+      "standard_error": 3195.4864557408673
+     },
+     "sample": {
+      "sample_households": 19
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 25974.766987298033,
+      "interval_95": [
+       3.9030699050665136,
+       61501.99418203416
+      ],
+      "standard_error": 15753.575720951325
+     },
+     "household_members": {
+      "estimate": 33150.382524687564,
+      "interval_95": [
+       0.02248985110782087,
+       99440.78361316957
+      ],
+      "standard_error": 32571.320874713452
+     },
+     "households": {
+      "estimate": 4735.584212438203,
+      "interval_95": [
+       0.0024649195838719606,
+       14205.457344006514
+      ],
+      "standard_error": 4653.0470870995705
+     },
+     "sample": {
+      "sample_households": 5
+     }
+    }
+   },
+   "ranks_1_2": {
+    "additional": {
+     "adults": {
+      "estimate": 12057535.580113854,
+      "interval_95": [
+       11197986.23997769,
+       12933667.189358313
+      ],
+      "standard_error": 448565.16601859184
+     },
+     "household_members": {
+      "estimate": 33582934.28062852,
+      "interval_95": [
+       31172005.088681538,
+       36079014.24973631
+      ],
+      "standard_error": 1259378.0267838144
+     },
+     "households": {
+      "estimate": 9893244.016685247,
+      "interval_95": [
+       9203685.354542874,
+       10596753.235994447
+      ],
+      "standard_error": 355455.18740340864
+     },
+     "sample": {
+      "sample_households": 5367
+     }
+    },
+    "below_half": {
+     "adults": {
+      "estimate": 17982488.83353472,
+      "interval_95": [
+       16892572.890972607,
+       19103475.63464059
+      ],
+      "standard_error": 569463.1260857872
+     },
+     "household_members": {
+      "estimate": 49520511.02864004,
+      "interval_95": [
+       46454244.96958181,
+       52726717.49855225
+      ],
+      "standard_error": 1577220.7218791519
+     },
+     "households": {
+      "estimate": 14105421.82282789,
+      "interval_95": [
+       13278881.810030323,
+       14933849.566577708
+      ],
+      "standard_error": 425472.2691078606
+     },
+     "sample": {
+      "sample_households": 7386
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 4980745.020648253,
+      "interval_95": [
+       4435921.5971322665,
+       5561422.750341973
+      ],
+      "standard_error": 289918.5434933748
+     },
+     "household_members": {
+      "estimate": 15937576.748011526,
+      "interval_95": [
+       14146278.994413365,
+       17792529.535971303
+      ],
+      "standard_error": 939760.9421932669
+     },
+     "households": {
+      "estimate": 4212177.806142645,
+      "interval_95": [
+       3765847.6020616814,
+       4690804.708906912
+      ],
+      "standard_error": 236736.39878242524
+     },
+     "sample": {
+      "sample_households": 2019
+     }
+    }
+   },
+   "ranks_1_2_share_of_all_ranks": {
+    "additional": {
+     "estimate": 0.9998717290715525,
+     "interval_95": [
+      0.9973605377473567,
+      1.002684596210482
+     ]
+    },
+    "below_half": {
+     "estimate": 0.999244144795405,
+     "interval_95": [
+      0.9978327599007947,
+      0.9999999484503945
+     ]
+    },
+    "strict": {
+     "estimate": 0.9979243034926504,
+     "interval_95": [
+      0.9934193544199535,
+      0.9999999985340724
+     ]
+    }
+   }
+  },
+  "job": {
+   "all_ranks": {
+    "additional": {
+     "adults": {
+      "estimate": 2626137.6106019765,
+      "interval_95": [
+       2282588.437712352,
+       2996876.0665477873
+      ],
+      "standard_error": 183879.55292582337
+     },
+     "household_members": {
+      "estimate": 10070118.72837105,
+      "interval_95": [
+       8730793.319236774,
+       11531226.846679004
+      ],
+      "standard_error": 720861.4424319693
+     },
+     "households": {
+      "estimate": 2514222.76582976,
+      "interval_95": [
+       2181402.0786477476,
+       2872772.285799143
+      ],
+      "standard_error": 176736.12291268833
+     },
+     "sample": {
+      "sample_households": 1689
+     }
+    },
+    "below_half": {
+     "adults": {
+      "estimate": 5423303.803745715,
+      "interval_95": [
+       4886354.786593046,
+       5989861.796431248
+      ],
+      "standard_error": 282132.6096387874
+     },
+     "household_members": {
+      "estimate": 20845703.686226103,
+      "interval_95": [
+       18806095.36475819,
+       23103650.687833175
+      ],
+      "standard_error": 1095767.2269692984
+     },
+     "households": {
+      "estimate": 5009003.684112808,
+      "interval_95": [
+       4525257.435086941,
+       5527530.779303867
+      ],
+      "standard_error": 253091.278971515
+     },
+     "sample": {
+      "sample_households": 2813
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 2680254.5096761426,
+      "interval_95": [
+       2296877.608665603,
+       3079567.4751951876
+      ],
+      "standard_error": 200283.5072081469
+     },
+     "household_members": {
+      "estimate": 10775584.957855053,
+      "interval_95": [
+       9260908.07782382,
+       12440210.43179114
+      ],
+      "standard_error": 813190.8471791403
+     },
+     "households": {
+      "estimate": 2494780.9182830467,
+      "interval_95": [
+       2151529.643011269,
+       2862405.1672963314
+      ],
+      "standard_error": 180305.7573880552
+     },
+     "sample": {
+      "sample_households": 1124
+     }
+    }
+   },
+   "fall": {
+    "below_half": {
+     "adults": {
+      "estimate": 33561.77834698919,
+      "interval_95": [
+       6635.412733083183,
+       69419.3192013721
+      ],
+      "standard_error": 16161.932084646953
+     },
+     "household_members": {
+      "estimate": 37468.92076695361,
+      "interval_95": [
+       4.805246367843939,
+       110735.22744912156
+      ],
+      "standard_error": 29422.21400996681
+     },
+     "households": {
+      "estimate": 4422.360111710965,
+      "interval_95": [
+       0.9240877977310448,
+       11287.084077332034
+      ],
+      "standard_error": 3195.4833384288017
+     },
+     "sample": {
+      "sample_households": 20
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 25974.766987298033,
+      "interval_95": [
+       3.9030699050665136,
+       61501.99418203416
+      ],
+      "standard_error": 15753.575720951325
+     },
+     "household_members": {
+      "estimate": 33150.382524687564,
+      "interval_95": [
+       0.02248985110782087,
+       99440.78361316957
+      ],
+      "standard_error": 32571.320874713452
+     },
+     "households": {
+      "estimate": 4735.584212438203,
+      "interval_95": [
+       0.0024649195838719606,
+       14205.457344006514
+      ],
+      "standard_error": 4653.0470870995705
+     },
+     "sample": {
+      "sample_households": 5
+     }
+    }
+   },
+   "ranks_1_2": {
+    "additional": {
+     "adults": {
+      "estimate": 2628019.217446923,
+      "interval_95": [
+       2283708.205887871,
+       2999535.3815960824
+      ],
+      "standard_error": 183836.4338608587
+     },
+     "household_members": {
+      "estimate": 10065800.190128783,
+      "interval_95": [
+       8717009.95011505,
+       11522914.75784037
+      ],
+      "standard_error": 719673.7840934043
+     },
+     "households": {
+      "estimate": 2514535.9899304872,
+      "interval_95": [
+       2181614.0246809917,
+       2873333.343504091
+      ],
+      "standard_error": 176645.22233096286
+     },
+     "sample": {
+      "sample_households": 1674
+     }
+    },
+    "below_half": {
+     "adults": {
+      "estimate": 5389742.025398727,
+      "interval_95": [
+       4858267.969366151,
+       5952651.7520936495
+      ],
+      "standard_error": 279495.4150710138
+     },
+     "household_members": {
+      "estimate": 20808234.76545915,
+      "interval_95": [
+       18782081.73544948,
+       23056629.585078195
+      ],
+      "standard_error": 1094710.4517069142
+     },
+     "households": {
+      "estimate": 5004581.324001096,
+      "interval_95": [
+       4519583.167372821,
+       5521021.829798467
+      ],
+      "standard_error": 253002.05202743068
+     },
+     "sample": {
+      "sample_households": 2793
+     }
+    },
+    "strict": {
+     "adults": {
+      "estimate": 2654279.742688845,
+      "interval_95": [
+       2280645.071429038,
+       3049037.24286811
+      ],
+      "standard_error": 196964.53020335405
+     },
+     "household_members": {
+      "estimate": 10742434.575330365,
+      "interval_95": [
+       9227767.714568686,
+       12410268.675682927
+      ],
+      "standard_error": 811028.4562570832
+     },
+     "households": {
+      "estimate": 2490045.3340706085,
+      "interval_95": [
+       2147387.4840891003,
+       2857488.9103117366
+      ],
+      "standard_error": 180036.49811502156
+     },
+     "sample": {
+      "sample_households": 1119
+     }
+    }
+   },
+   "ranks_1_2_share_of_all_ranks": {
+    "additional": {
+     "estimate": 0.9995711531950363,
+     "interval_95": [
+      0.9911102790108266,
+      1.0090356934550677
+     ]
+    },
+    "below_half": {
+     "estimate": 0.9982025590821522,
+     "interval_95": [
+      0.994873243801841,
+      0.9999997683172923
+     ]
+    },
+    "strict": {
+     "estimate": 0.9969235653883901,
+     "interval_95": [
+      0.9901800100906669,
+      0.999999997805603
+     ]
+    }
+   }
+  }
+ },
+ "reproduction": {
+  "inputs": {
+   "inputs": 99,
+   "reference_digest": "1c0cc9ddcfd7d8768a9e295d1c279b66dfdc6a915182d8fbe8f78a3a6da5c82a",
+   "same_coverage": true,
+   "same_inputs": true
+  },
+  "intervals": {
+   "intervals_compared": 108,
+   "max_relative_difference": 6.739519773295729e-16
+  },
+  "part_counts": {
+   "counts_compared": 216,
+   "exact": true,
+   "max_relative_difference": 0.0,
+   "reference_digest": "1c0cc9ddcfd7d8768a9e295d1c279b66dfdc6a915182d8fbe8f78a3a6da5c82a"
+  }
+ },
+ "runtime": {
+  "historical_loader": {
+   "aggregation": "MicroSeries methods; household weights mapped internally",
+   "experiment": "frozen-historical-2017",
+   "managed_bundle": false,
+   "managed_loader_limitation": "policyengine 6.17.2 rejects the historical model 2.116.0 during country import, before allow_unmanaged can select a custom dataset",
+   "policy": "2017 federal rules, model's 2018 Medicaid/CHIP limits, later state rules",
+   "policyengine_wrapper_attempted": "6.17.2",
+   "policyengine_wrapper_installed": null,
+   "population": "2024 microdata scaled to 2017 size, incomes and prices",
+   "source_dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+   "versions": {
+    "huggingface-hub": "2.4.0",
+    "microdf-python": "1.5.12",
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "policyengine-core": "3.34.10",
+    "policyengine-us": "2.116.0",
+    "spm-calculator": "1.1.0",
+    "tables": "3.11.1"
+   }
+  },
+  "mode": "unmanaged_frozen_historical_output_postprocessing",
+  "parts": [
+   {
+    "historical_loader": {
+     "aggregation": "MicroSeries methods; household weights mapped internally",
+     "experiment": "frozen-historical-2017",
+     "managed_bundle": false,
+     "managed_loader_limitation": "policyengine 6.17.2 rejects the historical model 2.116.0 during country import, before allow_unmanaged can select a custom dataset",
+     "policy": "2017 federal rules, model's 2018 Medicaid/CHIP limits, later state rules",
+     "policyengine_wrapper_attempted": "6.17.2",
+     "policyengine_wrapper_installed": null,
+     "population": "2024 microdata scaled to 2017 size, incomes and prices",
+     "source_dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+     "versions": {
+      "huggingface-hub": "2.4.0",
+      "microdf-python": "1.5.12",
+      "numpy": "2.5.4",
+      "pandas": "3.1.1",
+      "policyengine-core": "3.34.10",
+      "policyengine-us": "2.116.0",
+      "spm-calculator": "1.1.0",
+      "tables": "3.11.1"
+     }
+    },
+    "part": 0,
+    "peak_memory_gib": 2.49,
+    "seconds_load": 107.2,
+    "seconds_total": 734.5,
+    "versions": {
+     "microdf-python": "1.5.12",
+     "numpy": "2.5.4",
+     "pandas": "3.1.1",
+     "policyengine-core": "3.34.10",
+     "policyengine-us": "2.116.0"
+    }
+   },
+   {
+    "historical_loader": {
+     "aggregation": "MicroSeries methods; household weights mapped internally",
+     "experiment": "frozen-historical-2017",
+     "managed_bundle": false,
+     "managed_loader_limitation": "policyengine 6.17.2 rejects the historical model 2.116.0 during country import, before allow_unmanaged can select a custom dataset",
+     "policy": "2017 federal rules, model's 2018 Medicaid/CHIP limits, later state rules",
+     "policyengine_wrapper_attempted": "6.17.2",
+     "policyengine_wrapper_installed": null,
+     "population": "2024 microdata scaled to 2017 size, incomes and prices",
+     "source_dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+     "versions": {
+      "huggingface-hub": "2.4.0",
+      "microdf-python": "1.5.12",
+      "numpy": "2.5.4",
+      "pandas": "3.1.1",
+      "policyengine-core": "3.34.10",
+      "policyengine-us": "2.116.0",
+      "spm-calculator": "1.1.0",
+      "tables": "3.11.1"
+     }
+    },
+    "part": 1,
+    "peak_memory_gib": 2.49,
+    "seconds_load": 68.7,
+    "seconds_total": 364.7,
+    "versions": {
+     "microdf-python": "1.5.12",
+     "numpy": "2.5.4",
+     "pandas": "3.1.1",
+     "policyengine-core": "3.34.10",
+     "policyengine-us": "2.116.0"
+    }
+   },
+   {
+    "historical_loader": {
+     "aggregation": "MicroSeries methods; household weights mapped internally",
+     "experiment": "frozen-historical-2017",
+     "managed_bundle": false,
+     "managed_loader_limitation": "policyengine 6.17.2 rejects the historical model 2.116.0 during country import, before allow_unmanaged can select a custom dataset",
+     "policy": "2017 federal rules, model's 2018 Medicaid/CHIP limits, later state rules",
+     "policyengine_wrapper_attempted": "6.17.2",
+     "policyengine_wrapper_installed": null,
+     "population": "2024 microdata scaled to 2017 size, incomes and prices",
+     "source_dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+     "versions": {
+      "huggingface-hub": "2.4.0",
+      "microdf-python": "1.5.12",
+      "numpy": "2.5.4",
+      "pandas": "3.1.1",
+      "policyengine-core": "3.34.10",
+      "policyengine-us": "2.116.0",
+      "spm-calculator": "1.1.0",
+      "tables": "3.11.1"
+     }
+    },
+    "part": 2,
+    "peak_memory_gib": 2.491,
+    "seconds_load": 111.4,
+    "seconds_total": 709.7,
+    "versions": {
+     "microdf-python": "1.5.12",
+     "numpy": "2.5.4",
+     "pandas": "3.1.1",
+     "policyengine-core": "3.34.10",
+     "policyengine-us": "2.116.0"
+    }
+   },
+   {
+    "historical_loader": {
+     "aggregation": "MicroSeries methods; household weights mapped internally",
+     "experiment": "frozen-historical-2017",
+     "managed_bundle": false,
+     "managed_loader_limitation": "policyengine 6.17.2 rejects the historical model 2.116.0 during country import, before allow_unmanaged can select a custom dataset",
+     "policy": "2017 federal rules, model's 2018 Medicaid/CHIP limits, later state rules",
+     "policyengine_wrapper_attempted": "6.17.2",
+     "policyengine_wrapper_installed": null,
+     "population": "2024 microdata scaled to 2017 size, incomes and prices",
+     "source_dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+     "versions": {
+      "huggingface-hub": "2.4.0",
+      "microdf-python": "1.5.12",
+      "numpy": "2.5.4",
+      "pandas": "3.1.1",
+      "policyengine-core": "3.34.10",
+      "policyengine-us": "2.116.0",
+      "spm-calculator": "1.1.0",
+      "tables": "3.11.1"
+     }
+    },
+    "part": 3,
+    "peak_memory_gib": 2.494,
+    "seconds_load": 121.7,
+    "seconds_total": 780.2,
+    "versions": {
+     "microdf-python": "1.5.12",
+     "numpy": "2.5.4",
+     "pandas": "3.1.1",
+     "policyengine-core": "3.34.10",
+     "policyengine-us": "2.116.0"
+    }
+   }
+  ]
+ },
+ "status": "all_jurisdictions_unreviewed",
+ "uncertainty": {
+  "draws": 5000,
+  "method": "percentile; multinomial resample of all source households jointly, one draw for every count and share (scripts/expanded_combined_union.resample, as scripts/driver_intervals.resample)",
+  "seconds": 15.0,
+  "seed": 0,
+  "source_households": 47277
+ },
+ "without_health": {
+  "combined": {
+   "strict": {
+    "adults": {
+     "estimate": 1045609.5071051556,
+     "interval_95": [
+      790866.5227817831,
+      1324557.7061226403
+     ],
+     "standard_error": 135751.4149918433
+    },
+    "household_members": {
+     "estimate": 3122860.2100186273,
+     "interval_95": [
+      2357540.1092939745,
+      3949785.8327317005
+     ],
+     "standard_error": 395557.44205614575
+    },
+    "households": {
+     "estimate": 788516.3098927937,
+     "interval_95": [
+      603169.8660529869,
+      990357.579592639
+     ],
+     "standard_error": 98412.99369384702
+    }
+   },
+   "support": {
+    "kish_effective_source_households_members": 61.94512172997668,
+    "sample_adults": null,
+    "sample_households": 416,
+    "source_households": 375,
+    "source_households_for_half_of_members": 24,
+    "source_households_with_flagged_adults": 375
+   },
+   "with_health_for_comparison": {
+    "adults": {
+     "estimate": 11939458.623356294,
+     "interval_95": [
+      10999900.630192492,
+      12923767.08304903
+     ],
+     "standard_error": 492829.5988944148
+    },
+    "household_members": {
+     "estimate": 31909535.352546178,
+     "interval_95": [
+      29398318.13858242,
+      34562202.56952301
+     ],
+     "standard_error": 1327212.1109097372
+    },
+    "households": {
+     "estimate": 9534451.137743503,
+     "interval_95": [
+      8819028.557911975,
+      10282238.63183667
+     ],
+     "standard_error": 374612.0715422187
+    }
+   }
+  },
+  "combined_1000": {
+   "strict": {
+    "adults": {
+     "estimate": 642087.8465122199,
+     "interval_95": [
+      440374.1013109492,
+      870712.8682143346
+     ],
+     "standard_error": 109120.4707617646
+    },
+    "household_members": {
+     "estimate": 1888239.9256917369,
+     "interval_95": [
+      1314298.893778178,
+      2520520.479101877
+     ],
+     "standard_error": 305865.2200001473
+    },
+    "households": {
+     "estimate": 485378.0818364071,
+     "interval_95": [
+      342399.81723300985,
+      644530.0776582718
+     ],
+     "standard_error": 77682.76544602163
+    }
+   },
+   "support": {
+    "kish_effective_source_households_members": 37.91873199248047,
+    "sample_adults": null,
+    "sample_households": 246,
+    "source_households": 218,
+    "source_households_for_half_of_members": 15,
+    "source_households_with_flagged_adults": 218
+   },
+   "with_health_for_comparison": {
+    "adults": {
+     "estimate": 5006719.787635551,
+     "interval_95": [
+      4454185.664207003,
+      5591207.551802331
+     ],
+     "standard_error": 292146.2463626813
+    },
+    "household_members": {
+     "estimate": 15970727.130536214,
+     "interval_95": [
+      14179340.413358215,
+      17843897.159495797
+     ],
+     "standard_error": 941572.9498426487
+    },
+    "households": {
+     "estimate": 4216913.390355084,
+     "interval_95": [
+      3771592.5633075335,
+      4694880.185716058
+     ],
+     "standard_error": 236902.49583713585
+    }
+   }
+  },
+  "job": {
+   "strict": {
+    "adults": {
+     "estimate": 35031.00729430816,
+     "interval_95": [
+      7506.925595897107,
+      72572.89144320083
+     ],
+     "standard_error": 16587.474699121314
+    },
+    "household_members": {
+     "estimate": 176650.19816798414,
+     "interval_95": [
+      44792.98326748585,
+      343103.2372182953
+     ],
+     "standard_error": 76835.26602017818
+    },
+    "households": {
+     "estimate": 35031.00729430816,
+     "interval_95": [
+      7506.925595897107,
+      72572.89144320083
+     ],
+     "standard_error": 16587.474699121314
+    }
+   },
+   "support": {
+    "kish_effective_source_households_members": 5.124885992592979,
+    "sample_adults": null,
+    "sample_households": 22,
+    "source_households": 17,
+    "source_households_for_half_of_members": 3,
+    "source_households_with_flagged_adults": 17
+   },
+   "with_health_for_comparison": {
+    "adults": {
+     "estimate": 2680254.5096761426,
+     "interval_95": [
+      2296877.608665603,
+      3079567.4751951876
+     ],
+     "standard_error": 200283.5072081469
+    },
+    "household_members": {
+     "estimate": 10775584.957855053,
+     "interval_95": [
+      9260908.07782382,
+      12440210.43179114
+     ],
+     "standard_error": 813190.8471791403
+    },
+    "households": {
+     "estimate": 2494780.9182830467,
+     "interval_95": [
+      2151529.643011269,
+      2862405.1672963314
+     ],
+     "standard_error": 180305.7573880552
+    }
+   }
+  }
+ },
+ "year": 2017
+}

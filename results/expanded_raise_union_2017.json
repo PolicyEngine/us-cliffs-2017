@@ -1,0 +1,1457 @@
+{
+  "additional_group": "Households below 50% retention for at least one tested raise, excluding every household with negative retention for any tested raise; residents counted once.",
+  "aggregation": "MicroSeries.sum with household boolean unions and map_to='person'; saved CSV weight columns are not read.",
+  "code": {
+    "commit": "ff0672e5f7f0728208599d988e9bd3cc2e195391",
+    "script_sha256": "06ca2cbe6eae66cf7e8e16799cbdd700f68d863a8878ee2dff398477d8840475"
+  },
+  "health_measure": "Government-valued health coverage, with ACA PTC counted once, marketplace net-premium changes excluded and CHIP premiums retained.",
+  "inputs": [
+    {
+      "metadata_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/earnings_changes/parts/changes_2017_p4_0_s0/raise_1000.json",
+      "metadata_sha256": "99193486352f491be72eca84c23146b5eef865f7b76c7883b590c54121651275",
+      "rows_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/parts/per_person/changes_2017_p4_0_s0_raise_1000.csv.gz",
+      "rows_sha256": "b832c73c8dfc9b92340ee0e65fd1e60c7e6971dea867ec03d46c6b78b0d7cd5e"
+    },
+    {
+      "metadata_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/earnings_changes/parts/changes_2017_p4_0_s0/raise_2000.json",
+      "metadata_sha256": "8bf52962402d0af2fede0fb4f542a4113121650f02677fe8fcc01420152ca2ea",
+      "rows_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/parts/per_person/changes_2017_p4_0_s0_raise_2000.csv.gz",
+      "rows_sha256": "be8fdedb85754a6ea3fc362a269e38778edabb9d65e6e0ab57042417566af1f2"
+    },
+    {
+      "metadata_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/earnings_changes/parts/changes_2017_p4_0_s0/raise_5000.json",
+      "metadata_sha256": "9265eadf616de3e609757dbb5f4b2088d1169c7aa1c7e0537d073ebf10ab9a0d",
+      "rows_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/parts/per_person/changes_2017_p4_0_s0_raise_5000.csv.gz",
+      "rows_sha256": "b53dcdb00d36405b349ad7f8bb7e245ad34255350b93f4dd5d81f6d2c9f85bcf"
+    },
+    {
+      "metadata_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/earnings_changes/parts/changes_2017_p4_1_s0/raise_1000.json",
+      "metadata_sha256": "6509807896a71acefe1dc2d83bc31f5bfd20d7ff79529a113eb73745ffbe1c3e",
+      "rows_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/parts/per_person/changes_2017_p4_1_s0_raise_1000.csv.gz",
+      "rows_sha256": "23bdbe45e380e963a28ce8b0a30db6160fcbd11b48dbfbba1b8bdf0bfb25fa37"
+    },
+    {
+      "metadata_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/earnings_changes/parts/changes_2017_p4_1_s0/raise_2000.json",
+      "metadata_sha256": "024a0ac2ccdce7ef0f18511d5522530a45212d2fc4d400331089a73a0a580e4e",
+      "rows_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/parts/per_person/changes_2017_p4_1_s0_raise_2000.csv.gz",
+      "rows_sha256": "02ab19ae1d13c2ad8ca5f6aea5879483e96bb1c0e6b739ae83c7c653a4208e1c"
+    },
+    {
+      "metadata_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/earnings_changes/parts/changes_2017_p4_1_s0/raise_5000.json",
+      "metadata_sha256": "ad9112e58d2981c79245913658ac3ac75c2d9e1da3f05dbc03e5e7501a3876ef",
+      "rows_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/parts/per_person/changes_2017_p4_1_s0_raise_5000.csv.gz",
+      "rows_sha256": "09b2f55545e86357bf08cdbeacc7f6864eb7f1fb087986bc82b74acbcae6597c"
+    },
+    {
+      "metadata_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/earnings_changes/parts/changes_2017_p4_2_s0/raise_1000.json",
+      "metadata_sha256": "3bb687870644a2bec9034b303a66a5c8119e0ec1c354eee17a1b3ecf83c80f13",
+      "rows_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/parts/per_person/changes_2017_p4_2_s0_raise_1000.csv.gz",
+      "rows_sha256": "3cc91271db11f6044e9d65cbc3579f5082a7e8f14627e8a9a40a3af2de1f1981"
+    },
+    {
+      "metadata_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/earnings_changes/parts/changes_2017_p4_2_s0/raise_2000.json",
+      "metadata_sha256": "b1406937042a8c24281829b697c8fe8331441fa6671adc82695665598254cf84",
+      "rows_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/parts/per_person/changes_2017_p4_2_s0_raise_2000.csv.gz",
+      "rows_sha256": "673794c79678909d2831923587213c2f56dd9630b9991aff9289d148ed2945fc"
+    },
+    {
+      "metadata_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/earnings_changes/parts/changes_2017_p4_2_s0/raise_5000.json",
+      "metadata_sha256": "04d0c8b1294a0df8d9ed37a5df180f94f29b2b8a95c9d4b7d4b82f1174ae9623",
+      "rows_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/parts/per_person/changes_2017_p4_2_s0_raise_5000.csv.gz",
+      "rows_sha256": "d56f323f4912f597af83b636d9cf1e068735d71ca3d8589431ed81caa981f014"
+    },
+    {
+      "metadata_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/earnings_changes/parts/changes_2017_p4_3_s0/raise_1000.json",
+      "metadata_sha256": "ff17ec105c152a93a618916e53c2b9183262512c5350575c7618cf962dd56fd2",
+      "rows_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/parts/per_person/changes_2017_p4_3_s0_raise_1000.csv.gz",
+      "rows_sha256": "a475bd11bfb58b3875bf06f70828175607f21c2abde5eef8687f3c674c6ba3d6"
+    },
+    {
+      "metadata_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/earnings_changes/parts/changes_2017_p4_3_s0/raise_2000.json",
+      "metadata_sha256": "1518bacd16906c8b81c3f1a590b1548269211f8de73d048a9eb48455570419bf",
+      "rows_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/parts/per_person/changes_2017_p4_3_s0_raise_2000.csv.gz",
+      "rows_sha256": "f8b599ba1a6f71a60d93b1fc0d0233d87f92e4208d5481f6e49fc4cc9677fb87"
+    },
+    {
+      "metadata_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/earnings_changes/parts/changes_2017_p4_3_s0/raise_5000.json",
+      "metadata_sha256": "926a7edd2becbf460ed63a4695cd76b040a8fde6bd64cfe5d0ad738f05939d3d",
+      "rows_file": "/Users/maxghenis/PolicyEngine/us-cliffs-2017/results/parts/per_person/changes_2017_p4_3_s0_raise_5000.csv.gz",
+      "rows_sha256": "1bc8d1f4a0bdeeab021f30e825cc46f486abd76f93c51bad17c455e55898443a"
+    }
+  ],
+  "metrics": {
+    "with_health.additional_below_half_excluding_strict": {
+      "adults": 11574089.340405291,
+      "household_members": 33181755.69114242,
+      "households": 9762601.59499434
+    },
+    "with_health.original_1000_in_union_below_half": {
+      "household_members": 6045189.590398442,
+      "households": 1910712.6985757977
+    },
+    "with_health.original_1000_in_union_strict": {
+      "household_members": 6045189.590398442,
+      "households": 1910712.6985757977
+    },
+    "with_health.original_1000_outside_union_below_half": {
+      "household_members": 154527.50188846642,
+      "households": 68235.50026283003
+    },
+    "with_health.original_1000_outside_union_strict": {
+      "household_members": 154527.50188846642,
+      "households": 68235.50026283003
+    },
+    "with_health.raise_1000.retains_lt_0pct": {
+      "adults": 2326465.2779594087,
+      "household_members": 6045189.377090719,
+      "households": 1910712.6274732233
+    },
+    "with_health.raise_1000.retains_lt_20pct": {
+      "adults": 2935353.759199733,
+      "household_members": 7669454.940603141,
+      "households": 2417907.7302751243
+    },
+    "with_health.raise_1000.retains_lt_50pct": {
+      "adults": 12592746.808135998,
+      "household_members": 35389408.6933554,
+      "households": 10555851.871491147
+    },
+    "with_health.raise_1000.retains_lt_60pct": {
+      "adults": 39898690.67532021,
+      "household_members": 95627082.54803278,
+      "households": 29854277.569742884
+    },
+    "with_health.raise_2000.retains_lt_0pct": {
+      "adults": 3791420.568032302,
+      "household_members": 9819036.436178086,
+      "households": 3062905.140942273
+    },
+    "with_health.raise_2000.retains_lt_20pct": {
+      "adults": 4435492.456873756,
+      "household_members": 11633808.843749385,
+      "households": 3596786.1867359634
+    },
+    "with_health.raise_2000.retains_lt_50pct": {
+      "adults": 14312168.424450539,
+      "household_members": 39855830.524367094,
+      "households": 11927088.516688574
+    },
+    "with_health.raise_2000.retains_lt_60pct": {
+      "adults": 41678490.741044134,
+      "household_members": 100274247.97940753,
+      "households": 31200004.4282708
+    },
+    "with_health.raise_5000.retains_lt_0pct": {
+      "adults": 7965950.691713967,
+      "household_members": 20769668.232871875,
+      "households": 6776396.864972249
+    },
+    "with_health.raise_5000.retains_lt_20pct": {
+      "adults": 8816327.368796539,
+      "household_members": 23310850.11711318,
+      "households": 7450617.395699758
+    },
+    "with_health.raise_5000.retains_lt_50pct": {
+      "adults": 19298526.52005115,
+      "household_members": 53049319.989166975,
+      "households": 16174595.057937264
+    },
+    "with_health.raise_5000.retains_lt_60pct": {
+      "adults": 46341188.947020054,
+      "household_members": 112109298.55336511,
+      "households": 34925839.83116718
+    },
+    "with_health.union.retains_lt_0pct": {
+      "adults": 9259204.11368015,
+      "household_members": 24003303.574607007,
+      "households": 7718817.320682319
+    },
+    "with_health.union.retains_lt_20pct": {
+      "adults": 10362943.753465194,
+      "household_members": 27027446.99602887,
+      "households": 8579571.779937802
+    },
+    "with_health.union.retains_lt_50pct": {
+      "adults": 21113994.327422462,
+      "household_members": 57185059.265749425,
+      "households": 17481418.91567666
+    },
+    "with_health.union.retains_lt_60pct": {
+      "adults": 49346250.45951234,
+      "household_members": 118010159.52578133,
+      "households": 37038321.8106641
+    },
+    "with_health.union_below_half_outside_original_1000": {
+      "adults": 18566268.17069916,
+      "household_members": 51139869.67535099,
+      "households": 15570706.217100862
+    },
+    "without_health.additional_below_half_excluding_strict": {
+      "adults": 12564291.812928429,
+      "household_members": 36107719.09668893,
+      "households": 10671962.695098164
+    },
+    "without_health.original_1000_in_union_below_half": {
+      "household_members": 1728660.1004994446,
+      "households": 453192.1722560015
+    },
+    "without_health.original_1000_in_union_strict": {
+      "household_members": 1728660.1004994446,
+      "households": 453192.1722560015
+    },
+    "without_health.original_1000_outside_union_below_half": {
+      "household_members": 10601.240298382181,
+      "households": 10601.227165066462
+    },
+    "without_health.original_1000_outside_union_strict": {
+      "household_members": 10601.240298382181,
+      "households": 10601.227165066462
+    },
+    "without_health.raise_1000.retains_lt_0pct": {
+      "adults": 607056.8392179117,
+      "household_members": 1728659.8871917212,
+      "households": 453192.10115342704
+    },
+    "without_health.raise_1000.retains_lt_20pct": {
+      "adults": 1147714.5170580081,
+      "household_members": 3208470.7882589903,
+      "households": 922921.8455285152
+    },
+    "without_health.raise_1000.retains_lt_50pct": {
+      "adults": 10381323.716638021,
+      "household_members": 29775251.442547023,
+      "households": 8754408.985341046
+    },
+    "without_health.raise_1000.retains_lt_60pct": {
+      "adults": 36141067.18752359,
+      "household_members": 86272740.45621507,
+      "households": 27002095.319075327
+    },
+    "without_health.raise_2000.retains_lt_0pct": {
+      "adults": 538019.198004762,
+      "household_members": 1739069.7873680464,
+      "households": 395340.709545751
+    },
+    "without_health.raise_2000.retains_lt_20pct": {
+      "adults": 1168167.5088734138,
+      "household_members": 3506653.0538591836,
+      "households": 919095.6217144192
+    },
+    "without_health.raise_2000.retains_lt_50pct": {
+      "adults": 10820680.294049712,
+      "household_members": 31330015.069300715,
+      "households": 9137161.388227832
+    },
+    "without_health.raise_2000.retains_lt_60pct": {
+      "adults": 36896611.81351094,
+      "household_members": 88705781.00057119,
+      "households": 27602290.523041643
+    },
+    "without_health.raise_5000.retains_lt_0pct": {
+      "adults": 227551.4376855566,
+      "household_members": 699010.9829913878,
+      "households": 189793.2207533681
+    },
+    "without_health.raise_5000.retains_lt_20pct": {
+      "adults": 647170.4396161275,
+      "household_members": 2247197.6323447167,
+      "households": 560230.1446183231
+    },
+    "without_health.raise_5000.retains_lt_50pct": {
+      "adults": 11557992.992470518,
+      "household_members": 34037639.021457136,
+      "households": 9828050.55605259
+    },
+    "without_health.raise_5000.retains_lt_60pct": {
+      "adults": 37850541.55616838,
+      "household_members": 92543361.21234578,
+      "households": 28393416.08836507
+    },
+    "without_health.union.retains_lt_0pct": {
+      "adults": 1010578.4998108475,
+      "household_members": 2963280.2197553553,
+      "households": 756330.3361007769
+    },
+    "without_health.union.retains_lt_20pct": {
+      "adults": 1957433.5518521552,
+      "household_members": 5703237.037032748,
+      "households": 1556396.637993982
+    },
+    "without_health.union.retains_lt_50pct": {
+      "adults": 13623633.443876274,
+      "household_members": 39070999.31644429,
+      "households": 11428293.031198937
+    },
+    "without_health.union.retains_lt_60pct": {
+      "adults": 41032022.77840199,
+      "household_members": 99067098.2444649,
+      "households": 30784595.477788933
+    },
+    "without_health.union_below_half_outside_original_1000": {
+      "adults": 13013589.150586436,
+      "household_members": 37342339.21594485,
+      "households": 10975100.858942937
+    }
+  },
+  "original_all_adults_strict": {
+    "with_health.raise_1000": {
+      "adults": 2678606.3755043014,
+      "household_members": 6199717.092286909,
+      "households": 1978948.1988386277
+    },
+    "with_health.raise_2000": {
+      "adults": 4390641.77255288,
+      "household_members": 10216943.103493266,
+      "households": 3223557.9056844916
+    },
+    "with_health.raise_5000": {
+      "adults": 9415883.267218811,
+      "household_members": 21673855.56286613,
+      "households": 7153063.285183715
+    },
+    "without_health.raise_1000": {
+      "adults": 690879.1637878893,
+      "household_members": 1739261.340797827,
+      "households": 463793.39942106797
+    },
+    "without_health.raise_2000": {
+      "adults": 666855.7433043221,
+      "household_members": 1837532.5908630514,
+      "households": 428463.20358343836
+    },
+    "without_health.raise_5000": {
+      "adults": 298840.840834039,
+      "household_members": 769570.8717014306,
+      "households": 231665.8213583895
+    }
+  },
+  "parts": [
+    {
+      "metrics": {
+        "with_health.additional_below_half_excluding_strict": {
+          "adults": 2925821.848372665,
+          "household_members": 8678748.600433083,
+          "households": 2502957.644119894
+        },
+        "with_health.original_1000_in_union_below_half": {
+          "household_members": 1309687.271094714,
+          "households": 434236.5826803099
+        },
+        "with_health.original_1000_in_union_strict": {
+          "household_members": 1309687.271094714,
+          "households": 434236.5826803099
+        },
+        "with_health.original_1000_outside_union_below_half": {
+          "household_members": 67956.60684301378,
+          "households": 22767.24656927283
+        },
+        "with_health.original_1000_outside_union_strict": {
+          "household_members": 67956.60684301378,
+          "households": 22767.24656927283
+        },
+        "with_health.raise_1000.retains_lt_0pct": {
+          "adults": 579885.9861960404,
+          "household_members": 1309687.271094714,
+          "households": 434236.5826803099
+        },
+        "with_health.raise_1000.retains_lt_20pct": {
+          "adults": 762421.6513927893,
+          "household_members": 1779091.6119045664,
+          "households": 592854.8076268503
+        },
+        "with_health.raise_1000.retains_lt_50pct": {
+          "adults": 3312484.021760442,
+          "household_members": 9354666.430937279,
+          "households": 2786184.6577643603
+        },
+        "with_health.raise_1000.retains_lt_60pct": {
+          "adults": 9830514.220662553,
+          "household_members": 23093258.678968504,
+          "households": 7253852.555138295
+        },
+        "with_health.raise_2000.retains_lt_0pct": {
+          "adults": 847104.1652693255,
+          "household_members": 2247246.185359453,
+          "households": 650316.4160674841
+        },
+        "with_health.raise_2000.retains_lt_20pct": {
+          "adults": 1049446.035190672,
+          "household_members": 2792846.0337344515,
+          "households": 826949.0282082149
+        },
+        "with_health.raise_2000.retains_lt_50pct": {
+          "adults": 3494281.4409492863,
+          "household_members": 10156629.54327368,
+          "households": 2970402.9682919024
+        },
+        "with_health.raise_2000.retains_lt_60pct": {
+          "adults": 10135467.09958202,
+          "household_members": 24297677.995395884,
+          "households": 7538806.420996788
+        },
+        "with_health.raise_5000.retains_lt_0pct": {
+          "adults": 1770962.8933984556,
+          "household_members": 4794400.360926839,
+          "households": 1496516.9866397674
+        },
+        "with_health.raise_5000.retains_lt_20pct": {
+          "adults": 1993287.7059964049,
+          "household_members": 5474639.218706289,
+          "households": 1674492.3013019431
+        },
+        "with_health.raise_5000.retains_lt_50pct": {
+          "adults": 4578544.179935457,
+          "household_members": 13025516.019810846,
+          "households": 3867237.2098047677
+        },
+        "with_health.raise_5000.retains_lt_60pct": {
+          "adults": 11163981.27518133,
+          "household_members": 26980518.634098433,
+          "households": 8367140.989836332
+        },
+        "with_health.union.retains_lt_0pct": {
+          "adults": 2035775.6533292718,
+          "household_members": 5348117.51098053,
+          "households": 1687896.7259083854
+        },
+        "with_health.union.retains_lt_20pct": {
+          "adults": 2310232.387653502,
+          "household_members": 6153199.702674391,
+          "households": 1920346.1957262415
+        },
+        "with_health.union.retains_lt_50pct": {
+          "adults": 4998760.017381782,
+          "household_members": 14026866.111413613,
+          "households": 4190854.3700282797
+        },
+        "with_health.union.retains_lt_60pct": {
+          "adults": 11892899.580183214,
+          "household_members": 28322618.885956228,
+          "households": 8851167.231954489
+        },
+        "with_health.union_below_half_outside_original_1000": {
+          "adults": 4379568.569508898,
+          "household_members": 12717178.8403189,
+          "households": 3756617.7873479696
+        },
+        "without_health.additional_below_half_excluding_strict": {
+          "adults": 3198421.055625893,
+          "household_members": 9726972.913798809,
+          "households": 2774707.2385665434
+        },
+        "without_health.original_1000_in_union_below_half": {
+          "household_members": 330615.42759090295,
+          "households": 92980.37721081807
+        },
+        "without_health.original_1000_in_union_strict": {
+          "household_members": 330615.42759090295,
+          "households": 92980.37721081807
+        },
+        "without_health.original_1000_outside_union_below_half": {
+          "household_members": 0.0029946747235953808,
+          "households": 0.0029946747235953808
+        },
+        "without_health.original_1000_outside_union_strict": {
+          "household_members": 0.0029946747235953808,
+          "households": 0.0029946747235953808
+        },
+        "without_health.raise_1000.retains_lt_0pct": {
+          "adults": 130661.30010531505,
+          "household_members": 330615.42759090295,
+          "households": 92980.37721081807
+        },
+        "without_health.raise_1000.retains_lt_20pct": {
+          "adults": 313189.1439078366,
+          "household_members": 799980.6128349644,
+          "households": 251590.78076313113
+        },
+        "without_health.raise_1000.retains_lt_50pct": {
+          "adults": 2801562.2547204443,
+          "household_members": 8257890.302027259,
+          "households": 2415359.980709051
+        },
+        "without_health.raise_1000.retains_lt_60pct": {
+          "adults": 9001049.174113464,
+          "household_members": 21056015.604300715,
+          "households": 6634097.83503383
+        },
+        "without_health.raise_2000.retains_lt_0pct": {
+          "adults": 80685.53972916628,
+          "household_members": 259786.84892797738,
+          "households": 52398.49171755051
+        },
+        "without_health.raise_2000.retains_lt_20pct": {
+          "adults": 283024.80061149504,
+          "household_members": 805382.1242344717,
+          "households": 229029.5433818861
+        },
+        "without_health.raise_2000.retains_lt_50pct": {
+          "adults": 2800137.2304682736,
+          "household_members": 8593929.244972065,
+          "households": 2437905.1700024744
+        },
+        "without_health.raise_2000.retains_lt_60pct": {
+          "adults": 9152358.945909172,
+          "household_members": 21846654.900705457,
+          "households": 6792445.793218343
+        },
+        "without_health.raise_5000.retains_lt_0pct": {
+          "adults": 46007.24284681841,
+          "household_members": 140580.81161929062,
+          "households": 42948.86471852462
+        },
+        "without_health.raise_5000.retains_lt_20pct": {
+          "adults": 183703.94240844325,
+          "household_members": 610276.8186811449,
+          "households": 161374.1785526054
+        },
+        "without_health.raise_5000.retains_lt_50pct": {
+          "adults": 2939282.474722991,
+          "household_members": 9008160.992876403,
+          "households": 2556107.9850741513
+        },
+        "without_health.raise_5000.retains_lt_60pct": {
+          "adults": 9382075.788654167,
+          "household_members": 23048776.934041932,
+          "households": 7053260.726758253
+        },
+        "without_health.union.retains_lt_0pct": {
+          "adults": 217999.22979944508,
+          "household_members": 568218.1697303713,
+          "households": 154104.69572367787
+        },
+        "without_health.union.retains_lt_20pct": {
+          "adults": 500871.8264317588,
+          "household_members": 1344967.463356484,
+          "households": 407541.8189950923
+        },
+        "without_health.union.retains_lt_50pct": {
+          "adults": 3416420.3039573226,
+          "household_members": 10295191.08352918,
+          "households": 2928811.934290221
+        },
+        "without_health.union.retains_lt_60pct": {
+          "adults": 10139022.94746642,
+          "household_members": 24522257.267241932,
+          "households": 7578248.068421297
+        },
+        "without_health.union_below_half_outside_original_1000": {
+          "adults": 3285758.9947152194,
+          "household_members": 9964575.655938279,
+          "households": 2835831.5570794027
+        }
+      },
+      "original_all_adults_strict": {
+        "with_health.raise_1000": {
+          "adults": 660789.266379309,
+          "household_members": 1377643.8779377278,
+          "households": 457003.8292495827
+        },
+        "with_health.raise_2000": {
+          "adults": 1028371.7307258471,
+          "household_members": 2418891.3740883633,
+          "households": 729209.4703951249
+        },
+        "with_health.raise_5000": {
+          "adults": 2107276.2548969435,
+          "household_members": 4991240.314117927,
+          "households": 1588381.3930553326
+        },
+        "without_health.raise_1000": {
+          "adults": 150726.61554109314,
+          "household_members": 330615.4305855777,
+          "households": 92980.3802054928
+        },
+        "without_health.raise_2000": {
+          "adults": 123076.71129417469,
+          "household_members": 289622.2120691078,
+          "households": 67316.17419461843
+        },
+        "without_health.raise_5000": {
+          "adults": 61404.91688085999,
+          "household_members": 153744.38193179062,
+          "households": 49530.64987477462
+        }
+      },
+      "part": 0,
+      "worker_validation": {
+        "raise_1000": {
+          "with_health_workers_on_cliff": 579885.9861960404,
+          "without_health_workers_on_cliff": 130661.30010531505,
+          "workers_reached": 38083703.59816625
+        },
+        "raise_2000": {
+          "with_health_workers_on_cliff": 847104.1652693255,
+          "without_health_workers_on_cliff": 80685.53972916628,
+          "workers_reached": 38083703.59816625
+        },
+        "raise_5000": {
+          "with_health_workers_on_cliff": 1770962.8933984556,
+          "without_health_workers_on_cliff": 46007.24284681841,
+          "workers_reached": 38083703.59816625
+        }
+      }
+    },
+    {
+      "metrics": {
+        "with_health.additional_below_half_excluding_strict": {
+          "adults": 2714390.573231804,
+          "household_members": 7564954.944172149,
+          "households": 2307467.9956472055
+        },
+        "with_health.original_1000_in_union_below_half": {
+          "household_members": 1740192.315241881,
+          "households": 588636.3213858414
+        },
+        "with_health.original_1000_in_union_strict": {
+          "household_members": 1740192.315241881,
+          "households": 588636.3213858414
+        },
+        "with_health.original_1000_outside_union_below_half": {
+          "household_members": 27786.120801988698,
+          "households": 12527.998532555357
+        },
+        "with_health.original_1000_outside_union_strict": {
+          "household_members": 27786.120801988698,
+          "households": 12527.998532555357
+        },
+        "with_health.raise_1000.retains_lt_0pct": {
+          "adults": 711551.9373902074,
+          "household_members": 1740192.1019341575,
+          "households": 588636.2502832669
+        },
+        "with_health.raise_1000.retains_lt_20pct": {
+          "adults": 888237.7983927869,
+          "household_members": 2226134.6614908506,
+          "households": 746694.7883244045
+        },
+        "with_health.raise_1000.retains_lt_50pct": {
+          "adults": 3230287.0441632145,
+          "household_members": 8820614.961100262,
+          "households": 2703694.4373710137
+        },
+        "with_health.raise_1000.retains_lt_60pct": {
+          "adults": 10283425.638002446,
+          "household_members": 24723517.72603263,
+          "households": 7586349.170661557
+        },
+        "with_health.raise_2000.retains_lt_0pct": {
+          "adults": 1142148.1621319316,
+          "household_members": 2800218.05199781,
+          "households": 899560.4753112398
+        },
+        "with_health.raise_2000.retains_lt_20pct": {
+          "adults": 1319204.728662611,
+          "household_members": 3265166.674425612,
+          "households": 1063483.5241639516
+        },
+        "with_health.raise_2000.retains_lt_50pct": {
+          "adults": 3845809.3409039984,
+          "household_members": 10306280.058156386,
+          "households": 3169452.202171104
+        },
+        "with_health.raise_2000.retains_lt_60pct": {
+          "adults": 10893402.67537424,
+          "household_members": 26046557.526737705,
+          "households": 8011993.374888593
+        },
+        "with_health.raise_5000.retains_lt_0pct": {
+          "adults": 2369626.47646657,
+          "household_members": 6115912.408117045,
+          "households": 1888956.9261895367
+        },
+        "with_health.raise_5000.retains_lt_20pct": {
+          "adults": 2510797.7151335557,
+          "household_members": 6534750.0568154985,
+          "households": 1987988.8293954243
+        },
+        "with_health.raise_5000.retains_lt_50pct": {
+          "adults": 5146529.856595624,
+          "household_members": 13656129.99633251,
+          "households": 4188703.882460597
+        },
+        "with_health.raise_5000.retains_lt_60pct": {
+          "adults": 11957878.861872159,
+          "household_members": 28806811.076199006,
+          "households": 8788221.281619962
+        },
+        "with_health.union.retains_lt_0pct": {
+          "adults": 2769269.1452375497,
+          "household_members": 7068102.661642648,
+          "households": 2175316.512625012
+        },
+        "with_health.union.retains_lt_20pct": {
+          "adults": 3011945.108907913,
+          "household_members": 7663428.593960066,
+          "households": 2362231.945325004
+        },
+        "with_health.union.retains_lt_50pct": {
+          "adults": 5554330.534601875,
+          "household_members": 14633057.605814796,
+          "households": 4482784.508272218
+        },
+        "with_health.union.retains_lt_60pct": {
+          "adults": 12858439.865826055,
+          "household_members": 30698748.008870743,
+          "households": 9387087.684010193
+        },
+        "with_health.union_below_half_outside_original_1000": {
+          "adults": 4761767.43178632,
+          "household_members": 12892865.290572915,
+          "households": 3894148.1868863767
+        },
+        "without_health.additional_below_half_excluding_strict": {
+          "adults": 3086116.304016034,
+          "household_members": 8629739.84142975,
+          "households": 2597131.594259555
+        },
+        "without_health.original_1000_in_union_below_half": {
+          "household_members": 488292.080864663,
+          "households": 153754.33859583084
+        },
+        "without_health.original_1000_in_union_strict": {
+          "household_members": 488292.080864663,
+          "households": 153754.33859583084
+        },
+        "without_health.original_1000_outside_union_below_half": {
+          "household_members": 0.03678835660684854,
+          "households": 0.023655040888115764
+        },
+        "without_health.original_1000_outside_union_strict": {
+          "household_members": 0.03678835660684854,
+          "households": 0.023655040888115764
+        },
+        "without_health.raise_1000.retains_lt_0pct": {
+          "adults": 200742.63589712977,
+          "household_members": 488291.8675569396,
+          "households": 153754.26749325637
+        },
+        "without_health.raise_1000.retains_lt_20pct": {
+          "adults": 366399.5509452473,
+          "household_members": 935352.3807548843,
+          "households": 307025.8140932878
+        },
+        "without_health.raise_1000.retains_lt_50pct": {
+          "adults": 2607484.548975479,
+          "household_members": 7364527.447268449,
+          "households": 2192357.672117469
+        },
+        "without_health.raise_1000.retains_lt_60pct": {
+          "adults": 9379762.357707618,
+          "household_members": 22408615.77961293,
+          "households": 6902877.801687024
+        },
+        "without_health.raise_2000.retains_lt_0pct": {
+          "adults": 137277.1043237133,
+          "household_members": 418731.34440664016,
+          "households": 104387.24711747383
+        },
+        "without_health.raise_2000.retains_lt_20pct": {
+          "adults": 323177.582087809,
+          "household_members": 914238.5674501292,
+          "households": 283379.7062452779
+        },
+        "without_health.raise_2000.retains_lt_50pct": {
+          "adults": 2737542.4528394397,
+          "household_members": 7766581.737276794,
+          "households": 2326242.532503603
+        },
+        "without_health.raise_2000.retains_lt_60pct": {
+          "adults": 9623381.875412362,
+          "household_members": 22855149.969997894,
+          "households": 7072081.53787946
+        },
+        "without_health.raise_5000.retains_lt_0pct": {
+          "adults": 102055.01854788302,
+          "household_members": 240248.0664740313,
+          "households": 67356.41432918597
+        },
+        "without_health.raise_5000.retains_lt_20pct": {
+          "adults": 202125.83769629535,
+          "household_members": 601058.7568777616,
+          "households": 149972.60847018898
+        },
+        "without_health.raise_5000.retains_lt_50pct": {
+          "adults": 2969430.763010394,
+          "household_members": 8434740.791677259,
+          "households": 2506302.045999565
+        },
+        "without_health.raise_5000.retains_lt_60pct": {
+          "adults": 9661661.303655397,
+          "household_members": 23175123.79029558,
+          "households": 7067362.192112024
+        },
+        "without_health.union.retains_lt_0pct": {
+          "adults": 329977.13485166,
+          "household_members": 856166.5923009611,
+          "households": 248289.76464211973
+        },
+        "without_health.union.retains_lt_20pct": {
+          "adults": 584548.6304132943,
+          "household_members": 1573502.02435708,
+          "households": 471532.28706348105
+        },
+        "without_health.union.retains_lt_50pct": {
+          "adults": 3418501.637503707,
+          "household_members": 9485906.43373071,
+          "households": 2845421.358901675
+        },
+        "without_health.union.retains_lt_60pct": {
+          "adults": 10688334.87531348,
+          "household_members": 25407727.428524137,
+          "households": 7799191.9441445805
+        },
+        "without_health.union_below_half_outside_original_1000": {
+          "adults": 3217758.879115183,
+          "household_members": 8997614.352866048,
+          "households": 2691667.020305844
+        }
+      },
+      "original_all_adults_strict": {
+        "with_health.raise_1000": {
+          "adults": 794998.7052165596,
+          "household_members": 1767978.4360438697,
+          "households": 601164.3199183966
+        },
+        "with_health.raise_2000": {
+          "adults": 1262904.7402153788,
+          "household_members": 2854174.6172919204,
+          "households": 913671.6066790925
+        },
+        "with_health.raise_5000": {
+          "adults": 2616269.581926342,
+          "household_members": 6190831.931529791,
+          "households": 1921998.0985971126
+        },
+        "without_health.raise_1000": {
+          "adults": 225392.3965176309,
+          "household_members": 488292.1176530196,
+          "households": 153754.36225087172
+        },
+        "without_health.raise_2000": {
+          "adults": 168579.8762110435,
+          "household_members": 418731.7044018324,
+          "households": 104387.37187409852
+        },
+        "without_health.raise_5000": {
+          "adults": 102055.08965045749,
+          "household_members": 240248.0664740313,
+          "households": 67356.41432918597
+        }
+      },
+      "part": 1,
+      "worker_validation": {
+        "raise_1000": {
+          "with_health_workers_on_cliff": 711551.9373902074,
+          "without_health_workers_on_cliff": 200742.63589712977,
+          "workers_reached": 39722237.32477982
+        },
+        "raise_2000": {
+          "with_health_workers_on_cliff": 1142148.1621319316,
+          "without_health_workers_on_cliff": 137277.1043237133,
+          "workers_reached": 39722237.32477982
+        },
+        "raise_5000": {
+          "with_health_workers_on_cliff": 2369626.47646657,
+          "without_health_workers_on_cliff": 102055.01854788302,
+          "workers_reached": 39722237.32477982
+        }
+      }
+    },
+    {
+      "metrics": {
+        "with_health.additional_below_half_excluding_strict": {
+          "adults": 2941223.109954954,
+          "household_members": 7934928.300164873,
+          "households": 2371083.905251163
+        },
+        "with_health.original_1000_in_union_below_half": {
+          "household_members": 1758573.2899957525,
+          "households": 536557.3884891348
+        },
+        "with_health.original_1000_in_union_strict": {
+          "household_members": 1758573.2899957525,
+          "households": 536557.3884891348
+        },
+        "with_health.original_1000_outside_union_below_half": {
+          "household_members": 5451.157574761019,
+          "households": 2284.6640165029676
+        },
+        "with_health.original_1000_outside_union_strict": {
+          "household_members": 5451.157574761019,
+          "households": 2284.6640165029676
+        },
+        "with_health.raise_1000.retains_lt_0pct": {
+          "adults": 638041.8244289544,
+          "household_members": 1758573.2899957525,
+          "households": 536557.3884891348
+        },
+        "with_health.raise_1000.retains_lt_20pct": {
+          "adults": 778461.2153817418,
+          "household_members": 2113525.9262069785,
+          "households": 643128.7744565598
+        },
+        "with_health.raise_1000.retains_lt_50pct": {
+          "adults": 2989249.5119478256,
+          "household_members": 8055148.295415217,
+          "households": 2419215.5710071158
+        },
+        "with_health.raise_1000.retains_lt_60pct": {
+          "adults": 10302476.953508891,
+          "household_members": 24577535.725166835,
+          "households": 7773651.159837473
+        },
+        "with_health.raise_2000.retains_lt_0pct": {
+          "adults": 1084456.282600371,
+          "household_members": 2753905.551254891,
+          "households": 879643.850651256
+        },
+        "with_health.raise_2000.retains_lt_20pct": {
+          "adults": 1197273.7687716417,
+          "household_members": 3148990.350970558,
+          "households": 969983.4382327148
+        },
+        "with_health.raise_2000.retains_lt_50pct": {
+          "adults": 3564164.878482704,
+          "household_members": 9380033.118012663,
+          "households": 2851351.3045081287
+        },
+        "with_health.raise_2000.retains_lt_60pct": {
+          "adults": 10848992.043178372,
+          "household_members": 25750743.000666637,
+          "households": 8118864.25675497
+        },
+        "with_health.raise_5000.retains_lt_0pct": {
+          "adults": 2151785.4591621533,
+          "household_members": 5849849.019646173,
+          "households": 1856770.6595988297
+        },
+        "with_health.raise_5000.retains_lt_20pct": {
+          "adults": 2401009.2101844475,
+          "household_members": 6504221.130145573,
+          "households": 2043033.4186461247
+        },
+        "with_health.raise_5000.retains_lt_50pct": {
+          "adults": 4954180.094805371,
+          "household_members": 13466792.486572431,
+          "households": 4070381.390796944
+        },
+        "with_health.raise_5000.retains_lt_60pct": {
+          "adults": 12148800.374705797,
+          "household_members": 29112914.427823596,
+          "households": 9177219.169459643
+        },
+        "with_health.union.retains_lt_0pct": {
+          "adults": 2472329.6403353265,
+          "household_members": 6675468.540305467,
+          "households": 2070914.0157719431
+        },
+        "with_health.union.retains_lt_20pct": {
+          "adults": 2746370.6945531457,
+          "household_members": 7440419.361451319,
+          "households": 2279818.4343637307
+        },
+        "with_health.union.retains_lt_50pct": {
+          "adults": 5492750.762977237,
+          "household_members": 14610396.840470342,
+          "households": 4441997.921023106
+        },
+        "with_health.union.retains_lt_60pct": {
+          "adults": 12835703.652237428,
+          "household_members": 30432295.121374622,
+          "households": 9684789.62320157
+        },
+        "with_health.union_below_half_outside_original_1000": {
+          "adults": 4784814.385486955,
+          "household_members": 12851823.550474588,
+          "households": 3905440.5325339716
+        },
+        "without_health.additional_below_half_excluding_strict": {
+          "adults": 3126767.0780457007,
+          "household_members": 8462517.580152016,
+          "households": 2537833.622965321
+        },
+        "without_health.original_1000_in_union_below_half": {
+          "household_members": 561698.8512431526,
+          "households": 127509.61281679422
+        },
+        "without_health.original_1000_in_union_strict": {
+          "household_members": 561698.8512431526,
+          "households": 127509.61281679422
+        },
+        "without_health.original_1000_outside_union_below_half": {
+          "household_members": 0.004434012342244387,
+          "households": 0.004434012342244387
+        },
+        "without_health.original_1000_outside_union_strict": {
+          "household_members": 0.004434012342244387,
+          "households": 0.004434012342244387
+        },
+        "without_health.raise_1000.retains_lt_0pct": {
+          "adults": 177936.35727104294,
+          "household_members": 561698.8512431526,
+          "households": 127509.61281679422
+        },
+        "without_health.raise_1000.retains_lt_20pct": {
+          "adults": 281597.4554777632,
+          "household_members": 856556.2880775242,
+          "households": 210744.20896783948
+        },
+        "without_health.raise_1000.retains_lt_50pct": {
+          "adults": 2344687.2774521583,
+          "household_members": 6326398.321270311,
+          "households": 1876933.6081219085
+        },
+        "without_health.raise_1000.retains_lt_60pct": {
+          "adults": 9166796.622267041,
+          "household_members": 22003096.744636588,
+          "households": 6911042.564895337
+        },
+        "without_health.raise_2000.retains_lt_0pct": {
+          "adults": 138367.15521035314,
+          "household_members": 468926.565493413,
+          "households": 109414.8586123347
+        },
+        "without_health.raise_2000.retains_lt_20pct": {
+          "adults": 255405.48176169553,
+          "household_members": 863358.6422089062,
+          "households": 197605.84370277144
+        },
+        "without_health.raise_2000.retains_lt_50pct": {
+          "adults": 2517179.678766302,
+          "household_members": 6786281.577142854,
+          "households": 2012275.5260274182
+        },
+        "without_health.raise_2000.retains_lt_60pct": {
+          "adults": 9323113.863420298,
+          "household_members": 22516633.421757966,
+          "households": 7022968.183341645
+        },
+        "without_health.raise_5000.retains_lt_0pct": {
+          "adults": 61218.22626889357,
+          "household_members": 240627.39966640016,
+          "households": 61217.67209692905
+        },
+        "without_health.raise_5000.retains_lt_20pct": {
+          "adults": 128897.66023338641,
+          "household_members": 505248.2421857846,
+          "households": 128887.02650378863
+        },
+        "without_health.raise_5000.retains_lt_50pct": {
+          "adults": 2797855.4368872186,
+          "household_members": 7810025.967534841,
+          "households": 2270032.9677353096
+        },
+        "without_health.raise_5000.retains_lt_60pct": {
+          "adults": 9746433.584030326,
+          "household_members": 23735797.188796293,
+          "households": 7354472.695570249
+        },
+        "without_health.union.retains_lt_0pct": {
+          "adults": 233597.95206688612,
+          "household_members": 785840.4303808598,
+          "households": 182167.40743465014
+        },
+        "without_health.union.retains_lt_20pct": {
+          "adults": 419660.08530168294,
+          "household_members": 1376912.292758749,
+          "households": 341424.1468101792
+        },
+        "without_health.union.retains_lt_50pct": {
+          "adults": 3360365.5925168805,
+          "household_members": 9248358.010532876,
+          "households": 2720001.0303999707
+        },
+        "without_health.union.retains_lt_60pct": {
+          "adults": 10334186.588211708,
+          "household_members": 24985423.586463816,
+          "households": 7839465.471627266
+        },
+        "without_health.union_below_half_outside_original_1000": {
+          "adults": 3182429.234581643,
+          "household_members": 8686659.159289725,
+          "households": 2592491.417583177
+        }
+      },
+      "original_all_adults_strict": {
+        "with_health.raise_1000": {
+          "adults": 726541.221983212,
+          "household_members": 1764024.4475705135,
+          "households": 538842.0525056378
+        },
+        "with_health.raise_2000": {
+          "adults": 1216966.4616585786,
+          "household_members": 2759567.342758192,
+          "households": 882138.8564901337
+        },
+        "with_health.raise_5000": {
+          "adults": 2657815.231434464,
+          "household_members": 6163032.4355377015,
+          "households": 1965621.6405064708
+        },
+        "without_health.raise_1000": {
+          "adults": 191935.62358500162,
+          "household_members": 561698.855677165,
+          "households": 127509.61725080656
+        },
+        "without_health.raise_2000": {
+          "adults": 170619.12953678932,
+          "household_members": 468926.565493413,
+          "households": 109414.8586123347
+        },
+        "without_health.raise_5000": {
+          "adults": 92537.36050876835,
+          "household_members": 253812.72938157758,
+          "households": 74402.99320451776
+        }
+      },
+      "part": 2,
+      "worker_validation": {
+        "raise_1000": {
+          "with_health_workers_on_cliff": 638041.8244289544,
+          "without_health_workers_on_cliff": 177936.35727104294,
+          "workers_reached": 39027258.62344842
+        },
+        "raise_2000": {
+          "with_health_workers_on_cliff": 1084456.282600371,
+          "without_health_workers_on_cliff": 138367.15521035314,
+          "workers_reached": 39027258.62344842
+        },
+        "raise_5000": {
+          "with_health_workers_on_cliff": 2151785.4591621533,
+          "without_health_workers_on_cliff": 61218.22626889357,
+          "workers_reached": 39027258.62344842
+        }
+      }
+    },
+    {
+      "metrics": {
+        "with_health.additional_below_half_excluding_strict": {
+          "adults": 2992653.8088458683,
+          "household_members": 9003123.846372318,
+          "households": 2581092.049976078
+        },
+        "with_health.original_1000_in_union_below_half": {
+          "household_members": 1236736.7140660952,
+          "households": 351282.40602051164
+        },
+        "with_health.original_1000_in_union_strict": {
+          "household_members": 1236736.7140660952,
+          "households": 351282.40602051164
+        },
+        "with_health.original_1000_outside_union_below_half": {
+          "household_members": 53333.61666870292,
+          "households": 30655.591144498874
+        },
+        "with_health.original_1000_outside_union_strict": {
+          "household_members": 53333.61666870292,
+          "households": 30655.591144498874
+        },
+        "with_health.raise_1000.retains_lt_0pct": {
+          "adults": 396985.52994420624,
+          "household_members": 1236736.7140660952,
+          "households": 351282.40602051164
+        },
+        "with_health.raise_1000.retains_lt_20pct": {
+          "adults": 506233.0940324151,
+          "household_members": 1550702.741000746,
+          "households": 435229.35986730945
+        },
+        "with_health.raise_1000.retains_lt_50pct": {
+          "adults": 3060726.2302645147,
+          "household_members": 9158979.005902637,
+          "households": 2646757.205348657
+        },
+        "with_health.raise_1000.retains_lt_60pct": {
+          "adults": 9482273.863146322,
+          "household_members": 23232770.417864818,
+          "households": 7240424.68410556
+        },
+        "with_health.raise_2000.retains_lt_0pct": {
+          "adults": 717711.9580306739,
+          "household_members": 2017666.6475659334,
+          "households": 633384.3989122933
+        },
+        "with_health.raise_2000.retains_lt_20pct": {
+          "adults": 869567.9242488316,
+          "household_members": 2426805.784618764,
+          "households": 736370.1961310823
+        },
+        "with_health.raise_2000.retains_lt_50pct": {
+          "adults": 3407912.7641145503,
+          "household_members": 10012887.804924369,
+          "households": 2935882.041717439
+        },
+        "with_health.raise_2000.retains_lt_60pct": {
+          "adults": 9800628.922909498,
+          "household_members": 24179269.45660731,
+          "households": 7530340.375630449
+        },
+        "with_health.raise_5000.retains_lt_0pct": {
+          "adults": 1673575.8626867887,
+          "household_members": 4009506.4441818167,
+          "households": 1534152.2925441153
+        },
+        "with_health.raise_5000.retains_lt_20pct": {
+          "adults": 1911232.737482131,
+          "household_members": 4797239.7114458205,
+          "households": 1745102.8463562648
+        },
+        "with_health.raise_5000.retains_lt_50pct": {
+          "adults": 4619272.388714698,
+          "household_members": 12900881.486451183,
+          "households": 4048272.574874957
+        },
+        "with_health.raise_5000.retains_lt_60pct": {
+          "adults": 11070528.435260767,
+          "household_members": 27209054.415244073,
+          "households": 8593258.390251238
+        },
+        "with_health.union.retains_lt_0pct": {
+          "adults": 1981829.6747780023,
+          "household_members": 4911614.861678364,
+          "households": 1784690.066376979
+        },
+        "with_health.union.retains_lt_20pct": {
+          "adults": 2294395.5623506326,
+          "household_members": 5770399.337943091,
+          "households": 2017175.2045228262
+        },
+        "with_health.union.retains_lt_50pct": {
+          "adults": 5068153.012461569,
+          "household_members": 13914738.70805068,
+          "households": 4365782.116353057
+        },
+        "with_health.union.retains_lt_60pct": {
+          "adults": 11759207.36126564,
+          "household_members": 28556497.50957974,
+          "households": 9115277.271497853
+        },
+        "with_health.union_below_half_outside_original_1000": {
+          "adults": 4640117.783916987,
+          "household_members": 12678001.993984586,
+          "households": 4014499.7103325455
+        },
+        "without_health.additional_below_half_excluding_strict": {
+          "adults": 3152987.375240801,
+          "household_members": 9288488.76130836,
+          "households": 2762290.2393067437
+        },
+        "without_health.original_1000_in_union_below_half": {
+          "household_members": 348053.7408007261,
+          "households": 78947.84363255836
+        },
+        "without_health.original_1000_in_union_strict": {
+          "household_members": 348053.7408007261,
+          "households": 78947.84363255836
+        },
+        "without_health.original_1000_outside_union_below_half": {
+          "household_members": 10601.196081338509,
+          "households": 10601.196081338509
+        },
+        "without_health.original_1000_outside_union_strict": {
+          "household_members": 10601.196081338509,
+          "households": 10601.196081338509
+        },
+        "without_health.raise_1000.retains_lt_0pct": {
+          "adults": 97716.54594442388,
+          "household_members": 348053.7408007261,
+          "households": 78947.84363255836
+        },
+        "without_health.raise_1000.retains_lt_20pct": {
+          "adults": 186528.366727161,
+          "household_members": 616581.5065916172,
+          "households": 153561.0417042568
+        },
+        "without_health.raise_1000.retains_lt_50pct": {
+          "adults": 2627589.6354899397,
+          "household_members": 7826435.371981003,
+          "households": 2269757.724392618
+        },
+        "without_health.raise_1000.retains_lt_60pct": {
+          "adults": 8593459.033435464,
+          "household_members": 20805012.32766484,
+          "households": 6554077.117459136
+        },
+        "without_health.raise_2000.retains_lt_0pct": {
+          "adults": 181689.3987415292,
+          "household_members": 591625.0285400159,
+          "households": 129140.11209839192
+        },
+        "without_health.raise_2000.retains_lt_20pct": {
+          "adults": 306559.64441241405,
+          "household_members": 923673.7199656765,
+          "households": 209080.52838448383
+        },
+        "without_health.raise_2000.retains_lt_50pct": {
+          "adults": 2765820.9319756967,
+          "household_members": 8183222.509909001,
+          "households": 2360738.1596943364
+        },
+        "without_health.raise_2000.retains_lt_60pct": {
+          "adults": 8797757.12876911,
+          "household_members": 21487342.70810987,
+          "households": 6714795.008602193
+        },
+        "without_health.raise_5000.retains_lt_0pct": {
+          "adults": 18270.950021961573,
+          "household_members": 77554.70523166569,
+          "households": 18270.269608728457
+        },
+        "without_health.raise_5000.retains_lt_20pct": {
+          "adults": 132442.99927800253,
+          "household_members": 530613.8146000258,
+          "households": 119996.33109174004
+        },
+        "without_health.raise_5000.retains_lt_50pct": {
+          "adults": 2851424.3178499164,
+          "household_members": 8784711.269368637,
+          "households": 2495607.5572435637
+        },
+        "without_health.raise_5000.retains_lt_60pct": {
+          "adults": 9060370.87982849,
+          "household_members": 22583663.299211975,
+          "households": 6918320.473924542
+        },
+        "without_health.union.retains_lt_0pct": {
+          "adults": 229004.1830928562,
+          "household_members": 753055.0273431627,
+          "households": 171768.46830032923
+        },
+        "without_health.union.retains_lt_20pct": {
+          "adults": 452353.0097054194,
+          "household_members": 1407855.2565604346,
+          "households": 335898.38512522966
+        },
+        "without_health.union.retains_lt_50pct": {
+          "adults": 3428345.909898364,
+          "household_members": 10041543.788651522,
+          "households": 2934058.707607073
+        },
+        "without_health.union.retains_lt_60pct": {
+          "adults": 9870478.367410384,
+          "household_members": 24151689.962235022,
+          "households": 7567689.993595792
+        },
+        "without_health.union_below_half_outside_original_1000": {
+          "adults": 3327642.0421743896,
+          "household_members": 9693490.047850797,
+          "households": 2855110.8639745144
+        }
+      },
+      "original_all_adults_strict": {
+        "with_health.raise_1000": {
+          "adults": 496277.18192522076,
+          "household_members": 1290070.3307347982,
+          "households": 381937.99716501054
+        },
+        "with_health.raise_2000": {
+          "adults": 882398.8399530757,
+          "household_members": 2184309.7693547895,
+          "households": 698537.9721201404
+        },
+        "with_health.raise_5000": {
+          "adults": 2034522.1989610628,
+          "household_members": 4328750.88168071,
+          "households": 1677062.1530247994
+        },
+        "without_health.raise_1000": {
+          "adults": 122824.52814416349,
+          "household_members": 358654.9368820646,
+          "households": 89549.03971389687
+        },
+        "without_health.raise_2000": {
+          "adults": 204580.02626231458,
+          "household_members": 660252.1088986982,
+          "households": 147344.79890238668
+        },
+        "without_health.raise_5000": {
+          "adults": 42843.47379395312,
+          "household_members": 121765.69391403112,
+          "households": 40375.76394991117
+        }
+      },
+      "part": 3,
+      "worker_validation": {
+        "raise_1000": {
+          "with_health_workers_on_cliff": 396985.52994420624,
+          "without_health_workers_on_cliff": 97716.54594442388,
+          "workers_reached": 37449027.74595316
+        },
+        "raise_2000": {
+          "with_health_workers_on_cliff": 717711.9580306739,
+          "without_health_workers_on_cliff": 181689.3987415292,
+          "workers_reached": 37449027.74595316
+        },
+        "raise_5000": {
+          "with_health_workers_on_cliff": 1673575.8626867887,
+          "without_health_workers_on_cliff": 18270.950021961573,
+          "workers_reached": 37449027.74595316
+        }
+      }
+    }
+  ],
+  "population": "Current workers among up to two adults per household ranked highest by market income; worker means positive wages plus both signed self-employment income components.",
+  "raises": [
+    1000.0,
+    2000.0,
+    5000.0
+  ],
+  "runtime": {
+    "historical_loader": {
+      "aggregation": "MicroSeries methods; household weights mapped internally",
+      "experiment": "frozen-historical-2017",
+      "managed_bundle": false,
+      "managed_loader_limitation": "policyengine 6.17.2 rejects the historical model 2.116.0 during country import, before allow_unmanaged can select a custom dataset",
+      "policy": "2017 federal rules, model's 2018 Medicaid/CHIP limits, later state rules",
+      "policyengine_wrapper_attempted": "6.17.2",
+      "policyengine_wrapper_installed": null,
+      "population": "2024 microdata scaled to 2017 size, incomes and prices",
+      "source_dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+      "versions": {
+        "huggingface-hub": "2.4.0",
+        "microdf-python": "1.5.12",
+        "numpy": "2.5.4",
+        "pandas": "3.1.1",
+        "policyengine-core": "3.34.10",
+        "policyengine-us": "2.116.0",
+        "spm-calculator": "1.1.0",
+        "tables": "3.11.1"
+      }
+    },
+    "mode": "unmanaged_frozen_historical_output_postprocessing",
+    "versions": {
+      "microdf-python": "1.5.12",
+      "policyengine-core": "3.34.10",
+      "policyengine-us": "2.116.0"
+    }
+  },
+  "scope": "Finite union over $1,000, $2,000 and $5,000 raises to one adult at a time. No claim about untested adults, other sizes, a continuous earnings interval, job entry, or childcare expenses.",
+  "status": "preliminary_selected_worker_subset",
+  "thresholds": {
+    "retains_lt_0pct": 0.0,
+    "retains_lt_20pct": 0.2,
+    "retains_lt_50pct": 0.5,
+    "retains_lt_60pct": 0.6
+  },
+  "uncertainty": "Point estimates only; no new sampling intervals for unions have been calculated.",
+  "worker_validation": {
+    "raise_1000": {
+      "with_health_workers_on_cliff": 2326465.2779594087,
+      "without_health_workers_on_cliff": 607056.8392179117,
+      "workers_reached": 154282227.29234764
+    },
+    "raise_2000": {
+      "with_health_workers_on_cliff": 3791420.568032302,
+      "without_health_workers_on_cliff": 538019.198004762,
+      "workers_reached": 154282227.29234764
+    },
+    "raise_5000": {
+      "with_health_workers_on_cliff": 7965950.691713967,
+      "without_health_workers_on_cliff": 227551.4376855566,
+      "workers_reached": 154282227.29234764
+    }
+  },
+  "year": 2017
+}

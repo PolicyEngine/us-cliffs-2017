@@ -1,0 +1,30 @@
+{
+  "files": {
+    "README.md": {
+      "bytes": 2039,
+      "sha256": "6bed6a3b3cf3a3dd4c9b339ab939debc4dab0eeda9670fcbac1bfe3636479978"
+    },
+    "future-history-2025.json": {
+      "bytes": 34876,
+      "sha256": "d5280076f74201d8ff89754bb905119928238e072e89d42b0b5987fca7bb64ba"
+    },
+    "probe_2025.py": {
+      "bytes": 6229,
+      "sha256": "41ac42d9f4647913f0cbcd07347d5d611ba947c0aad27a36dd375fb147eef501"
+    },
+    "recount_2017.py": {
+      "bytes": 2429,
+      "sha256": "ea5eec45bc55c8f7b0757286fd72799965d277366a9c60eb4081eb036317fbe1"
+    },
+    "source-hashes.json": {
+      "bytes": 6505,
+      "sha256": "20c8d8919bffadf9baa978541b9a321ce7e2c716a2c32c2727fb1d656003165b"
+    },
+    "summary.json": {
+      "bytes": 6904,
+      "sha256": "20cf5d9dcdc2137776ac67dc8de3ab4dd35a0bfe6b45e4cdd9235994815707b2"
+    }
+  },
+  "schema_version": 1,
+  "scope": "Public metadata-only policy-date provenance; no survey records, IDs, weights, or private paths."
+}

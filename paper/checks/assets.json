@@ -1,0 +1,18 @@
+{
+  "supplementary_files_verified": 1,
+  "files_verified": 90,
+  "part_changes": 80,
+  "baseline_replications": 8,
+  "household_curve_files_verified": 1,
+  "policy_date_files_verified": 6,
+  "code_hashes": [
+    [
+      "e791e670d5407372c89fb549580813d6d82254fa590dd8049f85963ab09d4e73",
+      "ced7b6efa97310f825083505e95e5e945195ba1ef3c41beb1e0d77e206fe8b12"
+    ]
+  ],
+  "summary_draws": 5000,
+  "claims_recorded": 17805,
+  "figures": 0,
+  "tables": 15
+}

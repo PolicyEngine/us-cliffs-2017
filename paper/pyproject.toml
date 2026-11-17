@@ -1,0 +1,8 @@
+[project]
+name = "benefit-cliffs-working-paper"
+version = "0.1.0"
+requires-python = ">=3.13,<3.14"
+dependencies = ["matplotlib", "pypdf", "pillow", "pyyaml", "python-docx==1.2.0"]
+
+[tool.uv]
+package = false

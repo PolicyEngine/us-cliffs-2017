@@ -1,6 +1,10 @@
-# Tax-benefit cliffs under 2017 federal rules
+# Measuring benefit cliffs with finite earnings changes
 
-How many American adults would see their household's net income fall if they earned $1,000 more? We estimate that count under 2017 federal tax and benefit rules and, for comparison, under 2025 rules, with and without counting health coverage as income. Where PolicyEngine-US holds no 2017 value for a rule, as for state Medicaid limits and most state taxes, the 2017 runs read its earliest later value; METHODOLOGY.md lists them. We use [PolicyEngine-US](https://github.com/PolicyEngine/policyengine-us) and Microcosm, PolicyEngine's US microdata.
+How many selected adults would see their household's resources fall after an earnings increase? The main paper compares finite raises, health-resource valuations and units of counting in a frozen 2025 model scenario. These estimates do not establish validated current-law effects. The appendix retains a mixed 2017-oriented sensitivity: where the frozen model lacks 2017 rules, it reads later values, including state Medicaid limits and most state taxes. [METHODOLOGY.md](METHODOLOGY.md) records those limits. The population calculations use [PolicyEngine-US](https://github.com/PolicyEngine/policyengine-us) 2.116.0, core 3.34.10 and Microcosm microdata.
+
+- [paper/manuscript.pdf](paper/manuscript.pdf): the default PolicyEngine-branded paper, with six computed Matplotlib charts.
+- [paper/README.md](paper/README.md): paper rebuilding, separate household-curve reruns and full national replication.
+- [paper/submission/manuscript.docx](paper/submission/manuscript.docx): the journal edition with editable tables and embedded figure PNGs.
 
 - [results/summary.md](results/summary.md): the counts, with 95% intervals.
 - [METHODOLOGY.md](METHODOLOGY.md): how we define a cliff, build the 2017 population and measure uncertainty, and what the model leaves out.
@@ -34,10 +38,32 @@ How many American adults would see their household's net income fall if they ear
 | results/medicaid/ | The Medicaid sums and totals the health runs read |
 | results/csfp/ | The 2025 runs that count the Commodity Supplemental Food Program, and its reach |
 | scripts/render_results.py | Writes results/summary.md from the combined results |
+| scripts/paper_household_curves.py | Computes three hypothetical-household earnings curves under the frozen model, with scalar and accounting checks; no survey microdata or population estimates |
+| paper/build_figures.py | Draws the six article charts from saved household points and aggregate snapshots; runs no tax-benefit simulation |
 | scripts/audit_*.py, scripts/summarize_parameters.py | The parameter and formula audits behind the coverage notes in METHODOLOGY.md, and the counts it quotes from the parameter audit |
 | tests/ | Property and example tests (pytest) |
 
-## Running it
+## Clean IJM replication
+
+For a fresh replication that regenerates missing person-level intermediates,
+use the checked preparation route in [paper/README.md](paper/README.md). It
+preserves archived reference results separately and schedules direct reruns,
+so committed summaries cannot silently skip the computations required by later
+steps. Preparation alone runs no tax-benefit model.
+
+The household examples require a separate rerun with
+`scripts/paper_household_curves.py`; the national preparer does not schedule
+that step. Its frozen snapshot stores 2,503 grid points and 72 scalar checks
+for two 2025 cases and one appendix-only mixed 2017 case. See
+[paper/README.md](paper/README.md) for the exact resource-wrapped command and
+fixed Medicaid-total inputs. Rebuilding the six charts from this snapshot
+requires no model execution.
+
+## Resumable operational runs
+
+The commands below resume from saved aggregates. They do not recreate ignored
+person-level files when the corresponding aggregate already exists; use the
+clean replication route above when starting from a public clone.
 
 ```bash
 uv venv --python 3.13 && uv pip install -e ".[test]" && source .venv/bin/activate

@@ -1,0 +1,22 @@
+{
+  "scope": "Software development, retrieval of primary sources, computational diagnostics and manuscript preparation; language-model responses are not statistical observations.",
+  "tools": [
+    {
+      "provider": "Anthropic",
+      "service": "Claude Code",
+      "model_identifiers_observed_in_analysis_session": ["claude-opus-5-5", "claude-fable-5-2"],
+      "evidence": "Model fields in the original analysis session records; private raw session transcripts are not distributed.",
+      "purpose": "Original simulation code development, execution support and analysis documentation"
+    },
+    {
+      "provider": "OpenAI",
+      "service": "Codex",
+      "model": "GPT-6 family",
+      "exact_hosted_build": "Not exposed in the research-session interface",
+      "accessed": "2026-11-12",
+      "purpose": "Saved-output analysis extensions, hypothetical-household simulation code, deterministic Matplotlib figure code, code and statistical checks, primary-source literature review, simulated referee exercises and manuscript preparation"
+    }
+  ],
+  "figures": "Six scientific charts are rendered by Matplotlib from model-calculated hypothetical-household points and saved population aggregates. Language-model assistance supported coding and presentation; no image-generation model supplies chart pixels or numerical observations. paper/build_figures.py performs no tax-benefit simulation. Figure and source hashes appear in paper/checks/figure-provenance.json.",
+  "reproduction": "The executable estimators, model and input versions, seeds, aggregate manifests and manuscript sources reproduce reported results without replaying generative-AI prompts. The frozen 2025 model scenario is not validated current law; the mixed 2017-oriented scenario appears in the appendix. Prompts informed software development and prose, not an LLM-valued empirical outcome."
+}

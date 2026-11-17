@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Max Ghenis" />
+  <title>Cliffs</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <meta name="generator" content="pe-doc 1.0.0" />
+  <meta name="pe-doc-options" content="{&quot;budget_widths&quot;: false, &quot;legacy&quot;: false, &quot;max_pages&quot;: 40, &quot;pdf_name&quot;: null, &quot;psl_foundation&quot;: false, &quot;source_notes&quot;: false, &quot;split_tables&quot;: true}" />
+  <style>
+  /*
+   * PolicyEngine document template: base stylesheet.
+   *
+   * Derived from the ratified July 2026 proposal template (legacy/2026-07/).
+   * Colors are PolicyEngine ui-kit tokens (src/theme/tokens.css); the token
+   * name sits beside each hex, and tests/test_brand.py fails on any hex that
+   * is not a ui-kit token. Type is Inter, the design system's face, vendored
+   * under fonts/ so every machine and CI render the same glyphs.
+   *
+   * This file holds the July 2026 rules. Rules added since live in
+   * modules/additions.css, which `legacy: true` leaves out along with Inter.
+   * Optional rules live in modules/ and are switched by front matter or CLI
+   * flags (see README): source-notes.css, budget-widths.css, split-tables.css.
+   * A document's own extra.css loads last.
+   */
+
+  @font-face {
+    font-family: "Inter";
+    src: url("file:///Users/maxghenis/PolicyEngine/document-templates/src/pe_doc/template/fonts/Inter-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Inter";
+    src: url("file:///Users/maxghenis/PolicyEngine/document-templates/src/pe_doc/template/fonts/Inter-Italic.ttf");
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Inter";
+    src: url("file:///Users/maxghenis/PolicyEngine/document-templates/src/pe_doc/template/fonts/Inter-Bold.ttf");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Inter";
+    src: url("file:///Users/maxghenis/PolicyEngine/document-templates/src/pe_doc/template/fonts/Inter-BoldItalic.ttf");
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "JetBrains Mono";
+    src: url("file:///Users/maxghenis/PolicyEngine/document-templates/src/pe_doc/template/fonts/JetBrainsMono-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @page {
+    size: letter;
+    margin: 16mm 22mm 21mm 22mm;
+    @bottom-center {
+      content: "policyengine.org  |  Washington, DC";
+      font: 8pt "Inter", sans-serif;
+      color: #64748B; /* gray-500 */
+      border-top: 0.5pt solid #319795; /* teal-500 */
+      padding-top: 1.2mm;
+      padding-left: 8mm;
+      padding-right: 8mm;
+      vertical-align: top;
+      margin-bottom: 5mm;
+    }
+    @bottom-right {
+      content: counter(page) " / " counter(pages);
+      font: 8pt "Inter", sans-serif;
+      color: #94A3B8; /* gray-400 */
+    }
+  }
+
+  @page :first {
+    margin-top: 8mm;
+  }
+
+  body {
+    font: 10pt/1.5 "Inter", sans-serif;
+    color: #1E293B; /* gray-800 */
+    margin: 0;
+  }
+
+  #letterhead {
+    text-align: center;
+    border-bottom: 0.7pt solid #319795; /* teal-500 */
+    padding-bottom: 2mm;
+    margin-bottom: 5mm;
+  }
+
+  #letterhead img {
+    width: 44mm;
+  }
+
+  #letterhead .org {
+    font-size: 8.5pt;
+    color: #5a5a5a; /* text-secondary */
+    margin: 1.2mm 0 0;
+  }
+
+  /* Title block: # Title, then **subtitle**, then the gray meta line */
+  h1 {
+    font-size: 20pt;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: #101828; /* gray-900 */
+    margin: 0 0 2mm;
+  }
+
+  h1 + p {
+    font-size: 11.5pt;
+    color: #319795; /* teal-500 */
+    margin-bottom: 1mm;
+  }
+
+  h1 + p + p {
+    font-size: 9.5pt;
+    color: #475569; /* gray-600 */
+    margin-bottom: 6mm;
+  }
+
+  h2 {
+    font-size: 12.5pt;
+    color: #319795; /* teal-500 */
+    margin: 6.5mm 0 2.5mm;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin: 0 0 2.8mm;
+    orphans: 3;
+    widows: 3;
+  }
+
+  ul {
+    margin: 0 0 3mm;
+    padding-left: 5mm;
+  }
+
+  li {
+    margin-bottom: 1.4mm;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2mm 0 4mm;
+    font-size: 9.4pt;
+    page-break-inside: avoid;
+  }
+
+  th {
+    text-align: left;
+    border-bottom: 1.2pt solid #319795; /* teal-500 */
+    padding: 1.6mm 2mm;
+    color: #101828; /* gray-900 */
+  }
+
+  td {
+    border-bottom: 0.5pt solid #CBD5E1; /* gray-300 */
+    padding: 1.6mm 2mm;
+    vertical-align: top;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+
+  p:has(+ table) {
+    page-break-after: avoid;
+  }
+
+  hr {
+    border: none;
+    border-top: 0.5pt solid #CBD5E1; /* gray-300 */
+    margin: 5mm 0;
+  }
+
+  strong {
+    color: #101828; /* gray-900 */
+  }
+
+  a {
+    color: #319795; /* teal-500 */
+    text-decoration: none;
+  }
+
+  /*
+   * Split tables (default off). The base template keeps every table on one
+   * page, which strands up to half a page of white space before a long table.
+   * With `split_tables: true` or `--split-tables`, tables flow across pages,
+   * rows stay whole and the header row repeats.
+   */
+  table {
+    page-break-inside: auto;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  /*
+   * Rules added since the July 2026 template (default on). `legacy: true`
+   * leaves this file out, so a rebuilt pre-repo document lays out as it shipped.
+   */
+
+  /* The footer's box starts where the text area ends, so its rule would underline
+     the last line of a full page. Drop the rule and the footer line into the margin. */
+  @page {
+    @bottom-center {
+      margin-top: 2mm;
+    }
+  }
+
+  h3 {
+    font-size: 11pt;
+    color: #101828; /* gray-900 */
+    margin: 4.5mm 0 1.8mm;
+    page-break-after: avoid;
+  }
+
+  ol {
+    margin: 0 0 3mm;
+    padding-left: 5mm;
+  }
+
+  /* Figures line up in columns of numbers */
+  th,
+  td {
+    font-variant-numeric: tabular-nums;
+  }
+
+  code {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.88em;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  figure {
+    margin: 2mm 0 4mm;
+    page-break-inside: avoid;
+  }
+
+  figcaption {
+    font-size: 8.1pt;
+    color: #475569; /* gray-600 */
+    margin-top: 1.2mm;
+    text-align: center;
+  }
+
+  /* Footnotes: pandoc puts them after an hr at the end */
+  section.footnotes {
+    font-size: 8.1pt;
+    color: #475569; /* gray-600 */
+    line-height: 1.4;
+  }
+
+  /* extra.css */
+  /* The canonical pe-doc template supplies the wordmark, fonts and palette. */
+  /* Start the bibliography on a fresh page in this long research paper. */
+  h2#references { break-before: page; }
+  .research-figure { break-inside: avoid; margin: 1rem 0; }
+  .research-figure figure { margin: 0; }
+  /* Numbered captions above each chart provide the visible figure title. */
+  .research-figure figcaption { display: none; }
+
+  </style>
+</head>
+<body>
+<div id="letterhead">
+  <img src="data:image/png;base64,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" alt="PolicyEngine" />
+  <p class="org">policyengine.org&ensp;|&ensp;Washington, DC</p>
+</div>
+<h1 id="cliffs">Cliffs</h1>
+<p>Max Ghenis · PolicyEngine · 12 November 2026</p>
+<h2 id="abstract">Abstract</h2>
+<p>Cliff estimates for the combined tax-benefit system depend on the earnings transition, resource account and population tested. We examine these choices in a frozen PolicyEngine-US microsimulation evaluated for 2025 using survey-based microdata. We test up to two adults per household, ranked by market income, one at a time. Increasing the annual raise from $1,000 to $5,000 changes the cash and near-cash endpoint-loss count from 0.68 million to 0.63 million selected adults while increasing the count that includes government-valued health coverage from 3.08 million to 9.74 million. The paired increment-by-resource contrast reaches 6.71 million adults (95% sampling interval 6.00-7.44 million). Valuing Medicaid and CHIP at 30% of government cost lowers the $5,000 health-inclusive count to 6.55 million. Across the $1,000, $2,000 and $5,000 grid, strict-loss households of selected workers contain 23.67 million residents. An additional 29.61 million live in households retaining less than half of at least one tested raise, excluding every strict-loss household. Hypothetical household earnings paths illustrate the distinction between a sampled resource drop and a finite-change endpoint loss. We report matched worker rates, paired uncertainty and component attribution. The experiments describe the specified model, not a fully benchmarked estimate of observed incidence or labor-supply responses.</p>
+<p><strong>Keywords:</strong> cliffs, tax-benefit systems, effective marginal tax rates, microsimulation</p>
+<h2 id="introduction">1. Introduction</h2>
+<p>An earnings increase can reduce a household’s resources when additional taxes and lost benefits exceed the additional pay. National estimates of these adverse transitions depend on the raise that an analyst tests, the resources that the analyst counts and the adults whose earnings change. A $1,000 raise and a $5,000 raise can identify different households, and valuing health coverage at government cost can change both the number of losses and its response to the earnings increment.</p>
+<p>We use cliffs for adverse finite-change resource comparisons across the tax-benefit system and benefit cliffs when discussing benefit losses specifically. Section 3.3 distinguishes this endpoint measure from a discrete jump in a tax or benefit schedule.</p>
+<p>A larger raise acts through two channels. It can move households from farther below a tax or benefit threshold to above it. It also provides more earnings to offset additional taxes or lost benefits. Households that lose resources after a small raise may gain after a larger one, while other households cross a threshold only after the larger raise. The resulting endpoint-loss counts need not increase or decrease together. They also differ from a count of households that encounter any discontinuity anywhere along an earnings path.</p>
+<p>Health coverage adds a separate valuation choice. Government expenditure on a household’s coverage, the household’s willingness to pay and its cost of replacement insurance measure different quantities. Finkelstein, Hendren and Luttmer (2019) develop this distinction using the Oregon Health Insurance Experiment. A household can gain cash and near-cash resources while losing a larger amount of coverage valued at government cost. A count that includes this loss therefore answers a different question from a count based on nonhealth resources.</p>
+<p>Earlier microsimulation studies vary the earnings transition, population and resource account. The US Congressional Budget Office (CBO, 2012) uses a $100 earnings increment, while Giannarelli et al. (2019) examine $2,000, $5,000 and $10,000 increases and value Medicaid and CHIP at half government cost. Ghenis and Woodruff (2023) study PolicyEngine cliff measures and earnings-increment sensitivity using simultaneous raises to adults within a household. These conventions motivate a comparison that holds the model and records fixed while stating each transition and resource account explicitly.</p>
+<p>We examine three dollar increases, two proportional increases and the corresponding decreases in a frozen PolicyEngine-US model evaluated for 2025. We change one adult’s earnings at a time among up to two adults per household, ranked by market income. Dollar raises include selected adults with zero baseline earnings; worker-specific results use the matching selected population with positive net earnings. We also calculate earnings paths for fully specified hypothetical households. These examples illustrate mechanisms and do not estimate their prevalence.</p>
+<p>We estimate that a $1,000 raise produces an endpoint loss for 0.68 million selected adults under the cash and near-cash account and 3.08 million when we add health coverage at government cost. Increasing the raise to $5,000 changes the first count to 0.63 million and increases the second to 9.74 million. The health-inclusive difference reaches 6.66 million adults, with a paired 95% sampling interval of 5.93-7.41 million.</p>
+<p>We quantify these sensitivities with matched selected-worker denominators, paired sampling intervals, Medicaid and CHIP revaluations, and program-level resource changes. A finite-grid union distinguishes strict losses from retaining less than half of a tested raise, with disjoint household groups. An archival replication illustrates how changing stochastic inputs can create apparent individual losses even when earnings remain unchanged. A separate 2017-oriented experiment remains in the appendices because its later federal and state inputs prevent a historical-incidence interpretation. The main analysis concerns the frozen 2025 model scenario and its stated coverage limits.</p>
+<h2 id="related-measurement-approaches">2. Related measurement approaches</h2>
+<p>Microsimulation estimates of earnings incentives differ along four dimensions: the earnings transition, the population that receives it, the resource account and the time horizon. Comparisons require all four. An average effective marginal rate does not identify the share of people whose resources fall, and a complete loss of one benefit need not exceed the additional earnings.</p>
+<p>Tax research distinguishes discrete changes in liability from changes in marginal rates. Kleven and Waseem (2013) study tax notches in Pakistan, where crossing a threshold changes total tax liability discontinuously. Slemrod (2013) places such jumps within a broader taxonomy of tax-system notches. An upward tax notch can reduce net resources when a small earnings increase triggers a discrete liability increase. At a kink, the budget constraint remains continuous while its slope changes. Saez (2010) studies bunching at such points in the US income-tax schedule, including the Earned Income Tax Credit (EITC), and Kleven (2016) reviews both designs.</p>
+<p>Kleven and Waseem (2013) and Saez (2010) use bunching to estimate behavioral responses; we measure simulated annual endpoint losses. Our sign test can flag a notch crossed within an increment or a continuous decline under combined marginal rates above 100%. We do not estimate the prevalence of these mechanisms separately.</p>
+<p>CBO (2012) estimates annual effective marginal rates after a $100 earnings increase for selected low- and moderate-income workers. Its 2015 update reports rates for 2016. These distributional summaries describe broader retention patterns than the strict-loss count examined here. The Urban-Brookings Tax Policy Center (2022) uses a $1,000 increment for individual income-tax rates. TAXSIM35 documentation (National Bureau of Economic Research, 2022) specifies a one-cent finite difference and notch-smoothing conventions. Tax-only derivatives and finite-change tax-benefit losses answer different questions; neither convention fixes a universal increment for measuring cliffs.</p>
+<p>The US Office of the Assistant Secretary for Planning and Evaluation (ASPE) Marginal Tax Rate Series provides a closer annual tax-benefit comparison. Giannarelli et al. (2019) test $2,000, $5,000 and $10,000 earnings increases, allocate additional work through hours, weeks and wages, and sometimes assign work to nonworkers. They include out-of-pocket childcare expenses and value Medicaid and CHIP at half government cost. Within that framework, Chien and Macartney (2019) distinguish households with a rate of at least 100% from households that lose their entire childcare subsidy. The former includes a plateau at exactly 100%; our strict endpoint-loss test requires a rate above 100%. Their childcare-recipient population also differs from our selected-adult population.</p>
+<p>Kosar and Moffitt (2017) examine cumulative rates over earnings bands expressed relative to the poverty guideline, with Medicaid valued at 30% of government cost. Maag et al. (2012) study hypothetical single-parent families across states, earnings transitions and monthly earnings patterns. These studies show how program interactions and the earnings path affect resource retention. Their family cases and participation combinations do not directly supply a nationally weighted endpoint-loss count for the experiment used here.</p>
+<p>Time horizons further distinguish the outcomes. Altig et al. (2026 revision) compare current-year and remaining-lifetime net taxation after a $1,000 earnings increase, with $100 and $10,000 sensitivities. Altig, Ilin, Ruder and Terry (2020, revised February 2021) examine short-, medium- and long-term financial outcomes along a hypothetical career pathway. Annual losses can coexist with longer-term gains under those designs. The present experiments compare annual endpoints with household circumstances otherwise fixed; they do not project a career trajectory or a lifetime budget.</p>
+<p>Resource valuations require a separate comparison. Finkelstein, Hendren and Luttmer (2019) distinguish recipients’ willingness to pay for Medicaid from both gross government expenditure and the net resources required to provide coverage. Their evidence concerns low-income adults affected by the Oregon lottery. It motivates separating expenditure-based accounts from household welfare without supplying a uniform valuation for every person in a national model. We therefore report cash and near-cash resources separately from government-valued health resources and interpret revaluations as accounting sensitivities.</p>
+<p>Table A1 summarizes these differences. The comparison concerns defined outcomes within each study, rather than a ranking of estimates from incompatible populations or transitions. Our experiments contribute a common-model comparison across earnings increments and resource accounts, together with paired uncertainty and checks on individual counterfactual consistency.</p>
+<h2 id="data-and-methods">3. Data and methods</h2>
+<h3 id="microdata-and-model-scenario">3.1 Microdata and model scenario</h3>
+<p>We use the Microcosm 2024 file <code>populace_us_2024.h5</code>, fixed at revision <code>populace-us-2024-spm-20260909</code>. The file contains 57,240 household records built from pooled CPS Annual Social and Economic Supplement surveys and additional imputations, with calibrated household weights. Some records share an underlying survey-household identifier: the file contains 47,277 distinct source households, including 9,963 that appear in both an ASEC record and a tax-detail record. We preserve that relationship in the bootstrap. The archived <a href="https://github.com/PolicyEngine/us-cliffs-2017/blob/ff0672e5f7f0728208599d988e9bd3cc2e195391/METHODOLOGY.md">methodology</a> specifies the data inputs and calibration context.</p>
+<p>The main experiments evaluate this data in 2025 through the model’s forward uprating. We freeze PolicyEngine-US 2.116.0 and policyengine-core 3.34.10. A target-year calculation applies the model’s dated parameters and formulas; it does not establish complete coverage of that year’s law. Missing program coverage, take-up assumptions and administrative benchmarking remain limitations. The health account allocates 2023 Medicaid spending and uses the model’s later CHIP spending and enrollment inputs. We refer to this computation as the 2025 model scenario.</p>
+<p>An additional experiment scales later monetary inputs and population weights backward and applies selected 2017 federal provisions, including a custom pre-2018 ACA credit calculation. It retains many later state and federal inputs, family structure and take-up assumptions. We retain its numerical outputs as a mixed-policy sensitivity in the appendices, not as a reconstruction of 2017. Appendix B describes the implications and the parameter-history audit.</p>
+<p>The input snapshots, source commits, code hashes and package pins accompany the paper. The replication materials preserve the complete environment, the code for each experiment and aggregate outputs.</p>
+<h3 id="selected-adults-and-earnings-perturbations">3.2 Selected adults and earnings perturbations</h3>
+<p>In each household, the model selects up to two adults with the highest <strong>market income</strong>, which can include income other than earnings. It changes one adult’s earnings at a time, holding other household members’ inputs fixed and recomputing taxes, benefits and relevant eligibility. This selection can exclude an earner in a household with more than two adults, including when a nonworking adult with other market income ranks above that earner.</p>
+<p>For dollar increases, every selected adult receives the specified $1,000, $2,000 or $5,000 change, including those whose baseline earnings equal zero. These experiments reach 222.97 million selected adults in the 2025 model scenario. A dollar reduction requires sufficient positive earnings to cover the reduction. Proportional changes of 1% or 10% require positive earnings components. The engine allocates changes across the positive components of employment income and two self-employment income variables in proportion to their amounts. This construction avoids making a component negative under an admissible cut.</p>
+<p>Dollar increments use own-year nominal dollars: 2025 dollars in the main experiments. The appendix’s 2017-oriented increments use 2017 nominal dollars. The scenarios combine different policy inputs and population scaling and do not identify a policy-only effect across years.</p>
+<p>We separately identify workers using positive net earnings: the signed sum of those three earnings variables. Their population is slightly smaller than the positive-component universe used for proportional perturbations when a self-employment loss offsets another positive component. We retain the definitions rather than asserting exact equality between them.</p>
+<p>The selected-worker denominator for dollar raises is 162.91 million. Another 24.90 million earners fall outside the selection. Our conditional worker rates divide selected workers flagged by the test by selected workers reached by that same test. They do not impute the omitted workers’ outcomes. A small dollar increase for a nonworker also differs from a full-time job-entry experiment, which is outside this paper’s completed design.</p>
+<h3 id="resource-definitions-and-endpoint-losses">3.3 Resource definitions and endpoint losses</h3>
+<p>Let household resources under earnings vector <em>y</em> be <em>R</em>(<em>y</em>). For a selected adult <em>i</em>, change only that adult’s earnings by Δ and compute:</p>
+<blockquote>
+<p><strong>(1)</strong> ΔRᵢ = R(y + Δeᵢ) − R(y).</p>
+</blockquote>
+<p>For a positive earnings increase, the retention fraction is ΔRᵢ/Δ and the finite-change effective marginal rate is:</p>
+<blockquote>
+<p><strong>(2)</strong> τᵢ = 1 − ΔRᵢ/Δ.</p>
+</blockquote>
+<p>We flag a strict cliff when ΔRᵢ &lt; 0, equivalently τᵢ &gt; 1. A retention fraction of zero is a plateau and does not satisfy this strict inequality. For a cut, we flag an increase in resources. The common sign rule is:</p>
+<blockquote>
+<p><strong>(3)</strong> Δ × ΔRᵢ &lt; 0.</p>
+</blockquote>
+<p>An endpoint loss can reflect a discrete tax or benefit discontinuity, overlapping continuous phase-outs whose combined rate exceeds 100%, or rounding. The flag identifies an adverse finite-change resource comparison; it does not by itself locate a statutory notch. A kink alone changes the marginal rate without creating a discrete resource loss.</p>
+<p>This paper applies the rule to the endpoints of each specified change. It does not search every intermediate earnings level. A union across tested increases identifies a loss at at least one tested endpoint. It does not identify every decline along the continuous earnings path. We distinguish the individual-size, positive-grid and raise/cut-union measures.</p>
+<p>We use two resource definitions. <strong>Cash and near-cash resources</strong> combine market income, cash and modeled nonhealth benefits, and refundable tax credits, less modeled taxes. The label includes in-kind benefits such as SNAP and school meals; it does not mean literal cash alone. <strong>Health-inclusive resources</strong> additionally count Medicaid, the Children’s Health Insurance Program (CHIP), Medicare Savings Programs, the ACA premium tax credit and modeled state health programs at their government-cost values, while retaining CHIP premiums as a cost.</p>
+<p>The health-inclusive measure excludes marketplace net premiums. The underlying health toggle adds the premium tax credit and subtracts a marketplace premium already net of that credit. A credit change can therefore enter the original resource difference twice. Our measure removes the signed marketplace-net-premium component entirely, so the premium tax credit enters once. That choice matches the government-cost treatment of the other coverage components. It is not a measure of disposable income after actual replacement-insurance purchases. We do not estimate household willingness to pay, medical risk protection, or uncompensated-care consequences.</p>
+<p>For the broader valuation sensitivity, let ΔM and ΔC denote the saved signed changes in Medicaid and CHIP benefits. Holding eligibility, all other health components and premiums fixed, we apply multipliers α in {0, 0.3, 0.5, 1}:</p>
+<blockquote>
+<p><strong>(4)</strong> ΔRᵢ,α = ΔRᵢ,full + (α − 1)(ΔMᵢ + ΔCᵢ).</p>
+</blockquote>
+<p>The main sensitivity revalues Medicaid and CHIP together; a supplementary series revalues Medicaid alone. At α = 0 the account still includes the premium tax credit, Medicare Savings Programs and other health benefits. It therefore differs from the cash and near-cash account. The 0.3 and 0.5 choices draw on conventions in the literature but do not reproduce those studies’ full resource definitions or populations. We retain each saved native resource difference’s rounding residual. Scaling a benefit that increases after the earnings change can also create new endpoint losses, so we recompute flags for every tested adult, including those who had no loss at α = 1.</p>
+<h3 id="comparing-increments-and-constructing-unions">3.4 Comparing increments and constructing unions</h3>
+<p>A larger earnings increase can cross a new eligibility threshold and provide more earnings to compensate for a benefit loss. These effects can move endpoint-loss counts in opposite directions.</p>
+<p>More generally, let <em>a</em> denote the distance to a threshold and <em>L</em> the benefit lost on reaching that threshold, with other resources increasing dollar for dollar with earnings. For a baseline below the threshold, a positive change Δ produces a strict endpoint loss exactly when:</p>
+<blockquote>
+<p><strong>(5)</strong> a ≤ Δ &lt; L.</p>
+</blockquote>
+<p>Increasing Δ can satisfy the crossing condition while eventually failing the loss condition. No nesting relation follows from ordering the increments. A local derivative, a finite endpoint comparison and a search for any decline along an earnings path therefore address different outcomes.</p>
+<p>For a finite grid D = {$1,000, $2,000, $5,000}, define a selected worker’s flag at retention threshold <em>c</em> as:</p>
+<blockquote>
+<p><strong>(6)</strong> Uᵢ(c, D) = 1{min[ΔRᵢ(Δ)/Δ : Δ ∈ D] &lt; c}.</p>
+</blockquote>
+<p>We restrict this union to selected adults with positive baseline net earnings. The grid gives every included worker the same set of dollar increases. At <em>c</em> = 0, the union counts workers who lose resources after at least one tested raise; at <em>c</em> = 0.5, it counts workers who retain less than half of at least one tested raise. The latter includes the former by construction. Equality at the cutoff does not qualify.</p>
+<p>For household <em>h</em>, Hₕ(c, D) equals one when any selected worker in that household satisfies Uᵢ(c, D). We count residents of qualifying households once, including children and untested adults. The additional-resident group at the half-retention threshold uses Hₕ(0.5, D)[1 − Hₕ(0, D)]. Subtracting adult counts or assigning different earnings grids to the two groups would not construct that disjoint household group. The union remains specific to the tested grid; it supplies no estimate for untested earnings changes or full-time job entry.</p>
+<h3 id="hypothetical-household-earnings-paths">3.5 Hypothetical household earnings paths</h3>
+<p>We calculate two hypothetical households in Wake County, North Carolina: a single adult aged 50, and a single parent aged 35 with children aged 8 and 12. Both use the frozen 2025 model scenario. Only the adult’s employment earnings vary. We assume annual rent of $14,400, zero childcare spending and assets, and zero other monetary inputs. Household members are citizens without disability or employer-sponsored insurance; adults are not pregnant or students, and children attend school full time. We assume tax filing and take-up of EITC, SNAP, Medicaid, CHIP and the ACA credit, with no TANF or housing-assistance receipt. Rent affects applicable program calculations; we exclude it as a living-expense deduction from plotted resources.</p>
+<p>The earnings grid uses $100 steps from zero to $80,000 for the single adult and to $90,000 for the parent. Fresh scalar simulations check the annotated transitions at adjacent dollar amounts and the stated raise endpoints. Each simulation uses the same resource accounting, model versions and fixed national Medicaid valuation totals as the population experiment. These cases use no survey records or population weights. They illustrate the selected mechanisms, rather than representative families or the prevalence of a cliff.</p>
+<p>In Figures 1 and 2, the solid line includes government-valued health benefits and the dashed line includes cash and near-cash resources. Shading spans the sampled baseline immediately before a drop through the first $100-grid point recovering that baseline’s health-inclusive resources. It marks a baseline-to-recovery range, not a claim that every earnings value in that range yields lower resources. The boundaries depend on the grid; straight lines connect evaluated points as visual guides. The plotted health value is neither spendable income nor willingness to pay, and a Medicaid-to-ACA transition need not imply loss of insurance.</p>
+<div class="research-figure">
+<p><strong>Figure 1: Annual earnings and household resources for a single adult.</strong></p>
+<figure>
+<img src="figures/household-single-2025.png" alt="Single adult earnings and resources in the frozen 2025 North Carolina scenario." />
+<figcaption aria-hidden="true">Single adult earnings and resources in the frozen 2025 North Carolina scenario.</figcaption>
+</figure>
+<p><em>Notes:</em> Single adult aged 50, with the assumptions stated above. The model changes Medicaid eligibility between $21,600 and $21,601 of annual earnings. The ACA credit offsets part of the government-valued Medicaid loss. The dot uses the $21,600 sampled baseline; shading ends at the first sampled recovery point, $26,400.</p>
+</div>
+<div class="research-figure">
+<p><strong>Figure 2: Annual earnings and household resources for a single parent with two children.</strong></p>
+<figure>
+<img src="figures/household-parent-2025.png" alt="Parent and two children earnings and resources in the frozen 2025 North Carolina scenario." />
+<figcaption aria-hidden="true">Parent and two children earnings and resources in the frozen 2025 North Carolina scenario.</figcaption>
+</figure>
+<p><em>Notes:</em> Parent aged 35 and children aged 8 and 12. Labels identify the modeled adult Medicaid-to-ACA transition, school-meal transition and children’s Medicaid-to-ACA transition. Fresh scalar checks place these changes between $36,780 and $36,781, $49,303 and $49,304, and $57,564 and $57,565, respectively. Dots and shading use the $100 sampled baselines and recovery rule described above. These are model boundaries, not independently validated statutory cutoffs.</p>
+</div>
+<p>Figure 3 holds the single adult’s baseline at $21,600. An additional $1,000 lowers health-inclusive resources by $2,150, while an additional $5,000 raises them by $170. Cash and near-cash resources rise in both comparisons. The larger raise crosses the same drop and provides enough additional resources to exceed the baseline.</p>
+<div class="research-figure">
+<p><strong>Figure 3: Changes in resources from a common earnings baseline.</strong></p>
+<figure>
+<img src="figures/household-endpoints-2025.png" alt="Resource changes for the single adult relative to annual earnings of $21,600." />
+<figcaption aria-hidden="true">Resource changes for the single adult relative to annual earnings of $21,600.</figcaption>
+</figure>
+<p><em>Notes:</em> The household and resource accounts match Figure 1. Each point subtracts resources at $21,600 of annual earnings. We calculate the marked endpoints at $22,600 and $26,600; labels round resource changes to the nearest dollar. The zero line indicates recovery of baseline resources.</p>
+</div>
+<h3 id="counts-weights-and-uncertainty">3.6 Counts, weights and uncertainty</h3>
+<p>For each experiment, we count selected adults whose resources move against earnings. We also count households with at least one flagged selected adult and all members of those households. The latter count includes children and untested adults; it does not mean that each member independently faces an earnings cliff. A household counts once even when two tested adults satisfy the criterion.</p>
+<p>The archived simulation applies household-calibrated weights and entity mappings. The paper’s exhibit builder reads committed scenario aggregates rather than reconstructing survey weights. It computes conditional worker percentages by dividing the matching worker numerator and denominator from the same completed experiment. The build indexes numeric inputs to the generated exhibits by source field, records derived-rate operations and hashes every input snapshot. We do not rescale a count from one earnings experiment to estimate another.</p>
+<p>Adult-count intervals use the 2.5th and 97.5th percentiles of 5,000 bootstrap resamples of source households. Records sharing a source household are sampled together. Differences from the $1,000 experiment use paired resamples, preserving the shared records across the compared experiments. We report point estimates for the individual-size conditional worker rates and household-member counts because the archived summary lacks their bootstrap distributions. For the new positive-grid household unions and health revaluations, we construct weighted source-household contributions through MicroSeries and resample those contributions jointly. We derive the interval for additional household members from the paired difference between nested household groups in each draw. We also estimate the contrast [N_health($5,000) − N_health($1,000)] − [N_cash($5,000) − N_cash($1,000)] in each shared draw. Dividing an adult-count interval by a point denominator would not produce a valid interval for a worker rate.</p>
+<p>These intervals describe sampling variation under this resampling scheme. They omit uncertainty about policy reconstruction, benefit take-up, health valuation, imputation, calibration and model specification. They also omit CPS strata and sampling clusters and possible repeated households across pooled survey years. The intervals can therefore understate broader uncertainty.</p>
+<h3 id="counterfactual-controls-and-program-attribution">3.7 Counterfactual controls and program attribution</h3>
+<p>Each branch retains the baseline inputs, including stored take-up draws, and recomputes derived outcomes. The tests compare branch outcomes with a fresh simulation of the changed household. A zero-change control should preserve resources exactly. Appendix C examines a historical implementation where this identity failed and separated the failure from the earnings effect.</p>
+<p>We split the national dataset into four disjoint source-household groups for computation. Medicaid’s valuation uses state enrollment-related totals, so naively recomputing those totals within a quarter-sample would alter every enrollee’s value. We fix them at their full-sample baseline values across the parts and branches. Additivity tests compare split with unsplit samples. This is an accounting treatment of an individual earnings counterfactual, rather than an assumption that a single household’s raise changes a state’s Medicaid budget.</p>
+<p>For flagged adults, we identify the single resource component that moves most against the earnings change. Under a raise, this is the largest adverse component; under a cut, the largest gain. This attribution is descriptive. Several programs can change simultaneously, and removing the largest component need not remove the flag when other adverse components remain.</p>
+<h3 id="software-assistance">3.8 Software assistance</h3>
+<p>Generative AI assisted software development, literature retrieval, diagnostic review and manuscript preparation. The original analysis used Anthropic Claude Code, with model identifiers <code>claude-opus-5-5</code> and <code>claude-fable-5-2</code> recorded in its session. The extensions and manuscript used OpenAI Codex, identified by the service as the GPT-6 family; the interface did not expose its exact hosted build. The replication package records the available identifiers and access date in <code>software-assistance.json</code>. The executable code, fixed inputs and random seeds determine the estimates without replaying language-model prompts. Tables and Matplotlib figures derive from those outputs; no generative image model produced the figures.</p>
+<h2 id="results">4. Results</h2>
+<h3 id="dollar-increases-and-health-resources">4.1 Dollar increases and health resources</h3>
+<p>Table 1 reports selected-adult counts for the three dollar increases in the 2025 model scenario. The cash and near-cash point estimate changes from 0.68 million at $1,000 to 0.89 million at $2,000 and 0.63 million at $5,000. Including health produces a different pattern: the count rises from 3.08 million to 4.89 million and 9.74 million. Figure 4 displays these estimates and their sampling intervals.</p>
+<p><strong>Table 1: Selected adults with an endpoint resource loss after an annual earnings increase.</strong> Counts and intervals are millions; frozen 2025 model scenario.</p>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th>Scenario</th>
+<th style="text-align: right;">Annual raise</th>
+<th style="text-align: right;">Cash adults (m)</th>
+<th style="text-align: right;">95% interval</th>
+<th style="text-align: right;">Health adults (m)</th>
+<th style="text-align: right;">95% interval</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$1,000</td>
+<td style="text-align: right;">0.68</td>
+<td style="text-align: right;">0.49-0.90</td>
+<td style="text-align: right;">3.08</td>
+<td style="text-align: right;">2.62-3.58</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$2,000</td>
+<td style="text-align: right;">0.89</td>
+<td style="text-align: right;">0.63-1.18</td>
+<td style="text-align: right;">4.89</td>
+<td style="text-align: right;">4.28-5.53</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$5,000</td>
+<td style="text-align: right;">0.63</td>
+<td style="text-align: right;">0.44-0.84</td>
+<td style="text-align: right;">9.74</td>
+<td style="text-align: right;">8.87-10.66</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes:</em> Cash includes near-cash benefits. Health adds government-valued coverage, counts the ACA premium tax credit once and excludes marketplace net premiums. Intervals cover sampling error only. Dollar raises include nonworkers among the selected adults.</p>
+<div class="research-figure">
+<p><strong>Figure 4: Resource definitions change the relationship between the raise and the loss count.</strong></p>
+<figure>
+<img src="figures/increment-exposure.png" alt="Selected-adult endpoint losses under the three computed 2025 dollar increases." />
+<figcaption aria-hidden="true">Selected-adult endpoint losses under the three computed 2025 dollar increases.</figcaption>
+</figure>
+<p><em>Notes:</em> We evaluate the three marked raise sizes; bars show 95% sampling intervals. The selected population comprises up to two adults per household ranked by market income.</p>
+</div>
+<p>The paired difference between the health-inclusive $5,000 and $1,000 counts reaches 6.66 million adults, with an interval of 5.93-7.41 million. This comparison preserves the shared records across experiments. At $1,000, 77.8% of health-inclusive flags occur for adults whose other resources rise. Most health-inclusive flags therefore concern a gain in nonhealth resources offset by a larger government-valued coverage loss.</p>
+<h3 id="conditional-worker-rates-and-household-exposure">4.2 Conditional worker rates and household exposure</h3>
+<p>Table 2 uses matched selected-worker denominators. At $1,000, the health-inclusive rate reaches 1.59% among tested workers, compared with 0.32% for cash and near-cash resources. These rates differ from rates among selected adults because positive dollar raises also reach nonworkers.</p>
+<p><strong>Table 2: Endpoint losses among selected workers reached by each dollar raise.</strong> Frozen 2025 model scenario; denominators include only selected adults with positive net earnings.</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr>
+<th>Scenario</th>
+<th style="text-align: right;">Raise</th>
+<th style="text-align: right;">Tested workers (m)</th>
+<th style="text-align: right;">Cash rate (%)</th>
+<th style="text-align: right;">Health rate (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$1,000</td>
+<td style="text-align: right;">162.91</td>
+<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">1.59</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$2,000</td>
+<td style="text-align: right;">162.91</td>
+<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">2.44</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$5,000</td>
+<td style="text-align: right;">162.91</td>
+<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">4.95</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes:</em> Rates use matching numerators and denominators within the top-two-market-income adult selection. We do not infer rate intervals from adult-count intervals.</p>
+<p>For the $1,000 health-inclusive experiment, 3.08 million flagged adults live in 2.42 million households containing 7.33 million people. The corresponding household-member count reaches 23.05 million at $5,000. A household member need not receive the lost benefit or independently face a cliff. Table A2 reports adults, households and members, including the archival scenario.</p>
+<h3 id="exposure-across-the-positive-earnings-grid">4.3 Exposure across the positive earnings grid</h3>
+<p>Table 3 counts residents of households where at least one selected worker satisfies the stated retention test after at least one $1,000, $2,000 or $5,000 increase. We estimate 23.67 million residents in strict-loss households under the health-inclusive account, with a 95% sampling interval of 21.49-26.02 million. The broader below-half-retention group contains 53.28 million residents. Excluding every strict-loss household leaves 29.61 million additional residents, with an interval of 27.28-32.02 million.</p>
+<p><strong>Table 3: Residents of households with selected-worker exposure across the positive raise grid.</strong> Millions, with 95% sampling intervals; frozen 2025 model scenario.</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr>
+<th>Scenario</th>
+<th style="text-align: right;">Account</th>
+<th style="text-align: right;">Strict loss</th>
+<th style="text-align: right;">Below half</th>
+<th style="text-align: right;">Additional</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">3.73 (2.90-4.65)</td>
+<td style="text-align: right;">36.20 (33.57-38.92)</td>
+<td style="text-align: right;">32.47 (30.01-35.04)</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">23.67 (21.49-26.02)</td>
+<td style="text-align: right;">53.28 (50.02-56.57)</td>
+<td style="text-align: right;">29.61 (27.28-32.02)</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes:</em> Both tests use the same $1,000, $2,000 and $5,000 grid and selected workers. Strict loss requires retention below zero. Below half requires retention below 0.5 and includes strict-loss households. Additional excludes every strict-loss household from the broader group. Each resident counts once in a qualifying household. Health counts the premium tax credit once. The grid includes no full-time job entry or continuous search. Intervals cover sampling variation only.</p>
+<p>Under cash and near-cash accounting, the strict and additional groups contain 3.73 million and 32.47 million residents. The additional count need not rise with the overall below-half count because it excludes the strict-loss group in each account. Changing the account can alter which households qualify and how they divide between the disjoint groups.</p>
+<p>The paired increment-by-resource contrast reaches 6.71 million selected adults, with an interval of 6.00-7.44 million. It compares the change from $1,000 to $5,000 in one resource account’s count with the change in the other account’s count, preserving their covariance.</p>
+<h3 id="components-associated-with-endpoint-losses">4.4 Components associated with endpoint losses</h3>
+<p>Medicaid supplies the largest adverse component for 73% of the $1,000 health-inclusive flags and 89% of the $5,000 flags. Table 4 reports the classification across dollar changes. A larger increase can move a household from farther below a coverage threshold to above it while compensating for a smaller nonhealth benefit loss.</p>
+<p><strong>Table 4: Largest adverse component among health-inclusive endpoint losses.</strong> Shares of flagged adults, percent; frozen 2025 model scenario.</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th style="text-align: right;">Raise</th>
+<th style="text-align: right;">Medicaid</th>
+<th style="text-align: right;">MSP</th>
+<th style="text-align: right;">CHIP</th>
+<th style="text-align: right;">ACA PTC</th>
+<th style="text-align: right;">Other</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$1,000</td>
+<td style="text-align: right;">72.6</td>
+<td style="text-align: right;">4.4</td>
+<td style="text-align: right;">1.6</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">21.4</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$2,000</td>
+<td style="text-align: right;">75.5</td>
+<td style="text-align: right;">6.5</td>
+<td style="text-align: right;">1.8</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">16.2</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$5,000</td>
+<td style="text-align: right;">89.4</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes:</em> MSP denotes Medicare Savings Programs; CHIP, the Children’s Health Insurance Program; ACA PTC, the Affordable Care Act premium tax credit. Each adult contributes to one component, the one with the largest adverse change. Other components can also contribute. Removing one component need not eliminate the flag; rounding can prevent shares from summing to 100%.</p>
+<p>The 2025 scenario does not withdraw the ACA credit solely at 400% of the poverty guideline. Appendix B discusses the cutoff approximation in the separate pre-2018 credit reconstruction.</p>
+<h3 id="direction-and-small-losses">4.5 Direction and small losses</h3>
+<p>Raise and cut tests reach different populations. A dollar cut requires enough positive earnings to cover it; a raise does not. Table A3 reports the direction-specific counts and union. For a $1,000 raise or cut, the health-inclusive union reaches 4.81 million selected adults. Each adult counts once. This compares exposure on either side of current earnings, rather than after a raise alone.</p>
+<p>The strict sign test has no minimum loss threshold. Proportional perturbations can make small losses consequential: in the 2025 1% experiment, approximately 94,200 health-inclusive flags involve annual resource changes of $12 or less. Table A4 records the exact aggregate values and archival comparison. Small changes can interact with monthly rounding. The diagnostic does not classify every small loss as a numerical error or attribute every one to SNAP.</p>
+<h2 id="valuation-and-interpretation">5. Valuation and interpretation</h2>
+<h3 id="fixed-eligibility-revaluations">5.1 Fixed eligibility revaluations</h3>
+<p>Table 5 applies broader Medicaid and CHIP multipliers to every saved adult counterfactual. At a 30% valuation, we estimate 2.96 million endpoint losses after $1,000 and 6.55 million after $5,000. The corresponding full-cost counts reach 3.08 million and 9.74 million. Figure 5 shows that the $5,000 count responds more to this valuation change than the $1,000 count.</p>
+<p><strong>Table 5: Endpoint losses under alternative Medicaid and CHIP valuations.</strong> Selected adults in millions, with 95% sampling intervals; frozen 2025 model scenario.</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th style="text-align: right;">Multiplier α</th>
+<th style="text-align: right;">+$1,000 adults</th>
+<th style="text-align: right;">+$5,000 adults</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.84 (0.63-1.09)</td>
+<td style="text-align: right;">1.03 (0.78-1.30)</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">2.96 (2.50-3.45)</td>
+<td style="text-align: right;">6.55 (5.82-7.29)</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">3.04 (2.59-3.53)</td>
+<td style="text-align: right;">8.86 (8.03-9.74)</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.08 (2.62-3.58)</td>
+<td style="text-align: right;">9.74 (8.87-10.66)</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes:</em> The multiplier changes only signed Medicaid and CHIP components. Eligibility, take-up, the premium tax credit, other health components, premiums and native rounding residuals remain fixed. A zero multiplier retains other health benefits and differs from the cash account. We classify every selected adult, including those with gains at full valuation. These accounting sensitivities do not reproduce other studies’ complete resource concepts or estimate willingness to pay. The supplementary result file also reports Medicaid-only revaluations.</p>
+<div class="research-figure">
+<p><strong>Figure 5: Revaluing Medicaid and CHIP changes the larger-raise count more.</strong></p>
+<figure>
+<img src="figures/health-valuation-exposure.png" alt="Selected-adult endpoint losses at the four computed Medicaid and CHIP value multipliers." />
+<figcaption aria-hidden="true">Selected-adult endpoint losses at the four computed Medicaid and CHIP value multipliers.</figcaption>
+</figure>
+<p><em>Notes:</em> We evaluate the four marked valuation assumptions (0%, 30%, 50% and 100%); bars show 95% sampling intervals. The premium tax credit and other health components retain their original treatment.</p>
+</div>
+<p>A narrower 80%–120% Medicaid-only sensitivity leaves the $1,000 count at 3.079 million at both endpoints. Stability in that neighborhood coexists with sensitivity to lower Medicaid and CHIP valuations. Neither sensitivity changes program rules or estimates the cost of replacement insurance.</p>
+<h3 id="take-up-and-program-coverage">5.2 Take-up and program coverage</h3>
+<p>Take-up assumptions affect the opportunity to lose benefits. The frozen model gives some benefits, including school meals, CHIP and Medicare Savings Programs, to every eligible household or person when the data supply no take-up input. State childcare subsidies generally have no take-up input. A diagnostic removes these benefit groups’ changes from already flagged counterfactuals. This removes 18.0% of cash and near-cash flags and 10.7% of health-inclusive flags (Table A5).</p>
+<p>The diagnostic counts existing flags that disappear when the specified adverse changes no longer enter resources. It is not an alternative population simulation with calibrated take-up. Lower take-up could also eliminate coverage that the model supplies after another program ends, creating new losses the diagnostic cannot count. A realistic take-up analysis therefore requires coherent baseline and counterfactual receipt, rather than multiplying the cliff count by an assumed participation rate.</p>
+<p>Program coverage further limits interpretation. Head Start contributes no benefits in these runs, modeled housing assistance is low relative to the national program’s scale, and the full set of modeled program totals has not been benchmarked against administrative spending. Reported SSDI benefits remain fixed when earnings change, so these experiments do not capture an earnings-induced SSDI suspension. Adding a single earnings cutoff would not implement trial-work and extended-eligibility rules. We also omit new work-related childcare expenses. These limitations can move measured exposure in either direction, alongside the full-take-up assumptions above. We do not describe the estimates as lower or upper bounds on all US benefit-cliff exposure.</p>
+<h3 id="interpretation-of-annual-exposure">5.3 Interpretation of annual exposure</h3>
+<p>The experiments measure annual resource changes with other household circumstances held fixed. A simulated loss can identify an incentive in the specified resource account. It does not identify whether a household knows the rule, anticipates the change, receives a temporary continuation of benefits, can adjust spending, or declines an earnings opportunity. Government-valued health losses also do not identify equivalent household welfare losses. Empirical labor-supply responses require a separate design.</p>
+<h2 id="conclusion">6. Conclusion</h2>
+<p>The earnings increment and resource account jointly alter measured exposure to adverse earnings transitions in the frozen 2025 model scenario. Increasing the tested raise from $1,000 to $5,000 raises the health-inclusive endpoint-loss count by 6.66 million selected adults. The paired contrast between the cash and health changes reaches 6.71 million. Lower Medicaid and CHIP valuations reduce the health-inclusive counts, especially at $5,000. Annual government-cost losses cannot identify equivalent losses of spendable income or household welfare.</p>
+<p>Hypothetical household paths distinguish a decline along a sampled earnings range from a loss at a specified endpoint. A union across stated raise sizes counts selected workers with a loss at any tested endpoint and residents of their households once. The additional below-half-retention group excludes every strict-loss household. Both groups depend on the same finite grid and selected population.</p>
+<p>These comparisons support reporting the earnings transition, resource valuation, selection rule and counting unit alongside each exposure estimate. Shared resampling preserves covariance across accounts and transitions. Input and zero-change controls separate an earnings effect from a change in simulation state. Historical coverage requires a separate rule and data audit; setting a year argument does not supply missing history. The appendix’s mixed 2017 scenario consequently remains a computational sensitivity, not evidence of historical incidence.</p>
+<h2 id="data-and-code-availability">Data and code availability</h2>
+<p>The accompanying replication package contains the analysis source, exact dependency specifications, simulation and aggregation entry points, manuscript build code, input manifests and result aggregates. The source code uses an MIT license. The original experiments and documentation also remain publicly available at <a href="https://github.com/PolicyEngine/us-cliffs-2017/tree/ff0672e5f7f0728208599d988e9bd3cc2e195391">PolicyEngine/us-cliffs-2017, commit ff0672e</a>. The package’s metric index maps generated exhibit values to JSON fields. Aggregate-only rebuilding verifies and summarizes archived outputs; full simulation replication additionally regenerates record-level intermediate results in a separate working directory.</p>
+<p>Both finished simulation inputs are publicly accessible without registration at the time of access. The main <a href="https://huggingface.co/datasets/policyengine/populace-us/tree/9a814a3b3b53c0ecd6e1737b6ec862c31300ef6f">Microcosm release</a> resolves to commit <code>9a814a3b3b53c0ecd6e1737b6ec862c31300ef6f</code>. Appendix C uses the historical enhanced-CPS file from <a href="https://huggingface.co/PolicyEngine/policyengine-us-data/tree/da98b4faccf44492e91d80c0112a34ef6c3da0bd">revision da98b4f</a>. The public-input manifest records their expected byte counts and SHA-256 identifiers. These inputs support replication of the simulations; the package does not reconstruct Microcosm from every underlying raw survey or administrative source. The package excludes record-level outputs and copyrighted literature PDFs.</p>
+<h2 id="funding-and-competing-interests">Funding and competing interests</h2>
+<p>PolicyEngine supported preparation of this manuscript through its general operating resources. A client commissioned related benefit-cliff analysis, including earnings-retention work used here. No specific research grant supported preparation of the manuscript.</p>
+<p>Max Ghenis co-founded and leads PolicyEngine, whose software and data this study uses.</p>
+<h2 id="participants">Participants</h2>
+<p>The study uses secondary survey-based microdata and involves no new participant recruitment or intervention.</p>
+<h2 id="declaration-of-generative-ai-assistance">Declaration of generative AI assistance</h2>
+<p>Anthropic Claude Code and OpenAI Codex assisted coding, analysis checks, source retrieval and writing, as specified in Section 3.8 and the software-assistance record. All estimates and tables derive from the supplied executable code and specified model outputs.</p>
+<h2 id="references">References</h2>
+<p>Altig, D., Auerbach, A., Ilin, E., Kotlikoff, L., &amp; Ye, V. Y. (2026). <em>The marginal net taxation of Americans’ labor supply</em>. NBER Working Paper 27164, originally issued 2020; revision of 5 February 2026. <a href="https://eml.berkeley.edu/~auerbach/Marginal_Net_Taxation_of_Americans__Labor_Supply___Feb_2026.pdf">Author-hosted revision</a>. <a href="https://doi.org/10.3386/w27164">https://doi.org/10.3386/w27164</a>.</p>
+<p>Altig, D., Ilin, E., Ruder, A., &amp; Terry, E. (2020). <em>Benefits cliffs and the financial incentives for career advancement: A case study of a health care career pathway</em> (Community and Economic Development Discussion Paper 01-20a, revised February 2021). Federal Reserve Bank of Atlanta. <a href="https://doi.org/10.29338/dp2020-01">https://doi.org/10.29338/dp2020-01</a>.</p>
+<p>Chien, N., &amp; Macartney, S. (2019). <em>Effective marginal tax rates for households with child care subsidies: What happens following an earnings increase?</em> ASPE Marginal Tax Rate Series, Brief 3. US Department of Health and Human Services. <a href="https://aspe.hhs.gov/sites/default/files/private/aspe-files/260661/brief3-ccdfmtrbrief.pdf">https://aspe.hhs.gov/sites/default/files/private/aspe-files/260661/brief3-ccdfmtrbrief.pdf</a>.</p>
+<p>Congressional Budget Office. (2012). <em>Effective marginal tax rates for low- and moderate-income workers</em>. <a href="https://www.cbo.gov/publication/43709">https://www.cbo.gov/publication/43709</a>.</p>
+<p>Congressional Budget Office. (2015). <em>Effective marginal tax rates for low- and moderate-income workers in 2016</em>. <a href="https://www.cbo.gov/publication/50923">https://www.cbo.gov/publication/50923</a>.</p>
+<p>Finkelstein, A., Hendren, N., &amp; Luttmer, E. F. P. (2019). The value of Medicaid: Interpreting results from the Oregon Health Insurance Experiment. <em>Journal of Political Economy, 127</em>(6), 2836–2874. <a href="https://doi.org/10.1086/702238">https://doi.org/10.1086/702238</a>.</p>
+<p>Ghenis, M., &amp; Woodruff, N. (2023, February 2). <em>How would reforms affect cliffs?</em> PolicyEngine. <a href="https://www.policyengine.org/us/research/how-would-reforms-affect-cliffs">https://www.policyengine.org/us/research/how-would-reforms-affect-cliffs</a>.</p>
+<p>Giannarelli, L., Lippold, K., Maag, E., Steuerle, C. E., Chien, N., &amp; Macartney, S. (2019). <em>Estimating marginal tax rates using a microsimulation model: Technical appendix</em>. ASPE Marginal Tax Rate Series, Brief 5. US Department of Health and Human Services. <a href="https://aspe.hhs.gov/sites/default/files/private/aspe-files/260661/brief5-technicalappendix.pdf">https://aspe.hhs.gov/sites/default/files/private/aspe-files/260661/brief5-technicalappendix.pdf</a>.</p>
+<p>Internal Revenue Service. (2017, December 12). <em>Your federal income tax for individuals: For use in preparing 2017 returns</em> (Publication 17). <a href="https://www.irs.gov/pub/irs-prior/p17--2017.pdf">https://www.irs.gov/pub/irs-prior/p17–2017.pdf</a>.</p>
+<p>Kleven, H. J. (2016). Bunching. <em>Annual Review of Economics, 8</em>, 435-464. <a href="https://doi.org/10.1146/annurev-economics-080315-015234">https://doi.org/10.1146/annurev-economics-080315-015234</a>.</p>
+<p>Kleven, H. J., &amp; Waseem, M. (2013). Using notches to uncover optimization frictions and structural elasticities: Theory and evidence from Pakistan. <em>The Quarterly Journal of Economics, 128</em>(2), 669-723. <a href="https://doi.org/10.1093/qje/qjt004">https://doi.org/10.1093/qje/qjt004</a>.</p>
+<p>Kosar, G., &amp; Moffitt, R. A. (2017). Trends in cumulative marginal tax rates facing low-income families, 1997-2007. <em>Tax Policy and the Economy, 31</em>(1), 43-70. <a href="https://doi.org/10.1086/691083">https://doi.org/10.1086/691083</a>.</p>
+<p>Maag, E., Steuerle, C. E., Chakravarti, R., &amp; Quakenbush, C. (2012). How marginal tax rates affect families at various levels of poverty. <em>National Tax Journal, 65</em>(4), 759-782. <a href="https://doi.org/10.17310/ntj.2012.4.02">https://doi.org/10.17310/ntj.2012.4.02</a>.</p>
+<p>National Bureau of Economic Research. (2022). <em>Internet TAXSIM version 35: Marginal tax rates</em>. Accessed 11 November 2026. <a href="https://taxsim.nber.org/taxsim35/">https://taxsim.nber.org/taxsim35/</a>.</p>
+<p>Saez, E. (2010). Do taxpayers bunch at kink points? <em>American Economic Journal: Economic Policy, 2</em>(3), 180-212. <a href="https://doi.org/10.1257/pol.2.3.180">https://doi.org/10.1257/pol.2.3.180</a>.</p>
+<p>Slemrod, J. (2013). Buenas notches: Lines and notches in tax system design. <em>eJournal of Tax Research, 11</em>(3), 259-283. <a href="https://www.unsw.edu.au/business/sites/default/files/documents/03_eJTR_11_3.pdf">Publisher PDF</a>.</p>
+<p>Stout, N. K., &amp; Goldie, S. J. (2008). Keeping the noise down: Common random numbers for disease simulation modeling. <em>Health Care Management Science, 11</em>(4), 399-406. <a href="https://doi.org/10.1007/s10729-008-9067-6">https://doi.org/10.1007/s10729-008-9067-6</a>.</p>
+<p>Urban-Brookings Tax Policy Center. (2022). <em>Brief description of the tax model</em>, Section IV.C, Effective marginal tax rate estimates. Updated 9 March 2022; accessed 11 November 2026. <a href="https://taxpolicycenter.org/resources/brief-description-tax-model">https://taxpolicycenter.org/resources/brief-description-tax-model</a>.</p>
+<h2 id="appendix-a-comparability-and-full-results">Appendix A Comparability and full results</h2>
+<h3 id="a.1-earnings-conventions-in-the-literature">A.1 Earnings conventions in the literature</h3>
+<p><strong>Table A1: Earnings conventions and resource concepts in selected primary sources.</strong> Entries concern each source’s stated experiment, not a common national cliff rate.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Source</th>
+<th>Earnings convention</th>
+<th>Population or unit</th>
+<th>Principal distinction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ghenis &amp; Woodruff (2023)</td>
+<td>+$2,000 per adult; increment sensitivity</td>
+<td>Households; simultaneous adult increases</td>
+<td>Household pooling differs from one-adult counterfactuals</td>
+</tr>
+<tr>
+<td>CBO (2012)</td>
+<td>+$100</td>
+<td>Selected low- and moderate-income workers</td>
+<td>Annual taxes and selected transfers</td>
+</tr>
+<tr>
+<td>ASPE (2019)</td>
+<td>+$2,000, +$5,000, +$10,000</td>
+<td>Selected working-age households</td>
+<td>Medicaid/CHIP at half government cost; childcare expenses</td>
+</tr>
+<tr>
+<td>Altig et al. (2026 revision)</td>
+<td>+$1,000; +$100/+$10,000 sensitivities</td>
+<td>Selected SCF households</td>
+<td>Current-year and lifetime concepts</td>
+</tr>
+<tr>
+<td>Kosar and Moffitt (2017)</td>
+<td>50%-FPL bands</td>
+<td>Family types and participation combinations</td>
+<td>Medicaid at 30% of government cost</td>
+</tr>
+<tr>
+<td>Maag et al. (2012)</td>
+<td>Poverty-line transitions</td>
+<td>Hypothetical single-parent families</td>
+<td>Monthly earnings timing and state variation</td>
+</tr>
+<tr>
+<td>TAXSIM35</td>
+<td>+$0.01</td>
+<td>User-provided tax records</td>
+<td>Local tax rate with notch smoothing</td>
+</tr>
+<tr>
+<td>TPC (2022)</td>
+<td>+$1,000</td>
+<td>Tax units</td>
+<td>Individual income-tax rate</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes:</em> Full source locators and retrieval records accompany the paper. No source’s mean, median, conditional cell or recipient-only percentage is treated as a nationally comparable strict-cliff rate.</p>
+<h3 id="a.2-additional-empirical-results">A.2 Additional empirical results</h3>
+<p>The 2017 rows below describe the archival mixed-policy sensitivity defined in Appendix B. They are not estimates of historical incidence.</p>
+<p><strong>Table A2: Adults, household unions and household members under dollar raises.</strong> All counts are millions. Sampling intervals for the 2025 adult counts appear in Table 1.</p>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th>Scenario</th>
+<th style="text-align: right;">Raise</th>
+<th style="text-align: right;">Measure</th>
+<th style="text-align: right;">Adults (m)</th>
+<th style="text-align: right;">Households (m)</th>
+<th style="text-align: right;">Members (m)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+$1,000</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">1.74</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+$1,000</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">2.68</td>
+<td style="text-align: right;">1.98</td>
+<td style="text-align: right;">6.20</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+$2,000</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.67</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">1.84</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+$2,000</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">4.39</td>
+<td style="text-align: right;">3.22</td>
+<td style="text-align: right;">10.22</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+$5,000</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.77</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+$5,000</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">9.42</td>
+<td style="text-align: right;">7.15</td>
+<td style="text-align: right;">21.67</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$1,000</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.68</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">1.85</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$1,000</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">3.08</td>
+<td style="text-align: right;">2.42</td>
+<td style="text-align: right;">7.33</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$2,000</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.89</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">2.18</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$2,000</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">4.89</td>
+<td style="text-align: right;">3.76</td>
+<td style="text-align: right;">11.67</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$5,000</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.63</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">1.74</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$5,000</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">9.74</td>
+<td style="text-align: right;">7.51</td>
+<td style="text-align: right;">23.05</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table A3: Raise, cut and either-side counts under the health-inclusive resource measure.</strong> All counts are millions.</p>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th>Scenario</th>
+<th style="text-align: right;">Size</th>
+<th style="text-align: right;">Raise (m)</th>
+<th style="text-align: right;">Cut (m)</th>
+<th style="text-align: right;">Either side (m)</th>
+<th style="text-align: right;">95% union interval</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">$1,000</td>
+<td style="text-align: right;">2.68</td>
+<td style="text-align: right;">2.22</td>
+<td style="text-align: right;">4.84</td>
+<td style="text-align: right;">4.27-5.40</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">$2,000</td>
+<td style="text-align: right;">4.39</td>
+<td style="text-align: right;">3.66</td>
+<td style="text-align: right;">7.90</td>
+<td style="text-align: right;">7.12-8.67</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">$5,000</td>
+<td style="text-align: right;">9.42</td>
+<td style="text-align: right;">7.21</td>
+<td style="text-align: right;">16.25</td>
+<td style="text-align: right;">15.16-17.37</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">1%</td>
+<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">1.74</td>
+<td style="text-align: right;">1.46-2.06</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">10%</td>
+<td style="text-align: right;">3.38</td>
+<td style="text-align: right;">3.88</td>
+<td style="text-align: right;">7.06</td>
+<td style="text-align: right;">6.41-7.72</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">$1,000</td>
+<td style="text-align: right;">3.08</td>
+<td style="text-align: right;">1.84</td>
+<td style="text-align: right;">4.81</td>
+<td style="text-align: right;">4.21-5.43</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">$2,000</td>
+<td style="text-align: right;">4.89</td>
+<td style="text-align: right;">2.98</td>
+<td style="text-align: right;">7.62</td>
+<td style="text-align: right;">6.89-8.38</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">$5,000</td>
+<td style="text-align: right;">9.74</td>
+<td style="text-align: right;">5.51</td>
+<td style="text-align: right;">14.72</td>
+<td style="text-align: right;">13.63-15.81</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">1%</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">1.83</td>
+<td style="text-align: right;">1.53-2.16</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">10%</td>
+<td style="text-align: right;">4.82</td>
+<td style="text-align: right;">3.66</td>
+<td style="text-align: right;">8.07</td>
+<td style="text-align: right;">7.37-8.81</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes:</em> A cut must be covered by positive earnings components; a proportional change requires a positive component. Dollar raises also include selected nonworkers. The union contains adults flagged in either direction once. It is not the sum of the two columns and does not search the interval continuously.</p>
+<p><strong>Table A4: Small-loss diagnostic for positive earnings changes.</strong></p>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th>Scenario</th>
+<th style="text-align: right;">Raise</th>
+<th style="text-align: right;">Measure</th>
+<th style="text-align: right;">Flagged (m)</th>
+<th style="text-align: right;">Loss &lt;=$12 (000s)</th>
+<th style="text-align: right;">Share of flags (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+$1,000</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">6.7</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+$1,000</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">2.68</td>
+<td style="text-align: right;">14.8</td>
+<td style="text-align: right;">0.6</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+$2,000</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.67</td>
+<td style="text-align: right;">13.4</td>
+<td style="text-align: right;">2.0</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+$2,000</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">4.39</td>
+<td style="text-align: right;">13.4</td>
+<td style="text-align: right;">0.3</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+$5,000</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">6.6</td>
+<td style="text-align: right;">2.2</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+$5,000</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">9.42</td>
+<td style="text-align: right;">28.4</td>
+<td style="text-align: right;">0.3</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+1%</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">133.7</td>
+<td style="text-align: right;">26.6</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+1%</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">126.5</td>
+<td style="text-align: right;">15.3</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+10%</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">40.4</td>
+<td style="text-align: right;">9.3</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">+10%</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">3.38</td>
+<td style="text-align: right;">40.4</td>
+<td style="text-align: right;">1.2</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$1,000</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.68</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$1,000</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">3.08</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$2,000</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.89</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$2,000</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">4.89</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$5,000</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.63</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: right;">0.8</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+$5,000</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">9.74</td>
+<td style="text-align: right;">17.0</td>
+<td style="text-align: right;">0.2</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+1%</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.58</td>
+<td style="text-align: right;">104.8</td>
+<td style="text-align: right;">18.2</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+1%</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">94.2</td>
+<td style="text-align: right;">9.8</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+10%</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">0.58</td>
+<td style="text-align: right;">7.7</td>
+<td style="text-align: right;">1.3</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">+10%</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">4.82</td>
+<td style="text-align: right;">7.7</td>
+<td style="text-align: right;">0.2</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes:</em> The last column divides the archived count with losses of no more than $12 by the archived strict-loss count in the same experiment. It does not estimate a separate unrun policy scenario.</p>
+<p><strong>Table A5: Dependence of existing $1,000 flags on specified full-take-up benefit changes.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th style="text-align: right;">Resource measure</th>
+<th style="text-align: right;">Existing flags removed (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">50.7</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">20.0</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">Cash</td>
+<td style="text-align: right;">18.0</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align: right;">Health</td>
+<td style="text-align: right;">10.7</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes:</em> The diagnostic removes changes in selected benefit groups from already flagged rows. The state-benefit group also contains some benefits whose receipt follows SSI or TANF. New flags resulting from lower take-up of substitute health coverage are outside this diagnostic.</p>
+<h2 id="appendix-b-historical-policy-and-computational-boundaries">Appendix B Historical-policy and computational boundaries</h2>
+<p>The archival 2017-oriented scenario applies selected 2017 federal tax provisions and an explicit reconstruction of the ACA premium tax credit, but retains later information in several domains. The frozen model initializer copies each parameter leaf’s earliest available value backward to 2015 when earlier history is absent. Setting a simulation year to 2017 therefore does not reconstruct missing 2017 law.</p>
+<p>An audit of parameters read by that scenario identifies 1,571 raw-file state-tax parameter nodes, of which 1,080 contain a leaf whose first value is after January 1, 2017; 841 of those nodes first appear in 2021. The corresponding later-start counts are 491 of 536 traced state-childcare nodes and 208 of 752 federal nodes. These parameter histories count nodes, rather than laws, affected households or incorrect outputs. A later first date does not establish when a rule was enacted, and tracing a parameter does not establish that it changes benefits. The model’s earliest state Medicaid and CHIP limits and WIC package values begin in 2018, while some formulas refer explicitly to still later dates. Together with later household information and health valuations, these substitutions prevent a historical-incidence interpretation.</p>
+<p>The frozen ACA implementation also approximates the exact income boundary. It truncates income to whole percentage points of the poverty guideline and denies the credit at a truncated 400%, including exactly 400%, where the inclusive limit allows it (<a href="https://www.irs.gov/pub/irs-prior/p17--2017.pdf">IRS Publication 17, 2017, Chapter 37</a>). Its treatment of incomes just above the statutory limit can also depend on tax-form rounding conventions that this analysis has not established. The reported 400% crossings therefore describe the model’s rule, rather than exact statutory classification at every boundary. The historical parameter audit also records small poverty-guideline differences. These limitations matter particularly for a subgroup carried by few source households.</p>
+<p>Figure B1 retains an illustrative ACA-credit drop from this mixed-policy scenario. It uses the single-adult specification from Section 3.5 with the scenario year set to 2017 and the custom pre-2018 ACA calculation. Its earnings grid and scalar checks follow the same procedure. It does not depict a fully reconstructed 2017 household budget or establish the historical cutoff.</p>
+<div class="research-figure">
+<p><strong>Figure B1: An ACA-credit drop in the mixed 2017-oriented sensitivity.</strong></p>
+<figure>
+<img src="figures/household-aca-hybrid-2017.png" alt="Earnings and resources under the mixed 2017-oriented hypothetical single-adult scenario." />
+<figcaption aria-hidden="true">Earnings and resources under the mixed 2017-oriented hypothetical single-adult scenario.</figcaption>
+</figure>
+<p><em>Notes:</em> Hypothetical single adult aged 50 in Wake County, North Carolina. The plotted model changes ACA-credit status between $47,519 and $47,520. Relative to the sampled $47,500 baseline, a $1,000 raise lowers health-inclusive resources by $1,657 and a $5,000 raise raises them by $814. The shaded range ends at the first sampled recovery point, $51,200. Later policy inputs and the boundary approximation described above preclude a historical-law interpretation.</p>
+</div>
+<p>The 2025 scenario uses the same underlying source records and the model’s forward uprating. It also requires a coverage qualification. A bounded trace using two households in each state and the District of Columbia reads 3,760 raw-file parameter nodes; 139 contain a leaf first dated after December 31, 2025. The trace reads some future-start parameters through programs gated off for 2025, while inspected Georgia childcare eligibility formulas use backfilled 2026-source parameters without a calendar start gate. This trace does not establish positive benefits, historically incorrect values or the size of any national effect. Its sample and scenario differ from the 2017 audit, so the counts do not measure a change in coverage. We describe the main experiment as a frozen 2025 model scenario, rather than fully validated 2025 law. The replication package supplies the audit metadata and source identities.</p>
+<p>We exclude the Commodity Supplemental Food Program from the 2025 household-benefit account to align the benefit list with the archival scenario. This exclusion changes the cash and near-cash count relative to the frozen model’s default benefit list. It is part of the experiment’s definition rather than a general claim about the program’s importance.</p>
+<p>The bootstrap draws source-household identifiers, jointly including the paired ASEC and tax-detail copies. It therefore respects a known duplication in the microdata but does not recreate the original survey design or recalibrate each draw. Fixed state Medicaid totals also remain fixed in the resamples. The displayed intervals omit model and calibration uncertainty.</p>
+<p>Replication requires the specified package versions, data revision and resource definitions. Updating the software or data changes the experiment and requires renewed baseline, counterfactual and program-coverage checks.</p>
+<h2 id="appendix-c-preserving-stochastic-inputs-in-counterfactual-comparisons">Appendix C Preserving stochastic inputs in counterfactual comparisons</h2>
+<p>An earlier PolicyEngine-US implementation provides a controlled example of a counterfactual failure. The April 2025 model used random draws for SSI’s asset test, WIC take-up and WIC nutritional risk. Its copied household drew again while recomputing resources. Some adults therefore lost benefits for reasons unrelated to the earnings perturbation. Those changes could be counted as cliffs when they exceeded the raise’s own resource gain.</p>
+<p>A reconstruction of PolicyEngine-US 1.251.1 with policyengine-core 3.16.6 and the historical enhanced-CPS file produces 7.36 million flagged adults. Holding the draws fixed in the same model and data produces 0.82 million, with a 95% sampling interval of 0.32-1.51 million. The ratio of those point estimates is 8.94. A zero-earnings-change control produces approximately 10.53 million flags with the redraw behavior and none when the draws are held fixed. The <a href="https://github.com/PolicyEngine/us-cliffs-2017/blob/ff0672e5f7f0728208599d988e9bd3cc2e195391/CORRECTION.md">replication archive</a> records the historical versions, diagnostic experiments and uncertainty.</p>
+<p>This comparison isolates the draw-handling change within that older model. It does not attribute every difference between the old and newer estimates to that change: the later experiments also change microdata, model version, take-up mapping and program coverage. In the draws-held historical replication, only 149 source households carry the flagged count, and two supply half. The sampling concentration limits its precision.</p>
+<p>Common random numbers are an established simulation technique. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2761656/">Stout and Goldie (2008)</a> describe synchronized draws for individual counterfactual comparisons. The implication here concerns a diagnostic rather than a new variance-reduction method: zero-change comparisons should preserve every household’s outcomes, and an earnings branch should match a fresh simulation with identical retained inputs. A seed alone does not ensure that condition if draw order or branch state changes.</p>
+</body>
+</html>

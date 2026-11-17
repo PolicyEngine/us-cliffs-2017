@@ -1,0 +1,1458 @@
+{
+ "aggregation": "MicroSeries.sum on analysis flags in each part's frozen simulation; household flags mapped to residents with map_to='person'; parts added in part order. Stored weight columns are not read.",
+ "code": {
+  "aggregate_tag": "4721d56e6b03f659",
+  "commit": "c18aa54830fa6810a0e347d368cb515c30163497"
+ },
+ "definitions": {
+  "a": "covered before, no primary program after",
+  "b": "covered before and after, different primary program",
+  "c_mcm": "same primary program, value lower, mainly through medicaid_cost, chip or msp_cost",
+  "c_other": "same primary program, value lower, mainly through the premium credit, a state program or the CHIP premium",
+  "falls": "health value drops by more than $0.005",
+  "health_value": "medicaid_cost + chip + msp_cost of the person, plus shares of tax-unit amounts: assigned_aca_ptc over credit-eligible members, state programs over all members, minus chip_premium over CHIP enrollees; shares add up to the household's health value",
+  "household_categories": "a strict household's category in a set is the worst over its strict scenarios: any_a > b_no_a > only_c_other > only_c_mcm > other_only > no_fall; only_c = only_c_other + only_c_mcm",
+  "other": "value fell with no program before (a CHIP premium share); counted apart",
+  "person_buckets": "a person's bucket in a set is the worst over the set's strict scenarios: a > b > c_other > c_mcm > other",
+  "primary_program": "first of medicaid (medicaid_enrolled), chip (chip_enrolled), msp (msp_cost > 0), ptc (is_aca_ptc_eligible in a tax unit with assigned_aca_ptc > 0), state (a positive state health program in the tax unit, or or_healthier_oregon_cost)",
+  "strict_after_zeroing_all_same_program_mcm_changes": "sensitivity: add back every same-program Medicaid/CHIP/MSP change in either direction, including in households that were not strict",
+  "strict_after_zeroing_c": "household members still strict after adding back the medicaid_cost + chip + msp_cost change of every bucket (c) person; premium credit, state subsidy and CHIP premium changes stay"
+ },
+ "measure": "with_health: change in household_net_income + marketplace_net_premium (health coverage at government cost, premium tax credit counted once); a household is strict when a tested adult's household keeps strictly less than 0% of the gross change (current workers only for raises).",
+ "metrics": {
+  "combined_1000|any_a": {
+   "adults": 12433036.77944434,
+   "household_members": 12433036.77944434,
+   "households": 3312699.646755629
+  },
+  "combined_1000|b_no_a": {
+   "adults": 1912889.95812914,
+   "household_members": 1912889.95812914,
+   "households": 465609.5983969117
+  },
+  "combined_1000|no_fall": {
+   "adults": 1389394.9662035229,
+   "household_members": 1389394.9662035229,
+   "households": 356799.11227542
+  },
+  "combined_1000|only_c": {
+   "adults": 235405.42675920902,
+   "household_members": 235405.42675920902,
+   "households": 81805.03292712294
+  },
+  "combined_1000|only_c_mcm": {
+   "adults": 63175.54452139075,
+   "household_members": 63175.54452139075,
+   "households": 31586.132903073274
+  },
+  "combined_1000|only_c_other": {
+   "adults": 172229.88223781827,
+   "household_members": 172229.88223781827,
+   "households": 50218.90002404967
+  },
+  "combined_1000|other_only": {
+   "adults": 0.0,
+   "household_members": 0.0,
+   "households": 0.0
+  },
+  "combined_1000|person_a": {
+   "adults": 6373016.795142466,
+   "household_members": 12433036.77944434,
+   "households": 3312699.646755629
+  },
+  "combined_1000|person_b": {
+   "adults": 1539171.7821281594,
+   "household_members": 3472595.982194133,
+   "households": 818890.9837147844
+  },
+  "combined_1000|person_c_mcm": {
+   "adults": 165567.99423238455,
+   "household_members": 306346.31738882005,
+   "households": 94596.07542045804
+  },
+  "combined_1000|person_c_other": {
+   "adults": 200009.34187473624,
+   "household_members": 444116.2484818796,
+   "households": 122936.29109099152
+  },
+  "combined_1000|person_other": {
+   "adults": 0.0,
+   "household_members": 0.0,
+   "households": 0.0
+  },
+  "combined_1000|strict": {
+   "adults": 5006719.787635551,
+   "household_members": 15970727.130536214,
+   "households": 4216913.390355084
+  },
+  "combined_1000|strict_after_both_signs": {
+   "adults": 15920688.720702138,
+   "household_members": 15920688.720702138,
+   "households": 4189004.06913039
+  },
+  "combined_1000|strict_after_counterfactual": {
+   "adults": 15907551.586014822,
+   "household_members": 15907551.586014822,
+   "households": 4185327.25745201
+  },
+  "combined|any_a": {
+   "adults": 25347358.671650507,
+   "household_members": 25347358.671650507,
+   "households": 7704062.034029558
+  },
+  "combined|b_no_a": {
+   "adults": 3990595.7095356793,
+   "household_members": 3990595.7095356793,
+   "households": 1137106.2871750635
+  },
+  "combined|no_fall": {
+   "adults": 2086246.8932803036,
+   "household_members": 2086246.8932803036,
+   "households": 526462.054840694
+  },
+  "combined|only_c": {
+   "adults": 485334.0780796864,
+   "household_members": 485334.0780796864,
+   "households": 166820.76169818672
+  },
+  "combined|only_c_mcm": {
+   "adults": 195718.18868212384,
+   "household_members": 195718.18868212384,
+   "households": 87175.87215152424
+  },
+  "combined|only_c_other": {
+   "adults": 289615.88939756254,
+   "household_members": 289615.88939756254,
+   "households": 79644.88954666248
+  },
+  "combined|other_only": {
+   "adults": 0.0,
+   "household_members": 0.0,
+   "households": 0.0
+  },
+  "combined|person_a": {
+   "adults": 12404564.682345249,
+   "household_members": 25347358.671650507,
+   "households": 7704062.034029558
+  },
+  "combined|person_b": {
+   "adults": 2722912.1596478727,
+   "household_members": 6197279.034974856,
+   "households": 1658422.2032398526
+  },
+  "combined|person_c_mcm": {
+   "adults": 279950.230988146,
+   "household_members": 510388.62443763175,
+   "households": 162904.51658080303
+  },
+  "combined|person_c_other": {
+   "adults": 411030.00339423044,
+   "household_members": 962171.8437780875,
+   "households": 247507.6936033147
+  },
+  "combined|person_other": {
+   "adults": 0.0,
+   "household_members": 0.0,
+   "households": 0.0
+  },
+  "combined|strict": {
+   "adults": 11939458.623356294,
+   "household_members": 31909535.352546178,
+   "households": 9534451.137743503
+  },
+  "combined|strict_after_both_signs": {
+   "adults": 31744211.784323268,
+   "household_members": 31744211.784323268,
+   "households": 9457406.801084895
+  },
+  "combined|strict_after_counterfactual": {
+   "adults": 31713817.163864054,
+   "household_members": 31713817.163864054,
+   "households": 9447275.265591979
+  },
+  "job|any_a": {
+   "adults": 9634688.484341335,
+   "household_members": 9634688.484341335,
+   "households": 2288426.8812190886
+  },
+  "job|b_no_a": {
+   "adults": 981309.3449817625,
+   "household_members": 981309.3449817625,
+   "households": 174166.63896096218
+  },
+  "job|no_fall": {
+   "adults": 159580.02914371295,
+   "household_members": 159580.02914371295,
+   "households": 32185.97822534747
+  },
+  "job|only_c": {
+   "adults": 7.099388241767883,
+   "household_members": 7.099388241767883,
+   "households": 1.4198776483535767
+  },
+  "job|only_c_mcm": {
+   "adults": 0.0,
+   "household_members": 0.0,
+   "households": 0.0
+  },
+  "job|only_c_other": {
+   "adults": 7.099388241767883,
+   "household_members": 7.099388241767883,
+   "households": 1.4198776483535767
+  },
+  "job|other_only": {
+   "adults": 0.0,
+   "household_members": 0.0,
+   "households": 0.0
+  },
+  "job|person_a": {
+   "adults": 5130473.741801904,
+   "household_members": 9634688.484341335,
+   "households": 2288426.8812190886
+  },
+  "job|person_b": {
+   "adults": 1120511.1180444497,
+   "household_members": 2501118.605114631,
+   "households": 514597.6396645537
+  },
+  "job|person_c_mcm": {
+   "adults": 56290.11987230962,
+   "household_members": 97070.67683665175,
+   "households": 25269.410465166904
+  },
+  "job|person_c_other": {
+   "adults": 69899.87146249376,
+   "household_members": 164785.20138260958,
+   "households": 34948.26952306887
+  },
+  "job|person_other": {
+   "adults": 0.0,
+   "household_members": 0.0,
+   "households": 0.0
+  },
+  "job|strict": {
+   "adults": 2680254.5096761426,
+   "household_members": 10775584.957855053,
+   "households": 2494780.9182830467
+  },
+  "job|strict_after_both_signs": {
+   "adults": 10784011.713220265,
+   "household_members": 10784011.713220265,
+   "households": 2496887.607124349
+  },
+  "job|strict_after_counterfactual": {
+   "adults": 10775584.957855053,
+   "household_members": 10775584.957855053,
+   "households": 2494780.9182830467
+  },
+  "raise_union|any_a": {
+   "adults": 17893599.11576413,
+   "household_members": 17893599.11576413,
+   "households": 5953701.364319792
+  },
+  "raise_union|b_no_a": {
+   "adults": 3446808.9614108135,
+   "household_members": 3446808.9614108135,
+   "households": 1056538.1965762351
+  },
+  "raise_union|no_fall": {
+   "adults": 2177561.377605746,
+   "household_members": 2177561.377605746,
+   "households": 541756.9897387796
+  },
+  "raise_union|only_c": {
+   "adults": 485334.1198263186,
+   "household_members": 485334.1198263186,
+   "households": 166820.77004751316
+  },
+  "raise_union|only_c_mcm": {
+   "adults": 195718.23042875604,
+   "household_members": 195718.23042875604,
+   "households": 87175.88050085068
+  },
+  "raise_union|only_c_other": {
+   "adults": 289615.88939756254,
+   "household_members": 289615.88939756254,
+   "households": 79644.88954666248
+  },
+  "raise_union|other_only": {
+   "adults": 0.0,
+   "household_members": 0.0,
+   "households": 0.0
+  },
+  "raise_union|person_a": {
+   "adults": 8333038.307052907,
+   "household_members": 17893599.11576413,
+   "households": 5953701.364319792
+  },
+  "raise_union|person_b": {
+   "adults": 1886762.227236358,
+   "household_members": 4219280.4701784775,
+   "households": 1257005.8202403157
+  },
+  "raise_union|person_c_mcm": {
+   "adults": 313107.84145880217,
+   "household_members": 674598.4901152544,
+   "households": 201842.73913875752
+  },
+  "raise_union|person_c_other": {
+   "adults": 389099.234311256,
+   "household_members": 918307.2757962341,
+   "households": 236542.04079874395
+  },
+  "raise_union|person_other": {
+   "adults": 0.0,
+   "household_members": 0.0,
+   "households": 0.0
+  },
+  "raise_union|strict": {
+   "adults": 9259204.11368015,
+   "household_members": 24003303.574607007,
+   "households": 7718817.320682319
+  },
+  "raise_union|strict_after_both_signs": {
+   "adults": 23837979.958295695,
+   "household_members": 23837979.958295695,
+   "households": 7641772.974088942
+  },
+  "raise_union|strict_after_counterfactual": {
+   "adults": 23807585.344178252,
+   "household_members": 23807585.344178252,
+   "households": 7631641.440181469
+  }
+ },
+ "modal": {
+  "app": "us-cliffs-2017-coverage-split",
+  "parts": [
+   {
+    "app_id": null,
+    "part": 0,
+    "runtime": {
+     "historical_loader": {
+      "aggregation": "MicroSeries methods; household weights mapped internally",
+      "experiment": "frozen-historical-2017",
+      "managed_bundle": false,
+      "managed_loader_limitation": "policyengine 6.17.2 rejects the historical model 2.116.0 during country import, before allow_unmanaged can select a custom dataset",
+      "policy": "2017 federal rules, model's 2018 Medicaid/CHIP limits, later state rules",
+      "policyengine_wrapper_attempted": "6.17.2",
+      "policyengine_wrapper_installed": null,
+      "population": "2024 microdata scaled to 2017 size, incomes and prices",
+      "source_dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+      "versions": {
+       "huggingface-hub": "2.4.0",
+       "microdf-python": "1.5.12",
+       "numpy": "2.5.4",
+       "pandas": "3.1.1",
+       "policyengine-core": "3.34.10",
+       "policyengine-us": "2.116.0",
+       "spm-calculator": "1.1.0",
+       "tables": "3.11.1"
+      }
+     },
+     "peak_memory_gib": 2.479,
+     "seconds": 67.9
+    },
+    "union_reproduction": {
+     "combined": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     },
+     "combined_1000": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     },
+     "job": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     },
+     "raise_union": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     }
+    }
+   },
+   {
+    "app_id": null,
+    "part": 1,
+    "runtime": {
+     "historical_loader": {
+      "aggregation": "MicroSeries methods; household weights mapped internally",
+      "experiment": "frozen-historical-2017",
+      "managed_bundle": false,
+      "managed_loader_limitation": "policyengine 6.17.2 rejects the historical model 2.116.0 during country import, before allow_unmanaged can select a custom dataset",
+      "policy": "2017 federal rules, model's 2018 Medicaid/CHIP limits, later state rules",
+      "policyengine_wrapper_attempted": "6.17.2",
+      "policyengine_wrapper_installed": null,
+      "population": "2024 microdata scaled to 2017 size, incomes and prices",
+      "source_dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+      "versions": {
+       "huggingface-hub": "2.4.0",
+       "microdf-python": "1.5.12",
+       "numpy": "2.5.4",
+       "pandas": "3.1.1",
+       "policyengine-core": "3.34.10",
+       "policyengine-us": "2.116.0",
+       "spm-calculator": "1.1.0",
+       "tables": "3.11.1"
+      }
+     },
+     "peak_memory_gib": 2.479,
+     "seconds": 113.0
+    },
+    "union_reproduction": {
+     "combined": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     },
+     "combined_1000": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     },
+     "job": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     },
+     "raise_union": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     }
+    }
+   },
+   {
+    "app_id": null,
+    "part": 2,
+    "runtime": {
+     "historical_loader": {
+      "aggregation": "MicroSeries methods; household weights mapped internally",
+      "experiment": "frozen-historical-2017",
+      "managed_bundle": false,
+      "managed_loader_limitation": "policyengine 6.17.2 rejects the historical model 2.116.0 during country import, before allow_unmanaged can select a custom dataset",
+      "policy": "2017 federal rules, model's 2018 Medicaid/CHIP limits, later state rules",
+      "policyengine_wrapper_attempted": "6.17.2",
+      "policyengine_wrapper_installed": null,
+      "population": "2024 microdata scaled to 2017 size, incomes and prices",
+      "source_dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+      "versions": {
+       "huggingface-hub": "2.4.0",
+       "microdf-python": "1.5.12",
+       "numpy": "2.5.4",
+       "pandas": "3.1.1",
+       "policyengine-core": "3.34.10",
+       "policyengine-us": "2.116.0",
+       "spm-calculator": "1.1.0",
+       "tables": "3.11.1"
+      }
+     },
+     "peak_memory_gib": 2.481,
+     "seconds": 121.5
+    },
+    "union_reproduction": {
+     "combined": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     },
+     "combined_1000": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     },
+     "job": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     },
+     "raise_union": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     }
+    }
+   },
+   {
+    "app_id": null,
+    "part": 3,
+    "runtime": {
+     "historical_loader": {
+      "aggregation": "MicroSeries methods; household weights mapped internally",
+      "experiment": "frozen-historical-2017",
+      "managed_bundle": false,
+      "managed_loader_limitation": "policyengine 6.17.2 rejects the historical model 2.116.0 during country import, before allow_unmanaged can select a custom dataset",
+      "policy": "2017 federal rules, model's 2018 Medicaid/CHIP limits, later state rules",
+      "policyengine_wrapper_attempted": "6.17.2",
+      "policyengine_wrapper_installed": null,
+      "population": "2024 microdata scaled to 2017 size, incomes and prices",
+      "source_dataset": "policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+      "versions": {
+       "huggingface-hub": "2.4.0",
+       "microdf-python": "1.5.12",
+       "numpy": "2.5.4",
+       "pandas": "3.1.1",
+       "policyengine-core": "3.34.10",
+       "policyengine-us": "2.116.0",
+       "spm-calculator": "1.1.0",
+       "tables": "3.11.1"
+      }
+     },
+     "peak_memory_gib": 2.477,
+     "seconds": 111.8
+    },
+    "union_reproduction": {
+     "combined": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     },
+     "combined_1000": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     },
+     "job": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     },
+     "raise_union": {
+      "exact": true,
+      "max_abs_gap": 0.0,
+      "pass": true
+     }
+    }
+   }
+  ],
+  "volume": "us-cliffs-2017-coverage-split"
+ },
+ "question": "For people in households a raise or a job would leave worse off with health coverage counted (with_health strict), did public coverage end, move to another program, or only shrink within the same program?",
+ "reproduction": {
+  "scenarios_vs_saved_rows": {
+   "every_scenario_exact_d_with": true,
+   "every_strict_set_equal": true,
+   "max_abs_difference_d_with": 0.0,
+   "max_abs_difference_d_with_strict": 0.0,
+   "max_abs_difference_d_without": 0.0,
+   "scenarios": 46,
+   "tested_adults_compared": 320039
+  },
+  "union_strict_national": {
+   "combined": {
+    "adults": {
+     "exact": true,
+     "ours": 11939458.623356294,
+     "union": 11939458.623356294
+    },
+    "household_members": {
+     "exact": true,
+     "ours": 31909535.352546178,
+     "union": 31909535.352546178
+    },
+    "households": {
+     "exact": true,
+     "ours": 9534451.137743503,
+     "union": 9534451.137743503
+    }
+   },
+   "combined_1000": {
+    "adults": {
+     "exact": true,
+     "ours": 5006719.787635551,
+     "union": 5006719.787635551
+    },
+    "household_members": {
+     "exact": true,
+     "ours": 15970727.130536214,
+     "union": 15970727.130536214
+    },
+    "households": {
+     "exact": true,
+     "ours": 4216913.390355084,
+     "union": 4216913.390355084
+    }
+   },
+   "job": {
+    "adults": {
+     "exact": true,
+     "ours": 2680254.5096761426,
+     "union": 2680254.5096761426
+    },
+    "household_members": {
+     "exact": true,
+     "ours": 10775584.957855053,
+     "union": 10775584.957855053
+    },
+    "households": {
+     "exact": true,
+     "ours": 2494780.9182830467,
+     "union": 2494780.9182830467
+    }
+   },
+   "raise_union": {
+    "adults": {
+     "exact": true,
+     "ours": 9259204.11368015,
+     "union": 9259204.11368015
+    },
+    "household_members": {
+     "exact": true,
+     "ours": 24003303.574607007,
+     "union": 24003303.574607007
+    },
+    "households": {
+     "exact": true,
+     "ours": 7718817.320682319,
+     "union": 7718817.320682319
+    }
+   }
+  },
+  "union_strict_parts": [
+   {
+    "combined": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    },
+    "combined_1000": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    },
+    "job": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    },
+    "raise_union": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    }
+   },
+   {
+    "combined": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    },
+    "combined_1000": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    },
+    "job": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    },
+    "raise_union": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    }
+   },
+   {
+    "combined": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    },
+    "combined_1000": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    },
+    "job": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    },
+    "raise_union": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    }
+   },
+   {
+    "combined": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    },
+    "combined_1000": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    },
+    "job": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    },
+    "raise_union": {
+     "exact": true,
+     "max_abs_gap": 0.0,
+     "pass": true
+    }
+   }
+  ]
+ },
+ "sample_tallies_by_scenario": {
+  "job|rank_01": {
+   "c_mcm_by_state": {
+    "CO": 1,
+    "NM": 1,
+    "NV": 1,
+    "NY": 20
+   },
+   "categories": {
+    "any_a": 979,
+    "b_no_a": 94,
+    "no_fall": 18,
+    "only_c_mcm": 0,
+    "only_c_other": 1,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 2212,
+    "b": 560,
+    "c_mcm": 23,
+    "c_other": 60,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 1092,
+   "strict_households": 1092,
+   "transitions": {
+    "chip>chip": 4,
+    "chip>none": 35,
+    "chip>ptc": 3,
+    "medicaid>chip": 501,
+    "medicaid>medicaid": 20,
+    "medicaid>msp": 9,
+    "medicaid>none": 2149,
+    "medicaid>ptc": 47,
+    "msp>msp": 3,
+    "msp>none": 9,
+    "ptc>none": 19,
+    "ptc>ptc": 56
+   }
+  },
+  "job|rank_02": {
+   "c_mcm_by_state": {
+    "NY": 3
+   },
+   "categories": {
+    "any_a": 85,
+    "b_no_a": 5,
+    "no_fall": 0,
+    "only_c_mcm": 0,
+    "only_c_other": 0,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 204,
+    "b": 30,
+    "c_mcm": 3,
+    "c_other": 2,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 90,
+   "strict_households": 90,
+   "transitions": {
+    "chip>none": 7,
+    "chip>ptc": 3,
+    "medicaid>chip": 26,
+    "medicaid>medicaid": 3,
+    "medicaid>msp": 1,
+    "medicaid>none": 197,
+    "ptc>ptc": 2
+   }
+  },
+  "job|rank_03": {
+   "c_mcm_by_state": {},
+   "categories": {
+    "any_a": 9,
+    "b_no_a": 0,
+    "no_fall": 1,
+    "only_c_mcm": 0,
+    "only_c_other": 0,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 26,
+    "b": 1,
+    "c_mcm": 0,
+    "c_other": 0,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 10,
+   "strict_households": 10,
+   "transitions": {
+    "medicaid>chip": 1,
+    "medicaid>none": 26
+   }
+  },
+  "job|rank_04": {
+   "c_mcm_by_state": {},
+   "categories": {
+    "any_a": 2,
+    "b_no_a": 0,
+    "no_fall": 0,
+    "only_c_mcm": 0,
+    "only_c_other": 0,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 4,
+    "b": 0,
+    "c_mcm": 0,
+    "c_other": 0,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 2,
+   "strict_households": 2,
+   "transitions": {
+    "medicaid>none": 4
+   }
+  },
+  "job|rank_05": {
+   "c_mcm_by_state": {},
+   "categories": {
+    "any_a": 1,
+    "b_no_a": 0,
+    "no_fall": 0,
+    "only_c_mcm": 0,
+    "only_c_other": 0,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 2,
+    "b": 0,
+    "c_mcm": 0,
+    "c_other": 0,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 1,
+   "strict_households": 1,
+   "transitions": {
+    "medicaid>none": 2
+   }
+  },
+  "job|rank_06": {
+   "c_mcm_by_state": {},
+   "categories": {
+    "any_a": 0,
+    "b_no_a": 0,
+    "no_fall": 0,
+    "only_c_mcm": 0,
+    "only_c_other": 0,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 0,
+    "b": 0,
+    "c_mcm": 0,
+    "c_other": 0,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 0,
+   "strict_households": 0,
+   "transitions": {}
+  },
+  "job|rank_07": {
+   "c_mcm_by_state": {},
+   "categories": {
+    "any_a": 0,
+    "b_no_a": 0,
+    "no_fall": 0,
+    "only_c_mcm": 0,
+    "only_c_other": 0,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 0,
+    "b": 0,
+    "c_mcm": 0,
+    "c_other": 0,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 0,
+   "strict_households": 0,
+   "transitions": {}
+  },
+  "job|rank_08": {
+   "c_mcm_by_state": {},
+   "categories": {
+    "any_a": 0,
+    "b_no_a": 0,
+    "no_fall": 0,
+    "only_c_mcm": 0,
+    "only_c_other": 0,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 0,
+    "b": 0,
+    "c_mcm": 0,
+    "c_other": 0,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 0,
+   "strict_households": 0,
+   "transitions": {}
+  },
+  "raise_1000|rank_01": {
+   "c_mcm_by_state": {
+    "CO": 2,
+    "DE": 1,
+    "FL": 2,
+    "GA": 1,
+    "ND": 1,
+    "NM": 2,
+    "NY": 17,
+    "OH": 2,
+    "VA": 1,
+    "WA": 1
+   },
+   "categories": {
+    "any_a": 478,
+    "b_no_a": 126,
+    "no_fall": 175,
+    "only_c_mcm": 11,
+    "only_c_other": 27,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 700,
+    "b": 211,
+    "c_mcm": 30,
+    "c_other": 98,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 806,
+   "strict_households": 817,
+   "transitions": {
+    "chip>chip": 10,
+    "chip>none": 31,
+    "chip>ptc": 1,
+    "medicaid>chip": 141,
+    "medicaid>medicaid": 17,
+    "medicaid>msp": 13,
+    "medicaid>none": 623,
+    "medicaid>ptc": 56,
+    "msp>msp": 13,
+    "msp>none": 14,
+    "ptc>none": 32,
+    "ptc>ptc": 88
+   }
+  },
+  "raise_1000|rank_02": {
+   "c_mcm_by_state": {
+    "GA": 3,
+    "KS": 2,
+    "MN": 1,
+    "NM": 2,
+    "NY": 4
+   },
+   "categories": {
+    "any_a": 249,
+    "b_no_a": 60,
+    "no_fall": 77,
+    "only_c_mcm": 6,
+    "only_c_other": 9,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 362,
+    "b": 90,
+    "c_mcm": 12,
+    "c_other": 38,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 395,
+   "strict_households": 401,
+   "transitions": {
+    "chip>chip": 2,
+    "chip>none": 28,
+    "chip>ptc": 1,
+    "medicaid>chip": 56,
+    "medicaid>medicaid": 4,
+    "medicaid>msp": 5,
+    "medicaid>none": 313,
+    "medicaid>ptc": 28,
+    "msp>msp": 8,
+    "msp>none": 3,
+    "ptc>none": 18,
+    "ptc>ptc": 36
+   }
+  },
+  "raise_2000|rank_01": {
+   "c_mcm_by_state": {
+    "CO": 4,
+    "DE": 1,
+    "FL": 4,
+    "GA": 2,
+    "ID": 2,
+    "MO": 2,
+    "MS": 1,
+    "ND": 1,
+    "NJ": 1,
+    "NM": 2,
+    "NY": 32,
+    "OH": 2,
+    "OR": 1,
+    "TX": 1,
+    "VA": 2,
+    "WA": 1,
+    "WV": 1
+   },
+   "categories": {
+    "any_a": 818,
+    "b_no_a": 211,
+    "no_fall": 190,
+    "only_c_mcm": 23,
+    "only_c_other": 31,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 1203,
+    "b": 351,
+    "c_mcm": 60,
+    "c_other": 126,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 1250,
+   "strict_households": 1273,
+   "transitions": {
+    "chip>chip": 15,
+    "chip>none": 49,
+    "chip>ptc": 7,
+    "medicaid>chip": 234,
+    "medicaid>medicaid": 32,
+    "medicaid>msp": 29,
+    "medicaid>none": 1065,
+    "medicaid>ptc": 81,
+    "msp>msp": 28,
+    "msp>none": 31,
+    "ptc>none": 58,
+    "ptc>ptc": 111
+   }
+  },
+  "raise_2000|rank_02": {
+   "c_mcm_by_state": {
+    "FL": 1,
+    "GA": 3,
+    "KS": 2,
+    "MN": 1,
+    "NM": 2,
+    "NY": 8,
+    "VA": 1,
+    "WI": 2
+   },
+   "categories": {
+    "any_a": 439,
+    "b_no_a": 93,
+    "no_fall": 85,
+    "only_c_mcm": 11,
+    "only_c_other": 12,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 634,
+    "b": 147,
+    "c_mcm": 20,
+    "c_other": 49,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 629,
+   "strict_households": 640,
+   "transitions": {
+    "chip>chip": 7,
+    "chip>none": 41,
+    "chip>ptc": 3,
+    "medicaid>chip": 89,
+    "medicaid>medicaid": 6,
+    "medicaid>msp": 12,
+    "medicaid>none": 556,
+    "medicaid>ptc": 43,
+    "msp>msp": 14,
+    "msp>none": 6,
+    "ptc>none": 31,
+    "ptc>ptc": 42
+   }
+  },
+  "raise_5000|rank_01": {
+   "c_mcm_by_state": {
+    "AZ": 1,
+    "CO": 2,
+    "FL": 2,
+    "GA": 2,
+    "IA": 2,
+    "ID": 2,
+    "LA": 2,
+    "ME": 1,
+    "MO": 2,
+    "NH": 2,
+    "NJ": 2,
+    "NM": 6,
+    "NV": 1,
+    "NY": 57,
+    "OH": 1,
+    "OK": 1,
+    "SD": 2,
+    "WA": 3,
+    "WV": 2
+   },
+   "categories": {
+    "any_a": 1770,
+    "b_no_a": 359,
+    "no_fall": 56,
+    "only_c_mcm": 16,
+    "only_c_other": 4,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 2737,
+    "b": 707,
+    "c_mcm": 93,
+    "c_other": 152,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 2188,
+   "strict_households": 2205,
+   "transitions": {
+    "chip>chip": 17,
+    "chip>none": 94,
+    "chip>ptc": 7,
+    "medicaid>chip": 506,
+    "medicaid>medicaid": 57,
+    "medicaid>msp": 69,
+    "medicaid>none": 2537,
+    "medicaid>ptc": 125,
+    "msp>msp": 36,
+    "msp>none": 5,
+    "ptc>none": 101,
+    "ptc>ptc": 135
+   }
+  },
+  "raise_5000|rank_02": {
+   "c_mcm_by_state": {
+    "CO": 1,
+    "CT": 1,
+    "DE": 1,
+    "GA": 2,
+    "IA": 2,
+    "NM": 2,
+    "NY": 22,
+    "WI": 2
+   },
+   "categories": {
+    "any_a": 1102,
+    "b_no_a": 144,
+    "no_fall": 22,
+    "only_c_mcm": 5,
+    "only_c_other": 1,
+    "other_only": 0
+   },
+   "fallers_by_bucket": {
+    "a": 1559,
+    "b": 268,
+    "c_mcm": 33,
+    "c_other": 60,
+    "other": 0
+   },
+   "ptc_share_fallbacks": 0,
+   "strict_after_counterfactual": 1269,
+   "strict_households": 1274,
+   "transitions": {
+    "chip>chip": 3,
+    "chip>none": 61,
+    "chip>ptc": 3,
+    "medicaid>chip": 172,
+    "medicaid>medicaid": 21,
+    "medicaid>msp": 35,
+    "medicaid>none": 1446,
+    "medicaid>ptc": 58,
+    "msp>msp": 12,
+    "ptc>none": 52,
+    "ptc>ptc": 57
+   }
+  }
+ },
+ "status": "complete_unreviewed",
+ "totals": {
+  "combined": {
+   "any_a": 25347358.671650507,
+   "b_no_a": 3990595.7095356793,
+   "households": {
+    "any_a": 7704062.034029558,
+    "b_no_a": 1137106.2871750635,
+    "no_fall": 526462.054840694,
+    "only_c": 166820.76169818672,
+    "only_c_mcm": 87175.87215152424,
+    "only_c_other": 79644.88954666248,
+    "other_only": 0.0,
+    "strict": 9534451.137743503,
+    "strict_after_both_signs": 9457406.801084895,
+    "strict_after_counterfactual": 9447275.265591979
+   },
+   "no_health_fall": 2086246.8932803036,
+   "only_c": 485334.0780796864,
+   "only_c_mcm": 195718.18868212384,
+   "only_c_other": 289615.88939756254,
+   "other_only": 0.0,
+   "people_by_bucket": {
+    "a": {
+     "sample_people": 5386,
+     "weighted_members_of_their_households": 25347358.671650507,
+     "weighted_people": 12404564.682345249
+    },
+    "b": {
+     "sample_people": 1296,
+     "weighted_members_of_their_households": 6197279.034974856,
+     "weighted_people": 2722912.1596478727
+    },
+    "c_mcm": {
+     "sample_people": 137,
+     "weighted_members_of_their_households": 510388.62443763175,
+     "weighted_people": 279950.230988146
+    },
+    "c_other": {
+     "sample_people": 265,
+     "weighted_members_of_their_households": 962171.8437780875,
+     "weighted_people": 411030.00339423044
+    },
+    "other": {
+     "sample_people": 0,
+     "weighted_members_of_their_households": 0.0,
+     "weighted_people": 0.0
+    }
+   },
+   "sample_households": {
+    "any_a": 3269,
+    "b_no_a": 501,
+    "no_fall": 280,
+    "only_c": 76,
+    "only_c_mcm": 39,
+    "only_c_other": 37,
+    "other_only": 0,
+    "strict": 4126,
+    "strict_after_both_signs": 4095,
+    "strict_after_counterfactual": 4087
+   },
+   "strict": 31909535.352546178,
+   "strict_after_zeroing_all_same_program_mcm_changes": 31744211.784323268,
+   "strict_after_zeroing_c": 31713817.163864054
+  },
+  "combined_1000": {
+   "any_a": 12433036.77944434,
+   "b_no_a": 1912889.95812914,
+   "households": {
+    "any_a": 3312699.646755629,
+    "b_no_a": 465609.5983969117,
+    "no_fall": 356799.11227542,
+    "only_c": 81805.03292712294,
+    "only_c_mcm": 31586.132903073274,
+    "only_c_other": 50218.90002404967,
+    "other_only": 0.0,
+    "strict": 4216913.390355084,
+    "strict_after_both_signs": 4189004.06913039,
+    "strict_after_counterfactual": 4185327.25745201
+   },
+   "no_health_fall": 1389394.9662035229,
+   "only_c": 235405.42675920902,
+   "only_c_mcm": 63175.54452139075,
+   "only_c_other": 172229.88223781827,
+   "other_only": 0.0,
+   "people_by_bucket": {
+    "a": {
+     "sample_people": 3009,
+     "weighted_members_of_their_households": 12433036.77944434,
+     "weighted_people": 6373016.795142466
+    },
+    "b": {
+     "sample_people": 764,
+     "weighted_members_of_their_households": 3472595.982194133,
+     "weighted_people": 1539171.7821281594
+    },
+    "c_mcm": {
+     "sample_people": 63,
+     "weighted_members_of_their_households": 306346.31738882005,
+     "weighted_people": 165567.99423238455
+    },
+    "c_other": {
+     "sample_people": 144,
+     "weighted_members_of_their_households": 444116.2484818796,
+     "weighted_people": 200009.34187473624
+    },
+    "other": {
+     "sample_people": 0,
+     "weighted_members_of_their_households": 0.0,
+     "weighted_people": 0.0
+    }
+   },
+   "sample_households": {
+    "any_a": 1568,
+    "b_no_a": 225,
+    "no_fall": 189,
+    "only_c": 42,
+    "only_c_mcm": 15,
+    "only_c_other": 27,
+    "other_only": 0,
+    "strict": 2024,
+    "strict_after_both_signs": 2014,
+    "strict_after_counterfactual": 2009
+   },
+   "strict": 15970727.130536214,
+   "strict_after_zeroing_all_same_program_mcm_changes": 15920688.720702138,
+   "strict_after_zeroing_c": 15907551.586014822
+  },
+  "job": {
+   "any_a": 9634688.484341335,
+   "b_no_a": 981309.3449817625,
+   "households": {
+    "any_a": 2288426.8812190886,
+    "b_no_a": 174166.63896096218,
+    "no_fall": 32185.97822534747,
+    "only_c": 1.4198776483535767,
+    "only_c_mcm": 0.0,
+    "only_c_other": 1.4198776483535767,
+    "other_only": 0.0,
+    "strict": 2494780.9182830467,
+    "strict_after_both_signs": 2496887.607124349,
+    "strict_after_counterfactual": 2494780.9182830467
+   },
+   "no_health_fall": 159580.02914371295,
+   "only_c": 7.099388241767883,
+   "only_c_mcm": 0.0,
+   "only_c_other": 7.099388241767883,
+   "other_only": 0.0,
+   "people_by_bucket": {
+    "a": {
+     "sample_people": 2267,
+     "weighted_members_of_their_households": 9634688.484341335,
+     "weighted_people": 5130473.741801904
+    },
+    "b": {
+     "sample_people": 571,
+     "weighted_members_of_their_households": 2501118.605114631,
+     "weighted_people": 1120511.1180444497
+    },
+    "c_mcm": {
+     "sample_people": 23,
+     "weighted_members_of_their_households": 97070.67683665175,
+     "weighted_people": 56290.11987230962
+    },
+    "c_other": {
+     "sample_people": 60,
+     "weighted_members_of_their_households": 164785.20138260958,
+     "weighted_people": 69899.87146249376
+    },
+    "other": {
+     "sample_people": 0,
+     "weighted_members_of_their_households": 0.0,
+     "weighted_people": 0.0
+    }
+   },
+   "sample_households": {
+    "any_a": 1008,
+    "b_no_a": 96,
+    "no_fall": 19,
+    "only_c": 1,
+    "only_c_mcm": 0,
+    "only_c_other": 1,
+    "other_only": 0,
+    "strict": 1124,
+    "strict_after_both_signs": 1126,
+    "strict_after_counterfactual": 1124
+   },
+   "strict": 10775584.957855053,
+   "strict_after_zeroing_all_same_program_mcm_changes": 10784011.713220265,
+   "strict_after_zeroing_c": 10775584.957855053
+  },
+  "raise_union": {
+   "any_a": 17893599.11576413,
+   "b_no_a": 3446808.9614108135,
+   "households": {
+    "any_a": 5953701.364319792,
+    "b_no_a": 1056538.1965762351,
+    "no_fall": 541756.9897387796,
+    "only_c": 166820.77004751316,
+    "only_c_mcm": 87175.88050085068,
+    "only_c_other": 79644.88954666248,
+    "other_only": 0.0,
+    "strict": 7718817.320682319,
+    "strict_after_both_signs": 7641772.974088942,
+    "strict_after_counterfactual": 7631641.440181469
+   },
+   "no_health_fall": 2177561.377605746,
+   "only_c": 485334.1198263186,
+   "only_c_mcm": 195718.23042875604,
+   "only_c_other": 289615.88939756254,
+   "other_only": 0.0,
+   "people_by_bucket": {
+    "a": {
+     "sample_people": 3680,
+     "weighted_members_of_their_households": 17893599.11576413,
+     "weighted_people": 8333038.307052907
+    },
+    "b": {
+     "sample_people": 868,
+     "weighted_members_of_their_households": 4219280.4701784775,
+     "weighted_people": 1886762.227236358
+    },
+    "c_mcm": {
+     "sample_people": 132,
+     "weighted_members_of_their_households": 674598.4901152544,
+     "weighted_people": 313107.84145880217
+    },
+    "c_other": {
+     "sample_people": 237,
+     "weighted_members_of_their_households": 918307.2757962341,
+     "weighted_people": 389099.234311256
+    },
+    "other": {
+     "sample_people": 0,
+     "weighted_members_of_their_households": 0.0,
+     "weighted_people": 0.0
+    }
+   },
+   "sample_households": {
+    "any_a": 2533,
+    "b_no_a": 451,
+    "no_fall": 279,
+    "only_c": 77,
+    "only_c_mcm": 40,
+    "only_c_other": 37,
+    "other_only": 0,
+    "strict": 3340,
+    "strict_after_both_signs": 3307,
+    "strict_after_counterfactual": 3300
+   },
+   "strict": 24003303.574607007,
+   "strict_after_zeroing_all_same_program_mcm_changes": 23837979.958295695,
+   "strict_after_zeroing_c": 23807585.344178252
+  }
+ },
+ "union_run": "1c0cc9ddcfd7d876",
+ "year": 2017
+}

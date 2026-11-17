@@ -1,0 +1,7 @@
+/* The canonical pe-doc template supplies the wordmark, fonts and palette. */
+/* Start the bibliography on a fresh page in this long research paper. */
+h2#references { break-before: page; }
+.research-figure { break-inside: avoid; margin: 1rem 0; }
+.research-figure figure { margin: 0; }
+/* Numbered captions above each chart provide the visible figure title. */
+.research-figure figcaption { display: none; }

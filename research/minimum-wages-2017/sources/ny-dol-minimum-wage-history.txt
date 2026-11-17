@@ -1,0 +1,16 @@
+Source: New York State Department of Labor, "History of the Minimum Wage in New York State"
+URL: https://dol.ny.gov/history-minimum-wage-new-york-state
+Accessed: 2026-11-16 (HTTP GET with curl; HTML tags stripped; excerpt of the page's rate history, unedited apart from whitespace)
+Used for: New York rest-of-state (remainder of state) rate, $9.70 from 31 December 2016 and $10.40 from 31 December 2017.
+
+Beginning December 31, 2016, annual increases in the general minimum wage were determined by employment location, industry, and number of employees (in New York City only).
+Basic Minimum Hourly Rates (other than fast food employees)
+New York City: Large employers of 11 or more employees: $11.00 per hour on and after December 31, 2016; $13.00 per hour on and after December 31, 2017; $15.00 per hour on and after December 31, 2018.
+Small employers of 10 or fewer employees: $10.50 per hour on and after December 31, 2016; $12.00 per hour on and after December 31, 2017; $13.50 per hour on and after December 31, 2018; $15.00 per hour on and after December 31, 2019.
+All Employers: $16.00 per hour on and after January 1, 2024; $16.50 per hour on and after January 1, 2025; $17.00 per hour on and after January 1, 2026.
+Long Island, and Westchester counties: $10.00 per hour on and after December 31, 2016; $11.00 per hour on and after December 31, 2017; $12.00 per hour on and after December 31, 2018; $13.00 per hour on and after December 31, 2019; $14.00 per hour on and after December 31, 2020; $15.00 per hour on and after December 31, 2021; $16.00 per hour on and after January 1, 2024; $16.50 per hour on and after January 1, 2025; $17.00 per hour on and after January 1, 2026. 
+Remainder of state (outside of New York City and Nassau, Suffolk, and Westchester counties): $9.70 per hour on and after December 31, 2016; $10.40 per hour on and after December 31, 2017; $11.10 per hour on and after December 31, 2018; $11.80 per hour on and after December 31, 2019; $12.50 per hour on and after December 31, 2020; $13.20 per hour on and after December 31, 2021; $14.20 per hour on and after December 31, 2022; $15.00 per hour on and after January 1, 2024; $15.50 per hour on and after January 1, 2025; $16.00 per hour on and after January 1, 2026.
+
+Minimum Hourly Rates for Fast Food Employees
+New York City: $12.00 per hour on and after December 31, 2016; $13.50 per hour on and after December 31, 2017; $15.00 per hour on and after December 31, 2018; $16.50 per hour on and after January 1, 2025; $17.00 per hour on and after January 1, 2026.
+Outside of New York City: $10.75 per hour on and after December 31, 2016; $11.75 per hour on and after December 31, 2017; $12.75 per hour on and after December 31, 2018; $13.75 per hour on and after December 31, 2019; $14.50 per hour on and after December 31, 2020; $15.00 per hour on and after July 1, 2021; $15.50 per hour on and after January 1, 2025; $16.00 per hour on and after January 1, 2026.

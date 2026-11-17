@@ -1,0 +1,183 @@
+{
+  "audit_date": "2026-11-12",
+  "backdating": {
+    "algorithm": "After processing parameter inputs, the initializer copies each earliest processed leaf value to the interval from 2015-01-01 until that first value. It repeats backdating for parameters newly added or replaced by reforms.",
+    "examples": [
+      {
+        "path": "gov.states.ga.decal.caps.income.smi_rate.initial_eligibility",
+        "processed_earliest": "2015-01-01",
+        "processed_value_2017": 0.5,
+        "processed_value_2025": 0.5,
+        "raw_history": [
+          {
+            "instant": "2026-03-02",
+            "value": 0.5
+          }
+        ],
+        "raw_value_2025": null,
+        "utility_only_2025_value": 0.5
+      },
+      {
+        "path": "gov.ssa.ssi.income.exclusions.child_support_share",
+        "processed_earliest": "2015-01-01",
+        "processed_value_2017": 0.3333333333333333,
+        "processed_value_2025": 0.3333333333333333,
+        "raw_history": [
+          {
+            "instant": "2026-01-01",
+            "value": 0.3333333333333333
+          }
+        ],
+        "raw_value_2025": null
+      },
+      {
+        "path": "gov.states.ca.hbex.premium_subsidy.fpl_limit",
+        "processed_earliest": "2015-01-01",
+        "processed_value_2017": 1.65,
+        "processed_value_2025": 1.65,
+        "raw_history": [
+          {
+            "instant": "2027-01-01",
+            "value": 2.0
+          },
+          {
+            "instant": "2026-01-01",
+            "value": 1.65
+          }
+        ],
+        "raw_value_2025": null
+      },
+      {
+        "path": "gov.states.ri.tax.income.high_earner_tax.threshold",
+        "processed_earliest": "2015-01-01",
+        "processed_value_2017": 1000000,
+        "processed_value_2025": 1000000,
+        "raw_history": [
+          {
+            "instant": "2027-01-01",
+            "value": 1000000
+          }
+        ],
+        "raw_value_2025": null
+      }
+    ],
+    "first_modeled_year": 2015
+  },
+  "bounded_trace_2025": {
+    "controls": [
+      "is_on_cliff",
+      "cliff_gap"
+    ],
+    "counts": {
+      "all_leaves_after_dec2025": 129,
+      "any_leaf_after_dec2025": 139,
+      "any_leaf_after_jan2025": 189,
+      "raw_parameters": 3760,
+      "reads_after_dec2025": [],
+      "sample_households": 102,
+      "sample_people": 286,
+      "states": 51,
+      "traced_parameters": 7806
+    },
+    "definition": "Parameter metadata from actual reads. Any-leaf-after-January includes within-2025 starts; any-leaf-after-December identifies raw histories unavailable throughout 2025.",
+    "portable_adapter_model_rerun": false,
+    "sample": {
+      "households": 102,
+      "households_per_jurisdiction_max": 2,
+      "people": 286,
+      "seed": 0,
+      "state_dc_jurisdictions": 51
+    },
+    "scenario": {
+      "aca_before_2018": false,
+      "base_dataset_year": 2024,
+      "core": "3.34.10",
+      "fixed_medicaid_totals_sha256": "a4ffd77bec582f1f3ab11032b1fab419878c37fbdf89a10314a65dbfa65b787d",
+      "health": true,
+      "leave_out_csfp": true,
+      "model": "2.116.0",
+      "simulation_end_year": 2025,
+      "wic_mapping": {
+        "would_claim_wic": "takes_up_wic_if_eligible"
+      }
+    },
+    "source_dataset": {
+      "filename": "populace_us_2024.h5",
+      "repository": "policyengine/populace-us",
+      "repository_type": "dataset",
+      "revision": "9a814a3b3b53c0ecd6e1737b6ec862c31300ef6f",
+      "sha256": "6496cc4393d4d3c6574f76eca231de5898c803b9067645591fd5c4d3e65aee84"
+    },
+    "tracing_controls_equal": true
+  },
+  "gate_checks": [
+    {
+      "2025_behavior": "in_effect is false; benefit requires eligibility.",
+      "interpretation": "Future-start income limits read in 2025 do not establish positive 2025 benefits.",
+      "program": "California premium subsidy"
+    },
+    {
+      "2025_behavior": "in_effect is false; benefit returns zero for ineligible units.",
+      "interpretation": "Future-start benefit amounts read in 2025 do not establish positive 2025 benefits.",
+      "program": "Colorado premium assistance"
+    },
+    {
+      "2025_behavior": "Backfilled rate is zero; excess income above threshold is multiplied by zero.",
+      "interpretation": "Future-start threshold does not produce a 2025 surtax.",
+      "program": "Rhode Island high-income surtax"
+    },
+    {
+      "2025_behavior": "Six raw entries beginning 2026-03-02 read monthly in 2025 through undated eligibility formulas; benefit also requires eligible children, income/assets/activity conditions, and positive net childcare expenses.",
+      "interpretation": "Concrete backfilled source-rule path; positive sample benefits, different correct 2025 values, and material national effect were not established.",
+      "program": "Georgia CAPS"
+    }
+  ],
+  "kind": "Parameter-history and tracing metadata; no population findings",
+  "limits": [
+    "Counts measure traced parameter nodes, not laws, programs, incorrect outcomes, or households affected.",
+    "First raw history date does not establish enactment, a policy change, or an incorrect historical value.",
+    "Backdating fills missing histories; it does not reconstruct historical law.",
+    "Scale leaves or whole programs can be inactive despite parameter reads.",
+    "This bounded trace is not exhaustive statutory validation, an administrative benefit benchmark, or a national sensitivity run.",
+    "No explicit post-2025 read occurred in the bounded trace; unvisited paths remain unaudited.",
+    "The 2017 and 2025 traces use different sample sizes and scenario construction, so count differences do not measure comparative accuracy.",
+    "No actual 2025 output error or its materiality was demonstrated.",
+    "No survey records, IDs, weights, population totals, or private paths are included."
+  ],
+  "recount_2017": {
+    "childcare_classifier": "gov.states prefix and ccap|ccdf|ccsp|child_care|childcare substring; not exhaustive program coverage.",
+    "counts": {
+      "federal": {
+        "all": 752,
+        "later": 208
+      },
+      "later": 2426,
+      "later_fixed_reads": 22,
+      "local": {
+        "all": 61,
+        "later": 48
+      },
+      "raw_parameters": 4155,
+      "source_csv_sha256": "2742f2e9b170ed6c445cdb9b97d7f97c20e59630cba35cf6410960d25824853b",
+      "state": {
+        "all": 3336,
+        "later": 2167
+      },
+      "state_childcare": {
+        "all": 536,
+        "later": 491
+      },
+      "state_tax": {
+        "all": 1571,
+        "later": 1080
+      },
+      "state_tax_later_first2021": 841
+    },
+    "cutoff": "2017-01-01",
+    "definition": "Raw-file traced parameter node with any leaf first starting after the cutoff. A scale may contain several leaves.",
+    "sample_note": "Archived CSV lacks invocation arguments; no original sample-size claim is made here.",
+    "sample_size_verified": false,
+    "source": "results/parameters_read_2017.csv"
+  },
+  "schema_version": 1
+}

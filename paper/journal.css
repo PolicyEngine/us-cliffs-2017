@@ -1,0 +1,8 @@
+@page { margin: 1.5in; }
+body { font-family: "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; max-width: 7in; margin: 1in auto; color: #000; }
+h1, h2, h3 { font-size: 12pt; }
+table { font-family: Arial, sans-serif; font-size: 10pt; border-collapse: collapse; width: 100%; margin: 1em 0; }
+th, td { padding: .25em .35em; vertical-align: middle; }
+th { border-bottom: 1px solid #000; }
+blockquote { margin: 1em 0; text-align: center; }
+a { color: #000; }
