@@ -50,9 +50,11 @@ SKIP = {".venv", "logs", "__pycache__", ".hypothesis", ".pytest_cache", "per_per
 MEMORY_MIB = 32768
 CPU = 2.0
 DEFAULTS = {
-    "job_root": "/Users/maxghenis/reviews/bootstraps-cliffs-2017-2026-11-09/expanded-analysis",
-    "raise_rows_root": "/Users/maxghenis/PolicyEngine/us-cliffs-2017",
-    "union_root": "/Users/maxghenis/reviews/bootstraps-cliffs-2017-2026-11-09/expanded-union",
+    # Where the frozen experiment's rows live. Each defaults to this checkout;
+    # set CLIFFS_JOB_ROOT, CLIFFS_RAISE_ROWS_ROOT or CLIFFS_UNION_ROOT to point elsewhere.
+    "job_root": os.environ.get("CLIFFS_JOB_ROOT", str(ROOT)),
+    "raise_rows_root": os.environ.get("CLIFFS_RAISE_ROWS_ROOT", str(ROOT)),
+    "union_root": os.environ.get("CLIFFS_UNION_ROOT", str(ROOT)),
 }
 
 
