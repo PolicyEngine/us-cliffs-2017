@@ -26,7 +26,6 @@ from .commissioned import (
     _resources,
     _series,
 )
-from .native_materializer import input_digest
 
 SCHEMA = "native-health-pilot-v1"
 RAISE_REAL = 1000
@@ -66,6 +65,15 @@ def _sha(path):
         for block in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def _admitted_document(record):
+    """Authenticate configuration bytes before decoding nullable metadata."""
+    raw = Path(record["path"]).read_bytes()
+    digest = hashlib.sha256(raw).hexdigest()
+    if digest != record["sha256"]:
+        raise PilotError("Admitted source/config bytes changed")
+    return json.loads(raw), digest
 
 
 def _number(value):
@@ -261,13 +269,11 @@ def assemble_and_run(config, output, events):
     from .native_runtime import NativeInputs, load_maintained_tools, make_native_runtime
 
     def document(key):
-        record = config["files"][key]
-        if _sha(record["path"]) != record["sha256"]:
-            raise PilotError("Admitted source/config bytes changed")
-        return json.loads(Path(record["path"]).read_text())
+        return _admitted_document(config["files"][key])[0]
 
     events("runtime_and_contract")
-    declaration, metadata = document("input_contract"), document("input_metadata")
+    declaration, contract_sha = _admitted_document(config["files"]["input_contract"])
+    metadata = document("input_metadata")
     contract, specs, registry = build_managed_input_contract(
         declaration, actual_metadata=metadata
     )
@@ -302,6 +308,7 @@ def assemble_and_run(config, output, events):
 
     def capture_reference(sim):
         reference.capture_reference(sim)
+        events("reference_health_captured")
 
     events("reference_preparation_and_health_capture")
     values, fixed_facts, receipt = prepare_reference_once(
@@ -317,6 +324,7 @@ def assemble_and_run(config, output, events):
         observe_context=audit.observe_reference,
         capture_reference=capture_reference,
     )
+    events("reference_inputs_collected")
     price_basis = document("price_basis")
     if price_basis["index_by_year"] != {"2017": "245.120", "2025": "321.943"}:
         raise PilotError("Published currency inputs differ")
@@ -326,7 +334,7 @@ def assemble_and_run(config, output, events):
             for year, value in price_basis["index_by_year"].items()
         }
     )
-    contract_sha = input_digest(declaration)
+    events("native_input_compilation")
     plan = compile_native_plan(
         values,
         contract=contract,

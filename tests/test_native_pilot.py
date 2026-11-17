@@ -1,6 +1,7 @@
 """Deliberate weighted doubles only; no engine, source data or policy result."""
 
 from dataclasses import replace
+from hashlib import sha256
 from types import SimpleNamespace
 
 import pytest
@@ -8,6 +9,7 @@ import pytest
 from cliffs2017.native_pilot import (
     FCC_PATHS,
     PilotError,
+    _admitted_document,
     make_fcc_2017_reform,
     run_raise_pilot,
 )
@@ -161,3 +163,21 @@ def test_pilot_does_not_call_job_wage_provider():
         runtime, fixture.audit_object(), events=lambda stage: None
     )
     assert result["status"] == "engineering_controls_passed"
+
+
+def test_admitted_metadata_nulls_bind_raw_bytes_and_never_allow_missing_facts(tmp_path):
+    from cliffs2017.native_materializer import MaterializationError, input_digest
+
+    raw = b'{"calendar_scope": null, "source_dtype": null}\n'
+    path = tmp_path / "admitted-contract-metadata.json"
+    path.write_bytes(raw)
+    record = {"path": str(path), "sha256": sha256(raw).hexdigest()}
+    declaration, contract_sha = _admitted_document(record)
+    assert declaration == {"calendar_scope": None, "source_dtype": None}
+    assert contract_sha == record["sha256"]
+    with pytest.raises(MaterializationError, match="Missing/nonfinite input facts"):
+        input_digest({"annual_income": None})
+    # Even semantically equivalent JSON must keep the admitted byte identity.
+    path.write_bytes(raw + b"\n")
+    with pytest.raises(PilotError, match="Admitted source/config bytes changed"):
+        _admitted_document(record)
