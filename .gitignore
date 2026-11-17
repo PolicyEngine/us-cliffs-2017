@@ -31,3 +31,6 @@ paper/submission/manuscript.docx
 
 # Combined-union part results and per-source-household totals (record-level).
 results/combined_union/
+
+# Coverage split scenario rows, classified flags and aggregate part records (record-level).
+results/coverage_split/
