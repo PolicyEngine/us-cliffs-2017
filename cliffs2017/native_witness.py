@@ -26,6 +26,7 @@ CONTEXT_DIGESTS = (
     "price_basis_sha256",
     "component_ledger_sha256",
 )
+_UNSET = object()
 
 
 class WitnessError(ValueError):
@@ -86,12 +87,19 @@ class VariableExpectation:
     value_type: type = float
     adds: object = None
     subtracts: object = None
+    defined_for: object = _UNSET
 
     def __post_init__(self):
         if not self.name or not self.period or not self.entity:
             raise WitnessError("Declare the variable, period and entity")
         if self.formula is not None and not callable(self.formula):
             raise WitnessError("Expected formula must be the actual function object")
+        if (
+            self.defined_for is not _UNSET
+            and self.defined_for is not None
+            and not isinstance(self.defined_for, str)
+        ):
+            raise WitnessError("Declare a variable enrollment mask or explicit None")
         object.__setattr__(self, "adds", _composition(self.adds))
         object.__setattr__(self, "subtracts", _composition(self.subtracts))
 
@@ -214,6 +222,10 @@ class LiveContextWitness:
                 or _composition(variable.adds) != item.adds
                 or _composition(variable.subtracts) != item.subtracts
                 or variable.is_neutralized
+                or (
+                    item.defined_for is not _UNSET
+                    and getattr(variable, "defined_for", _UNSET) != item.defined_for
+                )
             ):
                 raise WitnessError("An admitted variable definition changed")
         for path, instant, expected in self.parameters:

@@ -76,6 +76,8 @@ with TemporaryDirectory(prefix="cliffs-pure-tests-") as cache:
             "tests/test_native_materializer.py",
             "tests/test_native_witness.py",
             "tests/test_wage_benchmark.py",
+            "tests/test_health_valuation.py",
+            "tests/test_native_runtime.py",
         ]
     )
     _check_loaded_modules()

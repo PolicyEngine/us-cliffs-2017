@@ -337,3 +337,38 @@ def test_fake_wrong_irmaa_period_cannot_become_a_frozen_history_exception():
     irmaa = next(x for x in options["fixed_inputs"] if x.purpose == "frozen_irmaa")
     with pytest.raises(witness.WitnessError, match="benefit-year2017"):
         replace(irmaa, period="2015")
+
+
+def test_fake_explicit_health_masks_refuse_changes_while_omitted_expectations_keep_compatibility():
+    sim = FakeSimulation()
+    context, options = configuration(sim)
+    unit = sim.tax_benefit_system.variables["FAKE_HEALTH_UNIT"]
+    unit.defined_for = None
+    value = FakeVariable(formula=fake_price_formula)
+    value.defined_for = "medicaid_enrolled"
+    sim.tax_benefit_system.variables["FAKE_HEALTH_VALUE"] = value
+    options["variables"] += (
+        witness.VariableExpectation(
+            "FAKE_HEALTH_UNIT", "2017", None, "household", "year", defined_for=None
+        ),
+        witness.VariableExpectation(
+            "FAKE_HEALTH_VALUE",
+            "2017",
+            fake_price_formula,
+            "household",
+            "year",
+            defined_for="medicaid_enrolled",
+        ),
+    )
+    observe = witness.LiveContextWitness(context, **options)
+    assert observe(sim) == context
+    # Supplying no mask expectation in the original configuration remains valid.
+    for variable, changed, restored in (
+        (unit, "chip_enrolled", None),
+        (value, "medicare_enrolled", "medicaid_enrolled"),
+    ):
+        variable.defined_for = changed
+        with pytest.raises(witness.WitnessError, match="definition changed"):
+            observe(sim)
+        variable.defined_for = restored
+        assert observe(sim) == context
