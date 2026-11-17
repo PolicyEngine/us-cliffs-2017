@@ -1,4 +1,4 @@
-"""Run the synthetic currency tests while refusing PolicyEngine imports."""
+"""Run synthetic counterfactual tests while refusing real PolicyEngine imports."""
 
 import importlib.abc
 import importlib.metadata
@@ -70,6 +70,8 @@ with TemporaryDirectory(prefix="cliffs-pure-tests-") as cache:
             "no:cacheprovider",
             "tests/test_native_currency.py",
             "tests/test_native_periods.py",
+            "tests/test_commissioned.py",
+            "tests/test_resource_accounts_fake.py",
         ]
     )
     _check_loaded_modules()
