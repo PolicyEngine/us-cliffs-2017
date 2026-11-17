@@ -64,7 +64,13 @@ with TemporaryDirectory(prefix="cliffs-pure-tests-") as cache:
         "ISOLATED_PURE_RUNTIME", sys.version.split()[0], expected_versions, flush=True
     )
     result = pytest.main(
-        ["-q", "-p", "no:cacheprovider", "tests/test_native_currency.py"]
+        [
+            "-q",
+            "-p",
+            "no:cacheprovider",
+            "tests/test_native_currency.py",
+            "tests/test_native_periods.py",
+        ]
     )
     _check_loaded_modules()
     print("COUNTRY_CORE_IMPORT_BLOCK_ENFORCED", flush=True)
