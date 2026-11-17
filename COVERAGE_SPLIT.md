@@ -32,18 +32,21 @@ the strict count.
   larger CHIP premium (`only_c_other`), and 195,718 through a smaller Medicaid, CHIP or
   MSP value (`only_c_mcm`).
 - **The counterfactual removes 0.6%.** Adding back the Medicaid/CHIP/MSP change of every
-  bucket (c) person takes the combined count from 31,909,535 to 31,713,817. It removes
-  exactly the `only_c_mcm` households in every set: 195,718 from the raise union, 63,176
-  from combined with the $1,000 raise, and none from the job test.
-- **Where within-program values fall.** Among strict scenarios, 274 sample people lose
-  Medicaid, CHIP or MSP value within the same program (`c_mcm`):
-  - 160 keep Medicaid, all in New York, where the family-tier share changes when the
-    number of enrollees in the tax unit changes;
-  - 114 keep MSP but drop from a full year of QMB to SLMB (113) or QI (1), which cuts
-    `msp_cost` from $4,071.80 to $1,608.00 a year.
+  bucket (c) person takes the combined count from 31,909,535 to 31,713,817. Checked
+  household by household, it removes exactly the `only_c_mcm` households in every set:
+  195,718 from the raise union, 63,176 from combined with the $1,000 raise, and none from
+  the job test.
+- **Where within-program values fall.** Summed over the 46 scenarios, strict households
+  hold 274 sample person-scenarios that lose Medicaid, CHIP or MSP value within the same
+  program (`c_mcm`):
+  - in 160, the person keeps Medicaid, all in New York, where the family-tier share
+    changes when the number of enrollees in the tax unit changes;
+  - in 114, the person keeps MSP but drops from a full year of QMB to SLMB (113) or QI
+    (1), which cuts `msp_cost` from $4,071.80 to $1,608.00 a year.
 
-  No Medicaid enrollee outside a family-tier state changes value, as the cost formula
-  implies.
+  Across all 21,653 person rows enrolled in Medicaid both before and after, in strict and
+  non-strict households, no enrollee outside New York or Vermont (the family-tier states)
+  changes value, as the cost formula implies.
 - **People by bucket (combined, weighted people).** Each person takes the worst bucket
   over the set's strict scenarios:
   - a: 12,404,565 (5,386 sample people);
@@ -56,13 +59,17 @@ the strict count.
 - **Sensitivity.** Adding back every same-program Medicaid/CHIP/MSP change in either
   direction, in every tested household, gives 31,744,212 combined. That is more than the
   primary counterfactual, because within-program gains (a New York enrollee's share rises
-  when a relative leaves Medicaid) are also removed. For the job test it gives
-  10,784,012, above the strict count: two sample households that were not strict become
-  strict once their gains are removed.
+  when a relative leaves Medicaid) are also removed. In every set it drops exactly the
+  `only_c_mcm` households and adds a few that were not strict but become strict once
+  their gains are removed (sample households: job 2, raise union 7, combined 8, combined
+  with the $1,000 raise 5). For the job test it gives 10,784,012, above the strict
+  count.
 
-"Coverage ends" means the person holds no public program after the change. The model
-assigns no value to employer coverage or unsubsidized marketplace coverage, so this
-analysis cannot say whether the person becomes uninsured.
+"Coverage ends" means the person holds no public program after the change. The
+with-health measure counts no employer coverage, unsubsidized marketplace coverage or
+Medicare (none is in `household_health_benefits`), so
+this analysis cannot say whether the person becomes uninsured. People who leave MSP, and
+aged or disabled people who leave Medicaid, keep Medicare.
 
 ## Variables (policyengine-us 2.116.0)
 
