@@ -149,6 +149,7 @@ def prepare_reference_once(
     archival_inputs,
     expected_context,
     observe_context,
+    capture_reference=None,
 ):
     """Use one managed2024→2025 preparation, then read only admitted raw fields.
 
@@ -157,6 +158,8 @@ def prepare_reference_once(
     proof and never interprets all sim.input_variables as approved raw inputs.
     """
     source_path = Path(source_path)
+    if capture_reference is not None and not callable(capture_reference):
+        raise MaterializationError("Reference capture must be an explicit callable")
     if (
         not isinstance(contract, InputContract)
         or not source_path.is_absolute()
@@ -215,6 +218,8 @@ def prepare_reference_once(
     topology, counts = topology_inputs(sim)
     if counts != dict(contract.entity_counts):
         raise MaterializationError("The closed source cohort changed")
+    if capture_reference is not None:
+        capture_reference(sim)
     fixed_names = {
         field.name
         for field in contract.fields

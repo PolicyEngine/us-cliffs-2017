@@ -52,6 +52,8 @@ for name, expected in expected_versions.items():
 root = Path(__file__).resolve().parents[1]
 if Path.cwd().resolve() != root:
     raise RuntimeError("Run this script from the repository root")
+if os.environ.get("PYTEST_ADDOPTS") or os.environ.get("PYTEST_PLUGINS"):
+    raise RuntimeError("The pure-test runner refuses pytest environment overrides")
 os.environ["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
 os.environ["CLIFFS_MAX_EXAMPLES"] = "60"
 sys.path.insert(0, str(root))
@@ -78,6 +80,7 @@ with TemporaryDirectory(prefix="cliffs-pure-tests-") as cache:
             "tests/test_wage_benchmark.py",
             "tests/test_health_valuation.py",
             "tests/test_native_runtime.py",
+            "tests/test_native_health_hooks.py",
         ]
     )
     _check_loaded_modules()

@@ -235,13 +235,34 @@ def _maximum(value):
     return float(value.abs().max()) if len(value) else 0.0
 
 
-def _counts(runtime, sim, flag):
+def _household_person_counts(runtime, sim, flag):
+    """Use Core mapping/weights for per-household counts; restore analysis input."""
+    previous = _series(runtime, sim.calc(PERSON_FLAG, period=2017), boolean=True).copy()
+    try:
+        sim.set_input(PERSON_FLAG, 2017, flag)
+        return _series(
+            runtime, sim.calc(PERSON_FLAG, period=2017, map_to="household")
+        ).copy()
+    finally:
+        sim.set_input(PERSON_FLAG, 2017, previous)
+
+
+def _counts(runtime, sim, flag, *, contribution_sink=None, key=None):
     household, members = _project(runtime, sim, flag)
-    return {
+    result = {
         "adults": float(flag.sum()),
         "households": float(household.sum()),
         "members": float(members.sum()),
     }
+    if contribution_sink is not None:
+        vectors = {
+            "adults": _household_person_counts(runtime, sim, flag),
+            "households": household.copy(),
+            "members": _household_person_counts(runtime, sim, members),
+        }
+        for metric, vector in vectors.items():
+            contribution_sink((*key, metric), vector, point_total=result[metric])
+    return result
 
 
 def _job_changes(runtime, sim, selected, hourly_real):
@@ -270,9 +291,11 @@ def _job_changes(runtime, sim, selected, hourly_real):
     return changes, flags, gross_real
 
 
-def run(spec: RunSpec, runtime: Runtime):
+def run(spec: RunSpec, runtime: Runtime, *, contribution_sink=None):
     """Calculate each scenario afresh; return aggregates, never fabricated results."""
     spec.validate()
+    if contribution_sink is not None and not callable(contribution_sink):
+        raise ContractError("A contribution sink must be callable")
     runtime.validate()
     binding_at_start = dict(runtime.bindings)
     context_at_start = json.dumps(
@@ -412,9 +435,27 @@ def run(spec: RunSpec, runtime: Runtime):
             additional_households = union_households & ~strict_households
             additional_members = union_members & ~strict_members
             rows[key] = {
-                "raise": _counts(runtime, sim, raises[key]),
-                "job": _counts(runtime, sim, flags["job"][key]),
-                "union": _counts(runtime, sim, union),
+                "raise": _counts(
+                    runtime,
+                    sim,
+                    raises[key],
+                    contribution_sink=contribution_sink,
+                    key=(str(amount), key, "raise"),
+                ),
+                "job": _counts(
+                    runtime,
+                    sim,
+                    flags["job"][key],
+                    contribution_sink=contribution_sink,
+                    key=(str(amount), key, "job"),
+                ),
+                "union": _counts(
+                    runtime,
+                    sim,
+                    union,
+                    contribution_sink=contribution_sink,
+                    key=(str(amount), key, "union"),
+                ),
                 "additional_households_outside_strict_households": float(
                     additional_households.sum()
                 ),
@@ -422,6 +463,21 @@ def run(spec: RunSpec, runtime: Runtime):
                     additional_members.sum()
                 ),
             }
+            if contribution_sink is not None:
+                contribution_sink(
+                    (str(amount), key, "additional_outside_strict", "households"),
+                    additional_households.copy(),
+                    point_total=rows[key][
+                        "additional_households_outside_strict_households"
+                    ],
+                )
+                contribution_sink(
+                    (str(amount), key, "additional_outside_strict", "members"),
+                    _household_person_counts(runtime, sim, additional_members),
+                    point_total=rows[key][
+                        "additional_members_outside_strict_households"
+                    ],
+                )
         tables[str(amount)] = rows
     check_frozen_context(sim)
     runtime.audit(sim, None, blank)

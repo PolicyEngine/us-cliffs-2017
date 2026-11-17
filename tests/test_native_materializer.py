@@ -675,3 +675,47 @@ def test_public_account_and_price_inputs_cannot_mask_formula_reforms(name):
     s.args["registry"][name] = InputRule("raw", SHA)
     with pytest.raises(MaterializationError, match="Stored price inputs"):
         prepare_reference_once(**s.args)
+
+
+def test_reference_capture_receives_same_full_sim_once_before_input_collection():
+    s = specimen()
+    captured = []
+
+    def capture(actual):
+        assert actual is s.sim
+        assert actual.dataset.years == [2024, 2025]
+        assert {
+            name: population.count for name, population in actual.populations.items()
+        } == dict(s.contract.entity_counts)
+        assert s.observed == []
+        captured.append(actual)
+
+    result = prepare_reference_once(**s.args, capture_reference=capture)
+    assert len(result) == 3 and captured == [s.sim] and len(s.calls) == 1
+    other = specimen()
+    other.args["contract"] = InputContract(
+        other.contract.fields, {**other.contract.entity_counts, "person": 3}
+    )
+    with pytest.raises(MaterializationError, match="closed source cohort"):
+        prepare_reference_once(
+            **other.args, capture_reference=lambda actual: captured.append(actual)
+        )
+    assert captured == [s.sim]
+
+
+def test_reference_capture_failure_propagates_without_collecting_or_reprojecting():
+    s = specimen()
+    before = deepcopy(s.values)
+    failure = RuntimeError("synthetic reference capture refused")
+    captured = []
+
+    def capture(actual):
+        assert actual is s.sim
+        captured.append(actual)
+        raise failure
+
+    with pytest.raises(RuntimeError) as caught:
+        prepare_reference_once(**s.args, capture_reference=capture)
+    assert caught.value is failure
+    assert captured == [s.sim] and len(s.calls) == 1
+    assert s.observed == [] and s.values == before

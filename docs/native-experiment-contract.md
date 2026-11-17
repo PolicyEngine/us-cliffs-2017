@@ -1,6 +1,6 @@
 # Native-law experiment interfaces
 
-The experiment interfaces separate the policy year from the price year. They target 2017 law on a recent reference population. Callers convert 2025-dollar money inputs to native 2017 units before construction; the account reports outputs in 2025 dollars. The modules provide account, price, managed-input and branch-integrity interfaces. Native execution still needs the runtime bridge and qualified health-price anchors.
+The experiment interfaces separate the policy year from the price year. They target 2017 law on a recent reference population. Callers convert 2025-dollar money inputs to native 2017 units before construction; the account reports outputs in 2025 dollars. The modules provide account, price, managed-input and branch-integrity interfaces. The runtime bridge composes these interfaces; native execution still requires qualified reference inputs, health unit values and integration checks.
 
 ## Resource account
 
@@ -20,6 +20,8 @@ The government-transfer account counts the used premium tax credit once. It reta
 
 A caller must reject stored derived-price inputs before construction, qualify geography and freeze unmasked health unit values across earnings branches. The account checks the context that its caller returns; the caller must check current model and price state after mutations. A constructor receipt cannot detect later changes by itself.
 
+The reference capture reads unmasked Medicaid, CHIP and Medicare unit values once on the full prepared 2025 sample. It converts those unit inputs to native money once and retains native enrollment and Medicare premium rules across earnings branches. It does not replace the native premium parameters.
+
 ## Native input and branch checks
 
 The managed adapter preserves explicit monthly vectors, household structure and declared runtime identities. The materializer requires source dispositions for supplied fields and separate declarations for pre-2017 lookbacks; it never fills missing history with zeros. The live witness checks selected formula objects, parameter values and frozen supplied inputs before account reads and after branches.
@@ -28,8 +30,12 @@ For Medicare income-related premiums, the materializer evaluates the existing tw
 
 `WageBenchmark` supplies January 7, 2017 state and regional rates for a hypothetical adult job at a large covered employer. It assumes residence equals workplace and excludes local ordinances, special-industry rates and later changes within 2017. NY and OR county checks select regional rates; callers retain the weighted person projection.
 
+## Paired uncertainty
+
+An optional contribution sink collects each metric through the maintained household mapping and `MicroSeries.weight()` interface. The resulting ledger applies survey weights once. Source-household clusters keep support clones together, and every scenario and cutoff uses the same resampling draws. The intervals condition on fixed calibration weights and model inputs; they do not cover survey design, imputation, calibration-fit or policy-encoding uncertainty.
+
 ## Real-engine requirements
 
-The current adapter requires the native-period argument from [wrapper PR761](https://github.com/PolicyEngine/policyengine.py/pull/761) at `8ab66b5`; released wrapper 6.20.2 lacks that argument. The proposed country target uses commit `5b186949`, Core 3.36.0 and SPM 1.1.0. The runtime bridge, historical source contract, unmasked health-price anchors and actual native checks still need completion.
+The current adapter requires the native-period argument from [wrapper PR761](https://github.com/PolicyEngine/policyengine.py/pull/761) at `8ab66b5`; released wrapper 6.20.2 lacks that argument. The proposed country target uses commit `5b186949`, Core 3.36.0 and SPM 1.1.0. The historical source contract, actual reference health-unit capture and native integration checks still need completion. Synthetic checks of the bridge and health interfaces do not establish those results.
 
 Synthetic tests exercise account arithmetic, input transport, currency conversion, native-age preservation, current-state checks and refusal paths with fake APIs. They do not establish real-engine compatibility or population results.
