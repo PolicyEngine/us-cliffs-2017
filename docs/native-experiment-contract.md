@@ -4,6 +4,10 @@ The experiment interfaces separate the policy year from the price year. They tar
 
 The `any_raise` table combines the discrete $1,000, $2,000 and $5,000 real-2025 raise scenarios. It counts each person flagged under at least one tested raise, then combines the job-entry flags through the household mapping. Its additional group excludes every household with a strict loss under any tested raise or job entry.
 
+The raise scenarios select adults aged 18 or older with positive total earnings across employment, self-employment and specified-service self-employment. The job-entry scenario selects adults aged 18–64 who report zero in all three earnings components and whose model inputs mark neither full-time study nor disability. It uses age 65 as the retirement exclusion and `is_disabled` as the disability proxy; it does not separately exclude younger retirees or measure capacity to work.
+
+For selected job entrants, the scenario sets work to 40 hours per week for 52 weeks at the benchmark wage. It sets weeks unemployed and unemployment compensation to zero, sets hourly-paid status to true, and sets self-employed and never-worked status to false. These assumptions describe a full-year job replacement, including the loss of unemployment compensation.
+
 ## Resource account
 
 `AccountSpec` requires explicit nonhealth benefits, net government health components and runtime, input-preparation and price identities. `make_account_reform` registers two household accounts:
@@ -38,6 +42,8 @@ An optional contribution sink collects each metric through the maintained househ
 
 ## Real-engine requirements
 
-The current adapter requires the native-period argument from [wrapper PR761](https://github.com/PolicyEngine/policyengine.py/pull/761) at `8ab66b5`; released wrapper 6.20.2 lacks that argument. The proposed country target uses commit `5b186949`, Core 3.36.0 and SPM 1.1.0. The historical source contract, actual reference health-unit capture and native integration checks still need completion. Synthetic checks of the bridge and health interfaces do not establish those results.
+The current adapter requires the native-period argument from [wrapper PR761](https://github.com/PolicyEngine/policyengine.py/pull/761) at `8ab66b5`; released wrapper 6.20.2 lacks that argument. The proposed country target uses commit `5b186949`, Core 3.36.0 and SPM 1.1.0. The input contract declares 187 engine variables and five structural role arrays. Actual full-cohort reference health capture and native integration still need validation.
+
+`native_pilot.py` runs one native baseline and one $1,000 real-2025 raise for the first working adult in each household. Its observer checks actual runtime sources, surviving raw inputs, household structure, fixed participation decisions and Core's earnings casts. It returns `precision_refused` when the realized earnings increment fails the exact identity, retaining aggregate rounding diagnostics without adopting a tolerance. This engineering pilot supplies no commissioned estimates. Its source-bound study reform sets four 2017 ACP/EBB caps to zero; country commit `5b186949` does not contain the separate FCC history correction.
 
 Synthetic tests exercise account arithmetic, input transport, currency conversion, native-age preservation, current-state checks and refusal paths with fake APIs. They do not establish real-engine compatibility or population results.

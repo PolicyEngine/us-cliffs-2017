@@ -147,7 +147,8 @@ def pipeline(monkeypatch, tmp_path):
     reference_system = reference.prepare_system(System(param))
     reference_sim = fake.ReferenceSimulation()
     reference_sim.tax_benefit_system = reference_system
-    reference_sim.default_calculation_period = "2025"
+    reference_sim.dataset = SimpleNamespace(years=[2024, 2025])
+    reference_sim.default_calculation_period = "2024"
     reference.capture_reference(reference_sim)
     anchor = reference.anchor_digest
     spec = AccountSpec(
@@ -271,3 +272,12 @@ def test_deferred_core_loader_preserves_exact_method_objects_without_imports():
     }
     with pytest.raises(WitnessError, match="both explicit"):
         hooks.load_core_readers(simulation_type=Simulation)
+
+
+def test_reference_2025_reads_preserve_actual_container_default_2024(
+    monkeypatch, tmp_path
+):
+    reference, _, _, _, _, _ = pipeline(monkeypatch, tmp_path)
+    assert reference.observed_default_calculation_period == "2024"
+    assert reference.capture.receipt["reference_year"] == 2025
+    # ReferenceSimulation.calc rejects any period except explicit2025.

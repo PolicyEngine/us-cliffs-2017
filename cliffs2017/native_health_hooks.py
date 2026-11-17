@@ -214,8 +214,13 @@ class ReferenceHealthSetup:
         self._runtime()
         if simulation.tax_benefit_system is not self.system or self.capture is None:
             raise WitnessError("The managed reference constructor changed systems")
-        if str(simulation.default_calculation_period) != "2025":
-            raise WitnessError("The prepared reference calculation clock differs")
+        if list(simulation.dataset.years) != [2024, 2025]:
+            raise WitnessError("The maintained source/reference years differ")
+        # Core retains the multi-year container's first-year default. Every
+        # health formula/cache query below remains explicitly reference2025.
+        self.observed_default_calculation_period = str(
+            simulation.default_calculation_period
+        )
         _bound(simulation, "get_holder", self.readers["get_holder"])
         for name in REFERENCE_READS.values():
             holder = simulation.get_holder(name)
