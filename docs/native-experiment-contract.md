@@ -2,6 +2,8 @@
 
 The experiment interfaces separate the policy year from the price year. They target 2017 law on a recent reference population. Callers convert 2025-dollar money inputs to native 2017 units before construction; the account reports outputs in 2025 dollars. The modules provide account, price, managed-input and branch-integrity interfaces. The runtime bridge composes these interfaces; native execution still requires qualified reference inputs, health unit values and integration checks.
 
+The generic runner defines raise and job-entry protocols. The supplied `NativeObservers.audit_facts` implementation supports the engineering pilot's saved baseline and selection of the first working adult in each household. It does not supply a general-runner fact audit. A general native adapter, job-entry branches and larger raises still require a compatible observer and integration validation.
+
 The `any_raise` table combines the discrete $1,000, $2,000 and $5,000 real-2025 raise scenarios. It counts each person flagged under at least one tested raise, then combines the job-entry flags through the household mapping. Its additional group excludes every household with a strict loss under any tested raise or job entry.
 
 The raise scenarios select adults aged 18 or older with positive total earnings across employment, self-employment and specified-service self-employment. The job-entry scenario selects adults aged 18–64 who report zero in all three earnings components and whose model inputs mark neither full-time study nor disability. It uses age 65 as the retirement exclusion and `is_disabled` as the disability proxy; it does not separately exclude younger retirees or measure capacity to work.
@@ -26,7 +28,7 @@ The government-transfer account counts the used premium tax credit once. It reta
 
 A caller must reject stored derived-price inputs before construction, qualify geography and freeze unmasked health unit values across earnings branches. The account checks the context that its caller returns; the caller must check current model and price state after mutations. A constructor receipt cannot detect later changes by itself.
 
-The reference capture reads unmasked Medicaid, CHIP and Medicare unit values once on the full prepared 2025 sample. It converts those unit inputs to native money once and retains native enrollment and Medicare premium rules across earnings branches. It does not replace the native premium parameters.
+The reference capture reads unmasked Medicaid, CHIP and Medicare unit values once on the full prepared 2025 sample. It converts those cached reference values to native money once and retains native enrollment and Medicare premium rules across earnings branches. It does not replace the native premium parameters.
 
 ## Native input and branch checks
 

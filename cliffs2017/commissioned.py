@@ -409,7 +409,7 @@ def run(spec: RunSpec, runtime: Runtime, *, contribution_sink=None):
                 f"{spec.run_id}_{label}_{rank}", changes, targets, selected, gross
             )
             for key, numerator, denominator in CUTOFFS:
-                # Integer cross-products keep exact cutoff semantics; no epsilon.
+                # Compare floating-point cross-products strictly, without an epsilon.
                 result[key] = result[key] | (
                     selected & (difference * denominator < gross * numerator)
                 )

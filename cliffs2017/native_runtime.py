@@ -86,7 +86,12 @@ def make_native_runtime(
     earnings_tolerance=0,
     resource_tolerance=0,
 ):
-    """Build one scenario Runtime from explicit source-owned capabilities.
+    """Compose the generic scenario Runtime protocol from explicit capabilities.
+
+    The supplied NativeObservers.audit_facts supports the pilot's saved baseline
+    and selection of the first working adult in each household. It does not
+    supply the general runner's fact audit. General native adapters, job-entry
+    branches and larger raises still need an observer and integration validation.
 
     prepared_inputs() returns NativeInputs made by the maintained materializer.
     prepare_system(system) returns that fresh system with final account/price

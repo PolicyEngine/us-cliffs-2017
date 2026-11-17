@@ -94,7 +94,7 @@ class ReferenceHealthCapture:
             raw = holder.get_array(periods[0], simulation.branch_name)
             if raw is None:
                 raise WitnessError("The actual reference unit cache is missing")
-            # This copies a Core unit-INPUT array, never strips a MicroSeries.
+            # Copy Core's cached 2025 reference formula-result array.
             array = raw.copy()
             expected = FixedInput.from_array(
                 native_name, "2025", "person", "health_unit_value", array
