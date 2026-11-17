@@ -5,15 +5,14 @@ import gzip
 import json
 from fractions import Fraction
 
-import pandas as pd
 import pytest
+from job_entry_pairs import make_pair, people
 from microdf import MicroSeries
 
 from scripts.expanded_job_entry import PILOT_WAGES
 from scripts.expanded_job_entry_national import (
     sample_counts_by_state,
     scoped_hourly_wages,
-    write_pair,
 )
 from scripts.job_entry_outputs import (
     csv_gzip,
@@ -202,23 +201,21 @@ def test_scope_names():
 
 
 def _pair(rank=1, count=2, passed=True, run_id="run1"):
-    rows = pd.DataFrame({"person_index": range(count), "rank": rank, "gross_pay": 15080.0})
-    record = {
-        "status": "complete",
-        "rank": rank,
-        "scope": "resolved",
-        "counts": {"sample_candidates_tested": count},
-        "identities": {"zero_change_max_household_change": {"value": 0.0, "pass": passed}},
-    }
-    csv_rel = result_csv("job_entry_2017_p4_0_s0", "resolved", rank, run_id)
-    return write_pair(rows, record, csv_rel, {"part": 0}), csv_rel
+    """A strict-valid pair (tests/job_entry_pairs.py); ``passed=False`` fails one identity check."""
+    def fail(record):
+        record["identities"]["zero_change_max_household_change"]["pass"] = False
+
+    json_bytes, csv_bytes, _ = make_pair(rank=rank, tested=people(count), run_id=run_id,
+                                         mutate_record=None if passed else fail)
+    return (json_bytes, csv_bytes), json.loads(json_bytes)["rows"]["file"]
 
 
 def test_pair_validation_rejects_anything_incomplete():
     (json_bytes, csv_bytes), csv_rel = _pair()
     record = validate_pair(json_bytes, csv_bytes, {"part": 0, "rank": 1, "scope": "resolved"})
     assert record["rows"]["file"] == csv_rel
-    assert gzip.decompress(csv_bytes).decode().splitlines()[0] == "person_index,rank,gross_pay"
+    assert gzip.decompress(csv_bytes).decode().splitlines()[0].startswith(
+        "person_index,person_id,household_id,state_code,rank,hourly_wage,gross_pay,d_net_single_ptc")
     with pytest.raises(ValueError, match="SHA-256"):
         validate_pair(json_bytes, csv_gzip("person_index,rank,gross_pay\n0,1,1\n"))
     with pytest.raises(ValueError, match="rank"):
@@ -235,7 +232,12 @@ def test_pair_validation_rejects_anything_incomplete():
     with pytest.raises(ValueError, match="row count"):
         validate_pair(json.dumps(short).encode(), csv_bytes)
     with pytest.raises(ValueError, match="identity"):
-        _pair(passed=False)
+        validate_pair(*_pair(passed=False)[0])
+    # The review's reproduction: duplicate person rows with one arbitrary passing check.
+    loose = json.loads(json_bytes)
+    loose["identities"] = {"anything": {"value": 0, "pass": True}}
+    with pytest.raises(ValueError, match="lacks identity checks"):
+        validate_pair(json.dumps(loose).encode(), csv_bytes)
 
 
 def test_install_never_overwrites_and_leaves_no_temporary_files(tmp_path):
@@ -254,7 +256,7 @@ def test_pairs_install_rows_first_and_refuse_a_conflict(tmp_path):
     assert local_record(tmp_path, json_rel)["rows"]["sha256"] == sha256(csv_bytes)
     # A second, different complete pair for the same rank keeps the first record.
     (other_json, other_csv), _ = _pair(count=3, run_id="run2")
-    assert install_pair(tmp_path, json_rel, other_json, other_csv).startswith("kept the local")
+    assert install_pair(tmp_path, json_rel, other_json, other_csv).startswith("conflict: kept the local")
     assert (tmp_path / json_rel).read_bytes() == json_bytes
     # Rows that differ under the same name never let their record in.
     other = tmp_path / "other"

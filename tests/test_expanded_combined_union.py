@@ -18,6 +18,7 @@ import pandas as pd
 import pytest
 from hypothesis import assume, given, settings
 from hypothesis import strategies as st
+from job_entry_pairs import install, make_pair, write_plan
 
 from scripts import combined_union_inputs as ci
 from scripts.expanded_combined_union import (
@@ -41,6 +42,7 @@ from scripts.expanded_combined_union import (
     check_set_invariants,
     compare_counts,
     count_sets,
+    final_status_problems,
     household_any,
     raise_union_view,
     reproduce_job_records,
@@ -48,7 +50,7 @@ from scripts.expanded_combined_union import (
     validate_job_rows,
 )
 from scripts.expanded_raise_union import CHANGES
-from scripts.job_entry_outputs import csv_gzip, sha256, validate_pair
+from scripts.job_entry_outputs import sha256
 
 YEAR = 2017
 RATIOS = [-0.5, -0.01, 0.0, 0.1, 0.2, 0.3, 0.5, 0.55, 0.6, 0.9, 1.0]
@@ -494,43 +496,29 @@ def test_raise_union_view_covers_every_committed_raise_union_key(pop):
 
 
 def write_scope(root, tag, states_by_part, outside_by_part, ranks=(1,), skip=None):
-    """Synthetic job-entry plans and validated pairs for one scope."""
+    """Job-entry plans and strictly valid pairs for one scope (tests/job_entry_pairs.py)."""
+    offset = 0 if tag == "resolved" else 100
     for part in range(ci.PARTS):
         in_scope = states_by_part[part]
-        plan = {"part": part, "scope": tag, "provenance": {"wages_json_sha256": "w"},
-                "plan": {"sample_candidates_by_rank": {str(r): sum(in_scope.values()) if r == 1 else 0 for r in ranks},
-                         "sample_candidates_in_scope_by_state": in_scope,
-                         "sample_candidates_outside_scope_by_state": outside_by_part[part]}}
-        path = root / ci.job_plan_rel(part, tag)
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(plan))
-        if skip == part or not sum(in_scope.values()):
+        n = sum(in_scope.values())
+        write_plan(root, part, tag, {r: n if r == 1 else 0 for r in ranks}, in_scope, outside_by_part[part])
+        if skip == part or not n:
             continue
-        lines = ["person_index"] + [str(i) for i in range(sum(in_scope.values()))]
-        csv_bytes = csv_gzip("\n".join(lines) + "\n")
-        csv_rel = f"results/job_entry/per_person/x_{part}_{tag}.csv.gz"
-        (root / csv_rel).parent.mkdir(parents=True, exist_ok=True)
-        (root / csv_rel).write_bytes(csv_bytes)
-        record = {"status": "complete", "part": part, "rank": 1, "scope": tag, "smoke": False,
-                  "identities": {"x": {"pass": True}},
-                  "counts": {"sample_candidates_tested": sum(in_scope.values()),
-                             "sample_candidates_tested_by_state": in_scope},
-                  "provenance": {"wages_json_sha256": "w", "code": {"uncommitted": ""},
-                                 "rates_used": {"AA": 7.25, "BB": 8.0, "MD": 9.0}},
-                  "rows": {"file": csv_rel, "sha256": sha256(csv_bytes), "count": sum(in_scope.values()),
-                           "columns": ["person_index"]}}
-        validate_pair(json.dumps(record).encode(), csv_bytes)
-        json_path = root / ci.job_record_rel(part, tag, 1)
-        json_path.parent.mkdir(parents=True, exist_ok=True)
-        json_path.write_text(json.dumps(record))
+        tested = []
+        for state, k in sorted(in_scope.items()):
+            for _ in range(k):
+                i = offset + len(tested)
+                tested.append({"person_index": i, "person_id": 1000 + i, "household_id": 500 + i, "state_code": state})
+        assert install(root, make_pair(part=part, scope=tag, tested=tested,
+                                       run_id=f"r{part}{tag.replace('-', '')}")).startswith(("wrote", "same"))
 
 
 def test_coverage_defers_missing_and_partial_scopes_and_accepts_a_complete_later_scope(tmp_path):
-    resolved = [{"AA": 2, "BB": 1}, {"AA": 1}, {"BB": 2}, {"AA": 1, "BB": 1}]
+    resolved = [{"CO": 2, "WA": 1}, {"CO": 1}, {"WA": 2}, {"CO": 1, "WA": 1}]
     md = [{"MD": 1}, {}, {"MD": 2}, {"MD": 1}]
     write_scope(tmp_path, "resolved", resolved, md)
     coverage, _ = ci.job_coverage(tmp_path)
-    assert coverage["jurisdictions_covered"] == ["AA", "BB"]
+    assert coverage["jurisdictions_covered"] == ["CO", "WA"]
     assert coverage["jurisdictions_deferred"] == {"MD": 4}
     assert coverage["status"] == ci.STATUS_PARTIAL
     # A later scope missing a part's rank is excluded and its state stays deferred.
@@ -541,10 +529,10 @@ def test_coverage_defers_missing_and_partial_scopes_and_accepts_a_complete_later
     # Once complete, it is picked up with no code change.
     write_scope(tmp_path, "states-MD", [m or {} for m in md], resolved)
     coverage, by_part = ci.job_coverage(tmp_path)
-    assert coverage["jurisdictions_covered"] == ["AA", "BB", "MD"]
+    assert coverage["jurisdictions_covered"] == ["CO", "MD", "WA"]
     assert coverage["jurisdictions_deferred"] == {}
     assert coverage["status"] == ci.STATUS_ALL
-    assert coverage["expected_rows_by_part"]["2"] == {"BB": 2, "MD": 2}
+    assert coverage["expected_rows_by_part"]["2"] == {"MD": 2, "WA": 2}
 
 
 def test_shipped_files_must_match_the_manifest(tmp_path):
@@ -587,7 +575,7 @@ def test_parts_add_left_to_right_as_the_raise_union_did():
 
 
 def test_scope_selection_leaves_unselected_scopes_deferred(tmp_path):
-    resolved = [{"AA": 2, "BB": 1}, {"AA": 1}, {"BB": 2}, {"AA": 1, "BB": 1}]
+    resolved = [{"CO": 2, "WA": 1}, {"CO": 1}, {"WA": 2}, {"CO": 1, "WA": 1}]
     md = [{"MD": 1}, {}, {"MD": 2}, {"MD": 1}]
     write_scope(tmp_path, "resolved", resolved, md)
     write_scope(tmp_path, "states-MD", md, resolved)
@@ -595,3 +583,28 @@ def test_scope_selection_leaves_unselected_scopes_deferred(tmp_path):
     assert coverage["scopes_excluded"] == {"states-MD": "states-MD: not selected for this run"}
     assert coverage["jurisdictions_deferred"] == {"MD": 4}
     assert ci.job_coverage(tmp_path)[0]["jurisdictions_deferred"] == {}
+
+
+def _final_candidate():
+    invariants = {"each_person_counted_once": {"pass_every_part": True},
+                  "raise_union_reproduced": {"pass_every_part": True, "exact": True},
+                  "national_counts": {"threshold_nesting_counts": True}}
+    return {"coverage": {"jurisdictions_deferred": {}, "jurisdictions_covered": [f"S{i}" for i in range(51)]},
+            "invariants": invariants, "reproduction": {"raise_union_exact": True}}
+
+
+def test_final_status_needs_all_jurisdictions_every_invariant_and_an_exact_raise_union():
+    assert final_status_problems(_final_candidate()) == []
+    deferred = _final_candidate()
+    deferred["coverage"]["jurisdictions_deferred"] = {"MD": 265}
+    deferred["coverage"]["jurisdictions_covered"] = deferred["coverage"]["jurisdictions_covered"][:50]
+    assert len(final_status_problems(deferred)) == 2
+    failed = _final_candidate()
+    failed["invariants"]["each_person_counted_once"]["pass_every_part"] = False
+    failed["invariants"]["national_counts"]["threshold_nesting_counts"] = False
+    assert [p.split(":")[0] for p in final_status_problems(failed)] == [
+        "invariant each_person_counted_once", "invariant national_counts"]
+    inexact = _final_candidate()
+    inexact["invariants"]["raise_union_reproduced"]["exact"] = False
+    inexact["reproduction"]["raise_union_exact"] = False
+    assert len(final_status_problems(inexact)) == 2

@@ -33,6 +33,7 @@ scope. Weighted totals use MicroSeries; no stored weight column is read.
 
 from __future__ import annotations
 
+import functools
 import gc
 import hashlib
 import io
@@ -66,10 +67,12 @@ from scripts.job_entry_outputs import (  # noqa: E402
     SEED,
     YEAR,
     csv_gzip,
+    local_environment,
     scope_states,
     scope_tag,
     sha256,
     validate_pair,
+    wage_table_fingerprint,
 )
 from scripts.job_entry_wages import HOURS_PER_YEAR, JURISDICTIONS, national_wage_table  # noqa: E402
 
@@ -95,6 +98,44 @@ def code_record() -> dict:
     except (OSError, subprocess.CalledProcessError):
         commit, dirty = None, None
     return {"commit": commit, "uncommitted": dirty, "sha256": hashes}
+
+
+# The installed versions a result records beside the requirements file's hash.
+VERSIONED = ("policyengine-us", "policyengine-core", "microdf-python", "numpy", "pandas", "tables",
+             "h5py", "huggingface-hub")
+
+
+def _file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for block in iter(lambda: handle.read(1 << 22), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def environment() -> dict:
+    """What fixes a result besides its request and wage table: code, dataset and packages.
+
+    The checkout's part (job_entry_outputs.local_environment) plus the dataset
+    file's SHA-256, the installed versions and the Python version. Only
+    ``code``, ``dataset`` and ``packages`` keys, each JSON-native, so a launch's
+    expectation and a stored record compare leaf by leaf.
+    """
+    from huggingface_hub import hf_hub_download
+
+    from cliffs2017.run import FILENAME, REPO, REVISION
+
+    env = local_environment(ROOT)
+    path = hf_hub_download(REPO, FILENAME, repo_type="dataset", revision=REVISION)
+    env["dataset"]["file_sha256"] = _dataset_sha256(str(path))
+    env["packages"]["versions"] = {p: metadata.version(p) for p in VERSIONED}
+    env["packages"]["python"] = platform.python_version()
+    return json.loads(json.dumps(env))
+
+
+@functools.lru_cache(maxsize=2)
+def _dataset_sha256(path: str) -> str:
+    return _file_sha256(Path(path))
 
 
 def load_part(part: int, parts: int = PARTS, seed: int = SEED, year: int = YEAR):
@@ -424,6 +465,7 @@ def provenance(expected_wages_sha256: str | None = None) -> dict:
         "code": code_record(),
         "wages_json_sha256": table["wages_json_sha256"],
         "rates_used": table["rates"],
+        "wage_table": wage_table_fingerprint(table),
         "unresolved_wages": table["unresolved"],
         "python": platform.python_version(),
         "numpy": metadata.version("numpy"),

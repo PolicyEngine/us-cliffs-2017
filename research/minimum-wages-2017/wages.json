@@ -8,11 +8,12 @@
     "unit": "hour",
     "scenario": "general non-tipped adult FLSA-covered hypothetical job; no newly offered employer healthcoverage",
     "federal_floor": 7.25,
-    "date_convention": "Freeze reference hourly wage at Jan 1,2017 for a clearly labeled annualized scenario; this is not a month-by-month2017 wage path. MEdate conflict flagged.",
+    "date_convention": "Freeze reference hourly wage at Jan 1,2017 for a clearly labeled annualized scenario; this is not a month-by-month2017 wage path. Maine's effective date is resolved: 7 January 2017 (IB 2015, c. 2), as the updates record.",
     "amount_semantics": "source-verified general headline rate under stated coverage category; may require employer/region selection. Never fill null reference_hourly implicitly.",
-    "verified_semantics": "amount supported by opened government source for stated generalcategory, not verification of all local/industry exceptions; ME unresolvedfalse.",
+    "verified_semantics": "amount supported by opened government source for stated generalcategory, not verification of all local/industry exceptions; ME verified true, effective 7 January 2017.",
     "updates": [
-      "2026-11-16: added Maryland's 1 July 2017 rate (9.25) and New York's rest-of-state 31 December 2017 rate (10.40) as dated variants, and resolved Maine's effective date as 7 January 2017 from the session law (ME now verified). Sources and access dates in evidence.md; excerpts in sources/."
+      "2026-11-16: added Maryland's 1 July 2017 rate (9.25) and New York's rest-of-state 31 December 2017 rate (10.40) as dated variants, and resolved Maine's effective date as 7 January 2017 from the session law (ME now verified). Sources and access dates in evidence.md; excerpts in sources/.",
+      "2026-11-17: replaced two stale Maine notes in date_convention and verified_semantics, which still called its date a conflict, with its resolved 7 January 2017 date; no rate or date changed."
     ],
     "national_run_ready": false,
     "unresolved": [

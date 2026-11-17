@@ -242,8 +242,56 @@ part of net income. Rows are record-level and git-ignored
 `results/job_entry/parts/` names its rows by a unique run id, hashes them, and
 records the checks, sample counts, MicroSeries-weighted counts, timing, peak
 memory, wage rates and code hashes. Only a complete, validated pair is published
-to the volume or installed locally, never over an existing file; a relaunch
-skips every rank already written.
+to the volume or installed locally, never over an existing file.
+
+### Runner guards
+
+An independent review of the runner asked for three changes; each now has a
+regression test in `tests/test_job_entry_runner.py` that fails when its guard is
+removed.
+
+1. **No stale resume.** A launch first asks one container for its environment and
+   checks it against the checkout. Each record carries a resume fingerprint: the
+   SHA-256 of every job-entry module and the `cliffs2017/` digest; the dataset (its
+   pinned revision, the file's SHA-256, the year, partition and Medicaid totals);
+   the package pins (the requirements file's hash, installed versions, Python);
+   the request (part, rank, scope); the planned candidate count; and the resolved
+   wage table, as each jurisdiction's dated path and exact effective rate. The
+   wage table enters as resolved, not as wages.json's bytes, so an edit to its
+   metadata alone leaves every result valid. A rank already written on the volume
+   or locally is reused only when its fingerprint matches the launch's
+   (`job_entry_outputs.existing_result`, behind both skips); any other record
+   stops the launch and names every difference. Plans are reused under the same
+   check. Records written before these checks carry no fingerprint and are never
+   resumed. `--namespace NAME --local-root PATH` starts a run on a new volume
+   (`us-cliffs-2017-job-entry-NAME`) and a local root outside the checkout, so
+   nothing resumes.
+2. **Failures exit nonzero.** Every failed container, rank left without an
+   installed pair, install conflict and strict-validation problem is collected
+   (`settle`, `finish_launch`) and the command exits nonzero naming each one; a
+   fetch does the same.
+3. **Strict pairs.** `validate_pair` requires every named identity check, each
+   passing within its rule; the complete row schema (identity columns, the three
+   measures and the record's component columns); a positive integer rank matching
+   every row; finite numbers; unique person indices, person IDs and households;
+   and rates and gross pay matching the record's wage table. `validate_results`
+   checks a set of results against the plans: every planned rank present with its
+   planned count, no person in two ranks or scopes, each household's candidates
+   ranked 1..n in one scope, and each jurisdiction tested by one scope, all its
+   candidates once. `python scripts/job_entry_outputs.py --root PATH --require-all`
+   runs it on installed results.
+
+`scripts/job_entry_model_fixture.py` is a small model-backed fixture for
+`run_rank`'s scenario and resource measures, run in a Modal container
+(`--model-fixture-only`) because it loads a full part. On a few households of
+part 0 it checks that every work-related column of the dataset's person table is
+either set by the job, at the full-time job's value, or reviewed as held fixed and
+unchanged, so an input omitted from both the branch and the fresh simulation
+fails by name; that earnings, employee payroll tax and, for adults living alone
+with no prior income in states without a wage income tax, federal income tax
+before credits, the EITC and market income change by hand-computed 2017 amounts;
+and that each row's measures equal the change in the model's top-level household
+net income, marketplace premiums and health benefits and costs.
 
 Under the wage scope `resolved`, Maryland and New York candidates were counted as
 deferred by state, because wages.json then lacked their rates. With the rates
@@ -295,10 +343,13 @@ to those the `resolved` records used.
 
 ```sh
 MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --check-only
+MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --model-fixture-only
 MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --smoke
 MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --plan-only [--scope states:MD,NY]
 MODAL_PROFILE=policyengine modal run --detach scripts/modal_job_entry.py [--scope states:MD,NY]
 MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --fetch
+# a fresh run that resumes nothing: a new volume and a local root outside the checkout
+MODAL_PROFILE=policyengine modal run --detach scripts/modal_job_entry.py --namespace NAME --local-root PATH
 ```
 
 ## Remaining work

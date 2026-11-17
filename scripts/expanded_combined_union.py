@@ -111,6 +111,11 @@ JOB_COLUMNS = ["person_index", "person_id", "household_id", "state_code", "rank"
 HOURS_PER_YEAR = 2080
 DRAWS = 5_000
 BOOTSTRAP_SEED = 0
+# Statuses ``combine --status`` may set, with the note the JSON carries.
+STATUSES = {
+    "final_pending_review": "All 51 jurisdictions, every invariant passed and the raise union reproduced "
+                            "exactly; final numbers pending independent review.",
+}
 TOLERANCE = 1e-9  # relative, as scripts/driver_intervals.py and the raise runner allow
 
 
@@ -876,7 +881,27 @@ def overlap(totals: dict, boot: dict) -> dict:
     return out
 
 
-def combine(digest: str, draws: int, seed: int, out: Path) -> dict:
+def final_status_problems(result: dict) -> list[str]:
+    """Why a combined result may not be marked final: deferred jurisdictions, a failed
+    invariant, or a raise union not reproduced exactly."""
+    problems = []
+    if result["coverage"]["jurisdictions_deferred"]:
+        problems.append(f"deferred jurisdictions {result['coverage']['jurisdictions_deferred']}")
+    if len(result["coverage"]["jurisdictions_covered"]) != 51:
+        problems.append(f"{len(result['coverage']['jurisdictions_covered'])} jurisdictions covered, not 51")
+    for name, entry in result["invariants"].items():
+        if name == "national_counts":
+            failed = [k for k, v in entry.items() if v is not True]
+        else:
+            failed = [k for k in ("pass_every_part", "exact") if k in entry and entry[k] is not True]
+        if failed:
+            problems.append(f"invariant {name}: {failed}")
+    if result["reproduction"]["raise_union_exact"] is not True:
+        problems.append("the raise union is not reproduced exactly")
+    return problems
+
+
+def combine(digest: str, draws: int, seed: int, out: Path, status: str | None = None) -> dict:
     from scripts.earnings_changes_summary import check_code
     from scripts.expanded_historical import historical_provenance
 
@@ -1002,6 +1027,14 @@ def combine(digest: str, draws: int, seed: int, out: Path) -> dict:
                    "job_sample_candidates_tested": r["job"]["sample_candidates_tested"],
                    "reproduction": r["reproduction"]} for r in records],
     }
+    if status is not None:
+        if status not in STATUSES:
+            raise ValueError(f"status must be one of {sorted(STATUSES)}")
+        problems = final_status_problems(result)
+        if problems:
+            raise ValueError(f"cannot mark the result {status}: " + "; ".join(problems))
+        result["status"] = status
+        result["status_note"] = STATUSES[status]
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(result, indent=1, sort_keys=True) + "\n")
     return result
@@ -1015,6 +1048,9 @@ def main() -> int:
     c.add_argument("--draws", type=int, default=DRAWS)
     c.add_argument("--seed", type=int, default=BOOTSTRAP_SEED)
     c.add_argument("--out", type=Path, default=ROOT / inputs.FINAL_JSON)
+    c.add_argument("--status", choices=sorted(STATUSES), default=None,
+                   help="mark the result final pending review; refused unless all 51 jurisdictions are covered, "
+                        "every invariant passes and the raise union is reproduced exactly")
     args = parser.parse_args()
     digest = args.digest
     if len(digest) == 16:
@@ -1022,7 +1058,7 @@ def main() -> int:
         if not matches:
             raise SystemExit(f"no manifest {digest}")
         digest = json.loads((ROOT / inputs.manifest_rel(digest)).read_text())["digest"]
-    result = combine(digest, args.draws, args.seed, args.out)
+    result = combine(digest, args.draws, args.seed, args.out, args.status)
     for measure in MEASURES:
         for base in HEADLINE_BASES + ("job",):
             h = result["headline"][measure][base]
