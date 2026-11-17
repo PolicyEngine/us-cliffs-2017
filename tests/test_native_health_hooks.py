@@ -388,3 +388,115 @@ def test_after_final_binding_a_different_system_is_never_rebound(
         sim.tax_benefit_system = spm_style_share(native.system)
         with pytest.raises(WitnessError, match="setup is incomplete"):
             native.pre_freeze_context(sim)
+
+
+def generated_zero_fixture(node):
+    """Deliberate double of Core3.36's missing-breakdown Parameter declaration."""
+    node.children["67"] = SimpleNamespace(
+        name=node.name + ".67",
+        file_path=None,
+        values_list=[
+            SimpleNamespace(instant_str="0000-01-01", value=0),
+            SimpleNamespace(instant_str="2040-01-01", value=0),
+        ],
+        value=0,
+    )
+    node.children["67"].get_at_instant = lambda instant: node.children["67"].value
+
+
+def parameter_fixture(monkeypatch, tmp_path, root):
+    """A source-file root, a declared leaf, and one missing-area generated zero."""
+    path = tmp_path / "FAKE-ACA-root.yaml"
+    path.write_text("Synthetic YAML source fixture; no legal or population values.\n")
+    declared = SimpleNamespace(name=root + ".CA.1", file_path=str(path))
+    declared.get_at_instant = lambda instant: 100.0
+    state = SimpleNamespace(name=root + ".CA", children={"1": declared})
+    generated_zero_fixture(state)
+    node = SimpleNamespace(
+        name=root,
+        file_path=str(path),
+        metadata={"breakdown": ["state_code", "range(1, 68)"]},
+        children={"CA": state},
+    )
+    system = SimpleNamespace(
+        parameters=SimpleNamespace(get_child=lambda name: node),
+        variables={
+            "state_code": SimpleNamespace(possible_values=[SimpleNamespace(name="CA")])
+        },
+    )
+    proofs = {
+        root: (path.name, sha256(path.read_bytes()).hexdigest()),
+        "parameter_homogenizer": proof(generated_zero_fixture),
+    }
+    monkeypatch.setattr(hooks, "PARAMETER_WATCH", ((root, "2025-01-01"),))
+    monkeypatch.setattr(hooks, "_parameter_homogenizer", lambda: generated_zero_fixture)
+    return system, node, declared, state.children["67"], proofs
+
+
+@pytest.mark.parametrize("root", sorted(hooks.GENERATED_ZERO_ROOTS))
+def test_generated_aca_zero_keeps_both_declared_and_missing_area_watches(
+    monkeypatch, tmp_path, root
+):
+    system, _, declared, generated, proofs = parameter_fixture(
+        monkeypatch, tmp_path, root
+    )
+    observed = hooks._parameter_watch(system, proofs)
+    assert observed == {
+        (declared.name, "2025-01-01"): 100.0,
+        (generated.name, "2025-01-01"): 0,
+    }
+    # A later declared-leaf value change remains visible to the existing comparison.
+    declared.get_at_instant = lambda instant: 101.0
+    assert hooks._parameter_watch(system, proofs) != observed
+
+
+@pytest.mark.parametrize("change", ["sentinel", "history", "current", "state", "area"])
+def test_generated_zero_refuses_changed_history_value_or_breakdown_name(
+    monkeypatch, tmp_path, change
+):
+    root = "gov.aca.state_rating_area_cost"
+    system, _, _, generated, proofs = parameter_fixture(monkeypatch, tmp_path, root)
+    if change == "sentinel":
+        generated.values_list.pop()
+    elif change == "history":
+        generated.values_list[0].value = 1
+    elif change == "current":
+        generated.value = 1
+    elif change == "state":
+        generated.name = root + ".UNKNOWN.67"
+    elif change == "area":
+        generated.name = root + ".CA.68"
+    with pytest.raises(WitnessError):
+        hooks._parameter_watch(system, proofs)
+
+
+@pytest.mark.parametrize(
+    "change", ["root_missing", "root_bytes", "leaf_path", "generator_hash"]
+)
+def test_generated_zero_never_waives_root_leaf_or_core_source_authentication(
+    monkeypatch, tmp_path, change
+):
+    root = "gov.aca.state_rating_area_cost"
+    system, node, declared, _, proofs = parameter_fixture(monkeypatch, tmp_path, root)
+    if change == "root_missing":
+        node.file_path = None
+    elif change == "root_bytes":
+        Path(node.file_path).write_text("Changed synthetic source bytes.\n")
+    elif change == "leaf_path":
+        other = tmp_path / "UNRELATED-leaf.yaml"
+        other.write_text(Path(node.file_path).read_text())
+        declared.file_path = str(other)
+    elif change == "generator_hash":
+        proofs["parameter_homogenizer"] = (proof(generated_zero_fixture)[0], "0" * 64)
+    with pytest.raises(WitnessError):
+        hooks._parameter_watch(system, proofs)
+
+
+def test_missing_source_is_not_general_permission_for_other_parameter_roots(
+    monkeypatch, tmp_path
+):
+    system, _, _, _, proofs = parameter_fixture(
+        monkeypatch, tmp_path, "FAKE.unselected"
+    )
+    with pytest.raises(WitnessError, match="not a selected ACA breakdown"):
+        hooks._parameter_watch(system, proofs)

@@ -139,17 +139,74 @@ def _leaves(node):
         yield node
 
 
+GENERATED_ZERO_ROOTS = frozenset(
+    {"gov.aca.state_rating_area_cost", "gov.aca.lcbp.state_rating_area_cost"}
+)
+
+
+def _parameter_homogenizer():
+    # Loaded only inside the already-admitted engine phase, never at module import.
+    from policyengine_core.parameters.operations.homogenize_parameters import (
+        homogenize_parameter_node,
+    )
+
+    return homogenize_parameter_node
+
+
+def _generated_zero_leaf(system, root, node, leaf):
+    """Recognize only Core3.36's missing ACA breakdown zero declaration.
+
+    The root YAML and maintained homogenizer are authenticated by the caller.
+    This recognizes ordinary processed source provenance, not adversarial mutation.
+    """
+    if root not in GENERATED_ZERO_ROOTS or node.metadata.get("breakdown") != [
+        "state_code",
+        "range(1, 68)",
+    ]:
+        raise WitnessError("Missing parameter source is not a selected ACA breakdown")
+    prefix = root + "."
+    parts = leaf.name[len(prefix) :].split(".") if leaf.name.startswith(prefix) else []
+    states = {item.name for item in system.variables["state_code"].possible_values}
+    if (
+        len(parts) != 2
+        or parts[0] not in states
+        or parts[1] not in {str(area) for area in range(1, 68)}
+    ):
+        raise WitnessError("The generated ACA leaf name differs from its breakdown")
+    history = leaf.values_list
+    if not history or not {"0000-01-01", "2040-01-01"}.issubset(
+        {item.instant_str for item in history}
+    ):
+        raise WitnessError("The generated ACA leaf lacks Core's zero-history sentinels")
+    for item in history:
+        _value(item.value)
+        if isinstance(item.value, bool) or item.value != 0:
+            raise WitnessError("The generated ACA leaf has a nonzero history")
+
+
 def _parameter_watch(system, proofs):
     result = {}
     checked = set()
+    homogenizer_checked = False
     for root, instant in PARAMETER_WATCH:
-        for leaf in _leaves(system.parameters.get_child(root)):
+        node = system.parameters.get_child(root)
+        # A single YAML owns each selected root, including generated descendants.
+        _source_file(node.file_path, proofs[root], {".yaml", ".yml"})
+        checked.add((root, node.file_path))
+        for leaf in _leaves(node):
             source = leaf.file_path
-            if (root, source) not in checked:
+            if source is None:
+                if not homogenizer_checked:
+                    _source(_parameter_homogenizer(), proofs["parameter_homogenizer"])
+                    homogenizer_checked = True
+                _generated_zero_leaf(system, root, node, leaf)
+            elif (root, source) not in checked:
                 _source_file(source, proofs[root], {".yaml", ".yml"})
                 checked.add((root, source))
             value = leaf.get_at_instant(instant)
             _value(value)  # Same finite/primitive convention as the live witness.
+            if source is None and (isinstance(value, bool) or value != 0):
+                raise WitnessError("The generated ACA leaf no longer evaluates to zero")
             result[leaf.name, instant] = value
     if not result:
         raise WitnessError("The selected price/premium watch set is empty")
