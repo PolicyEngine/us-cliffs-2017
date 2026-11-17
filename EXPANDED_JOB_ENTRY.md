@@ -298,9 +298,8 @@ deferred by state, because wages.json then lacked their rates. With the rates
 added, `--scope states:MD,NY` tests only them, with the same per-rank files under
 its own scope name. A complete job-entry union needs both scopes, and every
 candidate in exactly one. Now that wages.json resolves all 51 jurisdictions, a
-fresh `resolved` run would cover Maryland and New York too, so the union reads
-the existing `resolved` records with the `states-MD-NY` records rather than
-rerunning `resolved`.
+fresh `resolved` run covers Maryland and New York too; the fresh run below did
+that, and the final union reads it.
 
 The smoke run (`results/job_entry/parts/smoke_job_entry_2017_p4_0_s0_h150_seed17/`)
 tested rank 1 in a fixed 150-household subsample of part 0, seed 17: one
@@ -341,6 +340,18 @@ $0.02. Containers took 5.5 to 10 minutes, with a peak of 6.3 GiB. These records
 carry the new wages.json hash; the other 49 jurisdictions' rates are identical
 to those the `resolved` records used.
 
+After the runner guards, a fresh run (commit 9ea19fd) tested all 51
+jurisdictions in the one scope `resolved`, on a new volume with an empty local
+root, so nothing resumed. Its plans count 13,610 sample candidates, each rank's
+count exactly the earlier `resolved` plus `states-MD-NY` counts, in 22
+containers. All 22 pairs pass strict validation against the plans with no
+jurisdiction deferred, and every identity check passed. Its rows equal the
+earlier runs' rows exactly: the same 13,610 people in the same ranks, every
+column's text identical (gross pay, all three measures and every component),
+so no retention flag changes at any threshold. The records' integer counts and
+identity maxima match too; only the MicroSeries-weighted record totals differ in
+summation order, by at most 2 parts in 10^16, because one scope replaced two.
+
 ```sh
 MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --check-only
 MODAL_PROFILE=policyengine modal run scripts/modal_job_entry.py --model-fixture-only
@@ -354,12 +365,8 @@ MODAL_PROFILE=policyengine modal run --detach scripts/modal_job_entry.py --names
 
 ## Remaining work
 
-Write the job-entry union step over the per-rank rows of both scopes, checking
-that every candidate appears exactly once across ranks and scopes; review the
-observable availability
-restrictions; compare job-entry resource components with the main raise
-experiment; and validate the main strict-cliff group and the additional
-high-loss group under the same union. Uncertainty must resample source
-households together with their duplicate records. The national run produces
-per-person changes only: no job-entry union, population total or overlap with
-the raise union exists yet.
+The household union of the job test with the raise test, its population totals,
+intervals and overlap with the raise union are in `COMBINED_UNION.md`. Still
+open: an independent review of the runner fixes and the final union, a review
+of the observable availability restrictions, and a comparison of the job-entry
+resource components with the main raise experiment's.

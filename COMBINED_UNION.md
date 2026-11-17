@@ -51,7 +51,11 @@ wage scope counts only when every part has its plan and a validated record for
 every planned rank, and a jurisdiction counts as covered only when its tested rows
 equal the plans' count of its candidates in all four parts. Every other
 jurisdiction is deferred, and the JSON's status is
-`preliminary_partial_jurisdictions` while any is. Later scopes, such as Maryland
+`preliminary_partial_jurisdictions` while any is. `combine --status
+final_pending_review` labels a result final pending independent review, and
+refuses unless all 51 jurisdictions are covered, none is deferred, every invariant
+passes in every part and nationally, and the raise union reproduces exactly.
+Later scopes, such as Maryland
 and New York's `states-MD-NY`, enter with no code change; `--scopes` limits a run
 to named scopes.
 
@@ -97,10 +101,36 @@ overwriting, so a relaunch resumes.
 ```sh
 MODAL_PROFILE=policyengine modal run scripts/modal_combined_union.py \
     --job-root PATH --raise-rows-root PATH [--scopes resolved]
-python scripts/expanded_combined_union.py combine --digest DIGEST
+python scripts/expanded_combined_union.py combine --digest DIGEST \
+    [--status final_pending_review]
 ```
 
 `--job-root` is a checkout that holds the git-ignored `results/job_entry/`, and
 `--raise-rows-root` one that holds the raise experiment's
 `results/parts/per_person/` rows. The part records and per-source-household totals
 stay in `results/combined_union/`, which git ignores.
+
+## Current result
+
+The committed JSON (status `final_pending_review`) comes from commit 9ea19fd and
+manifest digest `2a499b9d5109f1d9`. Its job rows are one fresh `resolved` run
+that tests all 51 jurisdictions (13,610 sample candidates, see
+`EXPANDED_JOB_ENTRY.md`), so nothing is deferred. Every invariant passed, and with
+the job rows emptied the recount equals the raise union exactly.
+
+It matches the earlier 51-jurisdiction union, which read the `resolved` and
+`states-MD-NY` scopes together, in every count, point estimate and invariant. The
+per-source-household totals are bitwise identical, as are the bootstrap point
+estimates. Only some interval bounds and standard errors differ, by at most 8
+parts in 10^16, from floating-point summation order in the resample.
+
+Household members, millions, with 95% intervals:
+
+| Set | Measure | Strict loss | Additional | Below-half total |
+| --- | --- | --- | --- | --- |
+| combined | with health | 31.91 (29.40-34.56) | 36.48 (33.98-38.98) | 68.39 (64.92-72.09) |
+| combined_1000 | with health | 15.97 (14.18-17.84) | 33.59 (31.18-36.07) | 49.56 (46.49-52.77) |
+| job | with health | 10.78 (9.26-12.44) | 10.07 (8.73-11.53) | 20.85 (18.81-23.10) |
+| combined | without health | 3.12 (2.36-3.95) | 39.04 (36.31-41.82) | 42.16 (39.34-45.05) |
+| combined_1000 | without health | 1.89 (1.31-2.52) | 31.91 (29.47-34.45) | 33.80 (31.27-36.37) |
+| job | without health | 0.18 (0.04-0.34) | 7.52 (6.32-8.82) | 7.69 (6.48-9.01) |
