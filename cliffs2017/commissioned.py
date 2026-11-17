@@ -420,9 +420,14 @@ def run(spec: RunSpec, runtime: Runtime, *, contribution_sink=None):
                 raise ContractError("Cutoffs are not nested within one experiment")
         flags[label] = result
 
-    tables = {}
+    any_raise = {key: blank.copy() for key, _, _ in CUTOFFS}
     for amount in spec.raises:
-        raises = flags[f"raise_{amount}"]
+        for key, _, _ in CUTOFFS:
+            any_raise[key] = any_raise[key] | flags[f"raise_{amount}"][key]
+    table_flags = [(str(amount), flags[f"raise_{amount}"]) for amount in spec.raises]
+    table_flags.append(("any_raise", any_raise))
+    tables = {}
+    for amount, raises in table_flags:
         strict_raise_hh, _ = _project(runtime, sim, raises["0"])
         strict_job_hh, _ = _project(runtime, sim, flags["job"]["0"])
         strict_households = strict_raise_hh | strict_job_hh
@@ -488,6 +493,7 @@ def run(spec: RunSpec, runtime: Runtime, *, contribution_sink=None):
         "law_year": 2017,
         "reference_year": 2025,
         "currency_year": 2025,
+        "raise_amounts_real_2025": list(spec.raises),
         "bindings": binding_at_start,
         "tables": tables,
         "scenario_audit": audit,

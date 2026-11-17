@@ -2,6 +2,8 @@
 
 The experiment interfaces separate the policy year from the price year. They target 2017 law on a recent reference population. Callers convert 2025-dollar money inputs to native 2017 units before construction; the account reports outputs in 2025 dollars. The modules provide account, price, managed-input and branch-integrity interfaces. The runtime bridge composes these interfaces; native execution still requires qualified reference inputs, health unit values and integration checks.
 
+The `any_raise` table combines the discrete $1,000, $2,000 and $5,000 real-2025 raise scenarios. It counts each person flagged under at least one tested raise, then combines the job-entry flags through the household mapping. Its additional group excludes every household with a strict loss under any tested raise or job entry.
+
 ## Resource account
 
 `AccountSpec` requires explicit nonhealth benefits, net government health components and runtime, input-preparation and price identities. `make_account_reform` registers two household accounts:

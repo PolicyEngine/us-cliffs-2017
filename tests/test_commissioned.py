@@ -151,6 +151,7 @@ class Fixture:
         2000: {0: 1800, 1: 1600, 2: 1600, 6: 400},
         5000: {0: 4500, 1: 4000, 2: 4000, 6: -1},
     }
+    job_changes: ClassVar[dict[int, int]] = {3: 10400, 4: 0}
 
     def __init__(self):
         self.base = {
@@ -213,7 +214,7 @@ class Fixture:
         for person in selected:
             if "_job_" in sim.name:
                 # A: exactlyhalf20800; B: exactlyzero, not strictlynegative.
-                amount = 10400 if person == 3 else 0
+                amount = self.job_changes[person]
             else:
                 amount = next(
                     values[person]
@@ -282,6 +283,25 @@ class Simulation:
 
     def calc(self, name, *, period, map_to=None):
         assert period == 2017
+        if name == PERSON_FLAG:
+            flag = self.aux[name]
+            if map_to == "household":
+                household_mass = dict(zip(self.fixture.households, self.fixture.mass))
+                return Weighted(
+                    [
+                        sum(
+                            value
+                            for household, value in zip(
+                                self.fixture.households, flag._data
+                            )
+                            if household == target
+                        )
+                        for target in ("A", "B", "C")
+                    ],
+                    [household_mass[h] for h in ("A", "B", "C")],
+                    ("A", "B", "C"),
+                )
+            return flag.copy()
         if name == RANK:
             positions = dict.fromkeys(self.fixture.households, 0)
             rank = []
@@ -339,6 +359,43 @@ def test_different_raise_sizes_need_not_be_nested():
     assert result["tables"]["2000"]["0"]["raise"]["members"] == 0
     assert result["tables"]["5000"]["0"]["raise"]["members"] == 10
     assert result["tables"]["2000"]["0.50"]["union"]["members"] == 16
+
+
+def test_any_raise_deduplicates_non_nested_workers_and_households():
+    fixture = Fixture()
+    contributions = {}
+
+    def sink(key, vector, *, point_total):
+        assert key not in contributions
+        assert vector.index == ("A", "B", "C")
+        assert vector.sum() == point_total
+        contributions[key] = vector.copy()
+
+    result = run(RunSpec("any_raise"), fixture.runtime(), contribution_sink=sink)
+    tables = result["tables"]
+    assert set(tables) == {"1000", "2000", "5000", "any_raise"}
+    assert result["raise_amounts_real_2025"] == [1000, 2000, 5000]
+    # A loses under1000; C loses under5000 and qualifies under2000 at0.50.
+    # Count C once across sizes and A once despite multiple flagged adults.
+    assert tables["any_raise"]["0"]["raise"] == {
+        "adults": 7,
+        "households": 7,
+        "members": 18,
+    }
+    half = tables["any_raise"]["0.50"]
+    assert half["raise"] == {"adults": 7, "households": 7, "members": 18}
+    assert half["union"] == {"adults": 10, "households": 10, "members": 24}
+    assert half["additional_households_outside_strict_households"] == 3
+    assert half["additional_members_outside_strict_households"] == 6
+    # The per2000 table has no strict loss, but the combined strict group
+    # contains A and C from the other sizes. Only B remains additional.
+    assert tables["2000"]["0.50"]["additional_members_outside_strict_households"] == 16
+    assert tables["any_raise"]["0.60"]["raise"]["adults"] == 9
+    assert len(contributions) == 176
+    assert sum(key[0] == "any_raise" for key in contributions) == 44
+    assert len(fixture.created) == 1 and len(fixture.branch_changes) == 11
+    assert fixture.created[0].branches == {}
+    assert fixture.base == fixture.original
 
 
 def test_full_time_job_units_and_fractional_age_boundary():
@@ -490,3 +547,83 @@ def test_weighted_union_and_disjoint_additional_counts_match_set_reference(
         for person, household in enumerate(fixture.households)
         if household in additional
     )
+
+
+@settings(max_examples=30, deadline=None, derandomize=True, database=None)
+@given(
+    masses=st.tuples(*(st.integers(min_value=1, max_value=100) for _ in range(3))),
+    ratios=st.lists(
+        st.sampled_from(
+            (
+                Fraction(-1, 10),
+                Fraction(0),
+                Fraction(1, 5),
+                Fraction(1, 2),
+                Fraction(3, 5),
+                Fraction(1),
+            )
+        ),
+        min_size=14,
+        max_size=14,
+    ),
+)
+def test_discrete_any_raise_union_matches_independent_set_oracle(masses, ratios):
+    """Synthetic hand-defined changes; enumerate sets without engine helpers."""
+    fixture = Fixture()
+    household_mass = dict(zip(("A", "B", "C"), masses))
+    fixture.mass = tuple(household_mass[h] for h in fixture.households)
+    workers = (0, 1, 2, 6)
+    amounts = (1000, 2000, 5000)
+    fixture.changes = {
+        amount: {person: ratios[4 * j + i] * amount for i, person in enumerate(workers)}
+        for j, amount in enumerate(amounts)
+    }
+    fixture.job_changes = {3: ratios[12] * 20800, 4: ratios[13] * 20800}
+    result = run(RunSpec("grid_property"), fixture.runtime())
+    strict_people = {
+        person
+        for amount in amounts
+        for person, change in fixture.changes[amount].items()
+        if change < 0
+    } | {person for person, change in fixture.job_changes.items() if change < 0}
+    strict_households = {fixture.households[p] for p in strict_people}
+    for cutoff, key in (
+        (Fraction(3, 5), "0.60"),
+        (Fraction(1, 2), "0.50"),
+        (Fraction(1, 5), "0.20"),
+        (Fraction(0), "0"),
+    ):
+        raised = {
+            person
+            for amount in amounts
+            for person, change in fixture.changes[amount].items()
+            if change / amount < cutoff
+        }
+        jobs = {
+            person
+            for person, change in fixture.job_changes.items()
+            if change / 20800 < cutoff
+        }
+        row = result["tables"]["any_raise"][key]
+        for label, people in (
+            ("raise", raised),
+            ("job", jobs),
+            ("union", raised | jobs),
+        ):
+            households = {fixture.households[p] for p in people}
+            assert row[label] == {
+                "adults": sum(fixture.mass[p] for p in people),
+                "households": sum(household_mass[h] for h in households),
+                "members": sum(
+                    fixture.mass[p]
+                    for p, h in enumerate(fixture.households)
+                    if h in households
+                ),
+            }
+        additional = {fixture.households[p] for p in raised | jobs} - strict_households
+        assert row["additional_households_outside_strict_households"] == sum(
+            household_mass[h] for h in additional
+        )
+        assert row["additional_members_outside_strict_households"] == sum(
+            fixture.mass[p] for p, h in enumerate(fixture.households) if h in additional
+        )
