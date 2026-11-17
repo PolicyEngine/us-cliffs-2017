@@ -156,6 +156,40 @@ def _parameter_watch(system, proofs):
     return result
 
 
+def _variable_expectations(system, names, period):
+    return tuple(
+        VariableExpectation(
+            name,
+            period,
+            system.variables[name].get_formula(period),
+            system.variables[name].entity.key,
+            str(system.variables[name].definition_period).lower(),
+            value_type=system.variables[name].value_type,
+            adds=system.variables[name].adds,
+            subtracts=system.variables[name].subtracts,
+            defined_for=system.variables[name].defined_for,
+        )
+        for name in sorted(names)
+    )
+
+
+def _check_definitions(system, expected, original_objects):
+    for item in expected:
+        variable = system.variables.get(item.name)
+        if (
+            variable is not original_objects[item.name]
+            or variable.get_formula(item.period) is not item.formula
+            or variable.entity.key != item.entity
+            or str(variable.definition_period).lower() != item.definition_period
+            or variable.value_type is not item.value_type
+            or _composition(variable.adds) != item.adds
+            or _composition(variable.subtracts) != item.subtracts
+            or variable.defined_for != item.defined_for
+            or variable.is_neutralized
+        ):
+            raise WitnessError("A source-bound prepared definition changed")
+
+
 class ReferenceHealthSetup:
     """Callbacks for the existing once-prepared full reference constructor."""
 
@@ -175,7 +209,8 @@ class ReferenceHealthSetup:
         self.runtime, self.observe_runtime = expected_runtime, observe_runtime
         self.person_count, self.proofs = person_count, dict(source_proofs)
         self.readers = dict(core_readers)
-        self.capture, self.system = None, None
+        self.capture, self.system, self.origin_system = None, None, None
+        self.variables, self.variable_objects = (), {}
         for name, function in self.readers.items():
             _source(function, self.proofs[name])
 
@@ -187,7 +222,7 @@ class ReferenceHealthSetup:
 
     def prepare_system(self, system):
         self._runtime()
-        if self.system is not None:
+        if self.origin_system is not None:
             raise WitnessError("Own exactly one reference system")
         _source(make_reference_health_unit_reform, self.proofs["health_valuation"])
         formulas = {
@@ -207,13 +242,26 @@ class ReferenceHealthSetup:
         self.capture = ReferenceHealthCapture(
             reference_formulas=selected, person_count=self.person_count
         )
-        self.system = system
+        self.variables = _variable_expectations(
+            system, REFERENCE_READS.values(), "2025"
+        )
+        self.variable_objects = MappingProxyType(
+            {item.name: system.variables[item.name] for item in self.variables}
+        )
+        self.origin_system = system
         return system
 
     def capture_reference(self, simulation):
         self._runtime()
-        if simulation.tax_benefit_system is not self.system or self.capture is None:
+        if self.origin_system is None or self.capture is None:
+            raise WitnessError("The prepared reference system is missing")
+        if self.system is not None and simulation.tax_benefit_system is not self.system:
             raise WitnessError("The managed reference constructor changed systems")
+        # US SPM shares a private policy copy with the same registered variables.
+        # Authenticate that finite prepared set before binding its final system.
+        _check_definitions(
+            simulation.tax_benefit_system, self.variables, self.variable_objects
+        )
         if list(simulation.dataset.years) != [2024, 2025]:
             raise WitnessError("The maintained source/reference years differ")
         # Core retains the multi-year container's first-year default. Every
@@ -227,6 +275,7 @@ class ReferenceHealthSetup:
             for method in ("get_array", "get_known_periods"):
                 _bound(holder, method, self.readers[method])
         self.capture(simulation)
+        self.system = simulation.tax_benefit_system
 
     @property
     def anchor_digest(self):
@@ -309,11 +358,13 @@ class NativeHealthHooks:
                 "native_price_factor": (245120, 321943),
             }
         )
-        self.system, self.variables, self.parameters, self.fixed = None, (), {}, ()
+        self.system, self.origin_system = None, None
+        self.variables, self.variable_objects = (), {}
+        self.parameters, self.fixed = {}, ()
 
     def prepare_system(self, system):
         self.reference._runtime()
-        if self.system is not None:
+        if self.origin_system is not None:
             raise WitnessError("Own exactly one native system")
         for name in NATIVE_ORIGINALS:
             _source(system.variables[name].get_formula("2017"), self.proofs[name])
@@ -339,38 +390,32 @@ class NativeHealthHooks:
             *HEALTH_OUTPUTS,
             *NATIVE_ORIGINALS,
         }
-        self.variables = tuple(
-            VariableExpectation(
-                name,
-                "2017",
-                system.variables[name].get_formula("2017"),
-                system.variables[name].entity.key,
-                str(system.variables[name].definition_period).lower(),
-                value_type=system.variables[name].value_type,
-                adds=system.variables[name].adds,
-                subtracts=system.variables[name].subtracts,
-                defined_for=system.variables[name].defined_for,
-            )
-            for name in sorted(names)
+        self.variables = _variable_expectations(system, names, "2017")
+        self.variable_objects = MappingProxyType(
+            {item.name: system.variables[item.name] for item in self.variables}
         )
         self.parameters = _parameter_watch(system, self.proofs)
-        self.system = system
+        self.origin_system = system
         return system
 
     def prepare_health(self, simulation):
-        if simulation.tax_benefit_system is not self.system or self.fixed:
+        if self.system is not None or self.origin_system is None or self.fixed:
             raise WitnessError("Install once on the owned native system")
+        # Validate definitions/parameters before any health input installation.
+        self._prepared_state(simulation)
+        self.system = simulation.tax_benefit_system
         self.fixed = self.reference.capture.prepare_health(simulation)
+        if simulation.tax_benefit_system is not self.system:
+            raise WitnessError("The native system changed during health installation")
         return self.fixed
 
-    def pre_freeze_context(self, simulation):
+    def _prepared_state(self, simulation):
         self.reference._runtime()
         if (
-            simulation.tax_benefit_system is not self.system
+            self.origin_system is None
             or str(simulation.default_calculation_period) != "2017"
-            or not self.fixed
         ):
-            raise WitnessError("Native source/clock/health setup is incomplete")
+            raise WitnessError("Native source/clock setup is incomplete")
         if self.spec.health_price_anchor_sha256 != self.reference.anchor_digest:
             raise WitnessError("The reference anchor identity changed")
         for name, method in self.methods.items():
@@ -382,19 +427,9 @@ class NativeHealthHooks:
             raise WitnessError(
                 "A supplied derived price/account/health output overrides formulas"
             )
-        for item in self.variables:
-            variable = simulation.tax_benefit_system.variables[item.name]
-            if (
-                variable.get_formula(item.period) is not item.formula
-                or variable.entity.key != item.entity
-                or str(variable.definition_period).lower() != item.definition_period
-                or variable.value_type is not item.value_type
-                or _composition(variable.adds) != item.adds
-                or _composition(variable.subtracts) != item.subtracts
-                or variable.defined_for != item.defined_for
-                or variable.is_neutralized
-            ):
-                raise WitnessError("A source-bound native definition changed")
+        _check_definitions(
+            simulation.tax_benefit_system, self.variables, self.variable_objects
+        )
         for (path, instant), expected in self.parameters.items():
             if _value(
                 simulation.tax_benefit_system.parameters.get_child(path).get_at_instant(
@@ -404,6 +439,11 @@ class NativeHealthHooks:
                 raise WitnessError(
                     "A selected reference-price/native-premium leaf changed"
                 )
+
+    def pre_freeze_context(self, simulation):
+        if simulation.tax_benefit_system is not self.system or not self.fixed:
+            raise WitnessError("Native source/clock/health setup is incomplete")
+        self._prepared_state(simulation)
         for item in self.fixed:
             _fixed(simulation, item)
         return self.context

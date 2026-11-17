@@ -1,5 +1,6 @@
 """Fake callback sequencing only; source proofs here bind synthetic fixtures."""
 
+from copy import copy
 from hashlib import sha256
 from pathlib import Path
 from types import SimpleNamespace
@@ -16,6 +17,10 @@ from cliffs2017.native_witness import WitnessError
 class System:
     def __init__(self, parameter_path):
         self.variables = {}
+        self.entities = [
+            SimpleNamespace(key="person"),
+            SimpleNamespace(key="household"),
+        ]
         self.leaf = SimpleNamespace(
             name="FAKE.price", file_path=str(parameter_path), value=100.0
         )
@@ -101,7 +106,22 @@ def proof(function):
     return path.name, sha256(path.read_bytes()).hexdigest()
 
 
-def pipeline(monkeypatch, tmp_path):
+def spm_style_share(system):
+    """Toy copy/dict/private-entity route from maintained US share_spm_policy."""
+    chosen = copy(system)
+    chosen.variables = dict(system.variables)
+    chosen.entities = [copy(entity) for entity in system.entities]
+    return chosen
+
+
+def pipeline(
+    monkeypatch,
+    tmp_path,
+    *,
+    share_systems=False,
+    mutate_reference=None,
+    mutate_native=None,
+):
     """Use actual hook implementations with deliberately fake constructor/APIs."""
     monkeypatch.setattr(hooks, "make_reference_health_unit_reform", reference_reform)
     monkeypatch.setattr(hooks, "make_health_valuation_reform", valuation_reform)
@@ -146,7 +166,11 @@ def pipeline(monkeypatch, tmp_path):
     )
     reference_system = reference.prepare_system(System(param))
     reference_sim = fake.ReferenceSimulation()
-    reference_sim.tax_benefit_system = reference_system
+    reference_sim.tax_benefit_system = (
+        spm_style_share(reference_system) if share_systems else reference_system
+    )
+    if mutate_reference is not None:
+        mutate_reference(reference_sim)
     reference_sim.dataset = SimpleNamespace(years=[2024, 2025])
     reference_sim.default_calculation_period = "2024"
     reference.capture_reference(reference_sim)
@@ -166,7 +190,12 @@ def pipeline(monkeypatch, tmp_path):
         source_proofs=proofs,
     )
     sim = fake.Simulation()
-    sim.tax_benefit_system = native.prepare_system(System(param))
+    native_system = native.prepare_system(System(param))
+    sim.tax_benefit_system = (
+        spm_style_share(native_system) if share_systems else native_system
+    )
+    if mutate_native is not None:
+        mutate_native(sim)
     sim.default_calculation_period = "2017"
     fixed = native.prepare_health(sim)
     return reference, native, sim, fixed, anchor, observed
@@ -281,3 +310,81 @@ def test_reference_2025_reads_preserve_actual_container_default_2024(
     assert reference.observed_default_calculation_period == "2024"
     assert reference.capture.receipt["reference_year"] == 2025
     # ReferenceSimulation.calc rejects any period except explicit2025.
+
+
+def test_spm_private_policy_copy_authenticates_then_binds_final_systems(
+    monkeypatch, tmp_path
+):
+    reference, native, sim, fixed, _, _ = pipeline(
+        monkeypatch, tmp_path, share_systems=True
+    )
+    assert reference.system is not reference.origin_system
+    assert native.system is not native.origin_system
+    for setup in (reference, native):
+        assert setup.system.variables is not setup.origin_system.variables
+        assert setup.system.entities is not setup.origin_system.entities
+        assert setup.system.entities[0] is not setup.origin_system.entities[0]
+        assert all(
+            setup.system.variables[name] is setup.origin_system.variables[name]
+            for name in setup.variable_objects
+        )
+    assert native.pre_freeze_context(sim) == native.context
+    assert final_witness(native, sim, fixed)(sim) == native.context
+
+
+@pytest.mark.parametrize("change", ["formula", "schema", "variable_object"])
+def test_reference_final_copy_must_preserve_prepared_definitions(
+    monkeypatch, tmp_path, change
+):
+    def mutate(sim):
+        name = next(iter(hooks.REFERENCE_READS.values()))
+        item = sim.tax_benefit_system.variables[name]
+        if change == "formula":
+            item.get_formula = lambda period: lambda *args: None
+        elif change == "schema":
+            item.defined_for = "FAKE.changed_mask"
+        else:
+            sim.tax_benefit_system.variables[name] = copy(item)
+
+    with pytest.raises(WitnessError, match="prepared definition"):
+        pipeline(monkeypatch, tmp_path, share_systems=True, mutate_reference=mutate)
+
+
+@pytest.mark.parametrize("change", ["formula", "parameter", "variable_object"])
+def test_native_final_copy_rejects_drift_before_health_inputs(
+    monkeypatch, tmp_path, change
+):
+    seen = []
+
+    def mutate(sim):
+        seen.append(sim)
+        system = sim.tax_benefit_system
+        item = system.variables[hooks.CASH_VARIABLE]
+        if change == "formula":
+            item.get_formula = lambda period: lambda *args: None
+        elif change == "parameter":
+            system.leaf.value += 1
+        else:
+            system.variables[hooks.CASH_VARIABLE] = copy(item)
+
+    with pytest.raises(WitnessError):
+        pipeline(monkeypatch, tmp_path, share_systems=True, mutate_native=mutate)
+    assert not hooks.HEALTH_INPUTS.intersection(seen[0].inputs)
+
+
+@pytest.mark.parametrize("phase", ["reference", "native"])
+def test_after_final_binding_a_different_system_is_never_rebound(
+    monkeypatch, tmp_path, phase
+):
+    reference, native, sim, _, _, _ = pipeline(
+        monkeypatch, tmp_path, share_systems=True
+    )
+    if phase == "reference":
+        replacement = fake.ReferenceSimulation()
+        replacement.tax_benefit_system = spm_style_share(reference.system)
+        with pytest.raises(WitnessError, match="changed systems"):
+            reference.capture_reference(replacement)
+    else:
+        sim.tax_benefit_system = spm_style_share(native.system)
+        with pytest.raises(WitnessError, match="setup is incomplete"):
+            native.pre_freeze_context(sim)
