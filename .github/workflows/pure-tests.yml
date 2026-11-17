@@ -2,7 +2,7 @@ name: Pure preparation tests
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, codex/cliffs-native-period-packets]
 
 permissions:
   contents: read

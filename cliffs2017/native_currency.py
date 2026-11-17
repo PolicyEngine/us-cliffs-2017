@@ -56,8 +56,10 @@ FACT_UNITS = {
     Kind.WEIGHT: frozenset({"weight"}),
     Kind.CALENDAR: frozenset({"calendar_year", "calendar_date"}),
     Kind.STRUCTURE: frozenset({"id", "count", "flag"}),
-    Kind.DEMOGRAPHIC: frozenset({"category", "flag"}),
-    Kind.DIMENSIONLESS: frozenset({"fraction", "count", "flag"}),
+    Kind.DEMOGRAPHIC: frozenset({"category", "flag", "code"}),
+    Kind.DIMENSIONLESS: frozenset(
+        {"fraction", "count", "flag", "hours", "hours/week", "weeks"}
+    ),
 }
 ALL_UNITS = MONEY_UNITS | frozenset().union(*FACT_UNITS.values())
 # Representation limits bound arithmetic resources, not economic values or tax rules.
@@ -317,6 +319,11 @@ def _fact(value, unit):
             raise ContractError(
                 "Identifier/category must be a nonempty string or integer"
             )
+    elif unit == "code":
+        if not isinstance(value, str):
+            raise ContractError(
+                "Geographic codes require their supplied text, including explicit empty sentinels"
+            )
     elif unit == "calendar_year":
         if type(value) is not int:
             raise ContractError("Calendar year must be an integer; never clamp")
@@ -334,8 +341,11 @@ def _fact(value, unit):
         if isinstance(value, str):
             raise ContractError("Numeric facts require numeric values, not text")
         numeric = _number(value)
-        if unit in {"weight", "age_years"} and numeric < 0:
-            raise ContractError("Weight/age cannot be negative")
+        if (
+            unit in {"weight", "age_years", "hours", "hours/week", "weeks"}
+            and numeric < 0
+        ):
+            raise ContractError("Weight, age, hours and weeks cannot be negative")
     return value
 
 

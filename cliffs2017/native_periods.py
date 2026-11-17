@@ -71,9 +71,11 @@ def _validate_topology(contract, fixed_facts):
             field is None
             or field.entity != entity
             or field.kind != Kind.ID
-            or field.period != "eternity"
+            or field.period not in {"year", "eternity"}
         ):
-            raise ContractError("Each entity needs an explicit eternal ID vector")
+            raise ContractError(
+                "Each entity needs an explicit annual or eternal ID vector"
+            )
         ids = fixed_facts[name]
         if len(set(ids)) != len(ids):
             raise ContractError("Entity IDs must be unique")
@@ -86,11 +88,12 @@ def _validate_topology(contract, fixed_facts):
             if (
                 spec is None
                 or spec.entity != "person"
-                or spec.period != "eternity"
+                or spec.period
+                not in ({"year", "eternity"} if key == membership else {"eternity"})
                 or spec.disposition != Disposition.KEEP
             ):
                 raise ContractError(
-                    "Explicit eternal membership and role vectors required"
+                    "Explicit annual/eternal membership and eternal role vectors required"
                 )
         if fields[membership].kind not in {Kind.ID, Kind.STRUCTURE}:
             raise ContractError("Membership must be declared as an identifier")

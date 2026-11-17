@@ -1,0 +1,1 @@
+Add source-bound native input materialization and validation, government-transfer resource accounts, and guarded pilot interfaces for historical-law counterfactuals on a recent reference population. These interfaces do not yet qualify population results or provide new national estimates.

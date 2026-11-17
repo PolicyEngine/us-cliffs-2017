@@ -44,12 +44,14 @@ The helper tests use synthetic inputs and mock price indices and execute without
 
 Numeric facts retain their finite numeric types, including fractional ages; numeric strings fail validation. Money converts to exact fractions. Representation guards limit integers and ratio components to 4,096 bits, decimal coefficients to 1,000 digits, decimal exponents to ±1,000 and numeric text to 2,048 characters. These resource limits apply to supplied numbers.
 
-Declare every input field explicitly. For age-derived birth facts, supply `calendar_scope` and `calendar_reason`, approve the scope in `InputContract.calendar_scopes`, and choose the reviewed drop or compatible hold. The returned `calendar_dispositions` records the scope, reason and disposition; `dropped_fields` also lists any dropped birth fact. Retained calendar values never shift or clamp. Lexical name guards cover selected common names; the complete reviewed field contract must identify other date and cohort facts.
+Declare every input field explicitly. When a fixed age shares the same entity, age-derived birth facts require `calendar_scope` and `calendar_reason`; approve the scope in `InputContract.calendar_scopes`, and choose the reviewed drop or compatible hold. The returned `calendar_dispositions` records the scope, reason and disposition; `dropped_fields` also lists any dropped birth fact. Retained calendar values never shift or clamp. Lexical name guards cover selected common names; the complete reviewed field contract must identify other date and cohort facts.
 
 Run the isolated pure suite:
 
 ```bash
-uv run --no-project --python 3.13 --with pytest==9.2.0 --with hypothesis==6.170.15 python -m pytest tests/test_native_currency.py
+uv venv --python 3.13.13 .venv-pure
+uv pip install --python .venv-pure/bin/python --only-binary :all: --require-hashes -r ci/pure-test-requirements.txt
+uv run --no-project --python .venv-pure/bin/python python -I -B scripts/run_native_currency_tests.py
 ```
 
 The existing package pins and drivers below reproduce the archived experiments. New policy analysis requires the qualified managed `policyengine` interface described in the proposed protocol and entity-aware MicroSeries operations for weighted statistics.

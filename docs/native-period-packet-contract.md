@@ -13,8 +13,9 @@ law year and history-year list, variable schema and separate `fixed_facts`
 snapshot. The schema maps every name to `(entity, definition_period)`; the caller
 declares it without claiming a validated export of the model's live input contract.
 
-Declare all six entity counts, unique eternal entity IDs and explicit eternal
-person membership/role vectors. Memberships must reference declared group IDs.
+Declare all six entity counts, unique entity IDs and explicit person membership
+vectors, using each field's declared annual or eternal period. Role vectors remain
+eternal. Memberships must reference declared group IDs.
 The compiler preserves role labels but does not check them against engine roles.
 Every retained nonmonetary fact must match the separately supplied snapshot in
 value and scalar type across all blocks. This includes declared ages, original
@@ -37,7 +38,7 @@ Fact-only 2026 synthetic fixtures use an explicit hypothetical index to exercise
 period identity. They supply no price measurement. The compiler performs no engine
 float conversion, statutory rounding or parameter rebasing.
 
-When fixed age accompanies a recognized birth fact on any entity, the compiler
+When a fixed age and a recognized birth fact share an entity, the compiler
 requires a named hold/drop disposition. That declaration does not enforce a hold
 on model formulas: the engine can derive birth year from policy year minus fixed
 age. Review cohort-sensitive consumers, mortgage treatment, Social Security
@@ -51,5 +52,6 @@ trips, fixed topology, immutability and refusal cases through the fixed
 import-blocking runner, alongside the existing currency tests. They cannot
 validate constructor migrations, live variable semantics, structural reforms,
 managed-model admission, common unmasked health prices, reference-cohort choice,
-drift, certification or population estimates. Preserve the existing wrapper,
-Microcosm, source-parent, study and publication holds.
+drift, certification or population estimates. Record the selected software and input
+provenance before native execution, and keep synthetic checks separate from
+scientific validation.
