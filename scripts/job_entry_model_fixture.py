@@ -11,12 +11,14 @@ the job branch or the fresh-simulation route:
    from both the branch and the fresh simulation can't pass unnoticed;
 2. hand values: for every tested adult, earnings rise by the rate times 2,080
    and employee Social Security and Medicare tax by 7.65% of that (2017: 6.2%
-   below the $127,200 wage base, 1.45%); for tested adults who live alone with
-   no income before the job in a state without a wage income tax, federal income
-   tax before credits equals the 2017 single schedule on pay less the $6,350
-   standard deduction and $4,050 exemption, the EITC stays $0 (a childless
-   credit ends at $15,010, below every state's full-time pay), and market income
-   rises by exactly the pay (adults taking the standard deduction, not blind);
+   below the $127,200 wage base, 1.45%). For tested adults who file alone (a
+   one-person tax unit, no dependents, not joint), take the standard deduction
+   before and after, are not blind, have no preferentially taxed income and whose
+   AGI rises by exactly the pay, the change in federal income tax before credits
+   equals the 2017 single schedule (10% to $9,325 of taxable income, then 15%)
+   applied to AGI less the $6,350 standard deduction and $4,050 exemption, after
+   minus before; and the EITC is $0 before and after (no earnings before; a
+   childless credit ends at $15,010, below every state's full-time pay);
 3. resources: each row's measures equal the change in the model's top-level
    household variables: ``d_net`` the change in household net income,
    ``d_net_single_ptc`` that plus the change in marketplace net premiums, and
@@ -38,13 +40,12 @@ import numpy as np
 YEAR = 2017
 PART = 0
 SAMPLE_SEED = 11
-# States that tax no wage income in 2017 (New Hampshire and Tennessee tax only
-# interest and dividends), by FIPS code.
-NO_WAGE_TAX_FIPS = {"AK": 2, "FL": 12, "NV": 32, "NH": 33, "SD": 46, "TN": 47, "TX": 48, "WA": 53, "WY": 56}
 # 2017 single filer (Rev. Proc. 2016-55): standard deduction, personal exemption, brackets.
 STANDARD_DEDUCTION = 6350
 EXEMPTION = 4050
-BRACKETS = ((9325, 0.10), (37950, 0.15), (91900, 0.25))
+BRACKETS = ((9325, 0.10), (37950, 0.15), (91900, 0.25), (191650, 0.28), (416700, 0.33), (418400, 0.35),
+            (float("inf"), 0.396))
+AGI_CEILING = 100_000  # well below where the 2017 AMT could bind with the standard deduction
 SOCIAL_SECURITY_RATE = 0.062
 SOCIAL_SECURITY_WAGE_BASE = 127200
 MEDICARE_RATE = 0.0145
@@ -98,15 +99,13 @@ TAX_TOLERANCE = 0.05
 MEASURE_TOLERANCE = 1.0
 
 
-def federal_income_tax_before_credits(pay: float) -> float:
-    """2017 single schedule on pay alone, after the standard deduction and one exemption."""
-    taxable = max(0.0, pay - STANDARD_DEDUCTION - EXEMPTION)
+def federal_income_tax_before_credits(agi: float) -> float:
+    """2017 single schedule on ordinary AGI, after the standard deduction and one exemption."""
+    taxable = max(0.0, agi - STANDARD_DEDUCTION - EXEMPTION)
     tax, lower = 0.0, 0.0
     for upper, rate in BRACKETS:
         tax += rate * max(0.0, min(taxable, upper) - lower)
         lower = upper
-    if taxable > lower:
-        raise ValueError("pay above the fixture's brackets")
     return tax
 
 
@@ -120,8 +119,8 @@ def unreviewed_inputs(columns) -> list[str]:
 
 
 def fixture_sample(dataset, seed: int = SAMPLE_SEED, alone: int = 40, others: int = 30, non_candidates: int = 10):
-    """Households chosen from stored inputs: candidates living alone in states without a
-    wage income tax, other candidate households, and households with no candidate."""
+    """Households chosen from stored inputs: households of candidates alone in their tax
+    unit, other candidate households, and households with no candidate."""
     from cliffs2017.deflate import _keep_households
     from scripts.expanded_job_entry import eligible_nonworkers
 
@@ -131,11 +130,10 @@ def fixture_sample(dataset, seed: int = SAMPLE_SEED, alone: int = 40, others: in
         p.sstb_self_employment_income_before_lsr, p.is_full_time_college_student, p.is_disabled,
     )
     hh = dataset.household
-    size = p.groupby("person_household_id").size()
+    unit_size = p.person_tax_unit_id.map(p.groupby("person_tax_unit_id").size())
     has = hh.household_id.isin(set(p.loc[candidate, "person_household_id"]))
-    single = hh.household_id.map(size).eq(1)
-    no_tax = hh.state_fips.isin(set(NO_WAGE_TAX_FIPS.values()))
-    pools = [(has & single & no_tax, alone), (has & ~(single & no_tax), others), (~has, non_candidates)]
+    files_alone = hh.household_id.isin(set(p.loc[candidate & unit_size.eq(1), "person_household_id"]))
+    pools = [(files_alone, alone), (has & ~files_alone, others), (~has, non_candidates)]
     chosen = []
     for mask, n in pools:
         pool = hh[mask]
@@ -210,33 +208,45 @@ def run(rank: int = 1, scope: str = "resolved") -> dict:
     hand_payroll = np.array([employee_payroll_tax(x) for x in pay])
     _check("payroll_tax_7_65_percent_of_pay", float(np.abs(d_payroll[sel] - hand_payroll).max()),
            float(np.abs(d_payroll[sel] - hand_payroll).max()) <= TAX_TOLERANCE, checks)
-    household_size = np.asarray(sim.calc("household_size", period=YEAR, map_to="person"))
-    fips = np.asarray(sim.calc("state_fips", period=YEAR, map_to="person"))
+    # Single filers alone in their tax unit, with no dependents, the standard deduction
+    # before and after, not blind, no preferentially taxed income, and AGI rising by
+    # exactly the pay (so no unemployment compensation or Social Security interplay).
+    unit_size = tax_unit_to_person(sim, "tax_unit_size")
+    joint = tax_unit_to_person(sim, "tax_unit_is_joint").astype(bool)
+    dependents = tax_unit_to_person(sim, "tax_unit_dependents")
+    itemizes = tax_unit_to_person(sim, "tax_unit_itemizes").astype(bool) \
+        | tax_unit_to_person(branch, "tax_unit_itemizes").astype(bool)
+    blind = person(sim, "is_blind").astype(bool)
+    preferential = sum(np.abs(person(sim, v)) for v in ("long_term_capital_gains", "qualified_dividend_income"))
     agi_base = tax_unit_to_person(sim, "adjusted_gross_income")
-    market_base = np.asarray(sim.calc("household_market_income", period=YEAR, map_to="person"), dtype=np.float64)
-    itemizes = np.asarray(branch.calc("tax_unit_itemizes", period=YEAR, map_to="person"), dtype=bool)
-    blind = np.asarray(sim.calc("is_blind", period=YEAR), dtype=bool)
-    # Living alone with no AGI before the job, taking the standard deduction after it.
-    simple = sel & (household_size == 1) & np.isin(fips, list(NO_WAGE_TAX_FIPS.values())) \
-        & (agi_base == 0) & ~itemizes & ~blind
-    simple_pay = np.asarray(c["hourly"], dtype=np.float64)[simple] * HOURS_PER_YEAR
+    d_agi = tax_unit_to_person(branch, "adjusted_gross_income") - agi_base
+    all_pay = np.asarray(c["hourly"], dtype=np.float64) * HOURS_PER_YEAR
+    steps = {"tested": sel}
+    steps["alone_in_tax_unit"] = steps["tested"] & (unit_size == 1) & ~joint & (dependents == 0)
+    steps["standard_deduction_not_blind"] = steps["alone_in_tax_unit"] & ~itemizes & ~blind
+    steps["no_preferential_income"] = steps["standard_deduction_not_blind"] & (preferential == 0)
+    steps["agi_rises_by_pay"] = steps["no_preferential_income"] & (np.abs(d_agi - all_pay) <= PAY_TOLERANCE) \
+        & (agi_base + all_pay <= AGI_CEILING)
+    simple = steps["agi_rises_by_pay"]
+    simple_pay = all_pay[simple]
     if simple_pay.size and simple_pay.min() <= CHILDLESS_EITC_ENDS:
         raise ValueError("the EITC oracle assumes pay above the childless phase-out end")
+    deduction = STANDARD_DEDUCTION + EXEMPTION
+    hand_tax = np.array([federal_income_tax_before_credits(a + g) - federal_income_tax_before_credits(a)
+                         for a, g in zip(agi_base[simple], simple_pay)])
     d_tax = tax_unit_to_person(branch, "income_tax_before_credits") - tax_unit_to_person(sim, "income_tax_before_credits")
-    hand_tax = np.array([federal_income_tax_before_credits(x) for x in simple_pay])
     eitc = np.abs(tax_unit_to_person(branch, "eitc")[simple]) + np.abs(tax_unit_to_person(sim, "eitc")[simple])
-    d_market = np.asarray(branch.calc("household_market_income", period=YEAR, map_to="person"),
-                          dtype=np.float64) - market_base
-    _check("simple_households_checked", int(simple.sum()), simple.sum() >= 3, checks,
-           states=sorted(set(state[simple].tolist())))
+    _check("single_filers_checked", int(simple.sum()), simple.sum() >= 3, checks,
+           filter_counts={k: int(v.sum()) for k, v in steps.items()},
+           states=sorted(set(state[simple].tolist())),
+           agi_before_job=[round(float(a), 2) for a in agi_base[simple]])
     tax_error = float(np.abs(d_tax[simple] - hand_tax).max()) if simple.any() else None
-    _check("simple_federal_tax_before_credits_by_hand", tax_error,
+    _check("single_filer_federal_tax_before_credits_by_hand", tax_error,
            tax_error is not None and tax_error <= TAX_TOLERANCE, checks,
-           hand=[round(x, 2) for x in hand_tax.tolist()], pay=[round(x, 2) for x in simple_pay.tolist()])
-    _check("simple_eitc_zero", float(eitc.max()) if eitc.size else None, eitc.size > 0 and eitc.max() == 0, checks)
-    market_error = float(np.abs(d_market[simple] - simple_pay).max()) if simple.any() else None
-    _check("simple_market_income_rises_by_pay", market_error,
-           market_error is not None and market_error <= PAY_TOLERANCE, checks)
+           hand=[round(float(x), 2) for x in hand_tax], pay=[round(float(x), 2) for x in simple_pay],
+           rule=f"2017 single schedule on AGI less ${deduction:,}, after minus before")
+    _check("single_filer_eitc_zero", float(eitc.max()) if eitc.size else None, eitc.size > 0 and eitc.max() == 0,
+           checks)
 
     # 3. Resources from top-level household variables, row by row.
     tracked = [NET, HEALTH_BENEFITS, HEALTH_COSTS, MARKETPLACE_PREMIUM]
